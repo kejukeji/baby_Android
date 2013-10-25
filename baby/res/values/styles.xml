@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 标题栏字体的style -->
+    <style name="StyleBarTitle">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <!-- 字体阴影效果 -->
+    <style name="TextShadow">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:background">@null</item>
+    </style>
+    <!-- 自定义对话框 -->
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame" >@null</item>
+        <item name="android:windowIsFloating" >true</item>
+        <item name="android:windowIsTranslucent" >false</item>
+        <item name="android:windowNoTitle" >true</item>
+        <item name="android:windowBackground" >@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled" >true</item>
+    </style >
+    <!-- listview style -->
+	<style name="listviewStyle" parent="@android:style/Widget.ListView">
+        <item name="android:listSelector" >@android:color/transparent</item>
+        <item name="android:cacheColorHint" >@android:color/transparent</item>
+        <item name="android:fadingEdge" >none</item>
+    </style >
+</resources>

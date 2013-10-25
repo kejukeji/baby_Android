@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baby"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+ 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 网络访问权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/> 
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>    
+     <!-- SD卡读写权限 -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<!--  允许挂载和反挂载文件系统可移动存储 -->
+	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+	<!-- 友盟: 获取用户手机的IMEI，用来唯一的标识用户。(如果您的应用会运行在无法读取IMEI的平板上，我们会将mac地址作为用户的唯一标识，请添加权限： android.permission.ACCESS_WIFI_STATE ) -->
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" 
+        android:theme="@android:style/Theme.Light.NoTitleBar"
+        android:name="com.baby.CommonApplication">
+        <activity
+            android:name=".activity.LogoActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity  android:name=".activity.AuthorizeActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.SettingActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.ChangePasswordActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.NewAddBabyRecordActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.ChooseMilkActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        
+        <!-- 登录相关界面 -->
+        <activity  android:name=".activity.login.LoginActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.login.DoctorLoginActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.login.BabyLoginActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.login.DoctorRegisterActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <!-- 医生界面 -->
+        <activity  android:name=".activity.doctor.DoctorMainActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.DoctorHomeActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.DoctorMyActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.DoctorInfoEditActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.DoctorCreatBabyAccountActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.SearchActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.SearchResultActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.AcademicAbstractsActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.MeetingNotifyAcitivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <!-- 婴儿界面 -->
+        <activity  android:name=".activity.MainBabyActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.BabyMyActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.BabyInfoEditActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.FitmentActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.BabyDetailActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.BabyStatusActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+		
+		<!-- push服务 -->
+        <service android:name=".service.PullService"></service>
+        
+    </application>
+</manifest>

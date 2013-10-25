@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">baby</string>
+    <string name="account_bind">帐号绑定</string>
+    <string name="account_bind_success">绑定成功</string>
+    <string name="unbind">解除绑定</string>
+    <string name="unbind_promt">您确定解除绑定吗?</string>
+    <string name="weibo_content_is_empty">内容不能为空!</string>
+    <string name="weibo_content_too_long">内容不能超过140个中文!</string>
+    <string name="weibo_auth_faild">认证失败,请重新认证.</string>
+    <string name="weibo_repeat_content">相同内容请间隔10分钟再进行发布哦!</string>
+    <string name="weibo_bind_faild">绑定失败</string>
+    <string name="weibo_over_the_unaudited">未审核的应用使用人数超过限制</string>
+    
+    <string name="loading">正在加载...</string>
+    <string name="load_more">获取更多</string>
+    <string name="load_all">全部加载完毕</string>
+    <string name="NoSignalException">无法连接到网络，请检查网络配置</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="msg">提示</string>
+    <string name="logout">确定退出本应用?</string>
+
+</resources>
