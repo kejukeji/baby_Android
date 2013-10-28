@@ -22,4 +22,43 @@
     <string name="msg">提示</string>
     <string name="logout">确定退出本应用?</string>
 
+    <string name="login_title">登录</string>
+    <string name="login_username">用户名：</string>
+    <string name="login_password">密码：</string>
+    <string name="login_remember_me">记住我</string>
+    <string name="login_register">注册</string>
+    <string name="login_login">登录</string>
+    
+    <string name="register">注册</string>
+    <string name="register_back">Back</string>
+    <string name="register_finish">完成</string>
+    <string name="register_username">用户名：</string>
+    <string name="register_password">密码：</string>
+    <string name="register_password_affirm">确认密码：</string>
+    <string name="register_truename">真实姓名：</string>
+    <string name="register_region">地区：</string>
+    <string name="register_hospital">所属医院：</string>
+    <string name="register_branch">所属科室：</string>
+    <string name="register_occupation">职称：</string>
+    <string name="register_email">邮箱：</string>
+    <string name="register_phone">手机号：</string>
+    <string name="register_write">(必填)</string>
+    <string name="register_username_hint">请输入用户名</string>
+    <string name="register_password_hint">请输入密码</string>
+    <string name="register_password_agin">请再次输入用户名</string>
+    <string name="register_treaty_agree">确认阅读并同意协议</string>
+    <string name="register_treaty_read">(阅读协议)</string>
+    
+    <string name="register_treaty_title">欢迎注册营养随访体系App！</string>
+    <string name="register_treaty_content" >请仔细阅读下面的协议，只有接受协议才能继续进行注册。\n
+1．服务条款的确认和接纳\n
+营养随访体系App的所有权和运营权归XXX学会所有。营养随访体系App Android iOS平台所提供的服务将按照有关章程、服务条款和操作规则严格执行。用户通过注册程序点击“我同意” 按钮，即表示用户完全接受本协议的所有条款。\n
+2. 服务内容\n
+营养随访体系App Android iOS平台的服务内容由XXX学会根据实际情况向平台用户提供，营养随访体系App Android iOS平台保留变更服务的权利。\n
+3. 用户账户的安全性\n
+用户注册成功后， 营养随访体系App Android iOS平台将给予每个用户一个用户帐号以及相应密码，该用户帐号和密码由用户负责保管，用户应当对以其用户帐号进行的所有活动和事件负法律责任。\n
+用户不得以任何形式擅自转让或授权他人使用自己的 营养随访体系App Android iOS平台用户名或密码。如果用户泄漏了自己的营养随访体系App Android iOS平台用户名或密码，有可能导致不利的法律后果将由用户自己承担。\n
+</string>
+    
+  
 </resources>
