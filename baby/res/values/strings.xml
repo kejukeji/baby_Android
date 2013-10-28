@@ -21,5 +21,14 @@
     <string name="cancel">取消</string>
     <string name="msg">提示</string>
     <string name="logout">确定退出本应用?</string>
+    
+    <string name="setting">设置</string>
+    <string name="setting_activity_grade">给我评分</string>
+    <string name="setting_activity_opinion">意见反馈</string>
+    <string name="setting_activity_version">新版本检测</string>
+    <string name="setting_activity_ver">V1.0</string>
+    <string name="setting_activity_btnright">></string>   
+	<string name="setting_activity_about">关于</string>
+    <string name="setting_activity_exit">退出当前账号</string>
 
 </resources>
