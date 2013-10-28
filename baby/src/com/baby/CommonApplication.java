@@ -5,6 +5,9 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import com.baby.db.DataBaseAdapter;
 /**
@@ -23,6 +26,13 @@ public class CommonApplication extends Application {
 	 */
 	private DataBaseAdapter dataBaseAdapter;
 	
+	/**
+	 * 屏幕的长和宽
+	 * @return
+	 */
+	private int screen_width;
+	private int screen_height;
+	
 	public static CommonApplication getInstance() {
 		return instance;
 	}
@@ -33,6 +43,12 @@ public class CommonApplication extends Application {
 		instance = this;
 		dataBaseAdapter = new DataBaseAdapter(this);
 		dataBaseAdapter.open();
+		DisplayMetrics displaymetrics = new DisplayMetrics();
+		WindowManager window=(WindowManager)(this.getSystemService(Context.WINDOW_SERVICE));
+		window.getDefaultDisplay().getMetrics(displaymetrics);
+		screen_width=displaymetrics.widthPixels;
+		screen_height=displaymetrics.heightPixels;
+		
 	}
 	
 	/**
@@ -53,5 +69,11 @@ public class CommonApplication extends Application {
 	public void addActivity(Activity mActivity) {
 		activities.add(mActivity);
 	}
-	
+	public int getScreenWidth(){
+		return this.screen_width;
+		
+	}
+	public int getScreenHeight(){
+		return this.screen_height;
+	}
 }
