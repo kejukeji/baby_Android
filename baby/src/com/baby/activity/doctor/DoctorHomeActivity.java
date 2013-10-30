@@ -53,10 +53,10 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		// TODO Auto-generated method stub
 		List<BabyInformationBean> list=new ArrayList<BabyInformationBean>();
 		
-		BabyInformationBean test=new BabyInformationBean(R.drawable.ic_launcher,"1","baby1","1");
+		BabyInformationBean test=new BabyInformationBean(R.drawable.pic,"1000001","baby1","1个月");
 		list.add(test);
 		
-		test=new BabyInformationBean(R.drawable.ic_launcher,"2","baby2","2");
+		test=new BabyInformationBean(R.drawable.pic,"1000002","baby2","2个月");
 		list.add(test);
 		
 		return list;
@@ -65,13 +65,13 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	private List<BabyInformationBean> setdata() {
 		// TODO Auto-generated method stub
 		List<BabyInformationBean> list=new ArrayList<BabyInformationBean>();
-		BabyInformationBean test=new BabyInformationBean(R.drawable.ic_launcher,"3","baby3","3");
+		BabyInformationBean test=new BabyInformationBean(R.drawable.pic,"1000003","baby3","3个月");
 		list.add(test);
 		
-		test=new BabyInformationBean(R.drawable.ic_launcher,"4","baby4","4");
+		test=new BabyInformationBean(R.drawable.pic,"1000004","baby4","4个月");
 		list.add(test);
 		
-		test=new BabyInformationBean(R.drawable.ic_launcher,"5","baby5","5");
+		test=new BabyInformationBean(R.drawable.pic,"1000005","baby5","5个月");
 		list.add(test);
 		
 		return list;
