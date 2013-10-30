@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -25,7 +27,7 @@ import com.baby.bean.BabyInformationBean;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午2:51:05
  */
-public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener{
+public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener,OnItemClickListener{
 	private RadioGroup doctorHomeRadioGroup; //主页面radiogroup
 	private GridView homeGridView; //主页面gridview
 	private List<BabyInformationBean> list; // 数据源
@@ -45,6 +47,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		homeGridViewAdapter2=new HomeGridViewAdapter(this, list);
 		
 		homeGridView.setAdapter(homeGridViewAdapter);
+		homeGridView.setOnItemClickListener(this);
 		doctorHomeRadioGroup.setOnCheckedChangeListener(this);
 	}
 
@@ -75,6 +78,12 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		
 		return list;
 		
+		
+	}
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -152,5 +161,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		public TextView name;
 		public TextView day;
 	}
+
+	
 
 }
