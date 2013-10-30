@@ -26,11 +26,10 @@ import com.baby.bean.BabyInformationBean;
  * @version 创建时间：2013-10-25 下午2:51:05
  */
 public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener{
-	RadioGroup doctorHomeRadioGroup;
-	GridView homeGridView;
-	List<BabyInformationBean> list;
-	
-	HomeGridViewAdapter homeGridViewAdapter,homeGridViewAdapter2;
+	private RadioGroup doctorHomeRadioGroup; //主页面radiogroup
+	private GridView homeGridView; //主页面gridview
+	private List<BabyInformationBean> list; // 数据源
+	private HomeGridViewAdapter homeGridViewAdapter,homeGridViewAdapter2;// 所有baby适配器。 收藏适配器
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -92,7 +91,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		}
 	}
 	class HomeGridViewAdapter extends BaseAdapter{
-		
+		//适配器
 		List<BabyInformationBean> list= new ArrayList<BabyInformationBean>();
 		private LayoutInflater mInflater;
 		 public HomeGridViewAdapter(Context context,List<BabyInformationBean> list){
