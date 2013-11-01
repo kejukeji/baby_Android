@@ -30,5 +30,23 @@
     <string name="setting_activity_btnright">></string>   
 	<string name="setting_activity_about">关于</string>
     <string name="setting_activity_exit">退出当前账号</string>
+    
+    <string name="doctor_home_creat">创建婴儿账户</string>
+    <string name="doctor_home_title">营养随访体系</string>
+    
+    <string name="doctor_my_title">个人中心</string>
+    <string name="doctor_my_inform">我的资料</string>
+    <string name="doctor_my_collect">我的收藏</string>
+    <string name="doctor_my_change_password">修改密码</string>
+    <string name="doctor_my_change_imform">修改资料</string>
+    <string name="doctor_my_id">医生ID</string>
+    <string name="doctor_my_name">医生名</string>
+    <string name="doctor_my_region">所在地区</string>
+    <string name="doctor_my_hospital">所属医院</string>
+    <string name="doctor_my_branch">所属科室</string>
+    <string name="doctor_my_postition">职称</string>
+    <string name="doctor_my_email">邮箱</string>
+    <string name="doctor_my_phone">手机</string>
+  
 
 </resources>
