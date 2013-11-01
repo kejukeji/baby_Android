@@ -37,14 +37,17 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.doctor_home);
-		list=setdata();
-		 //测试用
+		
+		
 		doctorHomeRadioGroup=(RadioGroup)findViewById(R.id.dochome_radio_group);
 		homeGridView=(GridView)findViewById(R.id.dochome_gridview);
 		
+		 //测试用
+		list=setdata();
 		homeGridViewAdapter=new HomeGridViewAdapter(this,list);
 		list =setdata2();
 		homeGridViewAdapter2=new HomeGridViewAdapter(this, list);
+		
 		
 		homeGridView.setAdapter(homeGridViewAdapter);
 		homeGridView.setOnItemClickListener(this);
