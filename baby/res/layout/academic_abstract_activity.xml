@@ -10,11 +10,14 @@
         android:gravity="center"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:text="@string/doctor_my_title"
+        android:text="@string/academic_abstract_title"
         android:textColor="#FFFFFF" />
 
    <ListView
        android:id="@+id/lvAcademic"
+       android:layout_marginLeft="5dp"
+       android:layout_marginRight="5dp"
+       android:layout_marginTop="5dp"
        android:layout_width="match_parent"
        android:layout_height="wrap_content" >
    </ListView>

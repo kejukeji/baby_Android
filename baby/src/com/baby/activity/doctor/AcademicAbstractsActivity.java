@@ -42,6 +42,8 @@ public class AcademicAbstractsActivity extends BaseActivity {
 		list=setdata();
 		lvAcademic=(ListView)findViewById(R.id.lvAcademic);
 		academicAdapter=new AcademicAdapter(this,list);
+		lvAcademic.setAdapter(academicAdapter);
+		//lvAcademic.setVisibility(View.v)
 	}
 
 	private List<AcademicAbstractBean> setdata() {
@@ -69,19 +71,19 @@ public class AcademicAbstractsActivity extends BaseActivity {
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return 0;
+			return list.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
 			// TODO Auto-generated method stub
-			return null;
+			return position;
 		}
 
 		@Override
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
-			return 0;
+			return position;
 		}
 
 		@Override
@@ -100,6 +102,7 @@ public class AcademicAbstractsActivity extends BaseActivity {
 			viewHolder.content.setText(list.get(position).getContent());
 			return convertView;
 		}
+		
 	}
 	class ViewHolder{
 		public TextView title;
