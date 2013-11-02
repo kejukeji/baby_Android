@@ -3,99 +3,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <TextView
+    <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#758AA6"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnBack"
+           android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#758AA6"
+        android:textColor="#FFFFFF" 
+        android:layout_marginLeft="15dp"
+        android:text="@string/btn_back"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"      
         android:gravity="center"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:text="@string/doctor_my_title"
+        android:text="@string/doctor_my_change_inform_title"
         android:textColor="#FFFFFF" />
-
- 
-<LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="2" 
-     android:background="@drawable/baby"   
-     android:orientation="vertical" >
-	<LinearLayout
+    <TextView
+           android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    </LinearLayout>
+    
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
-     	android:layout_marginRight="20dp"        
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1.14"
+        android:background="@drawable/bg_setting"
         android:orientation="horizontal" >
 
-		<ImageView
+        <ImageView
 		    android:layout_width="wrap_content"
-		    android:layout_height="match_parent"
+        	android:layout_height="wrap_content"
+        	android:gravity="left"
 		    android:src="@drawable/pic" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+        	android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="王XX"/>
+            android:layout_marginLeft="20dp"
+            android:text="@string/doctor_my_change_inform_picture"/>
     </LinearLayout>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" 
-        android:gravity="center"       
-        android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/tvDoctor_my_inform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="@string/doctor_my_inform"/>
-
-        <RadioButton
-            android:id="@+id/tvDoctor_my_collect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_collect" />
-    </RadioGroup>
-    </LinearLayout>
-<LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="9"    
-     android:orientation="vertical" >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/btnDoctor_my_change_pw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"  
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"        
-            android:background="@drawable/bg_setting"
-            android:text="@string/doctor_my_change_password"/>
-
-        <Button
-            android:id="@+id/btnDoctor_my_change_inform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"        
-            android:background="@drawable/bg_setting"
-            android:text="@string/doctor_my_change_imform" />
-    </LinearLayout>
-<LinearLayout
+ <LinearLayout
      android:layout_width="match_parent"
      android:layout_height="0dp"
      android:layout_weight="6"
@@ -103,10 +65,11 @@
      android:layout_marginLeft="20dp"
      android:layout_marginRight="20dp"
      android:orientation="vertical" >
+
     <LinearLayout
-        android:layout_width="match_parent"       
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"       
+        android:layout_weight="1"
         android:orientation="horizontal" >
 
         <TextView
@@ -118,12 +81,12 @@
             android:layout_marginLeft="10dp"
             android:text="@string/doctor_my_id" />
 
-        <TextView
+        <EditText
             android:id="@+id/etDoctor_my_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            android:textSize="10sp"/>
         
         
     </LinearLayout>
@@ -146,7 +109,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/doctor_my_name" />
 
-        <TextView
+        <EditText
             android:id="@+id/etDoctor_my_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -171,7 +134,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/doctor_my_region" />
 
-        <TextView
+        <EditText
             android:id="@+id/etDoctor_my_region"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -196,7 +159,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/doctor_my_hospital" />
 
-        <TextView
+        <EditText
             android:id="@+id/etDoctor_my_hospital"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -221,7 +184,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/doctor_my_branch" />
 
-        <TextView
+        <EditText
             android:id="@+id/etDoctor_my_branch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -246,7 +209,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/doctor_my_postition" />
 
-        <TextView
+        <EditText
             android:id="@+id/etDoctor_my_position"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -279,7 +242,7 @@
             android:layout_marginLeft="10dp"
             android:text="@string/doctor_my_email" />
 
-        <TextView
+        <EditText
             android:id="@+id/etDoctor_my_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -305,12 +268,12 @@
             android:layout_marginLeft="10dp"
             android:text="@string/doctor_my_phone" />
 
-        <TextView
+        <EditText
             android:id="@+id/etDoctor_my_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2" />
     </LinearLayout>
 </LinearLayout>
-</LinearLayout>>
+  
 </LinearLayout>

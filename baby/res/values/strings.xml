@@ -48,5 +48,23 @@
     <string name="doctor_my_email">邮箱</string>
     <string name="doctor_my_phone">手机</string>
   
+    <string name="doctor_my_change_inform_title">修改资料</string>
+    <string name="doctor_my_change_inform_picture">修改头像</string>
+    
+    <string name="btn_back">Back</string>
+    <string name="btn_end">完成</string>
+    
+    <string name="doctor_my_changepw">修改密码</string>
+    <string name="doctor_my_changepw_old">旧密码：</string>
+    <string name="doctor_my_changepw_new">新密码：</string>
+    <string name="doctor_my_changepw_confirm">确认新密码：</string>
+    
+    <string name="academic_abstract_collect">收藏</string>
+    <string name="doctor_my_collect_cancel">取消收藏</string>
+    <string name="doctor_my_collect_share">分享</string>
+    <string name="doctor_my_collect_title">新生儿的营养和需要量 </string>
+
+    
+    
 
 </resources>
