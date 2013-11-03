@@ -24,7 +24,7 @@
         android:gravity="center"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:text="@string/doctor_my_change_inform_title"
+        android:text="@string/change_inform"
         android:textColor="#FFFFFF" />
     <TextView
            android:layout_width="0dp"
