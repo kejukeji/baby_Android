@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ public class MeetingNotifyAcitivity extends BaseActivity {
 	}
 	private List<MeetingNotifyBean> setdate() {
 		List<MeetingNotifyBean> list=new ArrayList<MeetingNotifyBean>();
-		MeetingNotifyBean test=new MeetingNotifyBean(R.drawable.ic_launcher," 尊敬的医生朋友，9.3日在上海XXXX医学中心将举行“惠氏奶粉 - 关爱新生儿”的医学讲座，期待您的参与！", "2013/9/1");
+		MeetingNotifyBean test=new MeetingNotifyBean(R.drawable.star," 尊敬的医生朋友，9.3日在上海XXXX医学中心将举行“惠氏奶粉 - 关爱新生儿”的医学讲座，期待您的参与！", "2013/9/1");
 		list.add(test);
 		test=new MeetingNotifyBean(R.drawable.ic_launcher," 尊敬的医生朋友，9.3日在上海XXXX医学中心将举行“惠氏奶粉 - 关爱新生儿”的医学讲座，期待您的参与！", "2013/9/1");
 		list.add(test);
@@ -84,7 +85,7 @@ public class MeetingNotifyAcitivity extends BaseActivity {
 			else{
 				holder=(ViewHolder)convertView.getTag();
 			}
-			holder.picture.setText(list.get(position).getPicture());
+			holder.picture.setCompoundDrawablesWithIntrinsicBounds(0, list.get(position).getPicture(), 0, 0);
 			holder.content.setText(list.get(position).getContent());
 			holder.date.setText(list.get(position).getDate());
 			return convertView;

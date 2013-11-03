@@ -73,7 +73,12 @@ public class DoctorMainActivity extends TabActivity {
          view.getLayoutParams().width = tabWidth; 
          view.getLayoutParams().height = tabHeight; 
        }
-       
-		
+      
+	}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		this.finish();
 	}
 }
