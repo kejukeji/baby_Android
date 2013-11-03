@@ -3,23 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-   <TextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#758AA6"
         android:gravity="center"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:text="@string/academic_abstract_title"
+        android:text="@string/meeting_notify_title"
         android:textColor="#FFFFFF" />
 
-   <ListView
-       android:id="@+id/lvAcademic"
-       android:layout_marginLeft="5dp"
-       android:layout_marginRight="5dp"
-       android:layout_marginTop="5dp"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content" >
-   </ListView>
+    <ListView
+        android:id="@+id/lvMeetingNotify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/bg_setting">
+    </ListView>
 
 </LinearLayout>

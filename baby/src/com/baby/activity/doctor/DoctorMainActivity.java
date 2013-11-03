@@ -60,7 +60,7 @@ public class DoctorMainActivity extends TabActivity {
         
         tabHost.addTab(tabHost.newTabSpec("我").setIndicator(myTab).setContent(new Intent(this,DoctorMyActivity.class)));  
         tabHost.addTab(tabHost.newTabSpec("学术文摘").setIndicator(articleTab).setContent(new Intent(this,AcademicAbstractsActivity.class)));
-        tabHost.addTab(tabHost.newTabSpec("会议通知").setIndicator(meetingTab).setContent(R.id.view3));
+        tabHost.addTab(tabHost.newTabSpec("会议通知").setIndicator(meetingTab).setContent(new Intent(this,MeetingNotifyAcitivity.class)));
         tabHost.addTab(tabHost.newTabSpec("设置").setIndicator(setTab)
         		.setContent(new Intent(this,SettingActivity.class)));
         

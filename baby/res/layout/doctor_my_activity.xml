@@ -41,6 +41,7 @@
             android:text="王XX"/>
     </LinearLayout>
     <RadioGroup
+        android:id="@+id/doctor_my_radiogroup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" 
@@ -48,14 +49,14 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/tvDoctor_my_inform"
+            android:id="@+id/rbDoctor_my_inform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="@string/doctor_my_inform"/>
 
         <RadioButton
-            android:id="@+id/tvDoctor_my_collect"
+            android:id="@+id/rbDoctor_my_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -63,6 +64,7 @@
     </RadioGroup>
     </LinearLayout>
 <LinearLayout
+    android:id="@+id/doctor_my_linearlayout"
      android:layout_width="match_parent"
      android:layout_height="0dp"
      android:layout_weight="9"    
@@ -312,5 +314,15 @@
             android:layout_weight="2" />
     </LinearLayout>
 </LinearLayout>
-</LinearLayout>>
+</LinearLayout>
+	<ListView 
+        android:id="@+id/doctor_my_listview"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="6"/>
+
 </LinearLayout>
