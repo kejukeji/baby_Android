@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.baby.R;
-import com.baby.activity.doctor.DoctorMainActivity;
+import com.baby.activity.login.LoginActivity;
 
 public class LogoActivity extends Activity {
     @Override
@@ -13,7 +13,7 @@ public class LogoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Intent intent=new Intent();
-        intent.setClass(this,DoctorMainActivity.class);
+        intent.setClass(this,LoginActivity.class);
         startActivity(intent);
         this.finish();
     }

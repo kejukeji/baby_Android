@@ -14,93 +14,55 @@
         android:text="@string/doctor_my_title"
         android:textColor="#FFFFFF" />
 
- 
-<LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="2" 
-     android:background="@drawable/baby"   
-     android:orientation="vertical" >
 	<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:layout_marginLeft="20dp"
-     	android:layout_marginRight="20dp"        
-        android:orientation="horizontal" >
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="2"
+	    android:background="@drawable/baby"
+	    android:gravity="center"
+	    android:orientation="horizontal" >
 
-		<ImageView
-		    android:layout_width="wrap_content"
-		    android:layout_height="match_parent"
-		    android:src="@drawable/pic" />
-
-        <TextView
+        <Button
+            android:id="@+id/btnBabyChangePw"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:layout_gravity="center"
-            android:text="王XX"/>
-    </LinearLayout>
-    <RadioGroup
-        android:id="@+id/doctor_my_radiogroup"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" 
-        android:gravity="center"       
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:id="@+id/rbDoctor_my_inform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"  
+            android:layout_gravity="bottom"     
+            android:background="#2470E2"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="#FFFFFF"
             android:layout_marginRight="10dp"
-            android:text="@string/doctor_my_inform"/>
-
-        <RadioButton
-            android:id="@+id/rbDoctor_my_collect"
-            android:layout_width="wrap_content"
+            android:text="@string/change_password"/>
+		<ImageView
+		    android:id="@+id/image_baby"
+		    android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+		    android:src="@drawable/pic" />
+        <Button
+            android:id="@+id/btnBabyChangeInform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"   
+            android:layout_gravity="bottom"    
+            android:background="#2470E2"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_collect" />
-    </RadioGroup>
+            android:textColor="#FFFFFF"
+            android:text="@string/change_inform" />
     </LinearLayout>
 <LinearLayout
     android:id="@+id/doctor_my_linearlayout"
      android:layout_width="match_parent"
      android:layout_height="0dp"
-     android:layout_weight="9"    
+     android:layout_weight="12"   
+     android:layout_marginTop="10dp" 
      android:orientation="vertical" >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/btnDoctor_my_change_pw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"  
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"        
-            android:background="@drawable/bg_setting"
-            android:text="@string/change_password"/>
-
-        <Button
-            android:id="@+id/btnDoctor_my_change_inform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"        
-            android:background="@drawable/bg_setting"
-            android:text="@string/change_inform" />
-    </LinearLayout>
+    
 <LinearLayout
      android:layout_width="match_parent"
      android:layout_height="0dp"
-     android:layout_weight="6"
+     android:layout_weight="3"
      android:background="@drawable/bg_setting"
      android:layout_marginLeft="20dp"
      android:layout_marginRight="20dp"
@@ -118,10 +80,10 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_id" />
+            android:text="@string/baby_my_id" />
 
         <TextView
-            android:id="@+id/etDoctor_my_id"
+            android:id="@+id/tvBaby_my_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="bottom"
@@ -146,10 +108,10 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_name" />
+            android:text="@string/baby_my_name" />
 
         <TextView
-            android:id="@+id/etDoctor_my_name"
+            android:id="@+id/tvBaby_my_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"/>
@@ -171,94 +133,20 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_region" />
+            android:text="@string/baby_my_gender" />
 
         <TextView
-            android:id="@+id/etDoctor_my_region"
+            android:id="@+id/tvBaby_my_gender"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"/>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_hospital" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_hospital"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_branch" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_branch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_postition" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_position"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
+    
  </LinearLayout>   
  <LinearLayout
      android:layout_width="match_parent"
      android:layout_height="0dp"
-     android:layout_weight="2"
+     android:layout_weight="9"
      android:background="@drawable/bg_setting"
      android:layout_marginLeft="20dp"
      android:layout_marginRight="20dp"
@@ -279,10 +167,60 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_email" />
+            android:text="@string/baby_my_preproduction" />
 
         <TextView
-            android:id="@+id/etDoctor_my_email"
+            android:id="@+id/tvBaby_my_preproduction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"       
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/baby_my_height" />
+
+        <TextView
+            android:id="@+id/tvBaby_my_height"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/baby_my_weight" />
+
+        <TextView
+            android:id="@+id/tvBaby_my_weight"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"/>
@@ -295,7 +233,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        
         android:orientation="horizontal" >
 
         <TextView
@@ -305,24 +242,139 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_phone" />
+            android:text="@string/baby_my_head_circumference" />
 
         <TextView
-            android:id="@+id/etDoctor_my_phone"
+            android:id="@+id/tvBaby_my_head"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2" />
+            android:layout_weight="2"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/baby_my_delivery_way" />
+
+        <TextView
+            android:id="@+id/tvBaby_my_delivery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/baby_my_refenrence" />
+
+        <TextView
+            android:id="@+id/tvBaby_my_refenrence"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/baby_my_apgar" />
+
+        <TextView
+            android:id="@+id/tvBaby_my_apgar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/baby_my_growth_target" />
+
+        <TextView
+            android:id="@+id/tvBaby_my_growth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/baby_my_remark" />
+
+        <TextView
+            android:id="@+id/tvBaby_my_remark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
     </LinearLayout>
 </LinearLayout>
 </LinearLayout>
-	<ListView 
-        android:id="@+id/doctor_my_listview"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="6"/>
-
 </LinearLayout>
