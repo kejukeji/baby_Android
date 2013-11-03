@@ -2,9 +2,6 @@ package com.baby.activity.doctor;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.http.entity.mime.content.ContentBody;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,15 +10,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.baby.R;
 import com.baby.activity.base.BaseActivity;
-import com.baby.activity.doctor.DoctorHomeActivity.ViewHolder;
 import com.baby.bean.AcademicAbstractBean;
-import com.baby.bean.BabyInformationBean;
 
 /**
  * 学术文摘界面
@@ -43,7 +36,6 @@ public class AcademicAbstractsActivity extends BaseActivity {
 		lvAcademic=(ListView)findViewById(R.id.lvAcademic);
 		academicAdapter=new AcademicAdapter(this,list);
 		lvAcademic.setAdapter(academicAdapter);
-		//lvAcademic.setVisibility(View.v)
 	}
 
 	private List<AcademicAbstractBean> setdata() {

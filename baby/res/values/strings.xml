@@ -65,6 +65,7 @@
     <string name="doctor_my_collect_title">新生儿的营养和需要量 </string>
 
     <string name="academic_abstract_title">学术文摘</string>
-    
+    <string name="meeting_notify_title">会议通知</string>
+    <string name="manage_man">管理员</string>
 
 </resources>

@@ -7,21 +7,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.baby.R;
 import com.baby.activity.base.BaseActivity;
-import com.baby.activity.doctor.AcademicAbstractsActivity.ViewHolder;
-import com.baby.bean.AcademicAbstractBean;
 import com.baby.bean.MyCollectBean;
 
 /**

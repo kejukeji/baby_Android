@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.baby.R;
-import com.baby.activity.doctor.DoctorHomeActivity;
 import com.baby.activity.doctor.DoctorMainActivity;
 
 public class LogoActivity extends Activity {
