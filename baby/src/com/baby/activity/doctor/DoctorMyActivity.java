@@ -9,7 +9,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.baby.R;
+import com.baby.activity.DoctorChangePassword;
 import com.baby.activity.base.BaseActivity;
 import com.baby.bean.MyCollectBean;
 
@@ -25,12 +28,13 @@ import com.baby.bean.MyCollectBean;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午2:53:44
  */
-public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeListener{
+public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeListener,OnClickListener{
 	private RadioGroup doctorMyRadioGroup;
 	private LinearLayout doctorMyLinearLayout;
 	private ListView doctorMyListView;
 	private MyCollectAdapter myCollectAdapter;
 	private List<MyCollectBean> list;
+	private Button btnPassword,btnInfo;
 	private long exitTime = 0;
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -41,7 +45,12 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 		doctorMyRadioGroup=(RadioGroup)findViewById(R.id.doctor_my_radiogroup);
 		doctorMyLinearLayout=(LinearLayout)findViewById(R.id.doctor_my_linearlayout);
 		doctorMyListView=(ListView)findViewById(R.id.doctor_my_listview);
-        doctorMyRadioGroup.setOnCheckedChangeListener(this);
+		btnPassword=(Button)findViewById(R.id.btnDoctor_my_change_pw);
+		btnInfo=(Button)findViewById(R.id.btnDoctor_my_change_inform);
+		
+        btnPassword.setOnClickListener(this);
+        btnInfo.setOnClickListener(this);
+		doctorMyRadioGroup.setOnCheckedChangeListener(this);
         myCollectAdapter=new MyCollectAdapter(this, list);
         doctorMyListView.setAdapter(myCollectAdapter);
          
@@ -136,5 +145,20 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 	class ViewHolder{
 		public TextView title;
 		public TextView content;
+	}
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btnDoctor_my_change_pw:
+			openActivity(DoctorChangePassword.class);
+			break;
+		case R.id.btnDoctor_my_change_inform:
+			openActivity(DoctorInfoEditActivity.class);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 }

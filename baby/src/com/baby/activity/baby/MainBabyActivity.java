@@ -54,10 +54,10 @@ public class MainBabyActivity extends TabActivity {
         setText.setText("设置");
         
         tabHost.addTab(tabHost.newTabSpec("首页").setIndicator(mainTab)
-        		.setContent(new Intent(this,BabyMyActivity.class))); 
+        		.setContent(new Intent(this,SettingActivity.class))); 
         
         tabHost.addTab(tabHost.newTabSpec("我").setIndicator(myTab).setContent(new Intent(this,BabyMyActivity.class)));  
-        tabHost.addTab(tabHost.newTabSpec("育儿指南").setIndicator(guideTab).setContent(new Intent(this,BabyMyActivity.class)));
+        tabHost.addTab(tabHost.newTabSpec("育儿指南").setIndicator(guideTab).setContent(new Intent(this,FitmentActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("设置").setIndicator(setTab)
         		.setContent(new Intent(this,SettingActivity.class)));
         
