@@ -1,6 +1,7 @@
 package com.baby.activity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import com.baby.R;
 import com.baby.activity.base.BaseActivity;
@@ -11,8 +12,24 @@ import com.baby.activity.base.BaseActivity;
  * @version 创建时间：2013-10-25 下午3:06:51
  */
 public class SettingActivity extends BaseActivity {
-	 public void onCreate(Bundle savedInstanceState) {
+	 private long exitTime;
+	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.setting_activity);
 	    }
+	 @Override
+		public boolean onKeyDown(int keyCode, KeyEvent event) {
+			// TODO Auto-generated method stub
+			if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+		        if((System.currentTimeMillis()-exitTime) > 2000){  
+		            showLongToast("再按一次返回键退出");                             
+		            exitTime = System.currentTimeMillis();   
+		        } else {
+		            finish();
+		            System.exit(0);
+		        }
+		        return true;   
+		    }
+			return super.onKeyDown(keyCode, event);
+		}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class MeetingNotifyAcitivity extends BaseActivity {
 	private ListView lvMeetingNotify;
 	private List<MeetingNotifyBean> list;
 	private MeetingNotifyAdapter meetingNotifyAdapter;
+	private long exitTime;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.meeting_notify_activity);
@@ -44,6 +46,21 @@ public class MeetingNotifyAcitivity extends BaseActivity {
 		list.add(test);
 		
 		return list;
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	        if((System.currentTimeMillis()-exitTime) > 2000){  
+	            showLongToast("再按一次返回键退出");                             
+	            exitTime = System.currentTimeMillis();   
+	        } else {
+	            finish();
+	            System.exit(0);
+	        }
+	        return true;   
+	    }
+		return super.onKeyDown(keyCode, event);
 	}
 	class MeetingNotifyAdapter extends BaseAdapter{
 		List<MeetingNotifyBean> list=new ArrayList<MeetingNotifyBean>();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class AcademicAbstractsActivity extends BaseActivity {
 	private ListView lvAcademic;
 	private List<AcademicAbstractBean> list;
 	private AcademicAdapter academicAdapter;
+	private long exitTime;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -47,6 +49,21 @@ public class AcademicAbstractsActivity extends BaseActivity {
 		list.add(test);
 		
 		return list;
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	        if((System.currentTimeMillis()-exitTime) > 2000){  
+	            showLongToast("再按一次返回键退出");                             
+	            exitTime = System.currentTimeMillis();   
+	        } else {
+	            finish();
+	            System.exit(0);
+	        }
+	        return true;   
+	    }
+		return super.onKeyDown(keyCode, event);
 	}
 	public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 		

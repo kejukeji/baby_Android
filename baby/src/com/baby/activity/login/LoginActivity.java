@@ -33,9 +33,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.btnDoctor:
 			openActivity(DoctorMainActivity.class);
+			this.finish();
 			break;
 		case R.id.btnBaby:
-			openActivity(MainBabyActivity.class);			
+			openActivity(MainBabyActivity.class);	
+			this.finish();
 			break;
 
 		default:

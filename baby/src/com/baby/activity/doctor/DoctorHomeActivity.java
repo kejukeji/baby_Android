@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	private GridView homeGridView; //主页面gridview
 	private List<BabyInformationBean> list; // 数据源
 	private HomeGridViewAdapter homeGridViewAdapter,homeGridViewAdapter2;// 所有baby适配器。 收藏适配器
+	private long exitTime;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -82,6 +84,21 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		return list;
 		
 		
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	        if((System.currentTimeMillis()-exitTime) > 2000){  
+	            showLongToast("再按一次返回键退出");                             
+	            exitTime = System.currentTimeMillis();   
+	        } else {
+	            finish();
+	            System.exit(0);
+	        }
+	        return true;   
+	    }
+		return super.onKeyDown(keyCode, event);
 	}
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
