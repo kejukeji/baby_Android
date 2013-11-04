@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#758AA6"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/dochome_create_baby_account"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:text="创建婴\n儿账户"
+            android:textSize="7sp" />
+
+        <TextView
+            android:id="@+id/dochome_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:text="营养随访体系" />
+
+        <Button
+            android:id="@+id/dochome_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:text="搜索"
+            android:textSize="7sp" />
+    </LinearLayout>
+    <!-- 建立一個RadioGroup -->
+
+    <RadioGroup
+        android:id="@+id/dochome_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center" >
+
+        <RadioButton
+            android:id="@+id/dochome_allbaby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            
+            android:text="全部婴儿" />
+        <RadioButton
+            android:id="@+id/dochome_mycollect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的收藏" />
+    </RadioGroup>
+	<GridView 
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:id="@+id/dochome_gridview"
+	    android:numColumns="2"
+	    />
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+ <TextView 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#758AA6"
+    android:text="@string/setting"
+    android:textSize="15sp"
+    android:gravity="center"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:textColor="#FFFFFF"/>
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="23dp"
+    android:background="@drawable/bg_setting"
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp" >
+<TextView 
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"	
+    android:text="@string/setting_activity_grade"/>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/setting_activity_btnright"
+    android:textSize="20sp"
+    android:layout_marginRight="5dp" />
+
+</LinearLayout>
+<View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp" >
+
+<TextView
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="@string/setting_activity_opinion" />
+
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:textSize="20sp"
+        android:text="@string/setting_activity_btnright" />
+</LinearLayout>
+<View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/setting_activity_version" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="5dp"
+        android:text="@string/setting_activity_ver" />
+</LinearLayout>
+<View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp" >
+<TextView 
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="@string/setting_activity_about"/>
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:textSize="20sp"
+        android:text="@string/setting_activity_btnright" />
+</LinearLayout>
+</LinearLayout>
+<Button
+    android:id="@+id/btnSetting_exit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="130dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:textColor="#FFFFFF"
+    android:background="#FF0000"
+    android:text="@string/setting_activity_exit" />
+
+</LinearLayout>
