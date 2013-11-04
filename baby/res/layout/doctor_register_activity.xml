@@ -24,7 +24,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="8dp"
-            android:text="@string/register_back"
+            android:text=""
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="@string/register"
+            android:text=""
             android:textColor="#FFFFFF" />
 
         <Button
@@ -46,7 +46,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="8dp"
-            android:text="@string/register_finish"
+            android:text=""
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
@@ -71,14 +71,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_username" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_username"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:hint="@string/register_username_hint"
+                android:hint=""
                 android:textSize="13sp" />
 
             <TextView
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 密码 -->
 
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_password" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_password"
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:inputType="textPassword"
-                android:hint="@string/register_password_hint"
+                android:hint=""
                 android:textSize="13sp" />
 
             <TextView
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 确认密码 -->
 
@@ -132,14 +132,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_password_affirm" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_password_affirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:hint="@string/register_password_agin"
+                android:hint=""
                 android:textSize="13sp" />
 
             <TextView
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 真实姓名 -->
 
@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_truename" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_truename"
@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 地区 -->
 
@@ -190,7 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_region" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_region"
@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 所属医院 -->
 
@@ -218,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_hospital" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_hospital"
@@ -231,7 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 所属科室 -->
 
@@ -246,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_branch" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_branch"
@@ -259,7 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 职称 -->
 
@@ -275,7 +275,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_occupation" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_occupation"
@@ -288,7 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 邮箱 -->
 
@@ -303,7 +303,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_email" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_email"
@@ -317,7 +317,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/register_write" />
+                android:text="" />
         </LinearLayout>
         <!-- 职称 -->
 
@@ -332,7 +332,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/register_phone" />
+                android:text="" />
 
             <EditText
                 android:id="@+id/btnDoctorRegister_phone"
@@ -357,12 +357,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/checkbox"
-            android:text="@string/register_treaty_agree" />
+            android:text="" />
         <TextView
             android:id="@+id/tvDoctorRegister_treaty_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"            
-            android:text="@string/register_treaty_read" />
+            android:text="" />
 		</LinearLayout>
         <Button
             android:id="@+id/btnDoctorRegister_register"
@@ -372,7 +372,7 @@
             android:background="#226DE1"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:text="@string/register"
+            android:text=""
             android:textColor="#FFFFFF" />
     </LinearLayout>
 

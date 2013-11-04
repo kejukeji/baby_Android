@@ -7,20 +7,20 @@
     <string name="unbind">解除绑定</string>
     <string name="unbind_promt">您确定解除绑定吗?</string>
     <string name="weibo_content_is_empty">内容不能为空!</string>
-    <string name="weibo_content_too_long">内容不能超过140个中�?</string>
-    <string name="weibo_auth_faild">认证失败,请重新认�?</string>
-    <string name="weibo_repeat_content">相同内容请间�?0分钟再进行发布哦!</string>
+    <string name="weibo_content_too_long">内容不能超过140个中文!</string>
+    <string name="weibo_auth_faild">认证失败,请重新认证.</string>
+    <string name="weibo_repeat_content">相同内容请间隔10分钟再进行发布哦!</string>
     <string name="weibo_bind_faild">绑定失败</string>
     <string name="weibo_over_the_unaudited">未审核的应用使用人数超过限制</string>
     
     <string name="loading">正在加载...</string>
     <string name="load_more">获取更多</string>
     <string name="load_all">全部加载完毕</string>
-    <string name="NoSignalException">无法连接到网络，请检查网络配�?/string>
+    <string name="NoSignalException">无法连接到网络，请检查网络配置</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="msg">提示</string>
-    <string name="logout">确定�?��本应�?</string>
+    <string name="logout">确定退出本应用?</string>
     
     <string name="change_password">修改密码</string>
     <string name="change_inform">修改资料</string>
@@ -28,11 +28,11 @@
     <string name="setting">设置</string>
     <string name="setting_activity_grade">给我评分</string>
     <string name="setting_activity_opinion">意见反馈</string>
-    <string name="setting_activity_version">新版本检�?/string>
+    <string name="setting_activity_version">新版本检测</string>
     <string name="setting_activity_ver">V1.0</string>
     <string name="setting_activity_btnright">></string>   
 	<string name="setting_activity_about">关于</string>
-    <string name="setting_activity_exit">�?��当前账号</string>
+    <string name="setting_activity_exit">退出当前账号</string>
     
     <string name="doctor_home_creat">创建婴儿账户</string>
     <string name="doctor_home_title">营养随访体系</string>
@@ -40,10 +40,10 @@
     <string name="doctor_my_title">个人中心</string>
     <string name="doctor_my_inform">我的资料</string>
     <string name="doctor_my_id">医生ID</string>
-    <string name="doctor_my_name">医生�?/string>
-    <string name="doctor_my_region">�?��地区</string>
-    <string name="doctor_my_hospital">�?��医院</string>
-    <string name="doctor_my_branch">�?��科室</string>
+    <string name="doctor_my_name">医生名</string>
+    <string name="doctor_my_region">所在地区</string>
+    <string name="doctor_my_hospital">所属医院</string>
+    <string name="doctor_my_branch">所属科室</string>
     <string name="doctor_my_postition">职称</string>
     <string name="doctor_my_collect">我的收藏</string>
     <string name="doctor_my_email">邮箱</string>
@@ -64,57 +64,19 @@
     <string name="doctor_my_collect_share">分享</string>
     <string name="doctor_my_collect_title">新生儿的营养和需要量 </string>
 
-    <string name="login_title">登录</string>
-    <string name="login_username">用户名：</string>
-    <string name="login_password">密码�?/string>
-    <string name="login_remember_me">记住�?/string>
-    <string name="login_register">注册</string>
-    <string name="login_login">登录</string>
-    
-    <string name="register">注册</string>
-    <string name="register_back">Back</string>
-    <string name="register_finish">完成</string>
-    <string name="register_username">用户名：</string>
-    <string name="register_password">密码�?/string>
-    <string name="register_password_affirm">确认密码�?/string>
-    <string name="register_truename">真实姓名�?/string>
-    <string name="register_region">地区�?/string>
-    <string name="register_hospital">�?��医院�?/string>
-    <string name="register_branch">�?��科室�?/string>
-    <string name="register_occupation">职称�?/string>
-    <string name="register_email">邮箱�?/string>
-    <string name="register_phone">手机号：</string>
-    <string name="register_write">(必填)</string>
-    <string name="register_username_hint">请输入用户名</string>
-    <string name="register_password_hint">请输入密�?/string>
-    <string name="register_password_agin">请再次输入用户名</string>
-    <string name="register_treaty_agree">确认阅读并同意协�?/string>
-    <string name="register_treaty_read">(阅读协议)</string>
-    
-    <string name="register_treaty_title">欢迎注册营养随访体系App�?/string>
-    <string name="register_treaty_content" >请仔细阅读下面的协议，只有接受协议才能继续进行注册�?\n
-1．服务条款的确认和接纳\n
-营养随访体系App的所有权和运营权归XXX学会�?��。营养随访体系App Android iOS平台�?��供的服务将按照有关章程�?服务条款和操作规则严格执行�?用户通过注册程序点击“我同意�?按钮，即表示用户完全接受本协议的�?��条款。\n
-2. 服务内容\n
-营养随访体系App Android iOS平台的服务内容由XXX学会根据实际情况向平台用户提供，营养随访体系App Android iOS平台保留变更服务的权利�?\n
-3. 用户账户的安全�?\n
-用户注册成功后， 营养随访体系App Android iOS平台将给予每个用户一个用户帐号以及相应密码，该用户帐号和密码由用户负责保管，用户应当对以其用户帐号进行的�?��活动和事件负法律责任。\n
-用户不得以任何形式擅自转让或授权他人使用自己�?营养随访体系App Android iOS平台用户名或密码。如果用户泄漏了自己的营养随访体系App Android iOS平台用户名或密码，有可能导致不利的法律后果将由用户自己承担�?\n
-</string>
-    
     <string name="academic_abstract_title">学术文摘</string>
     <string name="meeting_notify_title">会议通知</string>
-    <string name="manage_man">管理�?/string>
+    <string name="manage_man">管理员</string>
 
     <string name="baby_my_id">婴儿ID</string>
-    <string name="baby_my_name">婴儿�?/string>
+    <string name="baby_my_name">婴儿名</string>
     <string name="baby_my_gender">性别</string>
-    <string name="baby_my_preproduction">预产�?/string>
+    <string name="baby_my_preproduction">预产期</string>
     <string name="baby_my_height">出生身长</string>
     <string name="baby_my_weight">出生体重</string>
     <string name="baby_my_head_circumference">出生头围</string>
     <string name="baby_my_delivery_way">分娩方式</string>
-    <string name="baby_my_refenrence">参�?指标</string>
+    <string name="baby_my_refenrence">参考指标</string>
     <string name="baby_my_apgar">Apgar评分</string>
     <string name="baby_my_growth_target">生长指标</string>
     <string name="baby_my_remark">备注</string>
