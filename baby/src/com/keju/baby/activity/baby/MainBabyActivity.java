@@ -3,6 +3,8 @@ package com.keju.baby.activity.baby;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
@@ -18,7 +20,7 @@ import com.keju.baby.activity.SettingActivity;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午3:13:38
  */
-public class MainBabyActivity extends TabActivity implements OnCheckedChangeListener {
+public class MainBabyActivity extends TabActivity implements OnCheckedChangeListener,OnClickListener {
 	public static RadioButton rb_home, rb_account, rb_fitment, rb_setting;
 
 	public static TabHost mth;
@@ -34,6 +36,7 @@ public class MainBabyActivity extends TabActivity implements OnCheckedChangeList
 		findView();
 		fillData();
 		((CommonApplication) getApplication()).addActivity(this);
+		
 	}
 	
 	/**
@@ -77,6 +80,12 @@ public class MainBabyActivity extends TabActivity implements OnCheckedChangeList
 	}
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
 		
 	}
 }
