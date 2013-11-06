@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.baby"
+    package="com.keju.baby"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -22,7 +22,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" 
         android:theme="@android:style/Theme.Light.NoTitleBar"
-        android:name="com.baby.CommonApplication">
+        android:name="com.keju.baby.CommonApplication">
         <activity
             android:name=".activity.LogoActivity"
             android:label="@string/app_name" >

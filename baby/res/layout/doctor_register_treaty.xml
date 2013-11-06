@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="#758AA6"
         android:paddingBottom="8dp"
-        android:paddingTop="8dp"
+
         android:orientation="horizontal">
 
         <Button
@@ -24,7 +24,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="8dp"
-            
+
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_weight="4"
             android:gravity="center"
             android:textSize="25sp"
-            
+
             android:textColor="#FFFFFF" />
         <Button
             android:layout_width="0dp"
@@ -41,16 +41,6 @@
             android:layout_weight="1"
             android:background="#758AA6"/>
         </LinearLayout>
- 		<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="15sp"
-            />
-       <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            />
+ 		
+
 </LinearLayout>
