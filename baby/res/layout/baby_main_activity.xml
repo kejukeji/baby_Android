@@ -5,39 +5,54 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
+     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal" >
-        </TabWidget>
-
         <FrameLayout
             android:id="@android:id/tabcontent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
 
-            <TextView
-                android:id="@+id/tvBabyOne"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"/>
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.0"
+            android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/tvBabyTwo"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+        <RadioGroup
+            android:id="@+id/rg_main_btns"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tvBabyThree"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"/>
-        </FrameLayout>
-    </RelativeLayout>
+            
+            <RadioButton
+                android:id="@+id/rb_home"
+                android:checked="true"
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_baby_home_selector"/>
+
+            <RadioButton
+                android:id="@+id/rb_account"
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_baby_account_selector"/>
+
+            <RadioButton
+                android:id="@+id/rb_fitment"
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_baby_fitment_selector" />
+
+            <RadioButton
+                android:id="@+id/rb_setting"
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_baby_setting_selector"/>
+        </RadioGroup>
+    </LinearLayout>
 
 </TabHost>

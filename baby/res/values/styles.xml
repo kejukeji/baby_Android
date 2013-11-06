@@ -37,4 +37,20 @@
         <item name="android:cacheColorHint" >@android:color/transparent</item>
         <item name="android:fadingEdge" >none</item>
     </style >
+     <!-- tabhost底部 -->
+    <style name="main_btn_style">
+
+        <!-- 去除原生的单选按钮图标 -->
+        <item name="android:button">@null</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:paddingTop">8dip</item>
+        <item name="android:paddingBottom">3dp</item>
+        
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        
+        <item name="android:layout_weight">1.0</item>
+        <!-- 引用 main_btn_bg_d.xml，设定当按钮被press、checked时的背景图，以此增强点击、选中按钮时的视觉效果 -->
+    </style>
 </resources>
