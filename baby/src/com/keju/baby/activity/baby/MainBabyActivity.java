@@ -1,5 +1,8 @@
 package com.keju.baby.activity.baby;
 
+
+import android.app.LocalActivityManager;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +13,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-
 import com.keju.baby.CommonApplication;
 import com.keju.baby.R;
 import com.keju.baby.activity.SettingActivity;
@@ -20,7 +22,7 @@ import com.keju.baby.activity.SettingActivity;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午3:13:38
  */
-public class MainBabyActivity extends TabActivity implements OnCheckedChangeListener,OnClickListener {
+public class MainBabyActivity extends TabActivity implements OnCheckedChangeListener {
 	public static RadioButton rb_home, rb_account, rb_fitment, rb_setting;
 
 	public static TabHost mth;
@@ -36,7 +38,10 @@ public class MainBabyActivity extends TabActivity implements OnCheckedChangeList
 		findView();
 		fillData();
 		((CommonApplication) getApplication()).addActivity(this);
-		
+
+		LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);  
+        mLocalActivityManager.dispatchCreate(savedInstanceState);  
+        mth.setup(mLocalActivityManager); 
 	}
 	
 	/**
@@ -80,12 +85,29 @@ public class MainBabyActivity extends TabActivity implements OnCheckedChangeList
 	}
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-	}
-
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		
+		switch (buttonView.getId()) {
+		case R.id.rb_home:
+			if(isChecked){
+				mth.setCurrentTabByTag(HOME_TAB_ID);
+			}
+			break;
+		case R.id.rb_account:
+			if(isChecked){
+				mth.setCurrentTabByTag(ACCOUNT_TAB_ID);
+			}
+			break;
+		case R.id.rb_fitment:
+			if(isChecked){
+				mth.setCurrentTabByTag(FITMENT_TAB_ID);
+			}
+			break;
+		case R.id.rb_setting:
+			if(isChecked){
+				mth.setCurrentTabByTag(SETTING_TAB_ID);
+			}
+			break;
+		default:
+			break;
+		}
 	}
 }
