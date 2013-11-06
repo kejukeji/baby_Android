@@ -1,6 +1,8 @@
 package com.keju.baby.activity.baby;
 
+
 import android.app.LocalActivityManager;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +11,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-
 import com.keju.baby.CommonApplication;
 import com.keju.baby.R;
 import com.keju.baby.activity.SettingActivity;
@@ -81,6 +82,29 @@ public class MainBabyActivity extends TabActivity implements OnCheckedChangeList
 	}
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		
+		switch (buttonView.getId()) {
+		case R.id.rb_home:
+			if(isChecked){
+				mth.setCurrentTabByTag(HOME_TAB_ID);
+			}
+			break;
+		case R.id.rb_account:
+			if(isChecked){
+				mth.setCurrentTabByTag(ACCOUNT_TAB_ID);
+			}
+			break;
+		case R.id.rb_fitment:
+			if(isChecked){
+				mth.setCurrentTabByTag(FITMENT_TAB_ID);
+			}
+			break;
+		case R.id.rb_setting:
+			if(isChecked){
+				mth.setCurrentTabByTag(SETTING_TAB_ID);
+			}
+			break;
+		default:
+			break;
+		}
 	}
 }
