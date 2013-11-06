@@ -26,7 +26,7 @@
             android:visibility="gone" />
 
         <RadioGroup
-            android:id="@+id/rg_main_btns"
+            android:id="@+id/rg_doctor_main_btns"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -34,26 +34,26 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/rb_account"
+                android:id="@+id/rb_doctor_account"
                 android:checked="true"
                 style="@style/main_btn_style"
                 android:background="@drawable/ic_doctor_account_selector"/>
             
             <RadioButton
-                android:id="@+id/rb_home"                
+                android:id="@+id/rb_doctor_home"                
                 style="@style/main_btn_style"
                 android:background="@drawable/ic_doctor_home_selector"/>
             
             <RadioButton
-                android:id="@+id/rb_academic"
+                android:id="@+id/rb_doctor_academic"
                 style="@style/main_btn_style"
                 android:background="@drawable/ic_doctor_academic_selector" />
 			<RadioButton
-                android:id="@+id/rb_meeting"
+                android:id="@+id/rb_doctor_meeting"
                 style="@style/main_btn_style"
                 android:background="@drawable/ic_doctor_meeting_selector"/>
             <RadioButton
-                android:id="@+id/rb_setting"
+                android:id="@+id/rb_doctor_setting"
                 style="@style/main_btn_style"
                 android:background="@drawable/ic_doctor_setting_selector"/>
         </RadioGroup>

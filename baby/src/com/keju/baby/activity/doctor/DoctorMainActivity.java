@@ -55,11 +55,11 @@ public class DoctorMainActivity extends TabActivity implements OnCheckedChangeLi
 	private void findView() {
 		mth = getTabHost();
 
-		rb_home = (RadioButton) findViewById(R.id.rb_home);
-		rb_account = (RadioButton) findViewById(R.id.rb_account);
-		rb_academic = (RadioButton) findViewById(R.id.rb_academic);
-		rb_meeting=(RadioButton)findViewById(R.id.rb_meeting);
-		rb_setting = (RadioButton) findViewById(R.id.rb_setting);
+		rb_home = (RadioButton) findViewById(R.id.rb_doctor_home);
+		rb_account = (RadioButton) findViewById(R.id.rb_doctor_account);
+		rb_academic = (RadioButton) findViewById(R.id.rb_doctor_academic);
+		rb_meeting=(RadioButton)findViewById(R.id.rb_doctor_meeting);
+		rb_setting = (RadioButton) findViewById(R.id.rb_doctor_setting);
 
 		rb_home.setOnCheckedChangeListener(this);
 		rb_account.setOnCheckedChangeListener(this);
@@ -92,32 +92,32 @@ public class DoctorMainActivity extends TabActivity implements OnCheckedChangeLi
 		TabSpec ts5 = mth.newTabSpec(SETTING_TAB_ID).setIndicator(SETTING_TAB_ID);
 		ts5.setContent(new Intent(this, SettingActivity.class));
 		mth.addTab(ts5);
-		mth.setCurrentTabByTag(HOME_TAB_ID);
+		mth.setCurrentTabByTag(ACCOUNT_TAB_ID);
 	}
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		switch (buttonView.getId()) {
-		case R.id.rb_home:
+		case R.id.rb_doctor_home:
 			if(isChecked){
 				mth.setCurrentTabByTag(HOME_TAB_ID);
 			}
 			break;
-		case R.id.rb_account:
+		case R.id.rb_doctor_account:
 			if(isChecked){
 				mth.setCurrentTabByTag(ACCOUNT_TAB_ID);
 			}
 			break;
-		case R.id.rb_academic:
+		case R.id.rb_doctor_academic:
 			if(isChecked){
 				mth.setCurrentTabByTag(ACADEMIC_TAB_ID);
 			}
 			break;
-		case R.id.rb_meeting:
+		case R.id.rb_doctor_meeting:
 			if(isChecked){
 				mth.setCurrentTabByTag(MEETING_TAB_ID);
 			}
 			break;
-		case R.id.rb_setting:
+		case R.id.rb_doctor_setting:
 			if(isChecked){
 				mth.setCurrentTabByTag(SETTING_TAB_ID);
 			}
