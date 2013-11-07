@@ -1,23 +1,21 @@
 package com.keju.baby.activity.baby;
 
-import java.util.Timer;
-import java.util.TimerTask;
+
+import android.app.LocalActivityManager;
 
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.Toast;
-
 import com.keju.baby.CommonApplication;
 import com.keju.baby.R;
 import com.keju.baby.activity.SettingActivity;
-import com.keju.baby.util.AndroidUtil;
 
 /**
  * 婴儿tabhost界面
@@ -40,6 +38,10 @@ public class MainBabyActivity extends TabActivity implements OnCheckedChangeList
 		findView();
 		fillData();
 		((CommonApplication) getApplication()).addActivity(this);
+
+		LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);  
+        mLocalActivityManager.dispatchCreate(savedInstanceState);  
+        mth.setup(mLocalActivityManager); 
 	}
 	
 	/**

@@ -3,15 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-   <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#758AA6"
-        android:gravity="center"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:text="@string/academic_abstract_title"
-        android:textColor="#FFFFFF" />
+   <include layout="@layout/common_title_bar" />
 
    <ListView
        android:id="@+id/lvAcademic"

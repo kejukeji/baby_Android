@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -34,6 +35,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	private List<BabyInformationBean> list; // 数据源
 	private HomeGridViewAdapter homeGridViewAdapter,homeGridViewAdapter2;// 所有baby适配器。 收藏适配器
 	private long exitTime;
+	private Button btnLeft,btnRight;
+	private TextView tvTitle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -54,8 +57,25 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		homeGridView.setAdapter(homeGridViewAdapter);
 		homeGridView.setOnItemClickListener(this);
 		doctorHomeRadioGroup.setOnCheckedChangeListener(this);
+		
+		findView();
+		fillData();
 	}
-
+	private void findView() {
+		
+		btnLeft=(Button)findViewById(R.id.btnLeft);
+		btnRight=(Button)findViewById(R.id.btnRight);
+		tvTitle=(TextView)findViewById(R.id.tvTitle);
+	}
+	/**
+	 * 数据填充
+	 */
+	private void fillData() {
+		
+		btnLeft.setText("创建婴\n儿账户");
+		btnRight.setText("搜索");
+		tvTitle.setText("营养随访体系");
+	}
 	private List<BabyInformationBean> setdata2() {
 		// TODO Auto-generated method stub
 		List<BabyInformationBean> list=new ArrayList<BabyInformationBean>();

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+
+     <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.0"
+            android:visibility="gone" />
+
+        <RadioGroup
+            android:id="@+id/rg_doctor_main_btns"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rb_doctor_account"
+                android:checked="true"
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_doctor_account_selector"/>
+            
+            <RadioButton
+                android:id="@+id/rb_doctor_home"                
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_doctor_home_selector"/>
+            
+            <RadioButton
+                android:id="@+id/rb_doctor_academic"
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_doctor_academic_selector" />
+			<RadioButton
+                android:id="@+id/rb_doctor_meeting"
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_doctor_meeting_selector"/>
+            <RadioButton
+                android:id="@+id/rb_doctor_setting"
+                style="@style/main_btn_style"
+                android:background="@drawable/ic_doctor_setting_selector"/>
+        </RadioGroup>
+    </LinearLayout>
+</TabHost>
+
+
