@@ -81,4 +81,11 @@
     <string name="baby_my_growth_target">生长指标</string>
     <string name="baby_my_remark">备注</string>
     
+    <string name="baby_parents_phone">家长手机号</string>
+    <string name="baby_commit">合并症</string>
+    
+    <string name="baby_fitment_activity">育儿指南</string>
+    
+    <string name="baby_detail_title">育儿指南详情</string>
+    
 </resources>

@@ -1,7 +1,12 @@
+
 package com.keju.baby.activity.doctor;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.keju.baby.R;
+import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.bean.MyCollectBean;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,9 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
-import com.keju.baby.R;
-import com.keju.baby.activity.base.BaseActivity;
-import com.keju.baby.bean.MyCollectBean;
+
 
 /**
  * 医生资料界面
@@ -138,3 +141,4 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 		public TextView content;
 	}
 }
+
