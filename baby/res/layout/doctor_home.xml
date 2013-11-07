@@ -4,39 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#758AA6"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/dochome_create_baby_account"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_weight="1"
-            android:text="创建婴\n儿账户"
-            android:textSize="7sp" />
-
-        <TextView
-            android:id="@+id/dochome_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:text="营养随访体系" />
-
-        <Button
-            android:id="@+id/dochome_search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_weight="1"
-            android:text="搜索"
-            android:textSize="7sp" />
-    </LinearLayout>
+    <include layout="@layout/common_title_bar" />
     <!-- 建立一個RadioGroup -->
 
     <RadioGroup

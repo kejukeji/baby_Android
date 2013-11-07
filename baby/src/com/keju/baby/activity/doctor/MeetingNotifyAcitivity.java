@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,6 +28,8 @@ public class MeetingNotifyAcitivity extends BaseActivity {
 	private List<MeetingNotifyBean> list;
 	private MeetingNotifyAdapter meetingNotifyAdapter;
 	private long exitTime;
+	private Button btnLeft,btnRight;
+	private TextView tvTitle;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.meeting_notify_activity);
@@ -36,6 +39,24 @@ public class MeetingNotifyAcitivity extends BaseActivity {
 		meetingNotifyAdapter=new MeetingNotifyAdapter(this,list);
 		lvMeetingNotify.setAdapter(meetingNotifyAdapter);
 		
+		findView();
+		fillData();
+         
+	}
+	private void findView() {
+		
+		btnLeft=(Button)findViewById(R.id.btnLeft);
+		btnRight=(Button)findViewById(R.id.btnRight);
+		tvTitle=(TextView)findViewById(R.id.tvTitle);
+	}
+	/**
+	 * 数据填充
+	 */
+	private void fillData() {
+		
+		btnLeft.setVisibility(View.GONE);
+		btnRight.setVisibility(View.GONE);
+		tvTitle.setText("会议通知");
 	}
 	private List<MeetingNotifyBean> setdate() {
 		List<MeetingNotifyBean> list=new ArrayList<MeetingNotifyBean>();

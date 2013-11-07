@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +33,8 @@ public class FitmentActivity extends BaseActivity {
 	private FitmentAdapter fitmentAdapter;
 	
 	private long exitTime;
+	private Button btnLeft,btnRight;
+	private TextView tvTitle;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +44,23 @@ public class FitmentActivity extends BaseActivity {
 		lvFitment=(ListView)findViewById(R.id.lvFitment);
 		fitmentAdapter=new FitmentAdapter(this,list);
 		lvFitment.setAdapter(fitmentAdapter);
+		findView();
+		fillData();
+	}
+	private void findView() {
+		
+		btnLeft=(Button)findViewById(R.id.btnLeft);
+		btnRight=(Button)findViewById(R.id.btnRight);
+		tvTitle=(TextView)findViewById(R.id.tvTitle);
+	}
+	/**
+	 * 数据填充
+	 */
+	private void fillData() {
+		
+		btnLeft.setVisibility(View.GONE);
+		btnRight.setVisibility(View.GONE);
+		tvTitle.setText("育儿指南");
 	}
 	private List<FitmentBean> setdate() {
 		List<FitmentBean> list=new ArrayList<FitmentBean>();
