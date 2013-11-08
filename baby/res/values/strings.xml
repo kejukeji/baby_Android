@@ -88,4 +88,11 @@
     
     <string name="baby_detail_title">育儿指南详情</string>
     
+    <string name="search_key">关键字：</string>
+    <string name="search_time">婴儿出生\n时间段：</string>
+    <string name="search_to">到</string>
+    <string name="search_history">历史搜索：</string>
+    <string name="search_button">搜索</string>
+    <string name="search_clean">清除历史记录</string>
+    
 </resources>

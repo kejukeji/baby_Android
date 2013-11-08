@@ -47,7 +47,7 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnLeft:
-			openActivity(BabyMyActivity.class);
+			this.finish();
 			break;
 
 		default:

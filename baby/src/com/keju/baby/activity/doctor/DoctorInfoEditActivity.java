@@ -45,7 +45,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnLeft:
-			openActivity(DoctorMyActivity.class);
+			this.finish();
 			break;
 
 		default:

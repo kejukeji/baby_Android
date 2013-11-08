@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,7 +30,7 @@ import com.keju.baby.bean.BabyInformationBean;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午2:51:05
  */
-public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener,OnItemClickListener{
+public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener,OnItemClickListener,OnClickListener{
 	private RadioGroup doctorHomeRadioGroup; //主页面radiogroup
 	private GridView homeGridView; //主页面gridview
 	private List<BabyInformationBean> list; // 数据源
@@ -60,6 +61,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		
 		findView();
 		fillData();
+		btnRight.setOnClickListener(this);
 	}
 	private void findView() {
 		
@@ -200,6 +202,19 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		public TextView id;
 		public TextView name;
 		public TextView day;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btnRight:
+			openActivity(SearchActivity.class);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 
 	
