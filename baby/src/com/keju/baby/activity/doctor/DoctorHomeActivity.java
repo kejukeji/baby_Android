@@ -62,6 +62,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		findView();
 		fillData();
 		btnRight.setOnClickListener(this);
+		btnLeft.setOnClickListener(this);
 	}
 	private void findView() {
 		
@@ -210,7 +211,9 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		case R.id.btnRight:
 			openActivity(SearchActivity.class);
 			break;
-
+		case R.id.btnLeft:
+			openActivity(DoctorCreatBabyAccountActivity.class);
+			break;
 		default:
 			break;
 		}
