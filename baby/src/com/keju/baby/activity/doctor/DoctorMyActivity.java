@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -29,14 +30,14 @@ import android.widget.TextView;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午2:53:44
  */
-public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeListener{
+public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeListener,OnClickListener{
 	private RadioGroup doctorMyRadioGroup;
 	private LinearLayout doctorMyLinearLayout;
 	private ListView doctorMyListView;
 	private MyCollectAdapter myCollectAdapter;
 	private List<MyCollectBean> list;
 	private long exitTime = 0;
-	private Button btnLeft,btnRight;
+	private Button btnLeft,btnRight,btnChangeInfo,btnChangePw;
 	private TextView tvTitle;
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +49,18 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 		doctorMyRadioGroup=(RadioGroup)findViewById(R.id.doctor_my_radiogroup);
 		doctorMyLinearLayout=(LinearLayout)findViewById(R.id.doctor_my_linearlayout);
 		doctorMyListView=(ListView)findViewById(R.id.doctor_my_listview);
+		btnChangeInfo=(Button)findViewById(R.id.btnDoctor_my_change_inform);
+		btnChangePw=(Button)findViewById(R.id.btnDoctor_my_change_pw);
+		
         doctorMyRadioGroup.setOnCheckedChangeListener(this);
         myCollectAdapter=new MyCollectAdapter(this, list);
+        btnChangeInfo.setOnClickListener(this);
+        btnChangePw.setOnClickListener(this);
+        
         doctorMyListView.setAdapter(myCollectAdapter);
         
         findView();
-		fillData();
+		fillData();		
          
 	}
 	private void findView() {
@@ -160,6 +167,21 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 	class ViewHolder{
 		public TextView title;
 		public TextView content;
+	}
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btnDoctor_my_change_inform:
+			openActivity(DoctorInfoEditActivity.class);
+			break;
+		case R.id.btnDoctor_my_change_pw:
+			
+			break;
+		
+		default:
+			break;
+		}
+		
 	}
 }
 

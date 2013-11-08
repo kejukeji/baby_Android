@@ -3,6 +3,7 @@ package com.keju.baby.activity.baby;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,15 +16,20 @@ import com.keju.baby.activity.base.BaseActivity;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午3:25:43
  */
-public class BabyMyActivity extends BaseActivity {
+public class BabyMyActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
 	private Button btnLeft,btnRight;
 	private TextView tvTitle;
+	private Button btnChangeInfo,btnChangePassword;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.baby_my_activity);
 		
+		btnChangeInfo=(Button)findViewById(R.id.btnBabyChangeInform);
+		btnChangePassword=(Button)findViewById(R.id.btnBabyChangePw);
+		btnChangeInfo.setOnClickListener(this);
+		btnChangePassword.setOnClickListener(this);
 		
 		findView();
 		fillData();
@@ -56,5 +62,19 @@ public class BabyMyActivity extends BaseActivity {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btnBabyChangeInform:
+			openActivity(BabyInfoEditActivity.class);
+			break;
+		case R.id.btnBabyChangePw:
+			
+			break;
+		default:
+			break;
+		}
+		
 	}
 }

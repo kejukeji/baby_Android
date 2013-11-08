@@ -17,17 +17,16 @@ import android.widget.TextView;
  * @version 创建时间：2013-10-25 下午3:16:24
  */
 public class BabyInfoEditActivity extends BaseActivity implements OnClickListener{
-	private Button btnBack;
+
 	private Button btnLeft,btnRight;
 	private TextView tvTitle;
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.baby_info_edit_activity);
-		
-		btnBack=(Button)findViewById(R.id.btnBack);
-		btnBack.setOnClickListener(this);
-		findView();
+
+		findView();		
 		fillData();
+		btnLeft.setOnClickListener(this);
 	}
 	private void findView() {
 		
@@ -47,7 +46,7 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.btnBack:
+		case R.id.btnLeft:
 			openActivity(BabyMyActivity.class);
 			break;
 
