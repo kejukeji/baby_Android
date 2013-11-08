@@ -5,31 +5,53 @@
     android:orientation="vertical" >
 
     <include layout="@layout/common_title_bar" />
-    <!-- 建立一個RadioGroup -->
 
-    <RadioGroup
-        android:id="@+id/dochome_radio_group"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_second_title_repeat"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/dochome_radio_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/dochome_allbaby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:button="@drawable/round_check_selector"
+                android:checked="true"
+                android:gravity="center"
+                android:textColor="@color/gold"
+                android:text="全部婴儿" />
+
+            <RadioButton
+                android:id="@+id/dochome_mycollect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/round_check_selector"
+                android:gravity="center"
+                android:textColor="@color/gold"
+                android:text="我的收藏" />
+        </RadioGroup>
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/flag_win"
+            android:layout_marginRight="8dp"/>
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/flag_list"
+            android:layout_marginRight="8dp"/>
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/dochome_gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
+        android:numColumns="2" />
 
-        <RadioButton
-            android:id="@+id/dochome_allbaby"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            
-            android:text="全部婴儿" />
-        <RadioButton
-            android:id="@+id/dochome_mycollect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的收藏" />
-    </RadioGroup>
-	<GridView 
-	    android:layout_height="wrap_content"
-	    android:layout_width="match_parent"
-	    android:id="@+id/dochome_gridview"
-	    android:numColumns="2"
-	    />
 </LinearLayout>

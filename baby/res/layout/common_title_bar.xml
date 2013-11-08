@@ -5,7 +5,7 @@
     android:layout_height="50dp"
     android:gravity="center_vertical"
     android:paddingTop="3dp" 
-    android:background="#B9A770">
+    android:background="@drawable/bg_title_repeat">
 
     <Button
         android:id="@+id/btnLeft"

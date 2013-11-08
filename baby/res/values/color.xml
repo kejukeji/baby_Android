@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
+    
     <color name="blue">#ffccddff</color>
     <color name="grey">#58616d</color>
     <color name="darkgrey">#ff404040</color>
@@ -12,5 +11,8 @@
     <color name="lightransparent">#a0000000</color>
     <color name="transparent">#00000000</color>
     <color name="navpage">#FFE1E8EB</color>
-
+	<!-- 使用的颜色 -->
+	<color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gold">#9a8335</color>
 </resources>
