@@ -20,7 +20,7 @@ public abstract class DoctorCreatBabyAccountActivity extends BaseActivity implem
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.doctor_creat_baby_account_activity);
+		setContentView(R.layout.doctor_creat_baby_account);
 		findView();
 		fillData();
 		btnRight.setOnClickListener(this);

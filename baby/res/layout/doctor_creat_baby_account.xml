@@ -373,8 +373,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5.7"
-                android:gravity="right"
+                android:layout_weight="5"
+                android:gravity="left"
                 android:text="@string/doctor_creat_recover_days" />
 
             <Button
@@ -435,6 +435,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal" >
 
             <TextView
