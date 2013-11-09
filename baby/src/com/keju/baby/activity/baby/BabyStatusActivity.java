@@ -37,4 +37,5 @@ public class BabyStatusActivity extends BaseActivity {
 		btnRight.setVisibility(View.GONE);
 		tvTitle.setText("营养摄入状况");
 	}
+
 }

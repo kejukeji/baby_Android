@@ -47,7 +47,7 @@ public abstract class DoctorCreatBabyAccountActivity extends BaseActivity implem
 			this.finish();
 			break;
 		case R.id.btnLeft:
-			this.finish();
+
 			break;
 		default:
 			break;
