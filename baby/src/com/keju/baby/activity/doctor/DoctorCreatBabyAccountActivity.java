@@ -14,7 +14,7 @@ import com.keju.baby.activity.base.BaseActivity;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午2:57:49
  */
-public abstract class DoctorCreatBabyAccountActivity extends BaseActivity implements OnClickListener{
+public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnClickListener{
 	private Button btnLeft,btnRight;
 	private TextView tvTitle;
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +44,10 @@ public abstract class DoctorCreatBabyAccountActivity extends BaseActivity implem
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnRight:
-			this.finish();
+			//this.finish();
 			break;
 		case R.id.btnLeft:
-
+			this.finish();
 			break;
 		default:
 			break;
