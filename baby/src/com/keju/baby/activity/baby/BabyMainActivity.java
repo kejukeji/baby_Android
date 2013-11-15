@@ -2,17 +2,15 @@ package com.keju.baby.activity.baby;
 
 
 import android.app.LocalActivityManager;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+
 import com.keju.baby.CommonApplication;
 import com.keju.baby.R;
 import com.keju.baby.activity.SettingActivity;
