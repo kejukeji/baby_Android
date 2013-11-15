@@ -1,5 +1,7 @@
 package com.keju.baby.util;
 
+import com.keju.baby.Constants;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -22,6 +24,9 @@ public class SharedPrefUtil {
 	public static final String QQ_EXPIRES_IN = "qq_expires_in";//新浪微博令牌时间
 	public static final String QQ_OPENID = "qq_openid";
 	public static final String QQ_ACCESS_CURR_TIME = "qq_sccess_curr_time";//新浪微博授权时间
+	
+	public static final String UID = "uid";//用户id；
+	public static final String USER_TYPE = "user_type";//登录的用户；
 	
 	/**
 	 * 判断是否是第一次进入应用
@@ -170,5 +175,54 @@ public class SharedPrefUtil {
 	public static long getUpdateInterval(Context context){
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 		return sp.getLong(CHECK_UPDATE_TIME_KEY, 5*60*1000);
+	}
+	
+	/**
+	 * 判断是否登录
+	 * @param context
+	 * @return true表示登录
+	 */
+	public static boolean isLogin(Context context){
+		return getUid(context) > 0;
+	}
+	/**
+	 * 获取用户的uid
+	 * @param context
+	 * @return
+	 */
+	public static int getUid(Context context){
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		return sp.getInt(UID, 0);
+	}
+	/**
+	 * 保存用户的uid
+	 * @param context
+	 * @param uid
+	 */
+	public static void setUid(Context context, int uid){
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		Editor e = sp.edit();
+		e.putInt(UID, uid);
+		e.commit();
+	}
+	/**
+	 * 获取用户类型
+	 * @param context
+	 * @return
+	 */
+	public static int getUserType(Context context){
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		return sp.getInt(USER_TYPE, Constants.USER_DOCTOR);
+	}
+	/**
+	 * 保存用户类型
+	 * @param context
+	 * @param uid
+	 */
+	public static void setUserType(Context context, int userType){
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		Editor e = sp.edit();
+		e.putInt(USER_TYPE, userType);
+		e.commit();
 	}
 }

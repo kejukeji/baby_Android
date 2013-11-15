@@ -22,7 +22,7 @@ import com.keju.baby.activity.SettingActivity;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午3:13:38
  */
-public class MainBabyActivity extends TabActivity implements OnCheckedChangeListener {
+public class BabyMainActivity extends TabActivity implements OnCheckedChangeListener {
 	public static RadioButton rb_home, rb_account, rb_fitment, rb_setting;
 
 	public static TabHost mth;

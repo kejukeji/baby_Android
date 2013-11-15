@@ -56,7 +56,7 @@
         
         <activity  android:name=".activity.DoctorChangePassword" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <!-- 婴儿界面 -->
-        <activity  android:name=".activity.baby.MainBabyActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.baby.BabyMainActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.baby.BabyMyActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.baby.BabyInfoEditActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.baby.FitmentActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
