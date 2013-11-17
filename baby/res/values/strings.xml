@@ -22,6 +22,8 @@
     <string name="msg">提示</string>
     <string name="logout">确定退出本应用?</string>
     
+    <string name="logo_text">X&#160;X&#160;随&#160;访&#160;助&#160;手</string>
+    
     <string name="change_password">修改密码</string>
     <string name="change_inform">修改资料</string>
     

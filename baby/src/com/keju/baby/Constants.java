@@ -11,7 +11,8 @@ public class Constants {
 	/**
 	 * 应用文件存放目录
 	 */
-	public static final String APP_DIR_NAME = "ele4android";
+	public static final String APP_DIR_NAME = "baby";
+	public static final String BASE_HTML_URL = "http://42.121.108.142:7007/html/";
 	/**
 	 * 微博绑定类型，点击账号绑定和新浪微博
 	 */
@@ -34,16 +35,8 @@ public class Constants {
 	public static final String WEIBO_USER_UID = "1291843462";
 	
 	/**
-	 * 腾讯微博配置
+	 * 登录用户类型；
 	 */
-	public static final String TENCENT_APP_ID = "801237383";//app id
-	public static final String TENCENT_APP_KEY = "65a1355f898df7f19a6ccd47bdb45d92";//app key
-	public static final String TENCENT_REDIRECT_URL = "http://www.eemedia.cn/app_download.aspx";
-	
-	/**
-	 * 人人网
-	 */
-	public static final String RENREN_APP_ID = "211176";//app id
-	public static final String RENREN_API_KEY = "979175fc39c14a8eba6ea78f6e876c01";//api key
-	public static final String RENREN_SECRET_KEY = "a113d3aa3cde431eb499f6fc37ff1e30";//secret key
+	public static final int USER_DOCTOR = 1;//医生
+	public static final int USER_MOTHER = 2;//妈妈
 }
