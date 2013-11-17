@@ -115,6 +115,9 @@
     <string name="choice">选择</string>
     <string name="change">修改</string>
     <string name="must_fill">(必填)</string>
+    <string name="km">kcal/100ml</string>
+    <string name="gm">g/100ml</string>
+    
     <!-- 婴儿“修改资料”界面 -->
     <string name="doctor_creat_phone">家长手机号:</string>
     <string name="doctor_creat_name">婴儿名:</string>
@@ -134,12 +137,14 @@
     <string name="doctor_creat_choice1">WHO</string>
     <string name="doctor_creat_choice2">九城</string>
     <string name="doctor_creat_choice3">上海</string>
+    
   <!-- “配方奶”界面 -->  
     <string name="choose_milk_yard">院内/外：</string>
     <string name="choose_milk_brand">品牌：</string>
     <string name="choose_milk_kind">种类：</string>
     <string name="choose_milk_add_milk">新增配方奶</string>
     <string name="choose_milk_check">查看营养数据</string>
+    
   <!-- 婴儿状态总结(随访记录“分析”界面) -->
     <string name="baby_status_gap">营养差距></string>
     <string name="baby_status_energy_gap">能量差距</string>
@@ -154,4 +159,16 @@
     <string name="baby_status_in_milk_need">低出生体重儿院内专用配方奶喂养满足生长需求</string>
     <string name="baby_status_out_milk_need">早产儿出院后专用配方奶喂养满足生长需求</string>
     <string name="baby_status_sumup">营养总结：</string>
+    
+    <!-- 新增”配方奶“界面 -->
+    <string name="add_milk_in">院内</string>
+    <string name="add_milk_out">院外</string>
+    <string name="add_milk_brand1">惠氏</string>
+    <string name="add_milk_brand2">品牌A</string>
+    <string name="add_milk_brand3">品牌B</string>
+    <string name="add_milk_brand_other">其他</string>
+    <string name="add_milk_energy">能量：</string>
+    <string name="add_milk_protein">蛋白质：</string>
+    <string name="add_milk_carbohydrate">碳水化合物：</string>
+    <string name="add_milk_fat">脂肪：</string>
 </resources>
