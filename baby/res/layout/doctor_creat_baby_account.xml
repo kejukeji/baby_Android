@@ -27,9 +27,10 @@
                 android:text="@string/doctor_creat_phone" />
 
             <EditText
-                android:id="@+id/etDoctorCreatePhone"
+                android:id="@+id/et_doctor_create_phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:inputType="phone"
                 android:layout_weight="7" />
 
             <TextView

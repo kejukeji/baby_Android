@@ -14,7 +14,7 @@ import com.keju.baby.activity.base.BaseActivity;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午2:57:49
  */
-public abstract class DoctorCreatBabyAccountActivity extends BaseActivity implements OnClickListener{
+public  class DoctorCreatBabyAccountActivity extends BaseActivity implements OnClickListener{
 	private Button btnLeft,btnRight;
 	private TextView tvTitle;
 	protected void onCreate(Bundle savedInstanceState) {
