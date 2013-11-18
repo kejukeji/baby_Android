@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.BabyInformationBean;
+import com.keju.baby.util.AndroidUtil;
 
 /**
  * 医生首页界面
@@ -109,8 +110,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 				showLongToast("再按一次返回键退出");
 				exitTime = System.currentTimeMillis();
 			} else {
+				AndroidUtil.exitApp(this);
 				finish();
-				System.exit(0);
 			}
 			return true;
 		}
