@@ -89,5 +89,88 @@
     <string name="baby_fitment_activity">育儿指南</string>
     
     <string name="baby_detail_title">育儿指南详情</string>
+    <!-- “搜索”界面 -->
+    <string name="search_key">关键字：</string>
+    <string name="search_time">婴儿出生\n时间段：</string>
+    <string name="search_to">到</string>
+    <string name="search_history">历史搜索：</string>
+    <string name="search_button">搜索</string>
+    <string name="search_clean">清除历史记录</string>
+    <!-- “新增随访记录”界面 -->
+    <string name="add_visit_record">新增随访记录</string>
+    <string name="add_visit_record_time">测量日期:</string>
+    <string name="add_visit_record_weight">体重:</string>
+    <string name="add_visit_record_height">身长:</string>
+    <string name="add_visit_record_head">头围:</string>
+    <string name="add_visit_record_feed1">母乳喂养量:</string>
+    <string name="add_visit_record_milk">配方奶种类:</string>
+    <string name="add_visit_record_feed2">配方奶喂养量:</string>
     
+    <!-- 单位 -->
+    <string name="g">g</string>
+    <string name="cm">cm</string>
+    <string name="ml">ml</string>
+    <string name="day">天</string>
+    <string name="kkd">kcal/kg/day</string>
+    <string name="mkd">mg/kg/day</string>
+    <string name="mlkd">ml/kg/day</string>
+    <string name="choice">选择</string>
+    <string name="change">修改</string>
+    <string name="must_fill">(必填)</string>
+    <string name="km">kcal/100ml</string>
+    <string name="gm">g/100ml</string>
+    
+    <!-- 婴儿“修改资料”界面 -->
+    <string name="doctor_creat_phone">家长手机号:</string>
+    <string name="doctor_creat_name">婴儿名:</string>
+    <string name="doctor_creat_start_pw">初始密码:</string>
+    <string name="doctor_creat_end_pw">确认密码:</string>
+    <string name="doctor_creat_gender">性别:</string>
+    <string name="doctor_creat_parturition_time">预产期:</string>
+    <string name="doctor_creat_birthday">出生日期:</string>
+    <string name="doctor_creat_weight">出生体重:</string>
+    <string name="doctor_creat_height">出生身长:</string>
+    <string name="doctor_creat_head">出生头围:</string>
+    <string name="doctor_creat_way">分娩方式:</string>
+    <string name="doctor_creat_complication">合并症:</string>
+    <string name="doctor_creat_recover_days">恢复出生体重天数:</string>
+    <string name="doctor_creat_apgar">Apgar评分:</string>
+    <string name="doctor_creat_grow_measure">出长参考标准:</string>
+    <string name="doctor_creat_choice1">WHO</string>
+    <string name="doctor_creat_choice2">九城</string>
+    <string name="doctor_creat_choice3">上海</string>
+    
+  <!-- “配方奶”界面 -->  
+    <string name="choose_milk_yard">院内/外：</string>
+    <string name="choose_milk_brand">品牌：</string>
+    <string name="choose_milk_kind">种类：</string>
+    <string name="choose_milk_add_milk">新增配方奶</string>
+    <string name="choose_milk_check">查看营养数据</string>
+    
+  <!-- 婴儿状态总结(随访记录“分析”界面) -->
+    <string name="baby_status_gap">营养差距></string>
+    <string name="baby_status_energy_gap">能量差距</string>
+    <string name="baby_status_protein_gap">蛋白质差距</string>
+    <string name="baby_status_in_milk_gap">低出生体重儿院内专用配方奶喂养差距</string>
+    <string name="baby_status_out_milk_gap">早产儿出院后专用配方奶喂养差距</string>
+    <string name="baby_status_need">营养需求></string>
+    <string name="baby_status_energy_need">能量需求</string>
+    <string name="baby_status_protein_need">蛋白质需求</string>
+    <string name="baby_status_feed_need">喂养量需求</string>
+    <string name="baby_status_feed_meet">母乳喂养满足生长需求</string>
+    <string name="baby_status_in_milk_need">低出生体重儿院内专用配方奶喂养满足生长需求</string>
+    <string name="baby_status_out_milk_need">早产儿出院后专用配方奶喂养满足生长需求</string>
+    <string name="baby_status_sumup">营养总结：</string>
+    
+    <!-- 新增”配方奶“界面 -->
+    <string name="add_milk_in">院内</string>
+    <string name="add_milk_out">院外</string>
+    <string name="add_milk_brand1">惠氏</string>
+    <string name="add_milk_brand2">品牌A</string>
+    <string name="add_milk_brand3">品牌B</string>
+    <string name="add_milk_brand_other">其他</string>
+    <string name="add_milk_energy">能量：</string>
+    <string name="add_milk_protein">蛋白质：</string>
+    <string name="add_milk_carbohydrate">碳水化合物：</string>
+    <string name="add_milk_fat">脂肪：</string>
 </resources>

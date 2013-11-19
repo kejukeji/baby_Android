@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+<include layout="@layout/common_title_bar"/>   
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical" >
+    <!-- 院内/外 -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="@string/choose_milk_yard" />
+    <EditText
+        android:id="@+id/etMilkYard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    </LinearLayout>
+    <!-- 品牌 -->
+<LinearLayout   
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="@string/choose_milk_brand" />
+    <EditText
+        android:id="@+id/etMilkBrand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    </LinearLayout>
+    <!-- 种类 -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="@string/choose_milk_kind" />
+    <EditText
+        android:id="@+id/etMilkKind"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    </LinearLayout>
+    <!-- 按钮 -->
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginTop="8dp"
+    android:gravity="right">
+    <Button
+        android:id="@+id/btnAddMilk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_milk_add_milk" />
+    <Button
+        android:id="@+id/btnMilkCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_milk_check"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/home_line_bit" />
+    </LinearLayout>
+    <TextView 
+        android:id="@+id/tvCheck"
+        android:layout_width="match_parent"
+    	android:layout_height="0dp"
+    	android:layout_weight="1"/>
+</LinearLayout>

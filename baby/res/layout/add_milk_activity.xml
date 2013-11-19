@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title_bar" />
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_milk_yard"/>
+    <RadioGroup
+    android:id="@+id/rgAddMilkYard"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:orientation="horizontal">
+    <RadioButton
+        android:id="@+id/rbAddMilkIn"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:checked="true"
+        android:text="@string/add_milk_in" />
+
+    <RadioButton
+        android:id="@+id/rdAddMilkOut"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/add_milk_out" />
+    </RadioGroup>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="4"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal" >
+
+<TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_milk_brand"/>
+<RadioGroup
+    android:id="@+id/rgAddMilkBrand"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical">
+
+    <RadioButton
+        android:id="@+id/rdAddMilkBrand1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:checked="true"
+        android:text="@string/add_milk_brand1" />
+
+    <RadioButton
+        android:id="@+id/rdAddMilkBrand2"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/add_milk_brand2" />
+
+    <RadioButton
+        android:id="@+id/rdAddMilkBrand3"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/add_milk_brand3" />
+    
+    <RadioButton
+        android:id="@+id/rdAddMilkBrandOther"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/add_milk_brand_other" />
+</RadioGroup>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_weight="5"
+    android:orientation="vertical" >
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/choose_milk_kind"/>
+    <EditText
+        android:id="@+id/etAddMilkKind"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"/>
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/km"/>
+    </LinearLayout>
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/add_milk_energy"/>
+    <EditText
+        android:id="@+id/etAddMilkEnergy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"/>
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/gm"/>
+    </LinearLayout>
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/add_milk_protein"/>
+    <EditText
+        android:id="@+id/etAddMilkProtein"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"/>
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/gm"/>
+    </LinearLayout>
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/add_milk_carbohydrate"/>
+    <EditText
+        android:id="@+id/etAddMilkCarbohydrate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"/>
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/gm"/>
+    </LinearLayout>
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="right"
+        android:text="@string/add_milk_fat"/>
+    <EditText
+        android:id="@+id/etAddMilkFat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"/>
+    <TextView 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/gm"/>
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

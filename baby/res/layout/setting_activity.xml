@@ -32,20 +32,19 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/setting_activity_grade"
                     android:textColor="@color/gold"
-                    android:textSize="@dimen/LargeTextSize"
-                    android:text="@string/setting_activity_grade" />
+                    android:textSize="@dimen/LargeTextSize" />
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_activity_btnright"
-                    android:textSize="20sp" />
+                    android:src="@drawable/bg_setting_right" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="@drawable/home_line_bit" />
 
             <LinearLayout
@@ -59,21 +58,19 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/setting_activity_opinion"
                     android:textColor="@color/gold"
-                    android:textSize="@dimen/LargeTextSize"
-                    android:text="@string/setting_activity_opinion" />
+                    android:textSize="@dimen/LargeTextSize" />
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="@string/setting_activity_btnright"
-                    android:textSize="20sp" />
+                    android:src="@drawable/bg_setting_right" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="@drawable/home_line_bit" />
 
             <LinearLayout
@@ -87,20 +84,19 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/setting_activity_version"
                     android:textColor="@color/gold"
-                    android:textSize="@dimen/LargeTextSize"
-                    android:text="@string/setting_activity_version" />
+                    android:textSize="@dimen/LargeTextSize" />
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="5dp"
-                    android:text="@string/setting_activity_ver" />
+                    android:src="@drawable/bg_setting_right" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="@drawable/home_line_bit" />
 
             <LinearLayout
@@ -114,20 +110,19 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/setting_activity_about"
                     android:textColor="@color/gold"
-                    android:textSize="@dimen/LargeTextSize"
-                    android:text="@string/setting_activity_about" />
+                    android:textSize="@dimen/LargeTextSize" />
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="@string/setting_activity_btnright"
-                    android:textSize="20sp" />
+                    android:src="@drawable/bg_setting_right" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="@drawable/home_line_bit" />
 
             <LinearLayout
@@ -141,16 +136,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="修改密码"
                     android:textColor="@color/gold"
-                    android:textSize="@dimen/LargeTextSize"
-                    android:text="修改密码" />
+                    android:textSize="@dimen/LargeTextSize" />
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="@string/setting_activity_btnright"
-                    android:textSize="20sp" />
+                    android:src="@drawable/bg_setting_right" />
             </LinearLayout>
         </LinearLayout>
 
@@ -158,14 +151,16 @@
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/viewSetting"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/viewSetting"
-            android:background="#FF0000"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:text="@string/setting_activity_exit"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/bg_setting_button"
+            android:gravity="center"
+            android:text="退出登录"
+            android:textSize="@dimen/LargeTextSize"
             android:textColor="#FFFFFF" />
+
     </RelativeLayout>
 
 </LinearLayout>

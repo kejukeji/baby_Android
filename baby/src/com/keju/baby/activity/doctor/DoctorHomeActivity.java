@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,9 +31,11 @@ import com.keju.baby.util.AndroidUtil;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午2:51:05
  */
-public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener, OnItemClickListener {
+
+public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener, OnItemClickListener,OnClickListener {
 	private RadioGroup doctorHomeRadioGroup; // 主页面radiogroup
 	private GridView homeGridView; // 主页面gridview
+
 	private List<BabyInformationBean> list; // 数据源
 	private HomeGridViewAdapter homeGridViewAdapter, homeGridViewAdapter2;// 所有baby适配器。
 																			// 收藏适配器
@@ -46,6 +49,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		setContentView(R.layout.doctor_home);
 		findView();
 		fillData();
+		btnRight.setOnClickListener(this);
+		btnLeft.setOnClickListener(this);
 	}
 
 	private void findView() {
@@ -182,6 +187,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			holder.day.setText(list.get(position).getDay());
 			return convertView;
 		}
+		
+	
 
 	}
 
@@ -193,4 +200,22 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		public TextView day;
 	}
 
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.btnRight:
+			openActivity(SearchActivity.class);
+			break;
+		case R.id.btnLeft:
+			openActivity(DoctorCreatBabyAccountActivity.class);
+			break;
+		default:
+			break;
+	}
+
 }
+}
+
+	
+

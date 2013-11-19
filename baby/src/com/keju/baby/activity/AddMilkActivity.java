@@ -1,4 +1,4 @@
-package com.keju.baby.activity.doctor;
+package com.keju.baby.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,26 +7,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.keju.baby.R;
+import com.keju.baby.R.id;
+import com.keju.baby.R.layout;
 import com.keju.baby.activity.base.BaseActivity;
 
-/**
- * 医生信息编辑界面
- * @author Zhoujun
- * @version 创建时间：2013-10-25 下午2:56:27
- */
-public class DoctorInfoEditActivity extends BaseActivity implements OnClickListener{
-
+public class AddMilkActivity extends BaseActivity implements OnClickListener{
 	private Button btnLeft,btnRight;
 	private TextView tvTitle;
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.doctor_info_edit_activity);
-		
-		findView();
+	public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.add_milk_activity);
+        findView();
 		fillData();
-		btnLeft.setOnClickListener(this);
 	}
-	private void findView() {
+private void findView() {
 		
 		btnLeft=(Button)findViewById(R.id.btnLeft);
 		btnRight=(Button)findViewById(R.id.btnRight);
@@ -38,14 +32,17 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private void fillData() {
 		
 		btnLeft.setText("Back");
-		btnRight.setVisibility(View.GONE);
-		tvTitle.setText("修改资料");
+		btnRight.setText("确定");
+		tvTitle.setText("配方奶");
 	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnLeft:
 			this.finish();
+			break;
+		case R.id.btnRight:
+		
 			break;
 
 		default:

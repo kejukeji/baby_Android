@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+<include layout="@layout/common_title_bar"/>  
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical" >  
+<!-- 测量日期 -->
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="right"
+        android:text="@string/add_visit_record_time" />
+    <EditText
+        android:id="@+id/etAddVisitTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4" />
+    </LinearLayout>
+    <!-- 体重 -->
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="right"
+        android:text="@string/add_visit_record_weight" />
+    <EditText
+        android:id="@+id/etAddVisitWeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/g" />
+    <Button
+        android:id="@+id/btnAddVisitWeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/choice"/>
+    </LinearLayout>
+    <!-- 身长 -->
+     <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="right"
+        android:text="@string/add_visit_record_height" />
+    <EditText
+        android:id="@+id/etAddVisitHeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:text="@string/cm" />
+    <Button
+        android:id="@+id/btnAddVisitHeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/choice"/>
+    </LinearLayout>
+    <!-- 头围 -->
+     <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="right"
+        android:text="@string/add_visit_record_head" />
+    <EditText
+        android:id="@+id/etAddVisitHead"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:text="@string/cm" />
+    <Button
+        android:id="@+id/btnAddVisitHead"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/choice"/>
+    </LinearLayout>
+    <!-- 母乳喂养量 -->
+     <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="right"
+        android:text="@string/add_visit_record_feed1" />
+    <EditText
+        android:id="@+id/etAddVisitFeed1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/ml" />
+    <Button
+        android:id="@+id/btnAddVisitFeed1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/choice"/>
+    </LinearLayout>
+    <!-- 配方奶种类 -->
+     <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="right"
+        android:text="@string/add_visit_record_milk" />
+    <EditText
+        android:id="@+id/etAddVisitMilk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    <Button
+        android:id="@+id/btnAddVisitMilk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/change"/>
+    </LinearLayout>
+    <!-- 配方奶喂养量 -->
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="right"
+        android:text="@string/add_visit_record_feed2" />
+    <EditText
+        android:id="@+id/etAddVisitFeed2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/ml" />
+    <Button
+        android:id="@+id/btnAddVisitFeed2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/choice"/>
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

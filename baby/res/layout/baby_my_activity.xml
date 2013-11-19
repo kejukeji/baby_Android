@@ -17,9 +17,8 @@
         <Button
             android:id="@+id/btnBabyChangePw"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"  
+            android:layout_height="35dp"  
             android:layout_gravity="bottom"     
-            android:background="#2470E2"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:textColor="#FFFFFF"
@@ -34,9 +33,8 @@
         <Button
             android:id="@+id/btnBabyChangeInform"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"   
+            android:layout_height="35dp"   
             android:layout_gravity="bottom"    
-            android:background="#2470E2"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:layout_marginLeft="10dp"
