@@ -1,5 +1,8 @@
 package com.keju.baby.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -74,4 +77,24 @@ public class ImageUtil {
 	     
 	    return output;    
 	  }
+	
+	/**
+	 * 用当前时间给取得的图片命名
+	 * 
+	 */
+	public static String getPhotoFileName() {
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmsss");
+		return dateFormat.format(date) + ".jpg";
+	}
+	
+	/**
+	 * 头像文件名
+	 * 
+	 * @param sid
+	 * @return
+	 */
+	public static String createAvatarFileName(String sid) {
+		return "avatar_" + sid + ".jpg";
+	}
 }

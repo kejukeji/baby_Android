@@ -55,4 +55,13 @@ public class Constants {
 	public static final String URL_FITMENT = "raise.html";//育儿指南
 	public static final String URL_MEETING_NOTIFY = "meeting.html";//会议通知
 	public static final String URL_CHANGE_PASSWORD = "password.html";//修改密码
+	
+	/** 
+	 * 用来标识请求照相功能的activity
+	 */
+	public static final int CAMERA_WITH_DATA = 3023;
+	/** 
+	 * 用来标识请求gallery的activity 
+	 * */
+	public static final int PHOTO_PICKED_WITH_DATA = 3021;
 }

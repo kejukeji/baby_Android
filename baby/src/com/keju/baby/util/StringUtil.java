@@ -175,4 +175,8 @@ public class StringUtil {
 	public static String createImageName(String imageUrl, String imgSuffix){
 		return createSign(imageUrl) + imgSuffix;
 	}
+	public static String getExceptionInfo(Exception e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

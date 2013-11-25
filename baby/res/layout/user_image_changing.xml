@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_avatar_dialog" >
+    <TextView 
+    	android:id="@+id/tvtakephoto"
+    	android:layout_height="45dp"
+    	android:layout_width="fill_parent"
+    	android:text="拍照"
+    	android:textSize="18dp"
+    	android:gravity="center"
+    	android:background="@drawable/btn_normal_selector"
+    	android:layout_marginTop="15dp"
+    	android:layout_marginLeft="15dp"
+    	android:layout_marginRight="15dp"
+        />
+       <TextView 
+    	android:id="@+id/tvgetpicture"
+    	android:layout_height="45dp"
+    	android:layout_width="fill_parent"
+    	android:text="选择本地图片"
+    	android:textSize="18dp"
+    	android:gravity="center"
+    	android:background="@drawable/btn_normal_selector"
+    	android:layout_marginTop="10dp"
+    	android:layout_marginLeft="15dp"
+    	android:layout_marginRight="15dp"
+        />
+         <TextView 
+    	android:id="@+id/tvcancel"
+    	android:layout_height="45dp"
+    	android:layout_width="fill_parent"
+    	android:text="取消"
+    	android:textSize="18dp"
+    	android:textColor="#FFFFFF"
+    	android:gravity="center"
+    	android:background="@drawable/btn_cancel_selector"
+    	android:layout_marginTop="20dp"
+    	android:layout_marginLeft="15dp"
+    	android:layout_marginRight="15dp"
+    	android:layout_marginBottom="25dp"
+        />
+
+</LinearLayout>
