@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 标题栏字体的style -->
     <style name="StyleBarTitle">
@@ -36,6 +36,8 @@
         <item name="android:listSelector" >@android:color/transparent</item>
         <item name="android:cacheColorHint" >@android:color/transparent</item>
         <item name="android:fadingEdge" >none</item>
+        <item name="android:divider">@null</item>
+        <item name="android:dividerHeight">0dp</item>
     </style >
      <!-- tabhost底部 -->
     <style name="main_btn_style">
@@ -52,5 +54,23 @@
         
         <item name="android:layout_weight">1.0</item>
         <!-- 引用 main_btn_bg_d.xml，设定当按钮被press、checked时的背景图，以此增强点击、选中按钮时的视觉效果 -->
+    </style>
+    <!-- 个人信息标题style -->
+    <style name="info_text_style">
+        <item name="android:textColor">@color/gold</item>
+        <item name="android:textSize">@dimen/BasicTextSize</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 个人信息编辑style -->
+    <style name="info_label_style">
+        <item name="android:textColor">@color/gold</item>
+        <item name="android:textSize">@dimen/BasicTextSize</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

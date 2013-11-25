@@ -21,6 +21,7 @@
     <string name="cancel">取消</string>
     <string name="msg">提示</string>
     <string name="logout">确定退出本应用?</string>
+    <string name="try_again_logout">再按一次退出程序</string>
     
     <string name="logo_text">X&#160;X&#160;随&#160;访&#160;助&#160;手</string>
     

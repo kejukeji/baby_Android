@@ -7,11 +7,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.keju.baby.activity.SettingActivity;
-import com.keju.baby.util.NetUtil;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.util.AndroidUtil;
+import com.keju.baby.util.NetUtil;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -34,12 +33,6 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 		setContentView(R.layout.setting_activity);
 		findView();
 		fillData();
-		viewGrade.setOnClickListener(this);
-		viewRecommend.setOnClickListener(this);
-		viewVersion.setOnClickListener(this);
-		viewAbout.setOnClickListener(this);
-		viewChangePassword.setOnClickListener(this);
-		btnLogout.setOnClickListener(this);
 	}
 
 	private void findView() {
@@ -53,6 +46,12 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 		viewAbout=findViewById(R.id.viewAbout);
 		viewChangePassword=findViewById(R.id.viewChangePassword);
 		
+		viewGrade.setOnClickListener(this);
+		viewRecommend.setOnClickListener(this);
+		viewVersion.setOnClickListener(this);
+		viewAbout.setOnClickListener(this);
+		viewChangePassword.setOnClickListener(this);
+		btnLogout.setOnClickListener(this);
 	}
 
 	/**
@@ -68,7 +67,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				showLongToast("再按一次返回键退出");
+				showShortToast(R.string.try_again_logout);
 				exitTime = System.currentTimeMillis();
 			} else {
 				AndroidUtil.exitApp(this);
@@ -83,7 +82,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.viewGrade:
-			//AndroidUtil.lanuchMarket(this);
+			AndroidUtil.lanuchMarket(this);
 			break;
 		case R.id.viewRecommend:
 			
@@ -122,8 +121,8 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 		case R.id.viewChangePassword:
 			openActivity(ChangePasswordActivity.class);
 			break;
-		case R.id.btnLogout:
-			this.finish();
+		case R.id.btnLogout://二次提示，跳转到登录界面
+			
 			break;
 		default:
 			break;

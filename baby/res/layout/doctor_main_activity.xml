@@ -36,12 +36,12 @@
 
             <RadioButton
                 android:id="@+id/rb_doctor_account"
-                android:checked="true"
                 style="@style/main_btn_style"
                 android:background="@drawable/ic_doctor_account_selector"/>
             
             <RadioButton
-                android:id="@+id/rb_doctor_home"                
+                android:id="@+id/rb_doctor_home"  
+                android:checked="true"              
                 style="@style/main_btn_style"
                 android:background="@drawable/ic_doctor_home_selector"/>
             

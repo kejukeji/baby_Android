@@ -4,313 +4,258 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/common_title_bar" />
-
- 
-<LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="3" 
-     android:background="@drawable/baby"   
-     android:orientation="vertical" >
-	<LinearLayout
+    <include
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:layout_marginLeft="20dp"
-     	android:layout_marginRight="20dp"        
-        android:orientation="horizontal" >
+        layout="@layout/common_title_bar" />
 
-		<ImageView
-		    android:layout_width="wrap_content"
-		    android:layout_height="match_parent"
-		    android:src="@drawable/pic" />
+	<RadioGroup
+	    android:id="@+id/radio_group"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/bg_second_title_repeat"
+	    android:gravity="center_vertical"
+	    android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:layout_gravity="center"
-            android:text="王XX"/>
-    </LinearLayout>
-    <RadioGroup
-        android:id="@+id/doctor_my_radiogroup"
+	    <RadioButton
+	        android:id="@+id/rb_info"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:button="@drawable/round_check_selector"
+	        android:checked="true"
+	        android:gravity="center"
+	        android:text="我的资料"
+	        android:textColor="@color/gold"
+	        android:textSize="@dimen/BasicTextSize" />
+
+	    <RadioButton
+	        android:id="@+id/rb_collect"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:button="@drawable/round_check_selector"
+	        android:gravity="center"
+	        android:text="我的收藏"
+	        android:textColor="@color/gold"
+	        android:textSize="@dimen/BasicTextSize" />
+	</RadioGroup>
+
+    <ScrollView
+        android:id="@+id/viewInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp" >
+
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/pic" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/gold"
+                    android:textSize="@dimen/LargeTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_setting"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/doctor_my_id"/>
+
+                        <TextView
+                            android:id="@+id/tvId" style="@style/info_text_style"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                           style="@style/info_label_style" android:text="@string/doctor_my_name" />
+
+                        <TextView android:id="@+id/tvName" style="@style/info_text_style" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView style="@style/info_label_style" android:text="@string/doctor_my_region" />
+                        <TextView android:id="@+id/tvArea" style="@style/info_text_style" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView style="@style/info_label_style" android:text="@string/doctor_my_hospital" />
+                        <TextView android:id="@+id/tvHospital" style="@style/info_text_style"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/doctor_my_branch" />
+
+                        <TextView
+                            android:id="@+id/tvDepartment"
+                            style="@style/info_text_style" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/doctor_my_postition" />
+
+                        <TextView
+                            android:id="@+id/tvJob"
+                            style="@style/info_text_style" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/doctor_my_email" />
+
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            style="@style/info_text_style" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/doctor_my_phone" />
+
+                        <TextView
+                            android:id="@+id/tvPhone"
+                            style="@style/info_text_style" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ListView
+        android:id="@+id/listView"
+        style="@style/listviewStyle"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" 
-        android:gravity="center"       
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:id="@+id/rbDoctor_my_inform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="@string/doctor_my_inform"/>
-
-        <RadioButton
-            android:id="@+id/rbDoctor_my_collect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_collect" />
-    </RadioGroup>
-    </LinearLayout>
-<LinearLayout
-    android:id="@+id/doctor_my_linearlayout"
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="9"    
-     android:orientation="vertical" >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginBottom="6dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/btnDoctor_my_change_pw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"  
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"        
-            android:text="@string/change_password"/>
-
-        <Button
-            android:id="@+id/btnDoctor_my_change_inform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"        
-            android:text="@string/change_inform" />
-    </LinearLayout>
-<LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="6"
-     android:background="@drawable/bg_setting"
-     android:layout_marginLeft="20dp"
-     android:layout_marginRight="20dp"
-     android:orientation="vertical" >
-    <LinearLayout
-        android:layout_width="match_parent"       
-        android:layout_height="0dp"
-        android:layout_weight="1"       
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_id" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:layout_weight="2"/>
-        
-        
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_name" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_region" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_region"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_hospital" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_hospital"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_branch" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_branch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_postition" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_position"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
- </LinearLayout>   
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="2"
-     android:background="@drawable/bg_setting"
-     android:layout_marginLeft="20dp"
-     android:layout_marginRight="20dp"
-     android:layout_marginTop="20dp"
-     android:orientation="vertical" >
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"        
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_email" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_email"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"        
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/doctor_my_phone" />
-
-        <TextView
-            android:id="@+id/etDoctor_my_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
-</LinearLayout>
-</LinearLayout>
-	<ListView 
-        android:id="@+id/doctor_my_listview"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="6"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
 </LinearLayout>

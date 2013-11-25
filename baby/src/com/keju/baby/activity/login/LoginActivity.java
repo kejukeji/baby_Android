@@ -7,15 +7,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.keju.baby.R;
-import com.keju.baby.activity.baby.BabyMainActivity;
 import com.keju.baby.activity.base.BaseActivity;
-import com.keju.baby.activity.doctor.DoctorMainActivity;
 
 /**
  * 登录切换界面
  * 
  * @author Zhoujun
- * @version 创建时间�?013-10-25 下午2:33:05
+ * @version 创建时间2013-10-25 下午2:33:05
  */
 public class LoginActivity extends BaseActivity implements OnClickListener {
 	private Button btnLeft, btnRight;
@@ -50,12 +48,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnDoctor:
-//			openActivity(DoctorMainActivity.class);
 			openActivity(DoctorLoginActivity.class);
 			finish();
 			break;
 		case R.id.btnBaby:
-			openActivity(BabyMainActivity.class);
+			openActivity(BabyLoginActivity.class);
 			finish();
 			break;
 

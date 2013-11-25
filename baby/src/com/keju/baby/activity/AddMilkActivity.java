@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.keju.baby.R;
-import com.keju.baby.R.id;
-import com.keju.baby.R.layout;
 import com.keju.baby.activity.base.BaseActivity;
 
 public class AddMilkActivity extends BaseActivity implements OnClickListener{

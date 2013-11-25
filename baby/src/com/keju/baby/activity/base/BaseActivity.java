@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.keju.baby.CommonApplication;
 import com.keju.baby.R;
-import com.keju.baby.util.LogUtil;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -27,8 +26,8 @@ import com.umeng.analytics.MobclickAgent;
  * @version 创建时间：2013-6-17 上午10:26:56
  */
 public class BaseActivity extends Activity {
-	private static final String TAG = "BaseActivity";
 
+	protected Context context;
 	protected AlertDialog mAlertDialog;
 	@SuppressWarnings("rawtypes")
 	protected AsyncTask mRunningTask;
@@ -36,35 +35,31 @@ public class BaseActivity extends Activity {
 	/******************************** 【Activity LifeCycle For Debug】 *******************************************/
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		LogUtil.d(TAG, this.getClass().getSimpleName() + " onCreate() invoked!!");
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		MobclickAgent.onError(this);
+		context = this;
 		((CommonApplication) getApplication()).addActivity(this);
 	}
 
 	@Override
 	protected void onStart() {
-		LogUtil.d(TAG, this.getClass().getSimpleName() + " onStart() invoked!!");
 		super.onStart();
 	}
 
 	@Override
 	protected void onRestart() {
-		LogUtil.d(TAG, this.getClass().getSimpleName() + " onRestart() invoked!!");
 		super.onRestart();
 	}
 
 	@Override
 	protected void onResume() {
-		LogUtil.d(TAG, this.getClass().getSimpleName() + " onResume() invoked!!");
 		super.onResume();
 		MobclickAgent.onResume(this);
 	}
 
 	@Override
 	protected void onPause() {
-		LogUtil.d(TAG, this.getClass().getSimpleName() + " onPause() invoked!!");
 		super.onPause();
 		try {
 			MobclickAgent.onPause(this);
@@ -75,13 +70,11 @@ public class BaseActivity extends Activity {
 
 	@Override
 	protected void onStop() {
-		LogUtil.d(TAG, this.getClass().getSimpleName() + " onStop() invoked!!");
 		super.onStop();
 	}
 
 	@Override
 	public void onDestroy() {
-		LogUtil.d(TAG, this.getClass().getSimpleName() + " onDestroy() invoked!!");
 		super.onDestroy();
 
 		if (mRunningTask != null && mRunningTask.isCancelled() == false) {
@@ -344,5 +337,34 @@ public class BaseActivity extends Activity {
 	 */
 	public void defaultFinish() {
 		super.finish();
+	}
+	private ProgressDialog pd;
+	/**
+	 * 显示progressDialog
+	 */
+	protected void showPd(String message){
+		if(pd == null){
+			pd = new ProgressDialog(this);
+		}
+		pd.setMessage(message);
+		pd.show();
+	}
+	/**
+	 * 显示progressDialog
+	 */
+	protected void showPd(int msgId){
+		if(pd == null){
+			pd = new ProgressDialog(this);
+		}
+		pd.setMessage(getString(msgId));
+		pd.show();
+	}
+	/**
+	 * 关闭progressDialog
+	 */
+	protected void dismissPd(){
+		if(pd != null){
+			pd.dismiss();
+		}
 	}
 }

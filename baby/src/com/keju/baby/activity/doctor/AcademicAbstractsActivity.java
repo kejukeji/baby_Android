@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.AcademicAbstractBean;
+import com.keju.baby.util.AndroidUtil;
 
 /**
  * 学术文摘界面
@@ -73,14 +74,13 @@ public class AcademicAbstractsActivity extends BaseActivity {
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
 	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            showLongToast("再按一次返回键退出");                             
+	            showShortToast(R.string.try_again_logout);                             
 	            exitTime = System.currentTimeMillis();   
 	        } else {
+	        	AndroidUtil.exitApp(this);
 	            finish();
-	            System.exit(0);
 	        }
 	        return true;   
 	    }

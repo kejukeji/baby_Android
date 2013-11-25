@@ -3,27 +3,37 @@ package com.keju.baby.activity.doctor;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.keju.baby.AsyncImageLoader;
+import com.keju.baby.AsyncImageLoader.ImageCallback;
+import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
-import com.keju.baby.bean.BabyInformationBean;
+import com.keju.baby.bean.BabyBean;
+import com.keju.baby.bean.ResponseBean;
+import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
+import com.keju.baby.util.NetUtil;
+import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 医生首页界面
@@ -32,16 +42,24 @@ import com.keju.baby.util.AndroidUtil;
  * @version 创建时间：2013-10-25 下午2:51:05
  */
 
-public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener, OnItemClickListener,OnClickListener {
+public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeListener, OnItemClickListener,
+		OnClickListener {
 	private RadioGroup doctorHomeRadioGroup; // 主页面radiogroup
-	private GridView homeGridView; // 主页面gridview
+	private ListView listView; //
+	private List<BabyBean> list; // 数据源
+	private HomeAdapter adapter;
+	private View vFooter;
+	private ProgressBar pbFooter;
+	private TextView tvFooterMore;
+	private boolean isLoad = false;// 是否正在加载数据
+	private boolean isLoadMore = false;
+	private boolean isComplete = false;// 是否加载完了；
 
-	private List<BabyInformationBean> list; // 数据源
-	private HomeGridViewAdapter homeGridViewAdapter, homeGridViewAdapter2;// 所有baby适配器。
-																			// 收藏适配器
+	private int pageIndex = 1;
 	private long exitTime;
 	private Button btnLeft, btnRight;
 	private TextView tvTitle;
+	private boolean isShowAll = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,58 +79,80 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		btnRight.setBackgroundResource(R.drawable.btn_search_selector);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 
+		// 加载更多footer
+		vFooter = getLayoutInflater().inflate(R.layout.footer, null);
+		pbFooter = (ProgressBar) vFooter.findViewById(R.id.progressBar);
+		tvFooterMore = (TextView) vFooter.findViewById(R.id.tvMore);
+		listView = (ListView) findViewById(R.id.listView);
+		
 		doctorHomeRadioGroup = (RadioGroup) findViewById(R.id.dochome_radio_group);
-		homeGridView = (GridView) findViewById(R.id.dochome_gridview);
 	}
-
+	
 	/**
 	 * 数据填充
 	 */
 	private void fillData() {
 		tvTitle.setText("营养随访体系");
-
-		list = setdata();
-		homeGridViewAdapter = new HomeGridViewAdapter(this, list);
-		list = setdata2();
-		homeGridViewAdapter2 = new HomeGridViewAdapter(this, list);
-
-		homeGridView.setAdapter(homeGridViewAdapter);
-		homeGridView.setOnItemClickListener(this);
+		
+		adapter = new HomeAdapter();
+		list = new ArrayList<BabyBean>();
+		listView.addFooterView(vFooter);
+		listView.setAdapter(adapter);
+		listView.setOnScrollListener(LoadListener);
+		listView.setOnItemClickListener(itemListener);
 		doctorHomeRadioGroup.setOnCheckedChangeListener(this);
+		if(NetUtil.checkNet(this)){
+			new GetBabyListTask().execute();
+		}else{
+			showShortToast(R.string.NoSignalException);
+		}
 	}
+	/**
+	 * listview点击事件
+	 */
+	OnItemClickListener itemListener = new OnItemClickListener() {
 
-	private List<BabyInformationBean> setdata2() {
-		List<BabyInformationBean> list = new ArrayList<BabyInformationBean>();
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			if (list != null && list.size() > 0) {
+				
+			}
+		}
+	};
+	/**
+	 * 滚动监听器
+	 */
+	OnScrollListener LoadListener = new OnScrollListener() {
+		@Override
+		public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			if (firstVisibleItem + visibleItemCount == totalItemCount) {
+				isLoadMore = true;
+			} else {
+				isLoadMore = false;
+			}
+		}
 
-		BabyInformationBean test = new BabyInformationBean(R.drawable.pic, "1000001", "baby1", "1个月");
-		list.add(test);
+		@Override
+		public void onScrollStateChanged(AbsListView view, int scrollState) {
+			// 滚动到最后，默认加载下一页
+			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE && isLoadMore) {
+				if (NetUtil.checkNet(context)) {
+					if (!isLoad && !isComplete) {
+						new GetBabyListTask().execute();
+					}
+				} else {
+					showShortToast(R.string.NoSignalException);
+				}
+			} else {
 
-		test = new BabyInformationBean(R.drawable.pic, "1000002", "baby2", "2个月");
-		list.add(test);
-
-		return list;
-	}
-
-	private List<BabyInformationBean> setdata() {
-		List<BabyInformationBean> list = new ArrayList<BabyInformationBean>();
-		BabyInformationBean test = new BabyInformationBean(R.drawable.pic, "1000003", "baby3", "3个月");
-		list.add(test);
-
-		test = new BabyInformationBean(R.drawable.pic, "1000004", "baby4", "4个月");
-		list.add(test);
-
-		test = new BabyInformationBean(R.drawable.pic, "1000005", "baby5", "5个月");
-		list.add(test);
-
-		return list;
-
-	}
-
+			}
+		}
+	};
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				showLongToast("再按一次返回键退出");
+				showShortToast(R.string.try_again_logout);
 				exitTime = System.currentTimeMillis();
 			} else {
 				AndroidUtil.exitApp(this);
@@ -132,23 +172,17 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.dochome_allbaby:
-			homeGridView.setAdapter(homeGridViewAdapter);
+			isShowAll = true;
+			adapter.notifyDataSetChanged();
 			break;
 		case R.id.dochome_mycollect:
-			homeGridView.setAdapter(homeGridViewAdapter2);
+			isShowAll = false;
+			adapter.notifyDataSetChanged();
 			break;
 		}
 	}
 
-	class HomeGridViewAdapter extends BaseAdapter {
-		// 适配器
-		List<BabyInformationBean> list = new ArrayList<BabyInformationBean>();
-		private LayoutInflater mInflater;
-
-		public HomeGridViewAdapter(Context context, List<BabyInformationBean> list) {
-			this.mInflater = LayoutInflater.from(context);
-			this.list = list;
-		}
+	private class HomeAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
@@ -167,42 +201,64 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			BabyBean bean = list.get(position);
 			ViewHolder holder = null;
 			if (convertView == null) {
 				holder = new ViewHolder();
-				convertView = mInflater.inflate(R.layout.doctor_home_gridview_item, null);
-				holder.pricture = (ImageView) convertView.findViewById(R.id.gridview_picture);
-				holder.littleStar = (ImageView) convertView.findViewById(R.id.gridview_littlestar);
-				holder.id = (TextView) convertView.findViewById(R.id.gridview_id);
-				holder.name = (TextView) convertView.findViewById(R.id.gridview_name);
-				holder.day = (TextView) convertView.findViewById(R.id.gridview_day);
+				convertView = getLayoutInflater().inflate(R.layout.doctor_home_item, null);
+				holder.ivAvatar = (ImageView) convertView.findViewById(R.id.ivAvatar);
+				holder.ivCollect = (ImageView) convertView.findViewById(R.id.ivCollect);
+				holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+				holder.tvAge = (TextView) convertView.findViewById(R.id.tvAge);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			holder.pricture.setBackgroundResource(list.get(position).getPicture());
-			holder.littleStar.setBackgroundResource(R.drawable.star);
-			holder.id.setText(list.get(position).getId());
-			holder.name.setText(list.get(position).getName());
-			holder.day.setText(list.get(position).getDay());
+			String url = bean.getAvatarUrl();
+			holder.ivAvatar.setTag(url);
+			Drawable cacheDrawble = AsyncImageLoader.getInstance().loadDrawable(url, new ImageCallback() {
+
+				@Override
+				public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+					ImageView image = (ImageView) listView.findViewWithTag(imageUrl);
+					if (image != null) {
+						if (imageDrawable != null) {
+							image.setImageDrawable(imageDrawable);
+						} else {
+							image.setImageResource(R.drawable.item_lion);
+						}
+					}
+				}
+			});
+			if (cacheDrawble != null) {
+				holder.ivAvatar.setImageDrawable(cacheDrawble);
+			} else {
+				holder.ivAvatar.setImageResource(R.drawable.item_lion);
+			}
+			if (!isShowAll && !bean.isCollect()) {
+				convertView.setVisibility(View.GONE);
+			} else {
+				if(bean.isCollect()){
+					holder.ivCollect.setImageResource(R.drawable.ic_collected);
+				}else{
+					holder.ivCollect.setImageResource(R.drawable.ic_collect_not);
+				}
+				convertView.setVisibility(View.VISIBLE);
+			}
+			holder.tvName.setText(bean.getName());
+			holder.tvAge.setText(bean.getAge());
 			return convertView;
 		}
-		
-	
 
 	}
 
 	class ViewHolder {
-		public ImageView pricture;
-		public ImageView littleStar;
-		public TextView id;
-		public TextView name;
-		public TextView day;
+		public ImageView ivAvatar,ivCollect;
+		public TextView tvName, tvAge;
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btnRight:
 			openActivity(SearchActivity.class);
@@ -212,10 +268,66 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			break;
 		default:
 			break;
+		}
+
 	}
 
-}
-}
+	private class GetBabyListTask extends AsyncTask<Void, Void, ResponseBean<BabyBean>> {
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			if(isLoadMore){
+				isLoad = true;
+				pbFooter.setVisibility(View.VISIBLE);
+				tvFooterMore.setText(R.string.loading);
+			}
+		}
 
-	
+		@Override
+		protected ResponseBean<BabyBean> doInBackground(Void... params) {
+			int doctor_id = SharedPrefUtil.getUid(context);
+			return new BusinessHelper().getBabyList(pageIndex, doctor_id);
+		}
 
+		@Override
+		protected void onPostExecute(ResponseBean<BabyBean> result) {
+			super.onPostExecute(result);
+			pbFooter.setVisibility(View.GONE);
+			if (result.getStatus() == Constants.REQUEST_SUCCESS) {
+				List<BabyBean> tempList = result.getObjList();
+				boolean isLastPage = false;
+				if (tempList.size() > 0) {
+					list.addAll(tempList);
+					pageIndex++;
+				} else {
+					isLastPage = true;
+				}
+				if (isLastPage) {
+					pbFooter.setVisibility(View.GONE);
+					tvFooterMore.setText(R.string.load_all);
+					isComplete = true;
+				} else {
+					if (tempList.size() > 0 && tempList.size() < Constants.PAGE_SIZE) {
+						pbFooter.setVisibility(View.GONE);
+						tvFooterMore.setText("");
+						isComplete = true;
+					} else {
+						pbFooter.setVisibility(View.GONE);
+						tvFooterMore.setText("上拉查看更多");
+					}
+				}
+				if (pageIndex == 1 && tempList.size() == 0) {
+					tvFooterMore.setText("");
+				}
+
+			} else {
+				tvFooterMore.setText("");
+				showShortToast(result.getError());
+			}
+			adapter.notifyDataSetChanged();
+			isLoad = false;
+		}
+
+	}
+}

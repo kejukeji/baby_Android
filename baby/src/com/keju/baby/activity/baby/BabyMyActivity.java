@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.util.AndroidUtil;
 
 /**
  * 宝宝的资料
@@ -17,7 +18,6 @@ import com.keju.baby.activity.base.BaseActivity;
  * @version 创建时间：2013-10-25 下午3:25:43
  */
 public class BabyMyActivity extends BaseActivity implements OnClickListener{
-	private long exitTime = 0;
 	private Button btnLeft,btnRight;
 	private TextView tvTitle;
 	private Button btnChangeInfo,btnChangePassword;
@@ -49,15 +49,16 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener{
 		btnRight.setVisibility(View.GONE);
 		tvTitle.setText("个人中心");
 	}
+	private long exitTime;
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				showLongToast("再按一次返回键退出");
+				showShortToast(R.string.try_again_logout);
 				exitTime = System.currentTimeMillis();
 			} else {
+				AndroidUtil.exitApp(this);
 				finish();
-				System.exit(0);
 			}
 			return true;
 		}

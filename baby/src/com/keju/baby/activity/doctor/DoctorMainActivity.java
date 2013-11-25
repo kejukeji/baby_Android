@@ -4,22 +4,15 @@ import android.app.LocalActivityManager;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TabHost;
-import android.widget.TabWidget;
-import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TabHost.TabSpec;
 
 import com.keju.baby.CommonApplication;
 import com.keju.baby.R;
 import com.keju.baby.activity.SettingActivity;
-import com.keju.baby.activity.baby.BabyDetailActivity;
-import com.keju.baby.activity.baby.BabyMyActivity;
-import com.keju.baby.activity.baby.FitmentActivity;
 
 /**
  * 医生界面的tabhost
@@ -92,7 +85,7 @@ public class DoctorMainActivity extends TabActivity implements OnCheckedChangeLi
 		TabSpec ts5 = mth.newTabSpec(SETTING_TAB_ID).setIndicator(SETTING_TAB_ID);
 		ts5.setContent(new Intent(this, SettingActivity.class));
 		mth.addTab(ts5);
-		mth.setCurrentTabByTag(ACCOUNT_TAB_ID);
+		mth.setCurrentTabByTag(HOME_TAB_ID);
 	}
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

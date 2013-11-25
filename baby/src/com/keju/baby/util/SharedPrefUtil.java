@@ -1,11 +1,11 @@
 package com.keju.baby.util;
 
-import com.keju.baby.Constants;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
+
+import com.keju.baby.Constants;
 
 /**
  * SharedPreferences工具类

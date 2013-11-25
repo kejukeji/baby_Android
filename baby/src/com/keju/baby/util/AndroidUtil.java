@@ -4,8 +4,10 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
@@ -139,5 +141,14 @@ public class AndroidUtil {
 				.getDisplayMetrics();
 		return dm.density;
 	}
-	
+	/**
+	 * 跳转到市场
+	 * @param context
+	 */
+	public static void lanuchMarket(Context context) {
+		String packetName = context.getPackageName();
+		Uri uri = Uri.parse("market://details?id=" + packetName);
+		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		context.startActivity(intent);
+	}
 }
