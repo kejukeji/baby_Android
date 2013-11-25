@@ -27,6 +27,7 @@ public class SharedPrefUtil {
 	
 	public static final String UID = "uid";//用户id；
 	public static final String USER_TYPE = "user_type";//登录的用户；
+	public static final String SEARCH_HISTORY = "search_history";//搜索历史
 	
 	/**
 	 * 判断是否是第一次进入应用
@@ -225,4 +226,5 @@ public class SharedPrefUtil {
 		e.putInt(USER_TYPE, userType);
 		e.commit();
 	}
+	
 }

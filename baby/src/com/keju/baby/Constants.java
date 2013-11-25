@@ -33,6 +33,10 @@ public class Constants {
 	public static final String WEIBO_REDIRECT_URL = "http://www.eemedia.cn/";//微博应用回调地址
 	public static final String WEIBO_USER_UID = "1291843462";
 	/**
+	 * intent code
+	 */
+	public static final String EXTRA_DATA = "extra_data";//跳转绑定的数据；
+	/**
 	 * 网络请求状态码
 	 */
 	public static final int REQUEST_SUCCESS = 200;//网络请求成功
@@ -64,4 +68,7 @@ public class Constants {
 	 * 用来标识请求gallery的activity 
 	 * */
 	public static final int PHOTO_PICKED_WITH_DATA = 3021;
+
+	public static final String URL_GROW_LINE = "grow_line.html?user_id=";//生长曲线
+
 }

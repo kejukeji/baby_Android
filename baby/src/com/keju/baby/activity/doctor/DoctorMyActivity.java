@@ -3,6 +3,11 @@ package com.keju.baby.activity.doctor;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,15 +15,23 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.keju.baby.AsyncImageLoader;
+import com.keju.baby.AsyncImageLoader.ImageCallback;
+import com.keju.baby.Constants;
 import com.keju.baby.R;
+import com.keju.baby.SystemException;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.MyCollectBean;
+import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
+import com.keju.baby.util.NetUtil;
+import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 医生资料界面
@@ -31,7 +44,8 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 	private TextView tvTitle;
 	private RadioGroup radio_group;
 	private View viewInfo;
-	private TextView tvId,tvName,tvArea,tvHospital,tvDepartment,tvJob,tvEmail,tvPhone;
+	private ImageView ivAvatar;
+	private TextView tvName,tvId,tvRealName,tvArea,tvHospital,tvDepartment,tvJob,tvEmail,tvPhone;
 	
 	private ListView listView;
 	private Adapter adapter;
@@ -53,15 +67,16 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 		radio_group = (RadioGroup) findViewById(R.id.radio_group);
 		viewInfo = findViewById(R.id.viewInfo);
 		
+		ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
 		tvId = (TextView) findViewById(R.id.tvId);
 		tvName = (TextView) findViewById(R.id.tvName);
+		tvRealName = (TextView) findViewById(R.id.tvRealName);
 		tvArea = (TextView) findViewById(R.id.tvArea);
 		tvHospital = (TextView) findViewById(R.id.tvHospital);
 		tvDepartment = (TextView) findViewById(R.id.tvDepartment);
 		tvJob = (TextView) findViewById(R.id.tvJob);
 		tvEmail = (TextView) findViewById(R.id.tvEmail);
 		tvPhone = (TextView) findViewById(R.id.tvPhone);
-		
 		
 		listView = (ListView) findViewById(R.id.listView);
 	}
@@ -79,6 +94,11 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 		adapter = new Adapter();
 
 		listView.setAdapter(adapter);
+		if(NetUtil.checkNet(this)){
+			new GetDoctorTask().execute();
+		}else{
+			showShortToast(R.string.NoSignalException);
+		}
 	}
 
 	@Override
@@ -160,5 +180,68 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 			break;
 		}
 
+	}
+	/**
+	 * 获取医生详情
+	 * @author Zhoujun
+	 *
+	 */
+	private class GetDoctorTask extends AsyncTask<Void, Void, JSONObject>{
+
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+			int id = SharedPrefUtil.getUid(DoctorMyActivity.this);
+			try {
+				return new BusinessHelper().getDoctorInfo(id);
+			} catch (SystemException e) {
+				return null;
+			}
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			if(result != null){
+				try {
+					int status = result.getInt("code");
+					if(status == Constants.REQUEST_SUCCESS){
+						JSONObject obj = result.getJSONArray("doctor_list").getJSONObject(0);
+						tvId.setText(obj.getInt("id") + "");
+						tvName.setText(obj.getString("doctor_name"));
+						tvRealName.setText(obj.getString("real_name"));
+						tvArea.setText(obj.getString("province"));
+						tvHospital.setText(obj.getString("hospital"));
+						tvDepartment.setText(obj.getString("department"));
+						tvJob.setText(obj.getString("positions"));
+						tvEmail.setText(obj.getString("email"));
+						tvPhone.setText(obj.getString("tel"));
+						String avatarUrl = BusinessHelper.PIC_URL + obj.getString("picture_path");
+						Drawable cacheDrawable = AsyncImageLoader.getInstance().loadAsynLocalDrawable(avatarUrl, new ImageCallback() {
+							
+							@Override
+							public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+								if(imageDrawable != null){
+									ivAvatar.setImageDrawable(imageDrawable);
+								}else{
+//									ivAvatar.setImageResource(resId)
+								}
+							}
+						});
+						if(cacheDrawable != null){
+							ivAvatar.setImageDrawable(cacheDrawable);
+						}else{
+//							ivAvatar.setImageResource(resId)
+						}
+					}else{
+						showShortToast(result.getString("message"));
+					}
+				} catch (JSONException e) {
+					showShortToast(R.string.json_exception);
+				}
+			}else{
+				showShortToast(R.string.connect_server_exception);
+			}
+		}
+		
 	}
 }

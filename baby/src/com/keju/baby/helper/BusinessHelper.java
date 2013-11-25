@@ -81,6 +81,7 @@ public class BusinessHelper {
 		return response;
 	}
 
+
 	/***
 	 * 获取Baby个人资料
 	 * @param uid  用户id
@@ -173,6 +174,47 @@ public class BusinessHelper {
 			return httpClient.post(
 					BASE_URL + "baby/info"+ uid,params.toArray(new PostParameter[params.size()])).asJSONObject();
 		}
+	}
+
+
+	/**
+	 * 获取医生信息
+	 * @param id
+	 * @return
+	 * @throws SystemException
+	 */
+	public JSONObject getDoctorInfo(int id) throws SystemException{
+		return httpClient.post(BASE_URL + "doctor/info",new PostParameter[]{new PostParameter("doctor_id", id)}).asJSONObject();
+	}
+	/**
+	 * 搜索婴儿
+	 * @param keyword
+	 * @return
+	 */
+	public ResponseBean<BabyBean> searchBaby(String keyword){
+		ResponseBean<BabyBean> response = null;
+		JSONObject obj;
+		try {
+			obj = httpClient.get(BASE_URL + "doctor/search", new PostParameter[] { new PostParameter("keyword", keyword)}).asJSONObject();
+			int status = obj.getInt("code");
+			if (status == Constants.REQUEST_SUCCESS) {
+				response = new ResponseBean<BabyBean>(obj);
+				List<BabyBean> list = null;
+				if (!TextUtils.isEmpty(obj.getString("baby_list"))) {
+					list = BabyBean.constractList(obj.getJSONArray("baby_list"));
+				} else {
+					list = new ArrayList<BabyBean>();
+				}
+				response.setObjList(list);
+			} else {
+				response = new ResponseBean<BabyBean>(Constants.REQUEST_FAILD, obj.getString("message"));
+			}
+		} catch (SystemException e1) {
+			response = new ResponseBean<BabyBean>(Constants.REQUEST_FAILD, "服务器连接失败");
+		} catch (JSONException e) {
+			response = new ResponseBean<BabyBean>(Constants.REQUEST_FAILD, "json解析错误");
+		}
+		return response;
 	}
 
 }

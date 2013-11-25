@@ -24,6 +24,8 @@
     <string name="try_again_logout">再按一次退出程序</string>
     <string name="json_exception">json解析错误</string>
     <string name="logo_text">X&#160;X&#160;随&#160;访&#160;助&#160;手</string>
+    <string name="json_exception">json解析错误</string>
+    <string name="connect_server_exception">服务器连接失败</string>
     
     <string name="change_password">修改密码</string>
     <string name="change_inform">修改资料</string>

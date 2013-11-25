@@ -122,7 +122,7 @@
                         <TextView
                            style="@style/info_label_style" android:text="@string/doctor_my_name" />
 
-                        <TextView android:id="@+id/tvName" style="@style/info_text_style" />
+                        <TextView android:id="@+id/tvRealName" style="@style/info_text_style" />
                     </LinearLayout>
 
                     <View

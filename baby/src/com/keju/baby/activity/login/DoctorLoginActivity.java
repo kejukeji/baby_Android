@@ -37,7 +37,7 @@ public class DoctorLoginActivity extends BaseWebViewActivity {
 		btnRight.setVisibility(View.INVISIBLE);
 		tvTitle = (TextView) this.findViewById(R.id.tvTitle);
 		tvTitle.setVisibility(View.VISIBLE);
-		tvTitle.setText("登陆");
+		tvTitle.setText("登录");
 		webView = (WebView) findViewById(R.id.webview);
 	}
 

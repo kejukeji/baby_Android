@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <include layout="@layout/common_title_bar" />
-
+	<ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:scrollbars="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -434,16 +434,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
                 android:gravity="right"
                 android:text="@string/doctor_creat_grow_measure" />
 
@@ -451,19 +449,18 @@
                 android:id="@+id/rbWho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@drawable/round_check_selector"
+            	android:checked="true"
                 android:text="@string/doctor_creat_choice1" />
-            <RadioButton
-                android:id="@+id/rbNineCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/doctor_creat_choice2" />
+           
             <RadioButton
                 android:id="@+id/rbShanghai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@drawable/round_check_selector"
                 android:text="@string/doctor_creat_choice3" />
 
         </LinearLayout>
     </LinearLayout>
-
+	</ScrollView>
 </LinearLayout>

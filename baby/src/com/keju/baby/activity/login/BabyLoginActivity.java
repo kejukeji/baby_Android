@@ -11,7 +11,6 @@ import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.activity.baby.BabyMainActivity;
 import com.keju.baby.activity.base.BaseWebViewActivity;
-import com.keju.baby.activity.doctor.DoctorMainActivity;
 import com.keju.baby.util.AndroidUtil;
 import com.keju.baby.util.SharedPrefUtil;
 
@@ -37,7 +36,7 @@ public class BabyLoginActivity extends BaseWebViewActivity {
 		btnRight.setVisibility(View.INVISIBLE);
 		tvTitle = (TextView) this.findViewById(R.id.tvTitle);
 		tvTitle.setVisibility(View.VISIBLE);
-		tvTitle.setText("登陆");
+		tvTitle.setText("登录");
 		webView = (WebView) findViewById(R.id.webview);
 	}
 

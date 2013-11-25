@@ -27,6 +27,7 @@ import com.keju.baby.AsyncImageLoader;
 import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
+import com.keju.baby.activity.baby.BabyDetailActivity;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.BabyBean;
 import com.keju.baby.bean.ResponseBean;
@@ -67,8 +68,6 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		setContentView(R.layout.doctor_home);
 		findView();
 		fillData();
-		btnRight.setOnClickListener(this);
-		btnLeft.setOnClickListener(this);
 	}
 
 	private void findView() {
@@ -78,6 +77,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		btnRight = (Button) findViewById(R.id.btnRight);
 		btnRight.setBackgroundResource(R.drawable.btn_search_selector);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
+		btnRight.setOnClickListener(this);
+		btnLeft.setOnClickListener(this);
 
 		// 加载更多footer
 		vFooter = getLayoutInflater().inflate(R.layout.footer, null);
@@ -115,7 +116,9 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 			if (list != null && list.size() > 0) {
-				
+				Bundle b = new Bundle();
+				b.putSerializable(Constants.EXTRA_DATA, list.get(arg2));
+				openActivity(BabyDetailActivity.class,b);
 			}
 		}
 	};
