@@ -110,21 +110,42 @@ public class BusinessHelper {
 	 * @return
 	 * @throws avatarFile
 	 */
-	public JSONObject addBabyInfor(int uid,String babyName,String parentNumber,String babySex,
+	public JSONObject addBabyInfor(int uid,String type,String babyName,String parentNumber,String babySex,
 			String babyProduction,int babyWeight,int babyHeight,
 			int babyHeadCircumference,String childbirthWay,String complication, int grade,File avatarFile) throws SystemException {
 		List<PostParameter> params = new ArrayList<PostParameter>();
 		params.add(new PostParameter("baby_id", uid));
-		params.add(new PostParameter("baby_name", babyName));
-		params.add(new PostParameter("patriarch_tel", parentNumber));
-		params.add(new PostParameter("gender", babySex));
-		params.add(new PostParameter("due_date", babyProduction));
-		params.add(new PostParameter("born_weight", babyWeight));
-		params.add(new PostParameter("born_weight", babyHeight));
-		params.add(new PostParameter("born_head", babyHeadCircumference));
-		params.add(new PostParameter("childbirth", childbirthWay));
-		params.add(new PostParameter("complication", complication));
-        params.add(new PostParameter("apgar_score", grade));
+		params.add(new PostParameter("type", type));
+		if(!babyName.equals("")){
+			params.add(new PostParameter("baby_name", babyName));	
+		}
+		if(!parentNumber.equals("")){
+			params.add(new PostParameter("patriarch_tel", parentNumber));	
+		}
+		if(!babySex.equals("")){
+			params.add(new PostParameter("gender", babySex));
+		}
+	    if(!babyProduction.equals("")){
+	    	params.add(new PostParameter("due_date", babyProduction));
+	    }
+		if(babyWeight!=0){
+			params.add(new PostParameter("born_weight", babyWeight));
+		}
+		if(babyHeight!=0){
+			params.add(new PostParameter("born_weight", babyHeight));
+		}
+		if(babyHeadCircumference!=0){
+			params.add(new PostParameter("born_head", babyHeadCircumference));
+		}
+		if(!childbirthWay.equals("")){
+			params.add(new PostParameter("childbirth", childbirthWay));
+		}
+		if(!complication.equals("")){
+			params.add(new PostParameter("complication", complication));
+		}
+		if(grade!=0){
+			params.add(new PostParameter("apgar_score", grade));
+		}
 		if(avatarFile!=null){
 			return httpClient.multPartURL("upload_image",
 					BASE_URL + "baby/info",
@@ -132,7 +153,7 @@ public class BusinessHelper {
 					.asJSONObject();
 		}else{
 			return httpClient.post(
-					BASE_URL + "baby/info"+ uid,params.toArray(new PostParameter[params.size()])).asJSONObject();
+					BASE_URL + "baby/info",params.toArray(new PostParameter[params.size()])).asJSONObject();
 		}
 	}
 	
@@ -140,22 +161,19 @@ public class BusinessHelper {
 	 * 修改医生资料  图片上传
 	 * 此方案即可上传文件  又可以不传
 	 * @param uid
-	 * @param babyName 
-	 * @param parentNumber 
-	 * @param babySex 
-	 * @param babyProduction 
-	 * @param babyWeight 
-	 * @param babyHeight 
-	 * @param babyHeadCircumference 
-	 * @param childbirthWay 
-	 * @param complication 
-	 * @param grade 
-	 * @param grade 
+	 * @param doctorName 
+	 * @param doctorAddress 
+     * @param doctorHospital
+	 * @param doctorDepartment 
+	 * @param jobTitle 
+	 * @param doctorEmil 
+	 * @param doctorNumber 
+	 * @param avatarFile
 	 * @return
-	 * @throws avatarFile
+	 * @throws 
 	 */
 	public JSONObject addDoctorInfor(int uid, String doctorName,String doctorAddress,String doctorHospital,String doctorDepartment,
-			String jobTitle,String  doctorEmil,String  doctorNumber,File avatarFile) throws SystemException {
+			String jobTitle,String doctorEmil,String  doctorNumber,File avatarFile) throws SystemException {
 		List<PostParameter> params = new ArrayList<PostParameter>();
 		params.add(new PostParameter("doctor_id", uid));
 		params.add(new PostParameter("real_name", doctorName));

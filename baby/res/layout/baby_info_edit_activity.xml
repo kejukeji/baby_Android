@@ -43,6 +43,7 @@
                     android:layout_marginLeft="60dp"
                     android:layout_weight="1"
                     android:text="@string/doctor_my_change_inform_picture"
+                    android:textColor="@color/gold"
                     android:textSize="@dimen/LargeTextSize" />
 
                 <ImageView
@@ -66,17 +67,14 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
+                    android:paddingBottom="10dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                     >
+                    android:paddingTop="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                           android:gravity="right"
+                        style="@style/info_label_style"
+                        android:gravity="right"
                         android:text="@string/baby_parents_phone" />
 
                     <EditText
@@ -87,8 +85,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="13093448608"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -110,9 +108,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="@string/baby_my_name" />
 
@@ -124,8 +120,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="周玉莹"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -147,9 +143,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="@string/baby_my_gender" />
 
@@ -161,8 +155,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="男"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -184,9 +178,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="@string/baby_my_preproduction" />
 
@@ -198,8 +190,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="2013/05/05"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -221,9 +213,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="@string/baby_my_weight" />
 
@@ -235,8 +225,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="6kg"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -258,9 +248,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="@string/baby_my_height" />
 
@@ -272,8 +260,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="32.3cm"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -295,9 +283,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="出生头围：" />
 
@@ -309,8 +295,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="12.4cm"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -332,9 +318,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="分娩方式：" />
 
@@ -346,8 +330,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="顺产"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -369,9 +353,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="合并症：" />
 
@@ -383,8 +365,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="小儿黄值"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -406,9 +388,7 @@
                     android:padding="10dp" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="Apgar评分：" />
 
@@ -420,8 +400,8 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:gravity="left"
-                        android:text="68"
+                        android:gravity="center"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -434,15 +414,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@drawable/home_line_bit"
-                     android:visibility="gone" />
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="10dp" 
-                    android:visibility="gone">
+                    android:padding="10dp"
+                    android:visibility="gone" >
 
                     <TextView
                         android:layout_width="0dp"
@@ -460,6 +440,7 @@
                         android:background="@null"
                         android:gravity="left"
                         android:text="男"
+                        android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView

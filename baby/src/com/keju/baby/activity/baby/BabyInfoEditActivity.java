@@ -313,16 +313,16 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 	 */
 
 	private class PostBabyInfor extends AsyncTask<Void, Void, JSONObject> {
-		private String babyName;
-		private String parentNumber;
-		private String babySex;
-		private String babyProduction;
-		private int babyWeight;
-		private int babyHeight;
-		private int babyHeadCircumference;
-		private String childbirthWay;
-		private String complication;
-		private int grade;
+		private String babyName = null;
+		private String parentNumber = null;
+		private String babySex = null;
+		private String babyProduction = null;
+		private int babyWeight = 0;
+		private int babyHeight = 0;
+		private int babyHeadCircumference = 0;
+		private String childbirthWay = null;
+		private String complication = null;
+		private int grade = 0;
 
 		/**
 		 * @param babyName
@@ -344,12 +344,28 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 			this.parentNumber = parentNumber;
 			this.babySex = babySex;
 			this.babyProduction = babyProduction;
-			this.babyWeight = Integer.parseInt(babyWeight);
-			this.babyHeight = Integer.parseInt(babyHeight);
-			this.babyHeadCircumference = Integer.parseInt(babyHeadCircumference);
+			if (babyWeight.equals("") ) {
+				this.babyWeight = 0;
+			} else {
+				this.babyWeight = Integer.parseInt(babyWeight);
+			}
+			if (babyHeight.equals("")) {
+				this.babyHeight = 0;
+			} else {
+				this.babyHeight = Integer.parseInt(babyHeight);
+			}
+			if (babyHeadCircumference.equals("")) {
+				this.babyHeadCircumference = 0;
+			} else {
+				this.babyHeadCircumference = Integer.parseInt(babyHeadCircumference);
+			}
 			this.childbirthWay = childbirthWay;
 			this.complication = complication;
-			this.grade = Integer.parseInt(grade);
+			if (grade.equals("")) {
+				this.grade = 0;
+			} else {
+				this.grade = Integer.parseInt(grade);
+			}
 		}
 
 		@Override
@@ -361,8 +377,9 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 		@Override
 		protected JSONObject doInBackground(Void... params) {
 			int uid = SharedPrefUtil.getUid(BabyInfoEditActivity.this);
+			String type ="update";
 			try {
-				return new BusinessHelper().addBabyInfor(uid, babyName, parentNumber, babySex, babyProduction,
+				return new BusinessHelper().addBabyInfor(1,type,babyName, parentNumber, babySex, babyProduction,
 						babyWeight, babyHeight, babyHeadCircumference, childbirthWay, complication, grade, avatarFile);
 			} catch (SystemException e) {
 				e.printStackTrace();
@@ -376,8 +393,9 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 			dismissPd();
 			if (result != null) {
 				try {
-					int status = result.getInt("status");
+					int status = result.getInt("code");
 					if (status == Constants.REQUEST_SUCCESS) {
+						showShortToast("资料修改成功");
 					} else {
 						showShortToast("资料设置失败");
 					}

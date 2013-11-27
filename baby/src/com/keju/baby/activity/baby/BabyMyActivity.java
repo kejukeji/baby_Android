@@ -1,7 +1,11 @@
 package com.keju.baby.activity.baby;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,10 +15,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.keju.baby.AsyncImageLoader;
+import com.keju.baby.AsyncImageLoader.ImageCallback;
+import com.keju.baby.Constants;
 import com.keju.baby.R;
+import com.keju.baby.SystemException;
 import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
+import com.keju.baby.util.ImageUtil;
 import com.keju.baby.util.NetUtil;
+import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 宝宝的资料
@@ -25,8 +36,10 @@ import com.keju.baby.util.NetUtil;
 public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	private Button btnLeft, btnRight;
 	private TextView tvTitle;
-	
+
 	private ImageView ivAvatar;
+	private TextView tvId, tvRealName, tvGendar, tvPreproductions, tvHeight, tvWeight, tvHeadCircumference,
+			tvDeliveryWay,tvComplication,tvApgar;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,7 +54,18 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		btnLeft = (Button) findViewById(R.id.btnLeft);
 		btnRight = (Button) findViewById(R.id.btnRight);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
-		
+
+		tvId = (TextView) this.findViewById(R.id.tvId);
+		tvRealName = (TextView) this.findViewById(R.id.tvRealName);
+		tvGendar = (TextView) this.findViewById(R.id.tvGendar);
+		tvPreproductions = (TextView) this.findViewById(R.id.tvPreproductions);
+		tvHeight = (TextView) this.findViewById(R.id.tvHeight);
+		tvWeight = (TextView) this.findViewById(R.id.tvWeight);
+		tvHeadCircumference = (TextView) this.findViewById(R.id.tvHeadCircumference);
+		tvDeliveryWay = (TextView) this.findViewById(R.id.tvDeliveryWay);
+		tvComplication = (TextView) this.findViewById(R.id.tvComplication);
+		tvApgar = (TextView) this.findViewById(R.id.tvApgar);
+
 		ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
 		ivAvatar.setOnClickListener(this);
 		if (NetUtil.checkNet(this)) {
@@ -102,15 +126,72 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		protected JSONObject doInBackground(Void... params) {
-//			return new BusinessHelper().;
+			int uid = SharedPrefUtil.getUid(BabyMyActivity.this);
+			try {
+				return new BusinessHelper().getBabyInfor(1);
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-            dismissPd();
+			dismissPd();
+			if(result!=null){
+			try {
+				int status = result.getInt("code");
+				if(status==Constants.REQUEST_SUCCESS){
+					if(result.has("baby_list")){
+					JSONArray babyList = result.getJSONArray("baby_list");
+					JSONObject babyBean = babyList.optJSONObject(0);
+					tvId.setText(babyBean.getInt("id")+"");
+				    tvRealName.setText(babyBean.getString("baby_name"));
+				    tvGendar.setText(babyBean.getString("gender"));
+				    
+				    tvPreproductions.setText(babyBean.getString("due_date"));
+				    tvHeight.setText(babyBean.getInt("born_height")+"cm");
+				    tvWeight.setText(babyBean.getInt("born_weight")+"kg");
+				    tvHeadCircumference.setText(babyBean.getInt("born_head")+"cm");
+				    
+				    tvDeliveryWay.setText(babyBean.getString("childbirth"));
+				    tvComplication.setText(babyBean.getString("complication"));
+				    tvApgar.setText(babyBean.getInt("apgar_score")+"");
+				    
+				    String photoUrl = BusinessHelper.PIC_URL +babyBean.getString("picture_path");
+				    ivAvatar.setTag(photoUrl);
+					Drawable cacheDrawble = AsyncImageLoader.getInstance().loadDrawable(photoUrl,
+							new ImageCallback() {
+								@Override
+								public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+									ImageView image = (ImageView) ivAvatar.findViewWithTag(imageUrl);
+									if (image != null) {
+										if (imageDrawable != null) {
+											image.setImageDrawable(imageDrawable);
+										} else {
+											image.setImageResource(R.drawable.item_lion);
+										}
+									}
+								}
+							});
+					if (cacheDrawble != null) {
+						ivAvatar.setImageDrawable(cacheDrawble);
+					} else {
+						ivAvatar.setImageResource(R.drawable.item_lion);
+					}
+					}else{
+						showShortToast("数据加载失败");
+					}
+				}
+			} catch (JSONException e) {
+				showShortToast(R.string.json_exception);
+			}
+			}else{
+				showShortToast("服务器请求失败");
+			}
 		}
 
 	}
+	
 }

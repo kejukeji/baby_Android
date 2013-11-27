@@ -65,7 +65,6 @@
                             android:text="@string/baby_my_id"/>
 
                         <TextView
-                            android:text="13093448608"
                             android:id="@+id/tvId" style="@style/info_text_style"/>
                     </LinearLayout>
 
@@ -85,7 +84,7 @@
                         <TextView
                            style="@style/info_label_style" android:text="@string/baby_my_name" />
 
-                        <TextView android:id="@+id/tvRealName" style="@style/info_text_style"  android:text="周玉莹"/>
+                        <TextView android:id="@+id/tvRealName" style="@style/info_text_style" />
                     </LinearLayout>
 
                     <View
@@ -102,7 +101,7 @@
                         android:paddingTop="12dp" >
 
                         <TextView style="@style/info_label_style" android:text="@string/baby_my_gender" />
-                        <TextView android:id="@+id/tvGendar" style="@style/info_text_style" android:text="男"/>
+                        <TextView android:id="@+id/tvGendar" style="@style/info_text_style" />
                     </LinearLayout>
 
                     <View
@@ -119,7 +118,7 @@
                         android:paddingTop="12dp" >
 
                         <TextView style="@style/info_label_style" android:text="@string/baby_my_preproduction" />
-                        <TextView android:id="@+id/tvPreproductions" style="@style/info_text_style" android:text="2013/05/05"/>
+                        <TextView android:id="@+id/tvPreproductions" style="@style/info_text_style" />
                     </LinearLayout>
 
                     <View
@@ -141,7 +140,7 @@
 
                         <TextView
                             android:id="@+id/tvHeight"
-                            style="@style/info_text_style" android:text="6kg"/>
+                            style="@style/info_text_style"/>
                     </LinearLayout>
 
                     <View
@@ -163,7 +162,7 @@
 
                         <TextView
                             android:id="@+id/tvWeight"
-                            style="@style/info_text_style" android:text="32.3cm"/>
+                            style="@style/info_text_style" />
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
@@ -184,7 +183,7 @@
 
                         <TextView
                             android:id="@+id/tvHeadCircumference"
-                            style="@style/info_text_style" android:text="12.4cm"/>
+                            style="@style/info_text_style" />
                     </LinearLayout>
 
                     <View
@@ -206,7 +205,7 @@
 
                         <TextView
                             android:id="@+id/tvDeliveryWay"
-                            style="@style/info_text_style" android:text="顺产"/>
+                            style="@style/info_text_style" />
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
@@ -227,7 +226,7 @@
 
                         <TextView
                             android:id="@+id/tvComplication"
-                            style="@style/info_text_style" android:text="小儿黄值"/>
+                            style="@style/info_text_style" />
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
@@ -248,7 +247,7 @@
 
                         <TextView
                             android:id="@+id/tvApgar"
-                            style="@style/info_text_style" android:text="68"/>
+                            style="@style/info_text_style" />
                     </LinearLayout>
                 </LinearLayout>
 
