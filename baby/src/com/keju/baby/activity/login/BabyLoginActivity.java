@@ -47,8 +47,9 @@ public class BabyLoginActivity extends BaseWebViewActivity {
 				if(uid <= 0){
 					return;
 				}
+				SharedPrefUtil.setUid(BabyLoginActivity.this, uid);
 				if(isRemember == 1){
-					SharedPrefUtil.setUid(BabyLoginActivity.this, uid);
+					SharedPrefUtil.setIsLogin(BabyLoginActivity.this);
 					SharedPrefUtil.setUserType(BabyLoginActivity.this,Constants.USER_MOTHER);
 				}
 				openActivity(BabyMainActivity.class);
@@ -57,21 +58,11 @@ public class BabyLoginActivity extends BaseWebViewActivity {
 		}, "app");
 		
 	}
-	private long exitTime;
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
 			if (webView.canGoBack()) {
 				webView.goBack(); // goBack()表示返回webView的上一页面，而不直接关闭WebView
-				return true;
-			} else {
-				if ((System.currentTimeMillis() - exitTime) > 2000) {
-					showShortToast(R.string.try_again_logout);
-					exitTime = System.currentTimeMillis();
-				} else {
-					AndroidUtil.exitApp(this);
-					finish();
-				}
 				return true;
 			}
 		}

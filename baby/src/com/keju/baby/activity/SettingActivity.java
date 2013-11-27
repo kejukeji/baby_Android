@@ -1,5 +1,6 @@
 package com.keju.baby.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.TextView;
 
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.activity.login.LoginActivity;
 import com.keju.baby.util.AndroidUtil;
 import com.keju.baby.util.NetUtil;
+import com.keju.baby.util.SharedPrefUtil;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -122,7 +125,27 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 			openActivity(ChangePasswordActivity.class);
 			break;
 		case R.id.btnLogout://二次提示，跳转到登录界面
-			
+			showAlertDialog("提示", "确定要退出登录吗？", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					SharedPrefUtil.clearUserinfo(SettingActivity.this);
+					openActivity(LoginActivity.class);
+					finish();
+				}
+			}, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+				}
+			}, new DialogInterface.OnDismissListener() {
+
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+
+				}
+			});
 			break;
 		default:
 			break;

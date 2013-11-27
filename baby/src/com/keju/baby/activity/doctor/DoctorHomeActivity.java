@@ -47,7 +47,9 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		OnClickListener {
 	private RadioGroup doctorHomeRadioGroup; // 主页面radiogroup
 	private ListView listView; //
-	private List<BabyBean> list; // 数据源
+	private List<BabyBean> list; // adapter数据源
+	private List<BabyBean> allList;//所有的list
+	private List<BabyBean> collectList;//收藏的list
 	private HomeAdapter adapter;
 	private View vFooter;
 	private ProgressBar pbFooter;
@@ -97,6 +99,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		
 		adapter = new HomeAdapter();
 		list = new ArrayList<BabyBean>();
+		allList = new ArrayList<BabyBean>();
+		collectList = new ArrayList<BabyBean>();
 		listView.addFooterView(vFooter);
 		listView.setAdapter(adapter);
 		listView.setOnScrollListener(LoadListener);
@@ -176,10 +180,21 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		switch (checkedId) {
 		case R.id.dochome_allbaby:
 			isShowAll = true;
+			list.clear();
+			list.addAll(allList);
 			adapter.notifyDataSetChanged();
 			break;
 		case R.id.dochome_mycollect:
 			isShowAll = false;
+			collectList.clear();
+			list.clear();
+			for (int i = 0; i < allList.size(); i++) {
+				BabyBean bean = allList.get(i);
+				if(bean.isCollect()){
+					collectList.add(bean);
+				}
+			}
+			list.addAll(collectList);
 			adapter.notifyDataSetChanged();
 			break;
 		}
@@ -238,15 +253,10 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			} else {
 				holder.ivAvatar.setImageResource(R.drawable.item_lion);
 			}
-			if (!isShowAll && !bean.isCollect()) {
-				convertView.setVisibility(View.GONE);
-			} else {
-				if(bean.isCollect()){
-					holder.ivCollect.setImageResource(R.drawable.ic_collected);
-				}else{
-					holder.ivCollect.setImageResource(R.drawable.ic_collect_not);
-				}
-				convertView.setVisibility(View.VISIBLE);
+			if(bean.isCollect()){
+				holder.ivCollect.setImageResource(R.drawable.ic_collected);
+			}else{
+				holder.ivCollect.setImageResource(R.drawable.ic_collect_not);
 			}
 			holder.tvName.setText(bean.getName());
 			holder.tvAge.setText(bean.getAge());
@@ -301,7 +311,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 				List<BabyBean> tempList = result.getObjList();
 				boolean isLastPage = false;
 				if (tempList.size() > 0) {
-					list.addAll(tempList);
+					allList.addAll(tempList);
 					pageIndex++;
 				} else {
 					isLastPage = true;
@@ -328,6 +338,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 				tvFooterMore.setText("");
 				showShortToast(result.getError());
 			}
+			list.addAll(allList);
 			adapter.notifyDataSetChanged();
 			isLoad = false;
 		}

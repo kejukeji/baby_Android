@@ -72,6 +72,7 @@
     <string name="meeting_notify_title">会议通知</string>
     <string name="manage_man">管理员</string>
 
+    <string name="baby_parent_phone">家长手机号</string>
     <string name="baby_my_id">婴儿ID</string>
     <string name="baby_my_name">婴儿名：</string>
     <string name="baby_my_gender">性别：</string>
@@ -80,10 +81,9 @@
     <string name="baby_my_weight">出生体重：</string>
     <string name="baby_my_head_circumference">出生头围：</string>
     <string name="baby_my_delivery_way">分娩方式：</string>
-    <string name="baby_my_refenrence">参考指标：</string>
+    <string name="baby_complication">合并症：</string>
     <string name="baby_my_apgar">Apgar评分：</string>
-    <string name="baby_my_growth_target">生长指标</string>
-    <string name="baby_my_remark">备注</string>
+    
     
     <string name="baby_parents_phone">家长手机号 :</string>
     <string name="baby_commit">合并症</string>

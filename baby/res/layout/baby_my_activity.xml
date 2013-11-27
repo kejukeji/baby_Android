@@ -4,366 +4,263 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/common_title_bar" />
-
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="0dp"
-	    android:layout_weight="2"
-	    android:background="@drawable/baby"
-	    android:gravity="center"
-	    android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/btnBabyChangePw"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"  
-            android:layout_gravity="bottom"     
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textColor="#FFFFFF"
-            android:layout_marginRight="10dp"
-            android:text="@string/change_password"/>
-		<ImageView
-		    android:id="@+id/image_baby"
-		    android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-		    android:src="@drawable/pic" />
-        <Button
-            android:id="@+id/btnBabyChangeInform"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"   
-            android:layout_gravity="bottom"    
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="#FFFFFF"
-            android:text="@string/change_inform" />
-    </LinearLayout>
-<LinearLayout
-    android:id="@+id/doctor_my_linearlayout"
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="12"   
-     android:layout_marginTop="10dp" 
-     android:orientation="vertical" >
-    
-<LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="3"
-     android:background="@drawable/bg_setting"
-     android:layout_marginLeft="20dp"
-     android:layout_marginRight="20dp"
-     android:orientation="vertical" >
-    <LinearLayout
-        android:layout_width="match_parent"       
-        android:layout_height="0dp"
-        android:layout_weight="1"       
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_id" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:layout_weight="2"/>
-        
-        
-    </LinearLayout>
-    <View
+    <include
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
+        layout="@layout/common_title_bar" />
+
+    <ScrollView
+        android:id="@+id/viewInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="15dp" >
+
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/item_lion" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_setting"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/baby_my_id"/>
+
+                        <TextView
+                            android:text="13093448608"
+                            android:id="@+id/tvId" style="@style/info_text_style"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                           style="@style/info_label_style" android:text="@string/baby_my_name" />
+
+                        <TextView android:id="@+id/tvRealName" style="@style/info_text_style"  android:text="周玉莹"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView style="@style/info_label_style" android:text="@string/baby_my_gender" />
+                        <TextView android:id="@+id/tvGendar" style="@style/info_text_style" android:text="男"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView style="@style/info_label_style" android:text="@string/baby_my_preproduction" />
+                        <TextView android:id="@+id/tvPreproductions" style="@style/info_text_style" android:text="2013/05/05"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/baby_my_height" />
+
+                        <TextView
+                            android:id="@+id/tvHeight"
+                            style="@style/info_text_style" android:text="6kg"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/baby_my_weight" />
+
+                        <TextView
+                            android:id="@+id/tvWeight"
+                            style="@style/info_text_style" android:text="32.3cm"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/baby_my_head_circumference" />
+
+                        <TextView
+                            android:id="@+id/tvHeadCircumference"
+                            style="@style/info_text_style" android:text="12.4cm"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/baby_my_delivery_way" />
+
+                        <TextView
+                            android:id="@+id/tvDeliveryWay"
+                            style="@style/info_text_style" android:text="顺产"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/baby_complication" />
+
+                        <TextView
+                            android:id="@+id/tvComplication"
+                            style="@style/info_text_style" android:text="小儿黄值"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@drawable/home_line_bit" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp" >
+
+                        <TextView
+                            style="@style/info_label_style"
+                            android:text="@string/baby_my_apgar" />
+
+                        <TextView
+                            android:id="@+id/tvApgar"
+                            style="@style/info_text_style" android:text="68"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ListView
+        android:id="@+id/listView"
+        style="@style/listviewStyle"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_name" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_gender" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_gender"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    
- </LinearLayout>   
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="9"
-     android:background="@drawable/bg_setting"
-     android:layout_marginLeft="20dp"
-     android:layout_marginRight="20dp"
-     android:layout_marginTop="20dp"
-     android:orientation="vertical" >
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"        
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_preproduction" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_preproduction"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"       
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_height" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_height"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_weight" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_weight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_head_circumference" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_head"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_delivery_way" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_delivery"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_refenrence" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_refenrence"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_apgar" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_apgar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_growth_target" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_growth"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/home_line_bit" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="@string/baby_my_remark" />
-
-        <TextView
-            android:id="@+id/tvBaby_my_remark"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-    </LinearLayout>
-</LinearLayout>
-</LinearLayout>
 </LinearLayout>

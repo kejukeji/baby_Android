@@ -57,6 +57,10 @@ public class Constants {
 	public static final String URL_DOCTOR_LOGIN = "login.html";//医生登录
 	public static final String URL_BABY_LOGIN = "login.html";//婴儿登录
 	public static final String URL_FITMENT = "raise.html";//育儿指南
+	public static final String URL_GROW_LINE = "grow_line.html/";//医生端生长曲线
+	public static final String URL_CREATE_BABY = "create_baby.html";//医生端创建婴儿账号
+	public static final String URL_VISIT_RECORD = "visit_record.html";//妈妈端随访记录
+	public static final String URL_ADD_FOLLOW_UP = "add_follow-up.html";//添加随访记录
 	public static final String URL_MEETING_NOTIFY = "meeting.html";//会议通知
 	public static final String URL_CHANGE_PASSWORD = "password.html";//修改密码
 	
@@ -68,7 +72,5 @@ public class Constants {
 	 * 用来标识请求gallery的activity 
 	 * */
 	public static final int PHOTO_PICKED_WITH_DATA = 3021;
-
-	public static final String URL_GROW_LINE = "grow_line.html?user_id=";//生长曲线
 
 }

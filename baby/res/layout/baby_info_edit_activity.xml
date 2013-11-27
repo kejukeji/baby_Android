@@ -31,10 +31,10 @@
 
                 <ImageView
                     android:id="@+id/ivUserPhone"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:gravity="left"
-                    android:src="@drawable/pic" />
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/item_lion" />
 
                 <TextView
                     android:layout_width="0dp"

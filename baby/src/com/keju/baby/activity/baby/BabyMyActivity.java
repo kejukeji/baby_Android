@@ -8,11 +8,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
-import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
 import com.keju.baby.util.NetUtil;
 
@@ -25,16 +25,12 @@ import com.keju.baby.util.NetUtil;
 public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	private Button btnLeft, btnRight;
 	private TextView tvTitle;
-	private Button btnChangeInfo, btnChangePassword;
+	
+	private ImageView ivAvatar;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.baby_my_activity);
-
-		btnChangeInfo = (Button) findViewById(R.id.btnBabyChangeInform);
-		btnChangePassword = (Button) findViewById(R.id.btnBabyChangePw);
-		btnChangeInfo.setOnClickListener(this);
-		btnChangePassword.setOnClickListener(this);
 
 		findView();
 		fillData();
@@ -45,7 +41,9 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		btnLeft = (Button) findViewById(R.id.btnLeft);
 		btnRight = (Button) findViewById(R.id.btnRight);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
-
+		
+		ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
+		ivAvatar.setOnClickListener(this);
 		if (NetUtil.checkNet(this)) {
 			new GetBabyInfor().execute();
 		} else {
@@ -83,11 +81,8 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.btnBabyChangeInform:
+		case R.id.ivAvatar:
 			openActivity(BabyInfoEditActivity.class);
-			break;
-		case R.id.btnBabyChangePw:
-
 			break;
 		default:
 			break;

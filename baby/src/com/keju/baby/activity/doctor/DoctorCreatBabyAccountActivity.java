@@ -1,13 +1,15 @@
 package com.keju.baby.activity.doctor;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.keju.baby.Constants;
 import com.keju.baby.R;
-import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.activity.base.BaseWebViewActivity;
 
 /**
  * 创建婴儿账户
@@ -16,48 +18,39 @@ import com.keju.baby.activity.base.BaseActivity;
  * @version 创建时间：2013-10-25 下午2:57:49
  */
 
-public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnClickListener {
+public class DoctorCreatBabyAccountActivity extends BaseWebViewActivity {
 
 	private Button btnLeft, btnRight;
 	private TextView tvTitle;
-
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.doctor_creat_baby_account);
 		findView();
 		fillData();
-		btnRight.setOnClickListener(this);
-		btnLeft.setOnClickListener(this);
 	}
 
 	private void findView() {
-
-		btnLeft = (Button) findViewById(R.id.btnLeft);
-		btnRight = (Button) findViewById(R.id.btnRight);
-		tvTitle = (TextView) findViewById(R.id.tvTitle);
-	}
-
-	/**
-	 * 数据填充
-	 */
-	private void fillData() {
-
-		btnLeft.setText("Back");
-		btnRight.setText("提交");
+		btnLeft = (Button) this.findViewById(R.id.btnLeft);
+		btnLeft.setVisibility(View.INVISIBLE);
+		btnRight = (Button) this.findViewById(R.id.btnRight);
+		btnRight.setVisibility(View.INVISIBLE);
+		tvTitle = (TextView) this.findViewById(R.id.tvTitle);
+		tvTitle.setVisibility(View.VISIBLE);
 		tvTitle.setText("创建婴儿账户");
+		webView = (WebView) findViewById(R.id.webview);
 	}
 
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btnRight:
-			// this.finish();
-			break;
-		case R.id.btnLeft:
-			this.finish();
-			break;
-		default:
-			break;
+	private void fillData() {
+		loadUrl(Constants.URL_CREATE_BABY);
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+			if (webView.canGoBack()) {
+				webView.goBack(); // goBack()表示返回webView的上一页面，而不直接关闭WebView
+				return true;
+			}
 		}
-
+		return super.onKeyDown(keyCode, event);
 	}
 }

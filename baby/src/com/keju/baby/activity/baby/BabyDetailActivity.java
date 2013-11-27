@@ -2,6 +2,7 @@ package com.keju.baby.activity.baby;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import com.keju.baby.bean.BabyBean;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午3:29:41
  */
-public class BabyDetailActivity extends BaseWebViewActivity {
+public class BabyDetailActivity extends BaseWebViewActivity implements OnClickListener{
 	private Button btnLeft, btnRight;
 	private TextView tvTitle;
 	
@@ -35,7 +36,9 @@ public class BabyDetailActivity extends BaseWebViewActivity {
 		btnLeft = (Button) this.findViewById(R.id.btnLeft);
 		btnLeft.setVisibility(View.INVISIBLE);
 		btnRight = (Button) this.findViewById(R.id.btnRight);
-		btnRight.setVisibility(View.INVISIBLE);
+		btnRight.setBackgroundResource(android.R.drawable.btn_default);
+		btnRight.setText("添加随访记录");
+		btnRight.setOnClickListener(this);
 		tvTitle = (TextView) this.findViewById(R.id.tvTitle);
 		tvTitle.setVisibility(View.VISIBLE);
 		tvTitle.setText(bean.getName());
@@ -44,5 +47,16 @@ public class BabyDetailActivity extends BaseWebViewActivity {
 
 	private void fillData() {
 		loadUrl(Constants.URL_GROW_LINE + bean.getId());
+	}
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btnRight:
+			loadUrl(Constants.URL_ADD_FOLLOW_UP);
+			break;
+
+		default:
+			break;
+		}
 	}
 }
