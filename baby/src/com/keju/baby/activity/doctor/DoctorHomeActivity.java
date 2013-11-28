@@ -15,7 +15,6 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -60,7 +59,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 
 	private int pageIndex = 1;
 	private long exitTime;
-	private Button btnLeft, btnRight;
+	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 	private boolean isShowAll = true;
 
@@ -74,10 +73,10 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 
 	private void findView() {
 
-		btnLeft = (Button) findViewById(R.id.btnLeft);
-		btnLeft.setBackgroundResource(R.drawable.btn_create_account_selector);
-		btnRight = (Button) findViewById(R.id.btnRight);
-		btnRight.setBackgroundResource(R.drawable.btn_search_selector);
+		btnLeft = (ImageView) findViewById(R.id.btnLeft);
+		btnLeft.setImageResource(R.drawable.btn_create_account_selector);
+		btnRight = (ImageView) findViewById(R.id.btnRight);
+		btnRight.setImageResource(R.drawable.btn_search_selector);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 		btnRight.setOnClickListener(this);
 		btnLeft.setOnClickListener(this);

@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.keju.baby.R;
@@ -18,7 +19,7 @@ import com.keju.baby.util.AndroidUtil;
  * @version 创建时间2013-10-25 下午2:33:05
  */
 public class LoginActivity extends BaseActivity implements OnClickListener {
-	private Button btnLeft, btnRight;
+	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 	private Button btnDoctor, btnBaby;
 
@@ -31,9 +32,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void findView() {
-		btnLeft = (Button) findViewById(R.id.btnLeft);
+		btnLeft = (ImageView) findViewById(R.id.btnLeft);
 		btnLeft.setVisibility(View.INVISIBLE);
-		btnRight = (Button) findViewById(R.id.btnRight);
+		btnRight = (ImageView) findViewById(R.id.btnRight);
 		btnRight.setVisibility(View.INVISIBLE);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 		btnDoctor = (Button) findViewById(R.id.btnDoctor);

@@ -7,7 +7,7 @@
     android:paddingTop="3dp" 
     android:background="@drawable/bg_title_repeat">
 
-    <Button
+    <ImageView
         android:id="@+id/btnLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,10 +15,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:gravity="center"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="12dp"
+        android:clickable="true"
         android:textColor="@android:color/white"
         android:textSize="@dimen/BasicTextSize" />
 
@@ -43,17 +40,14 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/btnRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:clickable="true"
         android:textColor="@android:color/white"
         android:textSize="@dimen/BasicTextSize" />
 

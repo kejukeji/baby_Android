@@ -19,9 +19,8 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,7 +46,7 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class DoctorInfoEditActivity extends BaseActivity implements OnClickListener {
 
-	private Button btnLeft, btnRight;
+	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 
 	private LinearLayout viewDoctorPhone;
@@ -73,9 +72,9 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 
 	private void findView() {
 
-		btnLeft = (Button) findViewById(R.id.btnLeft);
+		btnLeft = (ImageView) findViewById(R.id.btnLeft);
 		btnLeft.setOnClickListener(this);
-		btnRight = (Button) findViewById(R.id.btnRight);
+		btnRight = (ImageView) findViewById(R.id.btnRight);
 		btnRight.setOnClickListener(this);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 
@@ -97,8 +96,8 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	 */
 	private void fillData() {
 
-		btnLeft.setText("Back");
-		btnRight.setText("提交");
+		btnLeft.setImageResource(R.drawable.btn_back_selector);
+
 		tvTitle.setText("修改资料");
 	}
 

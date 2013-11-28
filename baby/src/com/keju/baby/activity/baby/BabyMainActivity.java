@@ -13,7 +13,6 @@ import android.widget.TabHost.TabSpec;
 
 import com.keju.baby.CommonApplication;
 import com.keju.baby.R;
-import com.keju.baby.activity.HomeActivity;
 import com.keju.baby.activity.SettingActivity;
 
 /**
@@ -66,7 +65,7 @@ public class BabyMainActivity extends TabActivity implements OnCheckedChangeList
 	private void fillData() {
 		
 		TabSpec ts1 = mth.newTabSpec(HOME_TAB_ID).setIndicator(HOME_TAB_ID);
-		ts1.setContent(new Intent(this, HomeActivity.class));
+		ts1.setContent(new Intent(this, BabyHomeActivity.class));
 		mth.addTab(ts1);
 		
 		TabSpec ts2 = mth.newTabSpec(ACCOUNT_TAB_ID).setIndicator(ACCOUNT_TAB_ID);

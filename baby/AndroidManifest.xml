@@ -64,7 +64,7 @@
         <activity  android:name=".activity.baby.BabyStatusActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         
         <activity  android:name=".activity.baby.AddVisitRecordActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
-		<activity  android:name=".activity.HomeActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+		<activity  android:name=".activity.baby.BabyHomeActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
 		<activity  android:name=".activity.AddMilkActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
 		<!-- push服务 -->
         <service android:name=".service.PullService"></service>

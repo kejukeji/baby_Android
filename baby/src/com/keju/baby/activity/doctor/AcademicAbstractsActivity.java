@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,11 +32,10 @@ public class AcademicAbstractsActivity extends BaseActivity {
 	private List<AcademicAbstractBean> list;
 	private AcademicAdapter academicAdapter;
 	private long exitTime;
-	private Button btnLeft,btnRight;
+	private ImageView btnLeft,btnRight;
 	private TextView tvTitle;
 	
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.academic_abstract_activity);
 		
@@ -49,8 +49,8 @@ public class AcademicAbstractsActivity extends BaseActivity {
 	}
 	private void findView() {
 		
-		btnLeft=(Button)findViewById(R.id.btnLeft);
-		btnRight=(Button)findViewById(R.id.btnRight);
+		btnLeft=(ImageView)findViewById(R.id.btnLeft);
+		btnRight=(ImageView)findViewById(R.id.btnRight);
 		tvTitle=(TextView)findViewById(R.id.tvTitle);
 	}
 	/**
@@ -100,19 +100,16 @@ public class AcademicAbstractsActivity extends BaseActivity {
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return list.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 

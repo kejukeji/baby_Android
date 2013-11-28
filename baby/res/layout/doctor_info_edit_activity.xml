@@ -32,8 +32,7 @@
                 <ImageView
                     android:id="@+id/ivDoctorPhone"
                     android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/pic" />
+                    android:layout_height="70dp"/>
 
                 <TextView
                     android:layout_width="0dp"

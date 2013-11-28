@@ -63,7 +63,7 @@
     <string name="doctor_my_changepw_new">新密码：</string>
     <string name="doctor_my_changepw_confirm">确认新密码：</string>
     
-    <string name="academic_abstract_collect">收藏</string>
+    <string name="academic_abstract_collect">&#160;&#160;收&#160;&#160;&#160;&#160;藏&#160;&#160;</string>
     <string name="doctor_my_collect_cancel">取消收藏</string>
     <string name="doctor_my_collect_share">分享</string>
     <string name="doctor_my_collect_title">新生儿的营养和需要量 </string>
@@ -92,12 +92,12 @@
     
     <string name="baby_detail_title">育儿指南详情</string>
     <!-- “搜索”界面 -->
-    <string name="search_key">关键字：</string>
-    <string name="search_time">婴儿出生\n时间段：</string>
+    <string name="search_key">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;关键字:</string>
+    <string name="search_time">婴儿出生时间段:</string>
     <string name="search_to">到</string>
     <string name="search_history">历史搜索：</string>
     <string name="search_button">搜索</string>
-    <string name="search_clean">清除历史记录</string>
+    <string name="search_clean">清除历史</string>
     <!-- “新增随访记录”界面 -->
     <string name="add_visit_record">新增随访记录</string>
     <string name="add_visit_record_time">测量日期:</string>

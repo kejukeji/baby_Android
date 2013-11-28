@@ -3,12 +3,8 @@ package com.keju.baby.activity.login;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.keju.baby.Constants;
-import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseWebViewActivity;
 import com.keju.baby.activity.doctor.DoctorMainActivity;
 import com.keju.baby.util.SharedPrefUtil;
@@ -20,8 +16,6 @@ import com.keju.baby.util.SharedPrefUtil;
  * @version 创建时间：2013-10-25 下午2:35:21
  */
 public class DoctorLoginActivity extends BaseWebViewActivity {
-	private Button btnLeft, btnRight;
-	private TextView tvTitle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,14 +24,10 @@ public class DoctorLoginActivity extends BaseWebViewActivity {
 	}
 
 	private void findView() {
-		btnLeft = (Button) this.findViewById(R.id.btnLeft);
 		btnLeft.setVisibility(View.INVISIBLE);
-		btnRight = (Button) this.findViewById(R.id.btnRight);
 		btnRight.setVisibility(View.INVISIBLE);
-		tvTitle = (TextView) this.findViewById(R.id.tvTitle);
 		tvTitle.setVisibility(View.VISIBLE);
 		tvTitle.setText("登录");
-		webView = (WebView) findViewById(R.id.webview);
 	}
 
 	private void fillData() {

@@ -11,7 +11,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 
 import com.keju.baby.R;
-import com.keju.baby.activity.HomeActivity;
+import com.keju.baby.activity.baby.BabyHomeActivity;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.SharedPrefUtil;
 /**
@@ -93,7 +93,7 @@ public class PullService extends Service {
 
 		// The PendingIntent to launch our activity if the user selects this
 		// notification
-		Intent intent = new Intent(this, HomeActivity.class);
+		Intent intent = new Intent(this, BabyHomeActivity.class);
 		intent.putExtra("notifyId", notifyId);//消息id
 		intent.putExtra("title", title);//消息内容
 		/**

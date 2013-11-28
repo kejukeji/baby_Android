@@ -56,12 +56,18 @@ public class Constants {
 	public static final String URL_BASE_HTML = "http://42.121.108.142:7007/html/";
 	public static final String URL_DOCTOR_LOGIN = "login.html";//医生登录
 	public static final String URL_BABY_LOGIN = "login.html";//婴儿登录
-	public static final String URL_FITMENT = "raise.html";//育儿指南
+	public static final String URL_REGISTER = "register.html";//注册
+	public static final String URL_FITMENT_LIST = "raise_dir.html";//育儿指南列表
+	public static final String URL_FITMENT_DETAIL = "raise.html";//育儿指南详情
 	public static final String URL_GROW_LINE = "grow_line.html/";//医生端生长曲线
+	public static final String URL_BABY_DETAIL = "baby_detail.html/";//婴儿详细资料
+	public static final String URL_NEED = "need.html";//营养摄入需求
 	public static final String URL_CREATE_BABY = "create_baby.html";//医生端创建婴儿账号
 	public static final String URL_VISIT_RECORD = "visit_record.html";//妈妈端随访记录
 	public static final String URL_ADD_FOLLOW_UP = "add_follow-up.html";//添加随访记录
-	public static final String URL_MEETING_NOTIFY = "meeting.html";//会议通知
+	public static final String URL_FORMULA = "formula.html";//新增配方奶
+	public static final String URL_MEETING_NOTIFY_DETAIL = "meeting.html";//会议通知详情
+	public static final String URL_MEETING_NOTIFY_LIST = "meeting_notice.html";//会议通知列表
 	public static final String URL_CHANGE_PASSWORD = "password.html";//修改密码
 	
 	/** 

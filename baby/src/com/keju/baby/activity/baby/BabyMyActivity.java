@@ -4,14 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +32,7 @@ import com.keju.baby.util.SharedPrefUtil;
  * @version 创建时间：2013-10-25 下午3:25:43
  */
 public class BabyMyActivity extends BaseActivity implements OnClickListener {
-	private Button btnLeft, btnRight;
+	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 
 	private ImageView ivAvatar;
@@ -44,15 +42,14 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.baby_my_activity);
-
 		findView();
 		fillData();
 	}
 
 	private void findView() {
 
-		btnLeft = (Button) findViewById(R.id.btnLeft);
-		btnRight = (Button) findViewById(R.id.btnRight);
+		btnLeft = (ImageView) findViewById(R.id.btnLeft);
+		btnRight = (ImageView) findViewById(R.id.btnRight);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 
 		tvId = (TextView) this.findViewById(R.id.tvId);
@@ -168,17 +165,17 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 									ImageView image = (ImageView) ivAvatar.findViewWithTag(imageUrl);
 									if (image != null) {
 										if (imageDrawable != null) {
-											image.setImageDrawable(imageDrawable);
+											image.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(imageDrawable, 0.5f));
 										} else {
-											image.setImageResource(R.drawable.item_lion);
+											image.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(getResources().getDrawable(R.drawable.item_lion), 0.5f));
 										}
 									}
 								}
 							});
 					if (cacheDrawble != null) {
-						ivAvatar.setImageDrawable(cacheDrawble);
+						ivAvatar.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(cacheDrawble, 0.5f));
 					} else {
-						ivAvatar.setImageResource(R.drawable.item_lion);
+						ivAvatar.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(getResources().getDrawable(R.drawable.item_lion), 0.5f));
 					}
 					}else{
 						showShortToast("数据加载失败");

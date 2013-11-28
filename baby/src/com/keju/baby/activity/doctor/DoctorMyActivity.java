@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
@@ -40,7 +39,7 @@ import com.keju.baby.util.SharedPrefUtil;
  * @version 创建时间：2013-10-25 下午2:53:44
  */
 public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeListener, OnClickListener {
-	private Button btnLeft, btnRight;
+	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 	private RadioGroup radio_group;
 	private View viewInfo;
@@ -60,14 +59,15 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 	}
 
 	private void findView() {
-		btnLeft = (Button) findViewById(R.id.btnLeft);
-		btnRight = (Button) findViewById(R.id.btnRight);
+		btnLeft = (ImageView) findViewById(R.id.btnLeft);
+		btnRight = (ImageView) findViewById(R.id.btnRight);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 
 		radio_group = (RadioGroup) findViewById(R.id.radio_group);
 		viewInfo = findViewById(R.id.viewInfo);
 		
 		ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
+		ivAvatar.setOnClickListener(this);
 		tvId = (TextView) findViewById(R.id.tvId);
 		tvName = (TextView) findViewById(R.id.tvName);
 		tvRealName = (TextView) findViewById(R.id.tvRealName);
@@ -176,6 +176,9 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.ivAvatar:
+			openActivity(DoctorInfoEditActivity.class);
+			break;
 		default:
 			break;
 		}

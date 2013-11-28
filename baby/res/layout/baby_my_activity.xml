@@ -25,16 +25,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
+                android:background="@drawable/bg_baby_avatar"
                 android:padding="15dp" >
-
+				<FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content" >
                 <ImageView
                     android:id="@+id/ivAvatar"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:scaleType="centerCrop"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/item_lion" />
-
+                    android:layout_gravity="center_horizontal"/>
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_edit"
+                    android:layout_gravity="bottom|right" />
+				</FrameLayout>
             </LinearLayout>
 
             <LinearLayout

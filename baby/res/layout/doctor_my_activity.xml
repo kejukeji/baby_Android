@@ -56,15 +56,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@drawable/bg_doctor_avatar"
                 android:padding="8dp" >
-
+				<FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content" >
                 <ImageView
                     android:id="@+id/ivAvatar"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pic" />
-
+                    android:clickable="true"
+                    android:padding="6dp" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_edit"
+                    android:layout_gravity="bottom|right" />
+				</FrameLayout>
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"

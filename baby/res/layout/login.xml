@@ -13,11 +13,11 @@
             android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:gravity="center_vertical">
             <Button android:id="@+id/btnBaby" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="我是家长"
                 android:paddingLeft="25dp" android:paddingRight="25dp" android:background="@drawable/btn_selector" 
-                android:textSize="@dimen/LargeTextSize" android:textColor="@color/white"/>
+                android:textSize="@dimen/BasicTextSize" android:textColor="@color/white"/>
             <View android:layout_width="0dp" android:layout_height="fill_parent" android:layout_weight="1"/>
             <Button android:id="@+id/btnDoctor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="我是医生"
                 android:paddingLeft="25dp" android:paddingRight="25dp" android:background="@drawable/btn_selector"
-                android:textSize="@dimen/LargeTextSize" android:textColor="@color/white"/>
+                android:textSize="@dimen/BasicTextSize" android:textColor="@color/white"/>
         </LinearLayout>
         <TextView android:id="@+id/tvAppInfo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="软件信息XXXXX"
             android:textColor="@color/gold" android:textSize="@dimen/BasicTextSize" android:gravity="center" />

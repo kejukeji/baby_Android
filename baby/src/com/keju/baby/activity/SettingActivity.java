@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.keju.baby.R;
@@ -26,7 +27,8 @@ import com.umeng.update.UpdateResponse;
  */
 public class SettingActivity extends BaseActivity implements OnClickListener{
 	private long exitTime;
-	private Button btnLeft, btnRight,btnLogout;
+	private Button btnLogout;
+	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 	
 	private View viewGrade, viewRecommend,viewVersion, viewAbout,viewChangePassword;
@@ -39,8 +41,8 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void findView() {
-		btnLeft = (Button) findViewById(R.id.btnLeft);
-		btnRight = (Button) findViewById(R.id.btnRight);
+		btnLeft = (ImageView) findViewById(R.id.btnLeft);
+		btnRight = (ImageView) findViewById(R.id.btnRight);
 		btnLogout=(Button)findViewById(R.id.btnLogout);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 		viewGrade=findViewById(R.id.viewGrade);

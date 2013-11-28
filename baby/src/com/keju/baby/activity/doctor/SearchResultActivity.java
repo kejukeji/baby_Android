@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,18 +34,19 @@ import com.keju.baby.util.NetUtil;
  * @version 创建时间：2013-10-25 下午3:00:32
  */
 public class SearchResultActivity extends BaseActivity implements OnClickListener {
-	private Button btnLeft, btnRight;
+	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 
 	private ListView listView; //
 	private List<BabyBean> list; // 数据源
 	private HomeAdapter adapter;
-	
+
 	private String keyword;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(getIntent() != null){
+		if (getIntent() != null) {
 			keyword = getIntent().getExtras().getString(Constants.EXTRA_DATA);
 		}
 		setContentView(R.layout.search_result);
@@ -56,10 +56,10 @@ public class SearchResultActivity extends BaseActivity implements OnClickListene
 
 	private void findView() {
 
-		btnLeft = (Button) findViewById(R.id.btnLeft);
+		btnLeft = (ImageView) findViewById(R.id.btnLeft);
 		btnLeft.setBackgroundResource(android.R.drawable.btn_default);
-		btnLeft.setText("返回");
-		btnRight = (Button) findViewById(R.id.btnRight);
+		btnLeft.setImageResource(R.drawable.btn_back_selector);
+		btnRight = (ImageView) findViewById(R.id.btnRight);
 		btnRight.setVisibility(View.INVISIBLE);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 		btnLeft.setOnClickListener(this);
