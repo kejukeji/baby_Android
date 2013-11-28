@@ -11,13 +11,14 @@
         android:layout_height="250dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="10dp" >
-
-        <ListView
-            android:id="@+id/doctorListView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
+        android:padding="10dp"
+        android:visibility="gone" >
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/doctorListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </ListView>
 
 </LinearLayout>

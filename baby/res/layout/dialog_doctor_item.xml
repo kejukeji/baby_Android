@@ -6,6 +6,8 @@
 
     <TextView
         android:id="@+id/tvDoctorInfor"
+        android:padding="15dp"
+        android:textSize="@dimen/TitleTextSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

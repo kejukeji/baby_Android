@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.keju.baby.Constants;
 import com.keju.baby.R;
@@ -61,9 +63,8 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 
 	private LinearLayout viewDoctorPhone;
 	private ImageView ivDoctorPhone;
-	private EditText etDoctorName, etDoctorAddress, etDoctorHospital, etDoctorDepartment, etJobTitle, etDoctorEmil,
-			etDoctorNumber;
-
+	private EditText etDoctorName, etDoctorEmil, etDoctorNumber;
+	private TextView tvDoctorAddress, tvDoctorHospital, tvDoctorDepartment, tvJobTitle;
 	private LinearLayout viewDoctorAddress, viewDoctorHospital, viewDoctorDepartment, viewJobTitle;
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
 	private File avatarFile;// 头像文件
@@ -78,6 +79,15 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private List<DoctorBelongDepartmentBean> positionList = new ArrayList<DoctorBelongDepartmentBean>();// 医生的职位list
 
 	private ProviceAdapter adapter;
+	private HospitalAdaper adapter1;
+	private DepartmentAdaper adapter2;
+	private PositionAdaper adapter3;
+	
+	private int proviceId; 
+	private int hospitalId;
+	private int departmentId;
+	private int positionId;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.doctor_info_edit_activity);
@@ -100,10 +110,10 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 
 		ivDoctorPhone = (ImageView) this.findViewById(R.id.ivDoctorPhone);
 		etDoctorName = (EditText) this.findViewById(R.id.etDoctorName);
-		etDoctorAddress = (EditText) this.findViewById(R.id.etDoctorAddress);
-		etDoctorHospital = (EditText) this.findViewById(R.id.etDoctorHospital);
-		etDoctorDepartment = (EditText) this.findViewById(R.id.etDoctorDepartment);
-		etJobTitle = (EditText) this.findViewById(R.id.etJobTitle);
+		tvDoctorAddress = (TextView) this.findViewById(R.id.tvDoctorAddress);
+		tvDoctorHospital = (TextView) this.findViewById(R.id.tvDoctorHospital);
+		tvDoctorDepartment = (TextView) this.findViewById(R.id.tvDoctorDepartment);
+		tvJobTitle = (TextView) this.findViewById(R.id.tvJobTitle);
 		etDoctorEmil = (EditText) this.findViewById(R.id.etDoctorEmil);
 		etDoctorNumber = (EditText) this.findViewById(R.id.etDoctorNumber);
 
@@ -123,11 +133,14 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private void fillData() {
 
 		btnLeft.setImageResource(R.drawable.btn_back_selector);
-
+		btnRight.setImageResource(R.drawable.btn_commit_selector);
 		tvTitle.setText("修改资料");
 		if (NetUtil.checkNet(this)) {
 			new PostDoctorInforTask().execute();
+		} else {
+			showShortToast(R.string.NoSignalException);
 		}
+
 	}
 
 	@Override
@@ -171,9 +184,13 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			}
 		}
 	}
-
+	private Dialog dialogProvince;
+	private Dialog dialogDoctorHospital;
+	private Dialog dialogDoctorDepartment;
+	private Dialog dialogJobTitle;
 	@Override
 	public void onClick(View v) {
+		
 		switch (v.getId()) {
 		case R.id.btnLeft:
 			finish();
@@ -190,7 +207,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			WindowManager windowManager = getWindowManager();
 			Display display = windowManager.getDefaultDisplay();
 			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-			lp.width = (int) (display.getWidth()); // 设置宽度
+			lp.width = (int) (display.getWidth() - 40); // 设置宽度
 			lp.gravity = Gravity.BOTTOM;
 			dialog.getWindow().setAttributes(lp);
 			tvCancel.setOnClickListener(new OnClickListener() {
@@ -233,37 +250,82 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			break;
 		case R.id.viewDoctorAddress:
 			LayoutInflater inflater1 = getLayoutInflater();
-			View layout1= inflater1.inflate(R.layout.dialog_doctor_list, null); //
-			ListView addressList =(ListView)layout1.findViewById(R.id.doctorListView);
+			View layout1 = inflater1.inflate(R.layout.dialog_doctor_list, null);
+			ListView addressList = (ListView) layout1.findViewById(R.id.doctorListView);
 			adapter = new ProviceAdapter();
-			addressList.setAdapter(adapter); 
-			final Dialog dialog1 = new Dialog(this, R.style.dialog);
-			dialog1.setContentView(layout1); // 将取得布局文件set进去
-			dialog1.show(); // 显示
+			addressList.setAdapter(adapter);
+			addressList.setOnItemClickListener(itemListener);
+			dialogProvince = new Dialog(this, R.style.dialog);
+			dialogProvince.setContentView(layout1); // 将取得布局文件set进去
+			dialogProvince.show(); // 显示
 			WindowManager windowManager1 = getWindowManager();
 			Display display1 = windowManager1.getDefaultDisplay();
-			WindowManager.LayoutParams lp1 = dialog1.getWindow().getAttributes();
-			lp1.width = (int) (display1.getWidth()); // 设置宽度
-			lp1.gravity = Gravity.BOTTOM;
-			dialog1.getWindow().setAttributes(lp1);
+			WindowManager.LayoutParams lp1 = dialogProvince.getWindow().getAttributes();
+			lp1.width = (int) (display1.getWidth() - 20); // 设置宽度
+			// lp1.gravity = Gravity.BOTTOM;
+			dialogProvince.getWindow().setAttributes(lp1);
 			break;
 		case R.id.viewDoctorHospital:
+			LayoutInflater inflater2 = getLayoutInflater();
+			View layout2 = inflater2.inflate(R.layout.dialog_doctor_list, null);
+			ListView hospitalList = (ListView) layout2.findViewById(R.id.doctorListView);
+			adapter1 = new HospitalAdaper();
+			hospitalList.setAdapter(adapter1);
+			hospitalList.setOnItemClickListener(itemListener1);
+			dialogDoctorHospital = new Dialog(this, R.style.dialog);
+			dialogDoctorHospital.setContentView(layout2); // 将取得布局文件set进去
+			dialogDoctorHospital.show(); // 显示
+			WindowManager windowManager2 = getWindowManager();
+			Display display2 = windowManager2.getDefaultDisplay();
+			WindowManager.LayoutParams lp2 = dialogDoctorHospital.getWindow().getAttributes();
+			lp2.width = (int) (display2.getWidth() - 20); // 设置宽度
+			// lp1.gravity = Gravity.BOTTOM;
+			dialogDoctorHospital.getWindow().setAttributes(lp2);
 			break;
 		case R.id.viewDoctorDepartment:
+			LayoutInflater inflater3 = getLayoutInflater();
+			View layout3 = inflater3.inflate(R.layout.dialog_doctor_list, null);
+			ListView departmentList = (ListView) layout3.findViewById(R.id.doctorListView);
+			adapter2 = new DepartmentAdaper();
+			departmentList.setAdapter(adapter2);
+			departmentList.setOnItemClickListener(itemListener2);
+			dialogDoctorDepartment = new Dialog(this, R.style.dialog);
+			dialogDoctorDepartment.setContentView(layout3); // 将取得布局文件set进去
+			dialogDoctorDepartment.show(); // 显示
+			WindowManager windowManager3 = getWindowManager();
+			Display display3 = windowManager3.getDefaultDisplay();
+			WindowManager.LayoutParams lp3 = dialogDoctorDepartment.getWindow().getAttributes();
+			lp3.width = (int) (display3.getWidth() - 20); // 设置宽度
+			// lp1.gravity = Gravity.BOTTOM;
+			dialogDoctorDepartment.getWindow().setAttributes(lp3);
 			break;
 		case R.id.viewJobTitle:
+			LayoutInflater inflater4 = getLayoutInflater();
+			View layout4 = inflater4.inflate(R.layout.dialog_doctor_list, null);
+			ListView jobTitleList = (ListView) layout4.findViewById(R.id.doctorListView);
+			adapter3 = new PositionAdaper();
+			jobTitleList.setAdapter(adapter3);
+			jobTitleList.setOnItemClickListener(itemListener3);
+			dialogJobTitle = new Dialog(this, R.style.dialog);
+			dialogJobTitle.setContentView(layout4); // 将取得布局文件set进去
+			dialogJobTitle.show(); // 显示
+			WindowManager windowManager4 = getWindowManager();
+			Display display4 = windowManager4.getDefaultDisplay();
+			WindowManager.LayoutParams lp4 = dialogJobTitle.getWindow().getAttributes();
+			lp4.width = (int) (display4.getWidth() - 20); // 设置宽度
+			// lp1.gravity = Gravity.BOTTOM;
+			dialogJobTitle.getWindow().setAttributes(lp4);
 			break;
 		case R.id.btnRight:
 			String doctorName = etDoctorName.getText().toString().trim();
-			String doctorAddress = etDoctorAddress.getText().toString().trim();
-			String doctorHospital = etDoctorHospital.getText().toString().trim();
-			String doctorDepartment = etDoctorDepartment.getText().toString().trim();
-			String jobTitle = etJobTitle.getText().toString().trim();
+//			String doctorAddress = tvDoctorAddress.getText().toString().trim();
+//			String doctorHospital = tvDoctorHospital.getText().toString().trim();
+//			String doctorDepartment = tvDoctorDepartment.getText().toString().trim();
+//			String jobTitle = tvJobTitle.getText().toString().trim();
 			String doctorEmil = etDoctorEmil.getText().toString().trim();
 			String doctorNumber = etDoctorNumber.getText().toString().trim();
 			if (NetUtil.checkNet(this)) {
-				new PostDoctorInfor(doctorName, doctorAddress, doctorHospital, doctorDepartment, jobTitle, doctorEmil,
-						doctorNumber).execute();
+				new PostDoctorInfor(doctorName,doctorEmil,doctorNumber).execute();
 			} else {
 				showShortToast(R.string.NoSignalException);
 			}
@@ -271,8 +333,72 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		default:
 			break;
 		}
-
 	}
+
+	/**
+	 * 城市选择 listview 点击
+	 */
+	OnItemClickListener itemListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			if (arg2 >= provinceList.size()) {
+				return;
+			}
+			DoctorProvinceBean bean = provinceList.get(arg2);
+			tvDoctorAddress.setText(bean.getProvinceName());
+			proviceId = bean.getProvinceId();
+			dialogProvince.dismiss();
+		}
+	};
+	/**
+	 * 医院选择 listview 点击
+	 */
+	OnItemClickListener itemListener1 = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			if (arg2 >= hospitalList.size()) {
+				return;
+			}
+			DoctorHospitalBean bean = hospitalList.get(arg2);
+			tvDoctorHospital.setText(bean.getHospitalName());
+			hospitalId = bean.getHospitalId();
+			dialogDoctorHospital.dismiss();
+		}
+	};
+	/**
+	 * 科室选择 listview 点击
+	 */
+	OnItemClickListener itemListener2 = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			if (arg2 >= departmentList.size()) {
+				return;
+			}
+			DoctorDepartmentBean bean = departmentList.get(arg2);
+			tvDoctorDepartment.setText(bean.getDepartmentName());
+			departmentId = bean.getDepartmentId();
+			dialogDoctorDepartment.dismiss();
+		}
+	};
+	/**
+	 * 职位选择 listview 点击
+	 */
+	OnItemClickListener itemListener3 = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			if (arg2 >= positionList.size()) {
+				return;
+			}
+			DoctorBelongDepartmentBean bean = positionList.get(arg2);
+			tvJobTitle.setText(bean.getPositionName());
+			positionId = bean.getPositionId();
+			dialogJobTitle.dismiss();
+		}
+	};
 
 	private void createPhotoDir() {
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -353,10 +479,10 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	 */
 	private class PostDoctorInfor extends AsyncTask<Void, Void, JSONObject> {
 		private String doctorName;
-		private String doctorAddress;
-		private String doctorHospital;
-		private String doctorDepartment;
-		private String jobTitle;
+//		private String doctorAddress;
+//		private String doctorHospital;
+//		private String doctorDepartment;
+//		private String jobTitle;
 		private String doctorEmil;
 		private String doctorNumber;
 
@@ -369,13 +495,12 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		 * @param doctorEmil
 		 * @param doctorNumber
 		 */
-		public PostDoctorInfor(String doctorName, String doctorAddress, String doctorHospital, String doctorDepartment,
-				String jobTitle, String doctorEmil, String doctorNumber) {
+		public PostDoctorInfor(String doctorName,String doctorEmil,String doctorNumber) {
 			this.doctorName = doctorName;
-			this.doctorAddress = doctorAddress;
-			this.doctorHospital = doctorHospital;
-			this.doctorDepartment = doctorDepartment;
-			this.jobTitle = jobTitle;
+//			this.doctorAddress = doctorAddress;
+//			this.doctorHospital = doctorHospital;
+//			this.doctorDepartment = doctorDepartment;
+//			this.jobTitle = jobTitle;
 			this.doctorEmil = doctorEmil;
 			this.doctorNumber = doctorNumber;
 		}
@@ -385,13 +510,13 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			super.onPreExecute();
 			showPd("正在修改...");
 		}
-
 		@Override
 		protected JSONObject doInBackground(Void... params) {
 			int uid = SharedPrefUtil.getUid(DoctorInfoEditActivity.this);
+			String type ="update";
 			try {
-				return new BusinessHelper().addDoctorInfor(uid, doctorName, doctorAddress, doctorHospital,
-						doctorDepartment, jobTitle, doctorEmil, doctorNumber, avatarFile);
+				return new BusinessHelper().addDoctorInfor(uid,type,doctorName, proviceId, hospitalId,
+						departmentId, positionId, doctorEmil, doctorNumber, avatarFile);
 			} catch (SystemException e) {
 				e.printStackTrace();
 			}
@@ -404,8 +529,9 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			dismissPd();
 			if (result != null) {
 				try {
-					int status = result.getInt("status");
+					int status = result.getInt("code");
 					if (status == Constants.REQUEST_SUCCESS) {
+						showShortToast("资料修改成功");
 					} else {
 						showShortToast("资料设置失败");
 					}
@@ -413,11 +539,12 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 					showShortToast(R.string.json_exception);
 				}
 			} else {
-				showShortToast("服务连接失败");
+	//			showShortToast("服务连接失败");
 			}
 		}
 
 	}
+
 	/**
 	 * 获取医生的相关数据
 	 * 
@@ -481,31 +608,176 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			}
 		}
 	}
-	
-	private class ProviceAdapter extends BaseAdapter{
+	/**
+	 * 获取医生城市的适配器
+	 * 
+	 * */
+	private class ProviceAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
-			return 0;
+			return provinceList.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return null;
+			return provinceList.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			return 0;
+			return position;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			return null;
+			ViewHolder holder = null;
+			DoctorProvinceBean bean = provinceList.get(position);
+			if (convertView == null) {
+				holder = new ViewHolder();
+				convertView = getLayoutInflater().inflate(R.layout.dialog_doctor_item, null);
+				holder.tvProvinceName = (TextView) convertView.findViewById(R.id.tvDoctorInfor);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			holder.tvProvinceName.setText(bean.getProvinceName());
+			return convertView;
 		}
-		
+
+		class ViewHolder {
+			private TextView tvProvinceName;
+		}
+
 	}
-	
-	
-	
+	/**
+	 * 获取医生医院的适配器
+	 * 
+	 * */
+	private class HospitalAdaper extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return hospitalList.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return hospitalList.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ViewHolder holder = null;
+			DoctorHospitalBean bean = hospitalList.get(position);
+			if (convertView == null) {
+				holder = new ViewHolder();
+				convertView = getLayoutInflater().inflate(R.layout.dialog_doctor_item, null);
+				holder.tvHospitalName = (TextView) convertView.findViewById(R.id.tvDoctorInfor);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			holder.tvHospitalName.setText(bean.getHospitalName());
+			return convertView;
+		}
+
+		class ViewHolder {
+			private TextView tvHospitalName;
+		}
+
+	}
+
+	/**
+	 * 获取医生科室的适配器
+	 * 
+	 * */
+	private class DepartmentAdaper extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return departmentList.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return departmentList.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ViewHolder holder = null;
+			DoctorDepartmentBean bean = departmentList.get(position);
+			if (convertView == null) {
+				holder = new ViewHolder();
+				convertView = getLayoutInflater().inflate(R.layout.dialog_doctor_item, null);
+				holder.tvDepartmenName = (TextView) convertView.findViewById(R.id.tvDoctorInfor);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			holder.tvDepartmenName.setText(bean.getDepartmentName());
+			return convertView;
+		}
+
+		class ViewHolder {
+			private TextView tvDepartmenName;
+		}
+
+	}
+
+	/**
+	 * 获取医生职位的适配器
+	 * 
+	 * */
+	private class PositionAdaper extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return positionList.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return positionList.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ViewHolder holder = null;
+			DoctorBelongDepartmentBean bean = positionList.get(position);
+			if (convertView == null) {
+				holder = new ViewHolder();
+				convertView = getLayoutInflater().inflate(R.layout.dialog_doctor_item, null);
+				holder.tvPositionName = (TextView) convertView.findViewById(R.id.tvDoctorInfor);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			holder.tvPositionName.setText(bean.getPositionName());
+			return convertView;
+		}
+
+		class ViewHolder {
+			private TextView tvPositionName;
+		}
+
+	}
+
+
 }

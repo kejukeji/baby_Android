@@ -111,7 +111,7 @@
                         android:text="所在地区：" />
 
                     <TextView
-                        android:id="@+id/etDoctorAddress"
+                        android:id="@+id/tvDoctorAddress"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="30dp"
@@ -147,7 +147,7 @@
                         android:text="所属医院：" />
 
                     <TextView
-                        android:id="@+id/etDoctorHospital"
+                        android:id="@+id/tvDoctorHospital"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="30dp"
@@ -183,7 +183,7 @@
                         android:text="所属科室：" />
 
                     <TextView
-                        android:id="@+id/etDoctorDepartment"
+                        android:id="@+id/tvDoctorDepartment"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="30dp"
@@ -219,7 +219,7 @@
                         android:text="职称：" />
 
                     <TextView
-                        android:id="@+id/etJobTitle "
+                        android:id="@+id/tvJobTitle "
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="30dp"

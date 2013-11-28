@@ -172,25 +172,40 @@ public class BusinessHelper {
 	 * @return
 	 * @throws 
 	 */
-	public JSONObject addDoctorInfor(int uid, String doctorName,String doctorAddress,String doctorHospital,String doctorDepartment,
-			String jobTitle,String doctorEmil,String  doctorNumber,File avatarFile) throws SystemException {
+	public JSONObject addDoctorInfor(int uid,String type, String doctorName,int doctorAddressId,int doctorHospitalId,int doctorDepartmentId,
+			int jobTitleId,String doctorEmil,String  doctorNumber,File avatarFile) throws SystemException {
 		List<PostParameter> params = new ArrayList<PostParameter>();
-		params.add(new PostParameter("doctor_id", uid));
-		params.add(new PostParameter("real_name", doctorName));
-		params.add(new PostParameter("patriarch_tel", doctorAddress));
-		params.add(new PostParameter("belong_hospital", doctorHospital));
-		params.add(new PostParameter("belong_department", doctorDepartment));
-		params.add(new PostParameter("position", jobTitle));
-		params.add(new PostParameter("email", doctorEmil));
-		params.add(new PostParameter("tel", doctorNumber));
+	    params.add(new PostParameter("doctor_id", uid));
+	    params.add(new PostParameter("type", type));
+		if(!doctorName.equals("")){
+			params.add(new PostParameter("real_name", doctorName));
+		}
+		if(doctorAddressId!=0){
+			params.add(new PostParameter("patriarch_tel", doctorAddressId));
+		}
+		if(doctorHospitalId!=0){
+			params.add(new PostParameter("belong_hospital", doctorHospitalId));		
+		}
+		if(doctorDepartmentId!=0){
+			params.add(new PostParameter("belong_department", doctorDepartmentId));
+		}
+		if(jobTitleId!=0){
+			params.add(new PostParameter("position", jobTitleId));
+		}
+		if(!doctorEmil.equals("")){
+			params.add(new PostParameter("email", doctorEmil));
+		}
+		if(!doctorNumber.equals("")){
+			params.add(new PostParameter("tel", doctorNumber));
+		}
 		if(avatarFile!=null){
 			return httpClient.multPartURL("upload_image",
-					BASE_URL + "baby/info",
+					BASE_URL + "doctor/info",
 					params.toArray(new PostParameter[params.size()]), avatarFile)
 					.asJSONObject();
 		}else{
 			return httpClient.post(
-					BASE_URL + "baby/info"+ uid,params.toArray(new PostParameter[params.size()])).asJSONObject();
+					BASE_URL + "doctor/info",params.toArray(new PostParameter[params.size()])).asJSONObject();
 		}
 	}
 
@@ -241,7 +256,7 @@ public class BusinessHelper {
 	 * @throws SystemException
 	 */
 	public JSONObject getDoctorData() throws SystemException{
-		return httpClient.post(BASE_URL + "html/register/data").asJSONObject();
+		return httpClient.get(BASE_URL + "html/register/data").asJSONObject();
 	}
 	
 	
