@@ -2,7 +2,10 @@ package com.keju.baby.activity.doctor;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,10 +23,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +37,10 @@ import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
 import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.bean.DoctorBelongDepartmentBean;
+import com.keju.baby.bean.DoctorDepartmentBean;
+import com.keju.baby.bean.DoctorHospitalBean;
+import com.keju.baby.bean.DoctorProvinceBean;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.ImageUtil;
 import com.keju.baby.util.NetUtil;
@@ -54,6 +64,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private EditText etDoctorName, etDoctorAddress, etDoctorHospital, etDoctorDepartment, etJobTitle, etDoctorEmil,
 			etDoctorNumber;
 
+	private LinearLayout viewDoctorAddress, viewDoctorHospital, viewDoctorDepartment, viewJobTitle;
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
 	private File avatarFile;// 头像文件
 	private File PHOTO_DIR;// 照相机拍照得到的图片的存储位置
@@ -61,6 +72,12 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private Bitmap cameraBitmap;// 头像bitmap
 	private long userId;
 
+	private List<DoctorDepartmentBean> departmentList = new ArrayList<DoctorDepartmentBean>();// 科室list
+	private List<DoctorHospitalBean> hospitalList = new ArrayList<DoctorHospitalBean>();// 医院list
+	private List<DoctorProvinceBean> provinceList = new ArrayList<DoctorProvinceBean>();// 医生选择省得list
+	private List<DoctorBelongDepartmentBean> positionList = new ArrayList<DoctorBelongDepartmentBean>();// 医生的职位list
+
+	private ProviceAdapter adapter;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.doctor_info_edit_activity);
@@ -89,6 +106,15 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		etJobTitle = (EditText) this.findViewById(R.id.etJobTitle);
 		etDoctorEmil = (EditText) this.findViewById(R.id.etDoctorEmil);
 		etDoctorNumber = (EditText) this.findViewById(R.id.etDoctorNumber);
+
+		viewDoctorAddress = (LinearLayout) this.findViewById(R.id.viewDoctorAddress);
+		viewDoctorAddress.setOnClickListener(this);
+		viewDoctorHospital = (LinearLayout) this.findViewById(R.id.viewDoctorHospital);
+		viewDoctorHospital.setOnClickListener(this);
+		viewDoctorDepartment = (LinearLayout) this.findViewById(R.id.viewDoctorDepartment);
+		viewDoctorDepartment.setOnClickListener(this);
+		viewJobTitle = (LinearLayout) this.findViewById(R.id.viewJobTitle);
+		viewJobTitle.setOnClickListener(this);
 	}
 
 	/**
@@ -99,6 +125,9 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		btnLeft.setImageResource(R.drawable.btn_back_selector);
 
 		tvTitle.setText("修改资料");
+		if (NetUtil.checkNet(this)) {
+			new PostDoctorInforTask().execute();
+		}
 	}
 
 	@Override
@@ -201,6 +230,28 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 
 				}
 			});
+			break;
+		case R.id.viewDoctorAddress:
+			LayoutInflater inflater1 = getLayoutInflater();
+			View layout1= inflater1.inflate(R.layout.dialog_doctor_list, null); //
+			ListView addressList =(ListView)layout1.findViewById(R.id.doctorListView);
+			adapter = new ProviceAdapter();
+			addressList.setAdapter(adapter); 
+			final Dialog dialog1 = new Dialog(this, R.style.dialog);
+			dialog1.setContentView(layout1); // 将取得布局文件set进去
+			dialog1.show(); // 显示
+			WindowManager windowManager1 = getWindowManager();
+			Display display1 = windowManager1.getDefaultDisplay();
+			WindowManager.LayoutParams lp1 = dialog1.getWindow().getAttributes();
+			lp1.width = (int) (display1.getWidth()); // 设置宽度
+			lp1.gravity = Gravity.BOTTOM;
+			dialog1.getWindow().setAttributes(lp1);
+			break;
+		case R.id.viewDoctorHospital:
+			break;
+		case R.id.viewDoctorDepartment:
+			break;
+		case R.id.viewJobTitle:
 			break;
 		case R.id.btnRight:
 			String doctorName = etDoctorName.getText().toString().trim();
@@ -367,4 +418,94 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		}
 
 	}
+	/**
+	 * 获取医生的相关数据
+	 * 
+	 * */
+	private class PostDoctorInforTask extends AsyncTask<Void, Void, JSONObject> {
+
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+			try {
+				return new BusinessHelper().getDoctorData();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			if (result != null) {
+				try {
+					int status = result.getInt("code");
+					if (status == Constants.REQUEST_SUCCESS) {
+						// 医生的科室
+						JSONArray departmentArrList = result.getJSONArray("department_list");
+						if (departmentArrList != null) {
+							ArrayList<DoctorDepartmentBean> departmentBean = (ArrayList<DoctorDepartmentBean>) DoctorDepartmentBean
+									.constractList(departmentArrList);
+							departmentList.addAll(departmentBean);
+						}
+						// 医生的医院
+						JSONArray hospitalArrList = result.getJSONArray("hospital_list");
+						if (hospitalArrList != null) {
+							ArrayList<DoctorHospitalBean> hospitalBean = (ArrayList<DoctorHospitalBean>) DoctorHospitalBean
+									.constractList(hospitalArrList);
+							hospitalList.addAll(hospitalBean);
+						}
+						// 医生的职位
+						JSONArray positionArrList = result.getJSONArray("position_list");
+						if (positionArrList != null) {
+							ArrayList<DoctorBelongDepartmentBean> positionBean = (ArrayList<DoctorBelongDepartmentBean>) DoctorBelongDepartmentBean
+									.constractList(positionArrList);
+							positionList.addAll(positionBean);
+						}
+						// 医生的所在省
+						JSONArray provinceArrList = result.getJSONArray("province_list");
+						if (provinceArrList != null) {
+							ArrayList<DoctorProvinceBean> provinceBean = (ArrayList<DoctorProvinceBean>) DoctorProvinceBean
+									.constractList(provinceArrList);
+							provinceList.addAll(provinceBean);
+						}
+					} else {
+						showShortToast(result.getString("message"));
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+			} else {
+				showShortToast("服务器连接失败");
+			}
+		}
+	}
+	
+	private class ProviceAdapter extends BaseAdapter{
+
+		@Override
+		public int getCount() {
+			return 0;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			return null;
+		}
+		
+	}
+	
+	
+	
 }

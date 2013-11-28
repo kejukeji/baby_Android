@@ -234,5 +234,15 @@ public class BusinessHelper {
 		}
 		return response;
 	}
-
+	/**
+	 * 获取医生所在的地区，医院，科室，等信息 
+	 * @param id
+	 * @return
+	 * @throws SystemException
+	 */
+	public JSONObject getDoctorData() throws SystemException{
+		return httpClient.post(BASE_URL + "html/register/data").asJSONObject();
+	}
+	
+	
 }

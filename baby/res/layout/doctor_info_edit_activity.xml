@@ -98,6 +98,7 @@
                     android:background="@drawable/home_line_bit" />
 
                 <LinearLayout
+                    android:id="@+id/viewDoctorAddress"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -109,14 +110,13 @@
                         android:gravity="right"
                         android:text="所在地区：" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etDoctorAddress"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
-                        android:background="@null"
                         android:gravity="center"
                         android:textColor="@color/gold"
                         android:text="上海"
@@ -134,6 +134,7 @@
                     android:background="@drawable/home_line_bit" />
 
                 <LinearLayout
+                    android:id="@+id/viewDoctorHospital"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -145,14 +146,13 @@
                         android:gravity="right"
                         android:text="所属医院：" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etDoctorHospital"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
-                        android:background="@null"
                         android:gravity="center"
                         android:textColor="@color/gold"
                         android:text="第八中医药"
@@ -170,6 +170,7 @@
                     android:background="@drawable/home_line_bit" />
 
                 <LinearLayout
+                    android:id="@+id/viewDoctorDepartment"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -181,14 +182,13 @@
                         android:gravity="right"
                         android:text="所属科室：" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etDoctorDepartment"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
-                        android:background="@null"
                         android:gravity="center"
                         android:textColor="@color/gold"
                         android:text="儿科"
@@ -206,6 +206,7 @@
                     android:background="@drawable/home_line_bit" />
 
                 <LinearLayout
+                    android:id="@+id/viewJobTitle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -217,14 +218,13 @@
                         android:gravity="right"
                         android:text="职称：" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etJobTitle "
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
-                        android:background="@null"
                         android:gravity="center"
                         android:textColor="@color/gold"
                         android:text="主任医生"
