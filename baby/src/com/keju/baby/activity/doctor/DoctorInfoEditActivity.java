@@ -13,6 +13,7 @@ import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,9 +36,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.keju.baby.AsyncImageLoader;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
+import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.DoctorBelongDepartmentBean;
 import com.keju.baby.bean.DoctorDepartmentBean;
@@ -87,11 +90,24 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private int hospitalId;
 	private int departmentId;
 	private int positionId;
+	
+	private String doctorName,doctorAddress,doctorHospital,
+    doctorDepartment,doctorJop,doctorEmail,doctorPhone,avatarUrl;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.doctor_info_edit_activity);
-
+         
+		if(getIntent()!=null){
+		 doctorName =getIntent().getExtras().getString("DCNAME");
+		 doctorAddress =getIntent().getExtras().getString("DCADDRESS"); 
+		 doctorHospital =getIntent().getExtras().getString("DCHOSPITAL"); 
+		 doctorDepartment =getIntent().getExtras().getString("DCDEPARTMENT"); 
+		 doctorJop =getIntent().getExtras().getString("DCJOP"); 
+		 doctorEmail =getIntent().getExtras().getString("DCEMAIL");
+		 doctorPhone =getIntent().getExtras().getString("DCPHONE"); 
+		 avatarUrl =getIntent().getExtras().getString("DCURL"); 
+		}
 		findView();
 		fillData();
 		createPhotoDir();
@@ -116,7 +132,32 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		tvJobTitle = (TextView) this.findViewById(R.id.tvJobTitle);
 		etDoctorEmil = (EditText) this.findViewById(R.id.etDoctorEmil);
 		etDoctorNumber = (EditText) this.findViewById(R.id.etDoctorNumber);
-
+		
+        etDoctorName.setText(doctorName);
+        tvDoctorAddress.setText(doctorAddress);
+        tvDoctorHospital.setText(doctorHospital);
+        tvDoctorDepartment.setText(doctorDepartment);
+        tvJobTitle.setText(doctorJop);
+        etDoctorEmil.setText(doctorEmail);
+        etDoctorNumber.setText(doctorPhone);
+        Drawable cacheDrawable = AsyncImageLoader.getInstance().loadAsynLocalDrawable(avatarUrl, new ImageCallback() {
+			
+			@Override
+			public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+				if(imageDrawable != null){
+					Bitmap bitmap = ImageUtil.getRoundCornerBitmapWithPic(imageDrawable, 0.5f);
+					ivDoctorPhone.setImageBitmap(bitmap);
+				}else{
+					ivDoctorPhone.setImageResource(R.drawable.item_lion);
+				}
+			}
+		});
+		if(cacheDrawable != null){
+			Bitmap bitmap = ImageUtil.getRoundCornerBitmapWithPic(cacheDrawable, 0.5f);
+			ivDoctorPhone.setImageBitmap(bitmap);
+		}else{
+			ivDoctorPhone.setImageResource(R.drawable.item_lion);
+		}
 		viewDoctorAddress = (LinearLayout) this.findViewById(R.id.viewDoctorAddress);
 		viewDoctorAddress.setOnClickListener(this);
 		viewDoctorHospital = (LinearLayout) this.findViewById(R.id.viewDoctorHospital);
@@ -313,15 +354,10 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			Display display4 = windowManager4.getDefaultDisplay();
 			WindowManager.LayoutParams lp4 = dialogJobTitle.getWindow().getAttributes();
 			lp4.width = (int) (display4.getWidth() - 20); // 设置宽度
-			// lp1.gravity = Gravity.BOTTOM;
 			dialogJobTitle.getWindow().setAttributes(lp4);
 			break;
 		case R.id.btnRight:
 			String doctorName = etDoctorName.getText().toString().trim();
-//			String doctorAddress = tvDoctorAddress.getText().toString().trim();
-//			String doctorHospital = tvDoctorHospital.getText().toString().trim();
-//			String doctorDepartment = tvDoctorDepartment.getText().toString().trim();
-//			String jobTitle = tvJobTitle.getText().toString().trim();
 			String doctorEmil = etDoctorEmil.getText().toString().trim();
 			String doctorNumber = etDoctorNumber.getText().toString().trim();
 			if (NetUtil.checkNet(this)) {
@@ -479,10 +515,6 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	 */
 	private class PostDoctorInfor extends AsyncTask<Void, Void, JSONObject> {
 		private String doctorName;
-//		private String doctorAddress;
-//		private String doctorHospital;
-//		private String doctorDepartment;
-//		private String jobTitle;
 		private String doctorEmil;
 		private String doctorNumber;
 
@@ -497,10 +529,6 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		 */
 		public PostDoctorInfor(String doctorName,String doctorEmil,String doctorNumber) {
 			this.doctorName = doctorName;
-//			this.doctorAddress = doctorAddress;
-//			this.doctorHospital = doctorHospital;
-//			this.doctorDepartment = doctorDepartment;
-//			this.jobTitle = jobTitle;
 			this.doctorEmil = doctorEmil;
 			this.doctorNumber = doctorNumber;
 		}

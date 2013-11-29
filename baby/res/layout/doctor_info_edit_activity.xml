@@ -32,7 +32,8 @@
                 <ImageView
                     android:id="@+id/ivDoctorPhone"
                     android:layout_width="70dp"
-                    android:layout_height="70dp"/>
+                    android:layout_height="70dp"
+                    android:src="@drawable/item_lion"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -81,7 +82,6 @@
                         android:layout_marginRight="6dp"
                         android:layout_weight="2"
                         android:background="@null"
-                        android:text="Doctor"
                         android:gravity="center"
                         android:textColor="@color/gold"
                         android:textSize="@dimen/BasicTextSize" />
@@ -119,7 +119,6 @@
                         android:layout_weight="2"
                         android:gravity="center"
                         android:textColor="@color/gold"
-                        android:text="上海"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -155,7 +154,6 @@
                         android:layout_weight="2"
                         android:gravity="center"
                         android:textColor="@color/gold"
-                        android:text="第八中医药"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -191,7 +189,6 @@
                         android:layout_weight="2"
                         android:gravity="center"
                         android:textColor="@color/gold"
-                        android:text="儿科"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -227,7 +224,6 @@
                         android:layout_weight="2"
                         android:gravity="center"
                         android:textColor="@color/gold"
-                        android:text="主任医生"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -263,7 +259,6 @@
                         android:background="@null"
                         android:gravity="center"
                         android:textColor="@color/gold"
-                        android:text="1123@qq.com"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView
@@ -299,7 +294,6 @@
                         android:background="@null"
                         android:gravity="center"
                         android:textColor="@color/gold"
-                        android:text="12309883405"
                         android:textSize="@dimen/BasicTextSize" />
 
                     <ImageView

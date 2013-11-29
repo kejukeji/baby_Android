@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,9 +28,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.keju.baby.AsyncImageLoader;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
+import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.ImageUtil;
@@ -62,11 +65,27 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 	static final int DATE_DIALOG_ID = 1;
 	private Bitmap cameraBitmap;// 头像bitmap
 	private long userId;
+	
+	private String babyName,babySex,babyPreproductions,babyDeliveryW,babyComplication,babyPhone;
+    private int babyHeight,babyWeight,babyHeadCircumference,babyApgar;
+    private  String photoUrl; //婴儿图片的url
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.baby_info_edit_activity);
-
+       if(getIntent()!=null){
+    	   babyName = getIntent().getExtras().getString("BYNAME");
+    	   babySex = getIntent().getExtras().getString("BYSEX");
+    	   babyPreproductions = getIntent().getExtras().getString("BYPER");
+    	   babyDeliveryW = getIntent().getExtras().getString("BYDWAY");
+    	   babyHeight = getIntent().getExtras().getInt("BYHEI");
+    	   babyWeight = getIntent().getExtras().getInt("BYWEI");
+    	   babyHeadCircumference = getIntent().getExtras().getInt("BYHCIR");
+    	   babyApgar = getIntent().getExtras().getInt("BYAPGER");
+    	   babyPhone = getIntent().getExtras().getString("BYPHONE");
+    	   photoUrl = getIntent().getExtras().getString("ByURL");
+    	   babyComplication = getIntent().getExtras().getString("BYCOM");
+       }
 		findView();
 		fillData();
 		createPhotoDir();
@@ -94,7 +113,39 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 		etChildbirthWay = (EditText) findViewById(R.id.etChildbirthWay);
 		etComplication = (EditText) findViewById(R.id.etComplication);
 		etGrade = (EditText) findViewById(R.id.etGrade);
-
+		
+		etBabyName.setText(babyName);
+		etParentNumber.setText(babyPhone);
+		etBabySix.setText(babySex);
+		etBabyProduction.setText(babyPreproductions);
+		etBabyWeight.setText(babyWeight+"kg");
+		etBabyHeight.setText(babyHeight+"cm");
+		etBabyHeadCircumference.setText(babyHeadCircumference+"cm");
+		etChildbirthWay.setText(babyDeliveryW);
+		etGrade.setText(babyApgar+"");
+		etComplication.setText(babyComplication);
+		
+		ivUserPhone.setTag(photoUrl);
+			Drawable cacheDrawble = AsyncImageLoader.getInstance().loadDrawable(photoUrl,
+					new ImageCallback() {
+						@Override
+						public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+							ImageView image = (ImageView) ivUserPhone.findViewWithTag(imageUrl);
+							if (image != null) {
+								if (imageDrawable != null) {
+									image.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(imageDrawable, 0.5f));
+								} else {
+									image.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(getResources().getDrawable(R.drawable.item_lion), 0.5f));
+								}
+							}
+						}
+					});
+			if (cacheDrawble != null) {
+				ivUserPhone.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(cacheDrawble, 0.5f));
+			} else {
+				ivUserPhone.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(getResources().getDrawable(R.drawable.item_lion), 0.5f));
+			}
+		
 	}
 
 	/**
@@ -134,6 +185,8 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 					}
 					if (avatarFile != null) {
 						ivUserPhone.setImageBitmap(cameraBitmap);
+					}else{
+						ivUserPhone.setBackgroundResource(R.drawable.item_lion);
 					}
 					if (mCurrentPhotoFile != null && mCurrentPhotoFile.exists())
 						mCurrentPhotoFile.delete();

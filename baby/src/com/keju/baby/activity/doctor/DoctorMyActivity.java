@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.MyCollectBean;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
+import com.keju.baby.util.ImageUtil;
 import com.keju.baby.util.NetUtil;
 import com.keju.baby.util.SharedPrefUtil;
 
@@ -44,12 +46,15 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 	private RadioGroup radio_group;
 	private View viewInfo;
 	private ImageView ivAvatar;
-	private TextView tvName,tvId,tvRealName,tvArea,tvHospital,tvDepartment,tvJob,tvEmail,tvPhone;
-	
+	private TextView tvName, tvId, tvRealName, tvArea, tvHospital, tvDepartment, tvJob, tvEmail, tvPhone;
+
 	private ListView listView;
 	private Adapter adapter;
 	private List<MyCollectBean> list;
 	private long exitTime = 0;
+
+	private String doctorName, doctorAddress, doctorHospital, doctorDepartment, doctorJop, doctorEmail, doctorPhone,
+			avatarUrl;;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,7 +70,7 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 
 		radio_group = (RadioGroup) findViewById(R.id.radio_group);
 		viewInfo = findViewById(R.id.viewInfo);
-		
+
 		ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
 		ivAvatar.setOnClickListener(this);
 		tvId = (TextView) findViewById(R.id.tvId);
@@ -77,7 +82,7 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 		tvJob = (TextView) findViewById(R.id.tvJob);
 		tvEmail = (TextView) findViewById(R.id.tvEmail);
 		tvPhone = (TextView) findViewById(R.id.tvPhone);
-		
+
 		listView = (ListView) findViewById(R.id.listView);
 	}
 
@@ -94,9 +99,9 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 		adapter = new Adapter();
 
 		listView.setAdapter(adapter);
-		if(NetUtil.checkNet(this)){
+		if (NetUtil.checkNet(this)) {
 			new GetDoctorTask().execute();
-		}else{
+		} else {
 			showShortToast(R.string.NoSignalException);
 		}
 	}
@@ -177,19 +182,30 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.ivAvatar:
-			openActivity(DoctorInfoEditActivity.class);
+			Bundle b = new Bundle();
+			b.putString("DCNAME", doctorName);
+			b.putString("DCADDRESS", doctorAddress);
+			b.putString("DCHOSPITAL", doctorHospital);
+			b.putString("DCDEPARTMENT", doctorDepartment);
+			b.putString("DCJOP", doctorJop);
+			b.putString("DCEMAIL", doctorEmail);
+			b.putString("DCPHONE", doctorPhone);
+			b.putString("DCURL", avatarUrl);
+			openActivity(DoctorInfoEditActivity.class, b);
 			break;
 		default:
 			break;
 		}
 
 	}
+
 	/**
 	 * 获取医生详情
+	 * 
 	 * @author Zhoujun
-	 *
+	 * 
 	 */
-	private class GetDoctorTask extends AsyncTask<Void, Void, JSONObject>{
+	private class GetDoctorTask extends AsyncTask<Void, Void, JSONObject> {
 
 		@Override
 		protected JSONObject doInBackground(Void... params) {
@@ -204,47 +220,58 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			if(result != null){
+			if (result != null) {
 				try {
 					int status = result.getInt("code");
-					if(status == Constants.REQUEST_SUCCESS){
+					if (status == Constants.REQUEST_SUCCESS) {
 						JSONObject obj = result.getJSONArray("doctor_list").getJSONObject(0);
 						tvId.setText(obj.getInt("id") + "");
+
 						tvName.setText(obj.getString("doctor_name"));
-						tvRealName.setText(obj.getString("real_name"));
-						tvArea.setText(obj.getString("province"));
-						tvHospital.setText(obj.getString("hospital"));
-						tvDepartment.setText(obj.getString("department"));
-						tvJob.setText(obj.getString("positions"));
-						tvEmail.setText(obj.getString("email"));
-						tvPhone.setText(obj.getString("tel"));
-						String avatarUrl = BusinessHelper.PIC_URL + obj.getString("picture_path");
-						Drawable cacheDrawable = AsyncImageLoader.getInstance().loadAsynLocalDrawable(avatarUrl, new ImageCallback() {
-							
-							@Override
-							public void imageLoaded(Drawable imageDrawable, String imageUrl) {
-								if(imageDrawable != null){
-									ivAvatar.setImageDrawable(imageDrawable);
-								}else{
-//									ivAvatar.setImageResource(resId)
-								}
-							}
-						});
-						if(cacheDrawable != null){
-							ivAvatar.setImageDrawable(cacheDrawable);
-						}else{
-//							ivAvatar.setImageResource(resId)
+						doctorName = obj.getString("real_name");
+						tvRealName.setText(doctorName);
+						doctorAddress = obj.getString("province");
+						tvArea.setText(doctorAddress);
+						doctorHospital = obj.getString("hospital");
+						tvHospital.setText(doctorHospital);
+						doctorDepartment = obj.getString("department");
+						tvDepartment.setText(doctorDepartment);
+						doctorJop = obj.getString("positions");
+						tvJob.setText(doctorJop);
+						doctorEmail = obj.getString("email");
+						tvEmail.setText(doctorEmail);
+						doctorPhone = obj.getString("tel");
+						tvPhone.setText(doctorPhone);
+						avatarUrl = BusinessHelper.PIC_URL + obj.getString("picture_path");
+						Drawable cacheDrawable = AsyncImageLoader.getInstance().loadAsynLocalDrawable(avatarUrl,
+								new ImageCallback() {
+
+									@Override
+									public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+										if (imageDrawable != null) {
+											Bitmap bitmap = ImageUtil.getRoundCornerBitmapWithPic(imageDrawable, 0.5f);
+											ivAvatar.setImageBitmap(bitmap);
+										} else {
+											ivAvatar.setImageResource(R.drawable.item_lion);
+										}
+									}
+								});
+						if (cacheDrawable != null) {
+							Bitmap bitmap = ImageUtil.getRoundCornerBitmapWithPic(cacheDrawable, 0.5f);
+							ivAvatar.setImageBitmap(bitmap);
+						} else {
+							ivAvatar.setImageResource(R.drawable.item_lion);
 						}
-					}else{
+					} else {
 						showShortToast(result.getString("message"));
 					}
 				} catch (JSONException e) {
 					showShortToast(R.string.json_exception);
 				}
-			}else{
+			} else {
 				showShortToast(R.string.connect_server_exception);
 			}
 		}
-		
+
 	}
 }

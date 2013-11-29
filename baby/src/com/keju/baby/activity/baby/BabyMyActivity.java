@@ -38,7 +38,10 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	private ImageView ivAvatar;
 	private TextView tvId, tvRealName, tvGendar, tvPreproductions, tvHeight, tvWeight, tvHeadCircumference,
 			tvDeliveryWay,tvComplication,tvApgar;
-
+	
+	private String babyName,babySex,babyPreproductions,babyDeliveryW,babyComplication,babyPhone;
+    private int babyHeight,babyWeight,babyHeadCircumference,babyApgar;
+    private  String photoUrl; //婴儿图片的url
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.baby_my_activity);
@@ -103,7 +106,19 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.ivAvatar:
-			openActivity(BabyInfoEditActivity.class);
+			Bundle b = new Bundle();
+			b.putString("BYNAME",babyName );
+			b.putString("BYSEX",babySex);
+			b.putString("BYPER",babyPreproductions);
+			b.putString("BYDWAY",babyDeliveryW);
+			b.putInt("BYHEI",babyHeight);
+			b.putInt("BYWEI",babyWeight);
+			b.putInt("BYHCIR",babyHeadCircumference);
+			b.putInt("BYAPGER",babyApgar);
+			b.putString("BYCOM", babyComplication);
+			b.putString("BYPHONE", babyPhone);
+			b.putString("ByURL",photoUrl);
+			openActivity(BabyInfoEditActivity.class,b);
 			break;
 		default:
 			break;
@@ -144,19 +159,26 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 					JSONArray babyList = result.getJSONArray("baby_list");
 					JSONObject babyBean = babyList.optJSONObject(0);
 					tvId.setText(babyBean.getInt("id")+"");
-				    tvRealName.setText(babyBean.getString("baby_name"));
-				    tvGendar.setText(babyBean.getString("gender"));
-				    
-				    tvPreproductions.setText(babyBean.getString("due_date"));
-				    tvHeight.setText(babyBean.getInt("born_height")+"cm");
-				    tvWeight.setText(babyBean.getInt("born_weight")+"kg");
-				    tvHeadCircumference.setText(babyBean.getInt("born_head")+"cm");
-				    
-				    tvDeliveryWay.setText(babyBean.getString("childbirth"));
-				    tvComplication.setText(babyBean.getString("complication"));
-				    tvApgar.setText(babyBean.getInt("apgar_score")+"");
-				    
-				    String photoUrl = BusinessHelper.PIC_URL +babyBean.getString("picture_path");
+					babyPhone = babyBean.getString("patriarch_tel");
+					babyName = babyBean.getString("baby_name");
+				    tvRealName.setText(babyName);
+				    babySex = babyBean.getString("gender"); 
+				    tvGendar.setText(babySex);
+				    babyPreproductions =babyBean.getString("due_date");
+				    tvPreproductions.setText(babyPreproductions);
+				    babyHeight = babyBean.getInt("born_height");
+				    tvHeight.setText(babyHeight+"cm");
+				    babyWeight = babyBean.getInt("born_weight");
+				    tvWeight.setText(babyWeight+"kg");
+				    babyHeadCircumference = babyBean.getInt("born_head");
+				    tvHeadCircumference.setText(babyHeadCircumference+"cm");
+				    babyDeliveryW = babyBean.getString("childbirth");
+				    tvDeliveryWay.setText(babyDeliveryW);
+				    babyComplication = babyBean.getString("complication");
+				    tvComplication.setText(babyComplication);
+				    babyApgar = babyBean.getInt("apgar_score");
+				    tvApgar.setText(babyApgar+"");
+				     photoUrl = BusinessHelper.PIC_URL +babyBean.getString("picture_path");
 				    ivAvatar.setTag(photoUrl);
 					Drawable cacheDrawble = AsyncImageLoader.getInstance().loadDrawable(photoUrl,
 							new ImageCallback() {
