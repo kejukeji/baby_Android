@@ -32,11 +32,12 @@ public class BabyLoginActivity extends BaseWebViewActivity {
 	private void fillData() {
 		loadUrl(Constants.URL_BABY_LOGIN);
 		webView.addJavascriptInterface(new Object() {
-			public void webviewLogin(int uid,int isRemember) {
+			public void webviewLogin(int uid,int isRemember,String name) {
 				if(uid <= 0){
 					return;
 				}
 				SharedPrefUtil.setUid(BabyLoginActivity.this, uid);
+				SharedPrefUtil.setName(BabyLoginActivity.this, name);
 				if(isRemember == 1){
 					SharedPrefUtil.setIsLogin(BabyLoginActivity.this);
 					SharedPrefUtil.setUserType(BabyLoginActivity.this,Constants.USER_MOTHER);

@@ -10,6 +10,7 @@ import com.keju.baby.R;
 import com.keju.baby.activity.NewAddBabyRecordActivity;
 import com.keju.baby.activity.base.BaseWebViewActivity;
 import com.keju.baby.util.AndroidUtil;
+import com.keju.baby.util.SharedPrefUtil;
 
 public class BabyHomeActivity extends BaseWebViewActivity implements OnClickListener {
 
@@ -22,6 +23,7 @@ public class BabyHomeActivity extends BaseWebViewActivity implements OnClickList
 
 	private void findView() {
 		btnLeft.setVisibility(View.INVISIBLE);
+//		btnLeft.setImageResource(R.drawable.btn_back_selector);
 		btnRight.setOnClickListener(this);
 		tvTitle.setVisibility(View.VISIBLE);
 		tvTitle.setText("");
@@ -29,6 +31,7 @@ public class BabyHomeActivity extends BaseWebViewActivity implements OnClickList
 
 	private void fillData() {
 		loadUrl(Constants.URL_VISIT_RECORD);
+		tvTitle.setText(SharedPrefUtil.getName(this));
 	}
 
 	@Override

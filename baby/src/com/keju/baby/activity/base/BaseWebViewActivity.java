@@ -37,7 +37,7 @@ public class BaseWebViewActivity extends BaseActivity {
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setSavePassword(false);
 		webSettings.setSaveFormData(false);
-		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+//		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
 		webView.requestFocus();// 使WebView内的输入框等获得焦点
 		webView.setWebViewClient(new WebViewClient() {
 			// 点击网页里面的链接还是在当前的webView内部跳转，不跳转外部浏览器
@@ -73,7 +73,7 @@ public class BaseWebViewActivity extends BaseActivity {
 		webView.loadUrl(Constants.URL_BASE_HTML + url);
 	}
 	private static final String btnLeftInVisibleUrls[] = {Constants.URL_FITMENT_LIST,Constants.URL_MEETING_NOTIFY_LIST,Constants.URL_DOCTOR_LOGIN,Constants.URL_BABY_LOGIN };
-	private static final String btnLeftVisibleUrls[] = {Constants.URL_FITMENT_DETAIL,Constants.URL_MEETING_NOTIFY_DETAIL,Constants.URL_REGISTER,Constants.URL_ADD_FOLLOW_UP };
+	private static final String btnLeftVisibleUrls[] = {Constants.URL_FITMENT_DETAIL,Constants.URL_MEETING_NOTIFY_DETAIL,Constants.URL_REGISTER,Constants.URL_ADD_FOLLOW_UP,Constants.URL_NEED };
 	private static final String babyDetailUrls[] = {Constants.URL_VISIT_RECORD,Constants.URL_GROW_LINE,Constants.URL_BABY_DETAIL};
 	private static final String btnRightVisibleUrls[] = {Constants.URL_VISIT_RECORD,Constants.URL_GROW_LINE,Constants.URL_BABY_DETAIL};
 	/**

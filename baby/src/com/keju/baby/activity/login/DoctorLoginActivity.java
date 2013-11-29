@@ -33,11 +33,12 @@ public class DoctorLoginActivity extends BaseWebViewActivity {
 	private void fillData() {
 		loadUrl(Constants.URL_DOCTOR_LOGIN);
 		webView.addJavascriptInterface(new Object() {
-			public void webviewLogin(int uid,int isRemember) {
+			public void webviewLogin(int uid,int isRemember,String name) {
 				if(uid <= 0){
 					return;
 				}
 				SharedPrefUtil.setUid(DoctorLoginActivity.this, uid);
+				SharedPrefUtil.setName(DoctorLoginActivity.this, name);
 				if(isRemember == 1){
 					SharedPrefUtil.setIsLogin(DoctorLoginActivity.this);
 					SharedPrefUtil.setUserType(DoctorLoginActivity.this,Constants.USER_DOCTOR);

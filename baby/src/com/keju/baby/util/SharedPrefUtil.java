@@ -26,6 +26,7 @@ public class SharedPrefUtil {
 	public static final String QQ_ACCESS_CURR_TIME = "qq_sccess_curr_time";//新浪微博授权时间
 	
 	public static final String UID = "uid";//用户id；
+	public static final String NAME = "name";//用户名字；
 	public static final String IS_LOGIN = "is_login";//用户是否登录；
 	public static final String USER_TYPE = "user_type";//登录的用户；
 	public static final String SEARCH_HISTORY = "search_history";//搜索历史
@@ -220,6 +221,26 @@ public class SharedPrefUtil {
 		e.commit();
 	}
 	/**
+	 * 获取用户名
+	 * @param context
+	 * @return
+	 */
+	public static String getName(Context context){
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		return sp.getString(NAME, "");
+	}
+	/**
+	 * 保存用户的名字
+	 * @param context
+	 * @param uid
+	 */
+	public static void setName(Context context, String name){
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		Editor e = sp.edit();
+		e.putString(NAME, name);
+		e.commit();
+	}
+	/**
 	 * 获取用户类型
 	 * @param context
 	 * @return
@@ -246,7 +267,7 @@ public class SharedPrefUtil {
 	public static void clearUserinfo(Context context){
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 		Editor e = sp.edit();
-		e.remove(UID).remove(USER_TYPE).remove(IS_LOGIN);
+		e.remove(UID).remove(USER_TYPE).remove(IS_LOGIN).remove(NAME);
 		e.commit();
 	}
 }
