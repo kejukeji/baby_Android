@@ -429,7 +429,7 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 			int uid = SharedPrefUtil.getUid(BabyInfoEditActivity.this);
 			String type ="update";
 			try {
-				return new BusinessHelper().addBabyInfor(1,type,babyName, parentNumber, babySex, babyProduction,
+				return new BusinessHelper().addBabyInfor(uid,type,babyName, parentNumber, babySex, babyProduction,
 						babyWeight, babyHeight, babyHeadCircumference, childbirthWay, complication, grade, avatarFile);
 			} catch (SystemException e) {
 				e.printStackTrace();

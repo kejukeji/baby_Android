@@ -1,5 +1,6 @@
 package com.keju.baby.activity.baby;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -24,28 +25,43 @@ public class BabyHomeActivity extends BaseWebViewActivity implements OnClickList
 	private void findView() {
 		btnLeft.setVisibility(View.INVISIBLE);
 //		btnLeft.setImageResource(R.drawable.btn_back_selector);
+		btnRight.setImageResource(R.drawable.btn_add_record_selector);
 		btnRight.setOnClickListener(this);
 		tvTitle.setVisibility(View.VISIBLE);
 		tvTitle.setText("");
 	}
 
 	private void fillData() {
-		loadUrl(Constants.URL_VISIT_RECORD);
+		loadUrl(Constants.URL_VISIT_RECORD + SharedPrefUtil.getUid(this) + "?entrance_type=baby");
 		tvTitle.setText(SharedPrefUtil.getName(this));
 	}
-
+	@Override
+	protected void onResume() {
+		super.onResume();
+		webView.reload();
+	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnRight:
-			openActivity(NewAddBabyRecordActivity.class);
+			Bundle b = new Bundle();
+			b.putInt(Constants.EXTRA_DATA, SharedPrefUtil.getUid(this));
+			Intent intent = new Intent(this, NewAddBabyRecordActivity.class);
+			intent.putExtras(b);
+			startActivityForResult(intent, Constants.REQUEST_NEW_ADD_VISIT_CODE);
 			break;
 
 		default:
 			break;
 		}
 	}
-
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK && requestCode == Constants.REQUEST_NEW_ADD_VISIT_CODE){
+			webView.reload();
+		}
+	}
 	private long exitTime;
 
 	@Override

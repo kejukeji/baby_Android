@@ -1,5 +1,7 @@
 package com.keju.baby.activity.base;
 
+import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.keju.baby.Constants;
 import com.keju.baby.R;
+import com.keju.baby.activity.baby.BabyMainActivity;
 
 /**
  * html页面
@@ -37,7 +40,7 @@ public class BaseWebViewActivity extends BaseActivity {
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setSavePassword(false);
 		webSettings.setSaveFormData(false);
-//		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
 		webView.requestFocus();// 使WebView内的输入框等获得焦点
 		webView.setWebViewClient(new WebViewClient() {
 			// 点击网页里面的链接还是在当前的webView内部跳转，不跳转外部浏览器
@@ -57,7 +60,17 @@ public class BaseWebViewActivity extends BaseActivity {
 			public void onLoadResource(WebView view, String url) {
 
 			};
-
+			@Override
+			public void onPageStarted(WebView view, String url, Bitmap favicon) {
+				super.onPageStarted(view, url, favicon);
+				if(url.contains(Constants.URL_NEED)){
+					BabyMainActivity.setTabVisible(false);
+					setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+				}else{
+					BabyMainActivity.setTabVisible(true);
+					setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+				}
+			}
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
@@ -127,5 +140,11 @@ public class BaseWebViewActivity extends BaseActivity {
 			}
 		}
 		return isChangeTitle;
+	}
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		webView.clearCache(true);
+		webView.clearHistory();
 	}
 }

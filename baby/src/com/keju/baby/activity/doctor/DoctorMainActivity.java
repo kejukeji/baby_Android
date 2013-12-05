@@ -67,7 +67,7 @@ public class DoctorMainActivity extends TabActivity implements OnCheckedChangeLi
 	private void fillData() {
 		
 		TabSpec ts1 = mth.newTabSpec(ACCOUNT_TAB_ID).setIndicator(ACCOUNT_TAB_ID);
-		ts1.setContent(new Intent(this, DoctorMyActivity.class));
+		ts1.setContent(new Intent(this, DoctorInfoEditActivity.class));
 		mth.addTab(ts1);
 		
 		TabSpec ts2 = mth.newTabSpec(HOME_TAB_ID).setIndicator(HOME_TAB_ID);

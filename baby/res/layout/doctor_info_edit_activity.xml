@@ -6,7 +6,40 @@
 
     <include layout="@layout/common_title_bar" />
 
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_second_title_repeat"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:button="@drawable/round_check_selector"
+            android:checked="true"
+            android:gravity="center"
+            android:text="我的资料"
+            android:textColor="@color/gold"
+            android:textSize="@dimen/BasicTextSize" />
+
+        <RadioButton
+            android:id="@+id/rb_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/round_check_selector"
+            android:gravity="center"
+            android:text="我的收藏"
+            android:textColor="@color/gold"
+            android:textSize="@dimen/BasicTextSize" />
+    </RadioGroup>
+
     <ScrollView
+        android:id="@+id/viewInfo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none" >
@@ -14,50 +47,49 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/viewDoctorPhone"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/bg_setting"
-                android:gravity="center_vertical"
+                android:background="@drawable/bg_doctor_avatar"
                 android:orientation="horizontal"
-                android:padding="5dp" >
+                android:padding="8dp" >
 
-                <ImageView
-                    android:id="@+id/ivDoctorPhone"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/item_lion"/>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:id="@+id/ivAvatar"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:clickable="true"
+                        android:padding="6dp"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:src="@drawable/ic_edit" />
+                </FrameLayout>
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="60dp"
-                    android:layout_weight="1"
-                    android:text="@string/doctor_my_change_inform_picture"
-                    android:textColor="@color/gold"
-                    android:textSize="@dimen/LargeTextSize" />
-
-                <ImageView
+                    android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_grey_right_arrow" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/gold"
+                    android:textSize="@dimen/LargeTextSize" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="15dp"
                 android:background="@drawable/bg_setting"
                 android:orientation="vertical" >
 
@@ -66,25 +98,42 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                       android:padding="15dp"
-                     >
+                    android:padding="15dp" >
 
                     <TextView
-                      style="@style/info_label_style"
-                           android:gravity="right"
+                        style="@style/info_label_style"
+                        android:gravity="right"
+                        android:text="医生ID：" />
+
+                    <TextView
+                        android:id="@+id/tvId"
+                        style="@style/info_text_style"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_grey_right_arrow"
+                        android:visibility="invisible" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/home_line_bit" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="15dp" >
+
+                    <TextView
+                        style="@style/info_label_style"
+                        android:gravity="right"
                         android:text="医生名：" />
 
                     <EditText
                         android:id="@+id/etDoctorName"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="6dp"
-                        android:layout_weight="2"
-                        android:background="@null"
-                        android:gravity="center"
-                        android:textColor="@color/gold"
-                        android:textSize="@dimen/BasicTextSize" />
+                        style="@style/info_text_style" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -106,20 +155,13 @@
                     android:padding="15dp" >
 
                     <TextView
-                       style="@style/info_label_style"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="所在地区：" />
 
                     <TextView
                         android:id="@+id/tvDoctorAddress"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="6dp"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:textColor="@color/gold"
-                        android:textSize="@dimen/BasicTextSize" />
+                        style="@style/info_text_style" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -147,14 +189,7 @@
 
                     <TextView
                         android:id="@+id/tvDoctorHospital"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="6dp"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:textColor="@color/gold"
-                        android:textSize="@dimen/BasicTextSize" />
+                        style="@style/info_text_style" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -176,20 +211,13 @@
                     android:padding="15dp" >
 
                     <TextView
-                       style="@style/info_label_style"
+                        style="@style/info_label_style"
                         android:gravity="right"
                         android:text="所属科室：" />
 
                     <TextView
                         android:id="@+id/tvDoctorDepartment"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="6dp"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:textColor="@color/gold"
-                        android:textSize="@dimen/BasicTextSize" />
+                        style="@style/info_text_style" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -217,14 +245,7 @@
 
                     <TextView
                         android:id="@+id/tvJobTitle "
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="6dp"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:textColor="@color/gold"
-                        android:textSize="@dimen/BasicTextSize" />
+                        style="@style/info_text_style" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -251,15 +272,7 @@
 
                     <EditText
                         android:id="@+id/etDoctorEmil"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="6dp"
-                        android:layout_weight="2"
-                        android:background="@null"
-                        android:gravity="center"
-                        android:textColor="@color/gold"
-                        android:textSize="@dimen/BasicTextSize" />
+                        style="@style/info_text_style" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -286,24 +299,20 @@
 
                     <EditText
                         android:id="@+id/etDoctorNumber"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="6dp"
-                        android:layout_weight="2"
-                        android:background="@null"
-                        android:gravity="center"
-                        android:textColor="@color/gold"
-                        android:textSize="@dimen/BasicTextSize" />
+                        style="@style/info_text_style" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_grey_right_arrow" />
                 </LinearLayout>
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
+	<ListView
+        android:id="@+id/listView"
+        style="@style/listviewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 </LinearLayout>

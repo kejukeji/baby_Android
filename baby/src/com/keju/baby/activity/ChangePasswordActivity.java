@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.keju.baby.Constants;
+import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseWebViewActivity;
 
 /**
@@ -22,9 +23,23 @@ public class ChangePasswordActivity extends BaseWebViewActivity {
 	 */
 	private void fillData() {
 
-		btnLeft.setVisibility(View.GONE);
+		btnLeft.setImageResource(R.drawable.btn_back_selector);
+		btnLeft.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		btnRight.setVisibility(View.GONE);
 		tvTitle.setText("修改密码");
 		loadUrl(Constants.URL_CHANGE_PASSWORD);
+		webView.addJavascriptInterface(new Object() {
+			public void webviewPassword(int code) {
+				if(code == 200){
+					finish();
+				}
+			}
+		}, "app");
 	}
 }

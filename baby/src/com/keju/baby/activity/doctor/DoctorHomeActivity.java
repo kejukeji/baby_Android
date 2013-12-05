@@ -3,6 +3,10 @@ package com.keju.baby.activity.doctor;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +30,7 @@ import com.keju.baby.AsyncImageLoader;
 import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
+import com.keju.baby.SystemException;
 import com.keju.baby.activity.baby.BabyDetailActivity;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.BabyBean;
@@ -61,7 +66,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	private long exitTime;
 	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
-	private boolean isShowAll = true;
+	private boolean isRefresh = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,11 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		listView = (ListView) findViewById(R.id.listView);
 		
 		doctorHomeRadioGroup = (RadioGroup) findViewById(R.id.dochome_radio_group);
+		if (NetUtil.checkNet(this)) {
+			new GetBabyListTask().execute();
+		} else {
+			showShortToast(R.string.NoSignalException);
+		}
 	}
 	
 	/**
@@ -105,9 +115,16 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		listView.setOnScrollListener(LoadListener);
 		listView.setOnItemClickListener(itemListener);
 		doctorHomeRadioGroup.setOnCheckedChangeListener(this);
-		if(NetUtil.checkNet(this)){
+	}
+	/**
+	 * 刷新数据
+	 */
+	private void refreshData() {
+		if (NetUtil.checkNet(this)) {
+			isRefresh = true;
+			pageIndex = 1;
 			new GetBabyListTask().execute();
-		}else{
+		} else {
 			showShortToast(R.string.NoSignalException);
 		}
 	}
@@ -178,13 +195,11 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.dochome_allbaby:
-			isShowAll = true;
 			list.clear();
 			list.addAll(allList);
 			adapter.notifyDataSetChanged();
 			break;
 		case R.id.dochome_mycollect:
-			isShowAll = false;
 			collectList.clear();
 			list.clear();
 			for (int i = 0; i < allList.size(); i++) {
@@ -218,7 +233,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			BabyBean bean = list.get(position);
+			final BabyBean bean = list.get(position);
 			ViewHolder holder = null;
 			if (convertView == null) {
 				holder = new ViewHolder();
@@ -257,6 +272,17 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			}else{
 				holder.ivCollect.setImageResource(R.drawable.ic_collect_not);
 			}
+			holder.ivCollect.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if(NetUtil.checkNet(DoctorHomeActivity.this)){
+						new CollectTask(bean).execute();
+					}else{
+						showShortToast(R.string.NoSignalException);
+					}
+				}
+			});
 			holder.tvName.setText(bean.getName());
 			holder.tvAge.setText(bean.getAge());
 			return convertView;
@@ -276,12 +302,20 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			openActivity(SearchActivity.class);
 			break;
 		case R.id.btnLeft:
-			openActivity(DoctorCreatBabyAccountActivity.class);
+			Intent intent = new Intent(this,DoctorCreatBabyAccountActivity.class);
+			startActivityForResult(intent, Constants.REQUEST_CREATE_BABY);
 			break;
 		default:
 			break;
 		}
 
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK && requestCode == Constants.REQUEST_CREATE_BABY ){
+			refreshData();
+		}
 	}
 
 	private class GetBabyListTask extends AsyncTask<Void, Void, ResponseBean<BabyBean>> {
@@ -293,6 +327,9 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 				isLoad = true;
 				pbFooter.setVisibility(View.VISIBLE);
 				tvFooterMore.setText(R.string.loading);
+			}
+			if(isRefresh){
+				showPd(R.string.loading);
 			}
 		}
 
@@ -306,9 +343,14 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		protected void onPostExecute(ResponseBean<BabyBean> result) {
 			super.onPostExecute(result);
 			pbFooter.setVisibility(View.GONE);
+			dismissPd();
 			if (result.getStatus() == Constants.REQUEST_SUCCESS) {
 				List<BabyBean> tempList = result.getObjList();
 				boolean isLastPage = false;
+				list.clear();
+				if(isRefresh){
+					allList.clear();
+				}
 				if (tempList.size() > 0) {
 					allList.addAll(tempList);
 					pageIndex++;
@@ -340,7 +382,52 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			list.addAll(allList);
 			adapter.notifyDataSetChanged();
 			isLoad = false;
+			isRefresh = false;
 		}
 
+	}
+	private class CollectTask extends AsyncTask<Void, Void, JSONObject>{
+		private BabyBean bean;
+		
+		public CollectTask(BabyBean bean) {
+			super();
+			this.bean = bean;
+		}
+
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+			int doctorId = SharedPrefUtil.getUid(DoctorHomeActivity.this);
+			try {
+				return new BusinessHelper().collectBaby(bean.getId(), doctorId);
+			} catch (SystemException e) {
+				return null;
+			}
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			if(result != null){
+				try {
+					int status = result.getInt("code");
+					if(status == Constants.REQUEST_SUCCESS){
+						boolean isCollect = bean.isCollect();
+						bean.setCollect(!isCollect);
+						adapter.notifyDataSetChanged();
+						if(isCollect){
+							showShortToast("取消收藏成功");
+						}else{
+							showShortToast("收藏成功");
+						}
+					}else{
+						showShortToast(result.getString("message"));
+					}
+				} catch (JSONException e) {
+					showShortToast(R.string.json_exception);
+				}
+			}else{
+				showShortToast(R.string.connect_server_exception);
+			}
+		}
 	}
 }

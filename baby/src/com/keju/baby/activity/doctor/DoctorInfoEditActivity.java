@@ -27,25 +27,28 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.keju.baby.AsyncImageLoader;
+import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
-import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.DoctorBelongDepartmentBean;
 import com.keju.baby.bean.DoctorDepartmentBean;
 import com.keju.baby.bean.DoctorHospitalBean;
 import com.keju.baby.bean.DoctorProvinceBean;
+import com.keju.baby.bean.MyCollectBean;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.ImageUtil;
 import com.keju.baby.util.NetUtil;
@@ -59,15 +62,14 @@ import com.umeng.analytics.MobclickAgent;
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午2:56:27
  */
-public class DoctorInfoEditActivity extends BaseActivity implements OnClickListener {
+public class DoctorInfoEditActivity extends BaseActivity implements OnClickListener,OnCheckedChangeListener {
 
 	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 
-	private LinearLayout viewDoctorPhone;
-	private ImageView ivDoctorPhone;
+	private ImageView ivAvatar;
 	private EditText etDoctorName, etDoctorEmil, etDoctorNumber;
-	private TextView tvDoctorAddress, tvDoctorHospital, tvDoctorDepartment, tvJobTitle;
+	private TextView tvId, tvDoctorAddress, tvDoctorHospital, tvDoctorDepartment, tvJobTitle;
 	private LinearLayout viewDoctorAddress, viewDoctorHospital, viewDoctorDepartment, viewJobTitle;
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
 	private File avatarFile;// 头像文件
@@ -75,7 +77,8 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	static final int DATE_DIALOG_ID = 1;
 	private Bitmap cameraBitmap;// 头像bitmap
 	private long userId;
-
+	private RadioGroup radio_group;
+	private View viewInfo;
 	private List<DoctorDepartmentBean> departmentList = new ArrayList<DoctorDepartmentBean>();// 科室list
 	private List<DoctorHospitalBean> hospitalList = new ArrayList<DoctorHospitalBean>();// 医院list
 	private List<DoctorProvinceBean> provinceList = new ArrayList<DoctorProvinceBean>();// 医生选择省得list
@@ -86,28 +89,17 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private DepartmentAdaper adapter2;
 	private PositionAdaper adapter3;
 	
+	private ListView listView;
+	private CollectionAdapter collectionAdapter;
+	private List<MyCollectBean> list;
 	private int proviceId; 
 	private int hospitalId;
 	private int departmentId;
 	private int positionId;
 	
-	private String doctorName,doctorAddress,doctorHospital,
-    doctorDepartment,doctorJop,doctorEmail,doctorPhone,avatarUrl;
-
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.doctor_info_edit_activity);
-         
-		if(getIntent()!=null){
-		 doctorName =getIntent().getExtras().getString("DCNAME");
-		 doctorAddress =getIntent().getExtras().getString("DCADDRESS"); 
-		 doctorHospital =getIntent().getExtras().getString("DCHOSPITAL"); 
-		 doctorDepartment =getIntent().getExtras().getString("DCDEPARTMENT"); 
-		 doctorJop =getIntent().getExtras().getString("DCJOP"); 
-		 doctorEmail =getIntent().getExtras().getString("DCEMAIL");
-		 doctorPhone =getIntent().getExtras().getString("DCPHONE"); 
-		 avatarUrl =getIntent().getExtras().getString("DCURL"); 
-		}
 		findView();
 		fillData();
 		createPhotoDir();
@@ -121,10 +113,12 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		btnRight.setOnClickListener(this);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 
-		viewDoctorPhone = (LinearLayout) this.findViewById(R.id.viewDoctorPhone);
-		viewDoctorPhone.setOnClickListener(this);
-
-		ivDoctorPhone = (ImageView) this.findViewById(R.id.ivDoctorPhone);
+		radio_group = (RadioGroup) findViewById(R.id.radio_group);
+		radio_group.setOnCheckedChangeListener(this);
+		viewInfo = findViewById(R.id.viewInfo);
+		tvId = (TextView) findViewById(R.id.tvId);
+		ivAvatar = (ImageView) this.findViewById(R.id.ivAvatar);
+		ivAvatar.setOnClickListener(this);
 		etDoctorName = (EditText) this.findViewById(R.id.etDoctorName);
 		tvDoctorAddress = (TextView) this.findViewById(R.id.tvDoctorAddress);
 		tvDoctorHospital = (TextView) this.findViewById(R.id.tvDoctorHospital);
@@ -133,31 +127,6 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		etDoctorEmil = (EditText) this.findViewById(R.id.etDoctorEmil);
 		etDoctorNumber = (EditText) this.findViewById(R.id.etDoctorNumber);
 		
-        etDoctorName.setText(doctorName);
-        tvDoctorAddress.setText(doctorAddress);
-        tvDoctorHospital.setText(doctorHospital);
-        tvDoctorDepartment.setText(doctorDepartment);
-        tvJobTitle.setText(doctorJop);
-        etDoctorEmil.setText(doctorEmail);
-        etDoctorNumber.setText(doctorPhone);
-        Drawable cacheDrawable = AsyncImageLoader.getInstance().loadAsynLocalDrawable(avatarUrl, new ImageCallback() {
-			
-			@Override
-			public void imageLoaded(Drawable imageDrawable, String imageUrl) {
-				if(imageDrawable != null){
-					Bitmap bitmap = ImageUtil.getRoundCornerBitmapWithPic(imageDrawable, 0.5f);
-					ivDoctorPhone.setImageBitmap(bitmap);
-				}else{
-					ivDoctorPhone.setImageResource(R.drawable.item_lion);
-				}
-			}
-		});
-		if(cacheDrawable != null){
-			Bitmap bitmap = ImageUtil.getRoundCornerBitmapWithPic(cacheDrawable, 0.5f);
-			ivDoctorPhone.setImageBitmap(bitmap);
-		}else{
-			ivDoctorPhone.setImageResource(R.drawable.item_lion);
-		}
 		viewDoctorAddress = (LinearLayout) this.findViewById(R.id.viewDoctorAddress);
 		viewDoctorAddress.setOnClickListener(this);
 		viewDoctorHospital = (LinearLayout) this.findViewById(R.id.viewDoctorHospital);
@@ -166,6 +135,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		viewDoctorDepartment.setOnClickListener(this);
 		viewJobTitle = (LinearLayout) this.findViewById(R.id.viewJobTitle);
 		viewJobTitle.setOnClickListener(this);
+		listView = (ListView) findViewById(R.id.listView);
 	}
 
 	/**
@@ -173,17 +143,38 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	 */
 	private void fillData() {
 
-		btnLeft.setImageResource(R.drawable.btn_back_selector);
+		btnLeft.setVisibility(View.INVISIBLE);
 		btnRight.setImageResource(R.drawable.btn_commit_selector);
-		tvTitle.setText("修改资料");
+		tvTitle.setText("个人中心");
+		
+		list = new ArrayList<MyCollectBean>();
+		collectionAdapter = new CollectionAdapter();
+
+		listView.setAdapter(collectionAdapter);
 		if (NetUtil.checkNet(this)) {
 			new PostDoctorInforTask().execute();
+			new GetDoctorTask().execute();
 		} else {
 			showShortToast(R.string.NoSignalException);
 		}
 
 	}
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+		switch (checkedId) {
+		case R.id.rb_info:
+			viewInfo.setVisibility(View.VISIBLE);
+			listView.setVisibility(View.GONE);
+			break;
+		case R.id.rb_collect:
+			viewInfo.setVisibility(View.GONE);
+			listView.setVisibility(View.VISIBLE);
+			break;
+		default:
+			break;
+		}
 
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
@@ -211,7 +202,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 						out.close();
 					}
 					if (avatarFile != null) {
-						ivDoctorPhone.setImageBitmap(cameraBitmap);
+						ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmapWithPic(cameraBitmap, 0));
 					}
 					if (mCurrentPhotoFile != null && mCurrentPhotoFile.exists())
 						mCurrentPhotoFile.delete();
@@ -236,7 +227,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		case R.id.btnLeft:
 			finish();
 			break;
-		case R.id.viewDoctorPhone:
+		case R.id.ivAvatar:
 			LayoutInflater inflater = getLayoutInflater();
 			View layout = inflater.inflate(R.layout.user_image_changing, null); //
 			TextView tvTakePhoto = (TextView) layout.findViewById(R.id.tvtakephoto);
@@ -248,7 +239,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			WindowManager windowManager = getWindowManager();
 			Display display = windowManager.getDefaultDisplay();
 			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-			lp.width = (int) (display.getWidth() - 40); // 设置宽度
+			lp.width = (int) (display.getWidth()); // 设置宽度
 			lp.gravity = Gravity.BOTTOM;
 			dialog.getWindow().setAttributes(lp);
 			tvCancel.setOnClickListener(new OnClickListener() {
@@ -560,6 +551,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 					int status = result.getInt("code");
 					if (status == Constants.REQUEST_SUCCESS) {
 						showShortToast("资料修改成功");
+						finish();
 					} else {
 						showShortToast("资料设置失败");
 					}
@@ -806,6 +798,117 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		}
 
 	}
+	/**
+	 * 收藏适配
+	 * @author Zhoujun
+	 *
+	 */
+	private class CollectionAdapter extends BaseAdapter {
+		@Override
+		public int getCount() {
+			return list.size();
+		}
 
+		@Override
+		public Object getItem(int position) {
+			return position;
+		}
 
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ViewHolder viewHolder = null;
+			if (convertView == null) {
+				viewHolder = new ViewHolder();
+				convertView = getLayoutInflater().inflate(R.layout.doctor_my_collect_listitem, null);
+				viewHolder.title = (TextView) convertView.findViewById(R.id.my_collect_title);
+				viewHolder.content = (TextView) convertView.findViewById(R.id.my_collect_content);
+				convertView.setTag(viewHolder);
+			} else {
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
+			viewHolder.title.setText(list.get(position).getTitle());
+			viewHolder.content.setText(list.get(position).getContent());
+			return convertView;
+		}
+		class ViewHolder {
+			public TextView title;
+			public TextView content;
+		}
+
+	}
+	/**
+	 * 获取医生详情
+	 * 
+	 * @author Zhoujun
+	 * 
+	 */
+	private class GetDoctorTask extends AsyncTask<Void, Void, JSONObject> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showPd(R.string.loading);
+		}
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+			int id = SharedPrefUtil.getUid(DoctorInfoEditActivity.this);
+			try {
+				return new BusinessHelper().getDoctorInfo(id);
+			} catch (SystemException e) {
+				return null;
+			}
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			dismissPd();
+			if (result != null) {
+				try {
+					int status = result.getInt("code");
+					if (status == Constants.REQUEST_SUCCESS) {
+						JSONObject obj = result.getJSONArray("doctor_list").getJSONObject(0);
+						  etDoctorName.setText(obj.getString("doctor_name"));
+					        tvDoctorAddress.setText(obj.getString("province"));
+					        tvDoctorHospital.setText(obj.getString("hospital"));
+					        tvDoctorDepartment.setText(obj.getString("department"));
+					        tvJobTitle.setText(obj.getString("positions"));
+					        etDoctorEmil.setText(obj.getString("email"));
+					        etDoctorNumber.setText(obj.getString("tel"));
+						tvId.setText(obj.getInt("id") + "");
+
+						String avatarUrl = BusinessHelper.PIC_URL + obj.getString("picture_path");
+						Drawable cacheDrawable = AsyncImageLoader.getInstance().loadAsynLocalDrawable(avatarUrl,
+								new ImageCallback() {
+
+									@Override
+									public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+										if (imageDrawable != null) {
+											ivAvatar.setImageDrawable(imageDrawable);
+										} else {
+											ivAvatar.setImageResource(R.drawable.item_lion);
+										}
+									}
+								});
+						if (cacheDrawable != null) {
+							ivAvatar.setImageDrawable(cacheDrawable);
+						} else {
+							ivAvatar.setImageResource(R.drawable.item_lion);
+						}
+					} else {
+						showShortToast(result.getString("message"));
+					}
+				} catch (JSONException e) {
+					showShortToast(R.string.json_exception);
+				}
+			} else {
+				showShortToast(R.string.connect_server_exception);
+			}
+		}
+
+	}
 }

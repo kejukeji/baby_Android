@@ -6,7 +6,6 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.MyCollectBean;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
-import com.keju.baby.util.ImageUtil;
 import com.keju.baby.util.NetUtil;
 import com.keju.baby.util.SharedPrefUtil;
 
@@ -170,13 +168,13 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 			viewHolder.content.setText(list.get(position).getContent());
 			return convertView;
 		}
+		class ViewHolder {
+			public TextView title;
+			public TextView content;
+		}
 
 	}
 
-	class ViewHolder {
-		public TextView title;
-		public TextView content;
-	}
 
 	@Override
 	public void onClick(View v) {
@@ -249,16 +247,14 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 									@Override
 									public void imageLoaded(Drawable imageDrawable, String imageUrl) {
 										if (imageDrawable != null) {
-											Bitmap bitmap = ImageUtil.getRoundCornerBitmapWithPic(imageDrawable, 0.5f);
-											ivAvatar.setImageBitmap(bitmap);
+											ivAvatar.setImageDrawable(imageDrawable);
 										} else {
 											ivAvatar.setImageResource(R.drawable.item_lion);
 										}
 									}
 								});
 						if (cacheDrawable != null) {
-							Bitmap bitmap = ImageUtil.getRoundCornerBitmapWithPic(cacheDrawable, 0.5f);
-							ivAvatar.setImageBitmap(bitmap);
+							ivAvatar.setImageDrawable(cacheDrawable);
 						} else {
 							ivAvatar.setImageResource(R.drawable.item_lion);
 						}

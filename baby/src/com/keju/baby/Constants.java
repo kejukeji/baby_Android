@@ -42,9 +42,14 @@ public class Constants {
 	public static final int REQUEST_SUCCESS = 200;//网络请求成功
 	public static final int REQUEST_FAILD = 0;//网络请求成功
 	/**
+	 * requestCode
+	 */
+	public static final int REQUEST_CREATE_BABY = 5;//创建婴儿账户
+	public static final int REQUEST_NEW_ADD_VISIT_CODE = 6;//新增随访记录
+	/**
 	 * 分页数据
 	 */
-	public static final int PAGE_SIZE = 10;
+	public static final int PAGE_SIZE = 6;
 	/**
 	 * 登录用户类型；
 	 */
@@ -61,9 +66,9 @@ public class Constants {
 	public static final String URL_FITMENT_DETAIL = "raise.html";//育儿指南详情
 	public static final String URL_GROW_LINE = "grow_line.html/";//医生端生长曲线
 	public static final String URL_BABY_DETAIL = "baby_detail.html/";//婴儿详细资料
-	public static final String URL_NEED = "need.html";//营养摄入需求
+	public static final String URL_NEED = "grow_bar.html";//营养摄入需求
 	public static final String URL_CREATE_BABY = "create_baby.html";//医生端创建婴儿账号
-	public static final String URL_VISIT_RECORD = "visit_record.html";//妈妈端随访记录
+	public static final String URL_VISIT_RECORD = "visit_record.html/";//妈妈端随访记录
 	public static final String URL_ADD_FOLLOW_UP = "add_follow-up.html";//添加随访记录
 	public static final String URL_FORMULA = "formula.html";//新增配方奶
 	public static final String URL_MEETING_NOTIFY_DETAIL = "meeting.html";//会议通知详情

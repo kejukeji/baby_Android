@@ -7,7 +7,10 @@ import android.view.View.OnClickListener;
 
 import com.keju.baby.Constants;
 import com.keju.baby.R;
+import com.keju.baby.activity.baby.BabyMainActivity;
 import com.keju.baby.activity.base.BaseWebViewActivity;
+import com.keju.baby.activity.login.BabyLoginActivity;
+import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 创建婴儿账户
@@ -35,6 +38,14 @@ public class DoctorCreatBabyAccountActivity extends BaseWebViewActivity implemen
 
 	private void fillData() {
 		loadUrl(Constants.URL_CREATE_BABY);
+		webView.addJavascriptInterface(new Object() {
+			public void webviewCreateBaby(int code) {
+				if(code == 200){
+					setResult(RESULT_OK);
+					finish();
+				}
+			}
+		}, "app");
 	}
 	@Override
 	public void onClick(View v) {

@@ -1,13 +1,14 @@
 package com.keju.baby.activity.baby;
 
 
-import android.app.LocalActivityManager;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -21,6 +22,7 @@ import com.keju.baby.activity.SettingActivity;
  * @version 创建时间：2013-10-25 下午3:13:38
  */
 public class BabyMainActivity extends TabActivity implements OnCheckedChangeListener {
+	private static RadioGroup rg_main_btns;
 	public static RadioButton rb_home, rb_account, rb_fitment, rb_setting;
 
 	public static TabHost mth;
@@ -36,10 +38,6 @@ public class BabyMainActivity extends TabActivity implements OnCheckedChangeList
 		findView();
 		fillData();
 		((CommonApplication) getApplication()).addActivity(this);
-
-		LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);  
-        mLocalActivityManager.dispatchCreate(savedInstanceState);  
-        mth.setup(mLocalActivityManager); 
 	}
 	
 	/**
@@ -47,7 +45,7 @@ public class BabyMainActivity extends TabActivity implements OnCheckedChangeList
 	 */
 	private void findView() {
 		mth = getTabHost();
-
+		rg_main_btns = (RadioGroup) findViewById(R.id.rg_main_btns);
 		rb_home = (RadioButton) findViewById(R.id.rb_home);
 		rb_account = (RadioButton) findViewById(R.id.rb_account);
 		rb_fitment = (RadioButton) findViewById(R.id.rb_fitment);
@@ -58,6 +56,16 @@ public class BabyMainActivity extends TabActivity implements OnCheckedChangeList
 		rb_fitment.setOnCheckedChangeListener(this);
 		rb_setting.setOnCheckedChangeListener(this);
 
+	}
+	/**
+	 * 设置底部tab是否可见
+	 * @param isVisible
+	 */
+	public static void setTabVisible(boolean isVisible){
+		int visible = isVisible ? View.VISIBLE : View.GONE;
+		if(rg_main_btns != null){
+			rg_main_btns.setVisibility(visible);
+		}
 	}
 	/**
 	 * 数据填充

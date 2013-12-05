@@ -258,6 +258,27 @@ public class BusinessHelper {
 	public JSONObject getDoctorData() throws SystemException{
 		return httpClient.get(BASE_URL + "html/register/data").asJSONObject();
 	}
-	
+	/**
+	 * 收藏婴儿
+	 * @param babyId
+	 * @param doctorId
+	 * @return
+	 * @throws SystemException
+	 */
+	public JSONObject collectBaby(int babyId,int doctorId) throws SystemException{
+		return httpClient.get(BASE_URL + "doctor/collect",new PostParameter[]{new PostParameter("type", "baby"),
+				new PostParameter("baby_id", babyId),new PostParameter("doctor_id", doctorId)}).asJSONObject();
+	}
+	/**
+	 * 收藏文摘
+	 * @param abstractId
+	 * @param doctorId
+	 * @return
+	 * @throws SystemException
+	 */
+	public JSONObject collectAbstract(int abstractId,int doctorId) throws SystemException{
+		return httpClient.get(BASE_URL + "doctor/collect",new PostParameter[]{new PostParameter("type", "abstract"),
+				new PostParameter("abstract_id", abstractId),new PostParameter("doctor_id", doctorId)}).asJSONObject();
+	}
 	
 }
