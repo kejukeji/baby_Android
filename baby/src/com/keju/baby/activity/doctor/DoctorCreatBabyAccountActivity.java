@@ -7,10 +7,7 @@ import android.view.View.OnClickListener;
 
 import com.keju.baby.Constants;
 import com.keju.baby.R;
-import com.keju.baby.activity.baby.BabyMainActivity;
 import com.keju.baby.activity.base.BaseWebViewActivity;
-import com.keju.baby.activity.login.BabyLoginActivity;
-import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 创建婴儿账户

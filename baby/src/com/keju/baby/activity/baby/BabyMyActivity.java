@@ -64,7 +64,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	private TextView tvTitle;
 
 	private ImageView ivAvatar;
-	private TextView tvId, tvGendar, tvPreproductions, tvDeliveryWay,tvComplication, tvApgar;
+	private TextView tvId, tvGendar, tvPreproductions, tvDeliveryWay, tvComplication, tvApgar;
 	private EditText etRealName, etHeight, etWeight, etHeadCircumference;
 
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
@@ -72,7 +72,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	private File PHOTO_DIR;// 照相机拍照得到的图片的存储位置
 	static final int DATE_DIALOG_ID = 1;
 	private Bitmap cameraBitmap;// 头像bitmap
-	
+
 	private String dialogType;
 	private List<String> list = new ArrayList<String>();
 
@@ -103,7 +103,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 
 		ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
 		ivAvatar.setOnClickListener(this);
-		
+
 		tvGendar.setOnClickListener(this);
 		tvPreproductions.setOnClickListener(this);
 		etHeight.setOnClickListener(this);
@@ -334,20 +334,21 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
+
 	Calendar cal = Calendar.getInstance();
+
 	/**
 	 * 显示日期选项dialog；
 	 */
 	private void showDateDialog() {
-		new DatePickerDialog(this, listener, cal.get(Calendar.YEAR),
-				cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
+		new DatePickerDialog(this, listener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+				cal.get(Calendar.DAY_OF_MONTH)).show();
 	}
 
 	private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
 
 		@Override
-		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
+		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 			cal.set(Calendar.YEAR, year);
 			cal.set(Calendar.MONTH, monthOfYear);
 			cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -356,15 +357,16 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	};
 
 	private void updateDate() {
-		tvPreproductions.setText(DateUtil.dateToString("yyyy-MM-dd",
-				cal.getTime()));
+		tvPreproductions.setText(DateUtil.dateToString("yyyy-MM-dd", cal.getTime()));
 	}
+
 	private ProviceAdapter adapter;
 	private Dialog dialog;
+
 	/**
 	 * 显示dialog
 	 */
-	private void showDialog(List<String> list){
+	private void showDialog(List<String> list) {
 		View view = getLayoutInflater().inflate(R.layout.dialog_doctor_list, null);
 		ListView addressList = (ListView) view.findViewById(R.id.doctorListView);
 		adapter = new ProviceAdapter(list);
@@ -379,6 +381,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		lp1.width = (int) (display1.getWidth() - 20); // 设置宽度
 		dialog.getWindow().setAttributes(lp1);
 	}
+
 	/**
 	 * 城市选择 listview 点击
 	 */
@@ -386,27 +389,28 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-			if(dialogType.equals("gender")){
+			if (dialogType.equals("gender")) {
 				tvGendar.setText((String) adapter.getItem(arg2));
-			}else if(dialogType.equals("height")){
+			} else if (dialogType.equals("height")) {
 				etHeight.setText((String) adapter.getItem(arg2));
-			}else if(dialogType.equals("weight")){
+			} else if (dialogType.equals("weight")) {
 				etWeight.setText((String) adapter.getItem(arg2));
-			}else if(dialogType.equals("head")){
+			} else if (dialogType.equals("head")) {
 				etHeadCircumference.setText((String) adapter.getItem(arg2));
-			}else if(dialogType.equals("diliveryWay")){
+			} else if (dialogType.equals("diliveryWay")) {
 				tvDeliveryWay.setText((String) adapter.getItem(arg2));
 			}
 			dialog.dismiss();
 		}
 	};
+
 	/**
 	 * 获取医生城市的适配器
 	 * 
 	 * */
 	private class ProviceAdapter extends BaseAdapter {
-		private  List<String> list;
-		
+		private List<String> list;
+
 		public ProviceAdapter(List<String> list) {
 			super();
 			this.list = list;
@@ -448,6 +452,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
+
 	public static Intent getTakePickIntent(File f) {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
@@ -506,10 +511,10 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 							tvPreproductions.setText(babyBean.getString("due_date"));
 							etHeight.setText(babyBean.getInt("born_height") + "");
 							etWeight.setText(babyBean.getInt("born_weight") + "");
-							etHeadCircumference.setText( babyBean.getInt("born_head") + "");
+							etHeadCircumference.setText(babyBean.getInt("born_head") + "");
 							tvDeliveryWay.setText(babyBean.getString("childbirth"));
 							tvComplication.setText(babyBean.getString("complication"));
-							tvApgar.setText( babyBean.getInt("apgar_score") + "");
+							tvApgar.setText(babyBean.getInt("apgar_score") + "");
 							String photoUrl = BusinessHelper.PIC_URL + babyBean.getString("picture_path");
 							ivAvatar.setTag(photoUrl);
 							Drawable cacheDrawble = AsyncImageLoader.getInstance().loadDrawable(photoUrl,
@@ -546,6 +551,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	}
+
 	/**
 	 * 修改婴儿资料
 	 * 
@@ -619,9 +625,8 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 			int uid = SharedPrefUtil.getUid(BabyMyActivity.this);
 			String type = "update";
 			try {
-				return new BusinessHelper().addBabyInfor(uid, type, babyName, parentNumber, babySex,
-						babyProduction, babyWeight, babyHeight, babyHeadCircumference, childbirthWay, complication,
-						grade, avatarFile);
+				return new BusinessHelper().addBabyInfor(uid, type, babyName, parentNumber, babySex, babyProduction,
+						babyWeight, babyHeight, babyHeadCircumference, childbirthWay, complication, grade, avatarFile);
 			} catch (SystemException e) {
 				e.printStackTrace();
 			}

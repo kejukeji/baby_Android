@@ -5,7 +5,26 @@
     android:orientation="vertical" >
 
     <include layout="@layout/common_title_bar" />
-
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="45dp" android:gravity="center_vertical" 
+        android:background="@drawable/bg_web_tab" android:id="@+id/viewWebTab" android:visibility="gone">
+        <ImageView android:id="@+id/ivLeft" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+            android:src="@drawable/ic_left_arrow" android:paddingLeft="10dp" android:paddingRight="10dp"/>
+        <HorizontalScrollView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+	    android:scrollbars="none" android:id="@+id/viewTab">
+	    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+	      <TextView android:id="@+id/tvVisit"  style="@style/web_tab_text_style" android:text="随访记录" 
+	          android:background="@drawable/bg_web_tab_sel" android:textColor="@color/white"/>  
+	      <TextView android:id="@+id/tvGrowLine"  style="@style/web_tab_text_style" android:text="生长曲线" 
+	           android:textColor="@color/gold"/>  
+	      <TextView android:id="@+id/tvGrowRate"  style="@style/web_tab_text_style" android:text="生长速率" 
+	          android:textColor="@color/gold"/>  
+	      <TextView android:id="@+id/tvInfo"  style="@style/web_tab_text_style" android:text="详细资料" 
+	          android:textColor="@color/gold"/>  
+	    </LinearLayout>
+	</HorizontalScrollView>
+	<ImageView android:id="@+id/ivRight" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+	    android:src="@drawable/ic_right_arrow" android:paddingLeft="10dp" android:paddingRight="10dp"/>
+    </LinearLayout>
     <WebView
         android:id="@+id/webview"
         android:layout_width="fill_parent"

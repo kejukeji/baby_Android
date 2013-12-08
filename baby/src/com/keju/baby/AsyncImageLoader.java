@@ -264,6 +264,8 @@ public class AsyncImageLoader {
 			Drawable drawable;
 			if(!PHOTO_DIR.exists())
 				PHOTO_DIR.mkdirs();
+			if(!file.exists())
+				file.createNewFile();
 			localFile  = new File(PHOTO_DIR,StringUtil.createImageName(imageUrl));
 			if(!localFile.exists() || localFile.length() <= 0){
 				if(!fetchTaskMap.containsKey(imageUrl)){

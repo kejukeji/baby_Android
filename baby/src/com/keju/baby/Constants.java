@@ -64,12 +64,15 @@ public class Constants {
 	public static final String URL_REGISTER = "register.html";//注册
 	public static final String URL_FITMENT_LIST = "raise_dir.html";//育儿指南列表
 	public static final String URL_FITMENT_DETAIL = "raise.html";//育儿指南详情
-	public static final String URL_GROW_LINE = "grow_line.html/";//医生端生长曲线
+	
+	public static final String URL_VISIT_RECORD = "visit_record.html/";//随访记录
+	public static final String URL_GROW_LINE = "grow_line.html/";//生长曲线
+	public static final String URL_GROW_RATE = "grow_rate.html/";//生长速率
 	public static final String URL_BABY_DETAIL = "baby_detail.html/";//婴儿详细资料
-	public static final String URL_NEED = "grow_bar.html";//营养摄入需求
+	public static final String URL_NEED = "grow_bar.html/";//营养摄入需求
+	
 	public static final String URL_CREATE_BABY = "create_baby.html";//医生端创建婴儿账号
-	public static final String URL_VISIT_RECORD = "visit_record.html/";//妈妈端随访记录
-	public static final String URL_ADD_FOLLOW_UP = "add_follow-up.html";//添加随访记录
+	public static final String URL_ADD_FOLLOW_UP = "add_follow-up.html/";//添加随访记录
 	public static final String URL_FORMULA = "formula.html";//新增配方奶
 	public static final String URL_MEETING_NOTIFY_DETAIL = "meeting.html";//会议通知详情
 	public static final String URL_MEETING_NOTIFY_LIST = "meeting_notice.html";//会议通知列表

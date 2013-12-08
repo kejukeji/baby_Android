@@ -29,10 +29,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.keju.baby.AsyncImageLoader;
+import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
-import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.ImageUtil;

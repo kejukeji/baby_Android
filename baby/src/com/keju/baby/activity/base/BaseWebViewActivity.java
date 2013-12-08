@@ -23,6 +23,7 @@ public class BaseWebViewActivity extends BaseActivity {
 	protected ImageView btnLeft, btnRight;
 	protected TextView tvTitle;
 	protected WebView webView;
+	protected View viewWebTab;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class BaseWebViewActivity extends BaseActivity {
 		btnLeft = (ImageView) findViewById(R.id.btnLeft);
 		btnRight = (ImageView) findViewById(R.id.btnRight);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
+		viewWebTab = findViewById(R.id.viewWebTab);
 		
 		webView = (WebView) findViewById(R.id.webview);
 		WebSettings webSettings = webView.getSettings();
@@ -63,6 +65,7 @@ public class BaseWebViewActivity extends BaseActivity {
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
 				super.onPageStarted(view, url, favicon);
+				setWebTabVisible(url);
 				if(url.contains(Constants.URL_NEED)){
 					BabyMainActivity.setTabVisible(false);
 					setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -74,9 +77,10 @@ public class BaseWebViewActivity extends BaseActivity {
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
-				if(changeTitle(url)){
-					tvTitle.setText(view.getTitle());
-				}
+//				if(changeTitle(url)){
+//					tvTitle.setText(view.getTitle());
+//				}
+				tvTitle.setText(view.getTitle());
 				btnLeftIsVisible(url);
 				btnRightIsVisible(url);
 			}
@@ -87,8 +91,8 @@ public class BaseWebViewActivity extends BaseActivity {
 	}
 	private static final String btnLeftInVisibleUrls[] = {Constants.URL_FITMENT_LIST,Constants.URL_MEETING_NOTIFY_LIST,Constants.URL_DOCTOR_LOGIN,Constants.URL_BABY_LOGIN };
 	private static final String btnLeftVisibleUrls[] = {Constants.URL_FITMENT_DETAIL,Constants.URL_MEETING_NOTIFY_DETAIL,Constants.URL_REGISTER,Constants.URL_ADD_FOLLOW_UP,Constants.URL_NEED };
-	private static final String babyDetailUrls[] = {Constants.URL_VISIT_RECORD,Constants.URL_GROW_LINE,Constants.URL_BABY_DETAIL};
-	private static final String btnRightVisibleUrls[] = {Constants.URL_VISIT_RECORD,Constants.URL_GROW_LINE,Constants.URL_BABY_DETAIL};
+	private static final String babyDetailUrls[] = {Constants.URL_VISIT_RECORD,Constants.URL_GROW_LINE,Constants.URL_GROW_RATE,Constants.URL_BABY_DETAIL};
+	private static final String btnRightVisibleUrls[] = {Constants.URL_VISIT_RECORD,Constants.URL_GROW_LINE,Constants.URL_GROW_RATE,Constants.URL_BABY_DETAIL};
 	/**
 	 * 左边的按钮是否可见
 	 * @param url
@@ -139,7 +143,27 @@ public class BaseWebViewActivity extends BaseActivity {
 				break;
 			}
 		}
+		if(url.contains(Constants.URL_NEED)){
+			isChangeTitle = true;
+		}
 		return isChangeTitle;
+	}
+	/**
+	 * 设置web导航是否可见
+	 */
+	private void setWebTabVisible(String url){
+		boolean isVisible = false;;
+		for (int i = 0; i < babyDetailUrls.length; i++) {
+			if(url.contains(babyDetailUrls[i])){
+				isVisible = true;
+				break;
+			}
+		}
+		if(isVisible){
+			viewWebTab.setVisibility(View.VISIBLE);
+		}else{
+			viewWebTab.setVisibility(View.GONE);
+		}
 	}
 	@Override
 	public void onDestroy() {

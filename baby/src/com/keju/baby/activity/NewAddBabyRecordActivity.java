@@ -36,10 +36,12 @@ public class NewAddBabyRecordActivity extends BaseWebViewActivity implements OnC
 		btnRight.setVisibility(View.INVISIBLE);
 		tvTitle.setVisibility(View.VISIBLE);
 		webView = (WebView) findViewById(R.id.webview);
+		
+		tvTitle.setText("新增随访记录");
 	}
 
 	private void fillData() {
-		loadUrl(Constants.URL_ADD_FOLLOW_UP + "/" + id);
+		loadUrl(Constants.URL_ADD_FOLLOW_UP  + id);
 		webView.addJavascriptInterface(new Object() {
 			public void webviewAddVisit(int code) {
 				if (code == 200) {
@@ -51,7 +53,7 @@ public class NewAddBabyRecordActivity extends BaseWebViewActivity implements OnC
 				if (code == 200) {
 					if (webView.canGoBack()) {
 						webView.goBack();
-						webView.reload();
+//						webView.reload();
 					}
 				}
 			}
