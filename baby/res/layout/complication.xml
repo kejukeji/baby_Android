@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include layout="@layout/common_title_bar"/>
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:scrollbars="none">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical"
+            android:layout_gravity="center_horizontal" android:background="@drawable/bg_setting" android:layout_margin="10dp"
+            android:paddingLeft="20dp" android:paddingRight="20dp" android:paddingTop="10dp" android:paddingBottom="10dp" >
+            
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="常见:" android:textSize="@dimen/LargeTextSize"/>
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+                android:gravity="center_vertical" android:layout_marginTop="6dp">
+                <RadioButton android:id="@+id/rbHuangDan" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="黄疸"/>
+                <RadioButton android:id="@+id/rbLuNei" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="颅内出血"/>
+            </RadioGroup>
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+                android:gravity="center_vertical" android:layout_marginTop="6dp">
+                <RadioButton android:id="@+id/rbYingZhong" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="新生儿硬肿症"/>
+                <RadioButton android:id="@+id/rbShiWangMo" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="早产儿视网膜病"/>
+            </RadioGroup>
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="心血管疾病:" 
+                android:textSize="@dimen/LargeTextSize" android:layout_marginTop="15dp"/>
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+                android:gravity="center_vertical" android:layout_marginTop="6dp">
+                <RadioButton android:id="@+id/rbDongMaiGuan" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="动脉导管未闭"/>
+                <RadioButton android:id="@+id/rbXinZangBing" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="先天性心脏病"/>
+            </RadioGroup>
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="呼吸系统疾病:" 
+                android:textSize="@dimen/LargeTextSize" android:layout_marginTop="15dp"/>
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+                android:gravity="center_vertical" android:layout_marginTop="10dp">
+                <RadioButton android:id="@+id/rbHuXi" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="新生儿呼吸窘迫综合症"/>
+                <RadioButton android:id="@+id/rbHuXiShuaiJie" style="@style/complication_radio_btn_style" android:layout_width="wrap_content" 
+                    android:text="呼吸衰竭"/>
+            </RadioGroup>
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="肠胃系统疾病:" 
+                android:textSize="@dimen/LargeTextSize" android:layout_marginTop="15dp"/>
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+                android:gravity="center_vertical" android:layout_marginTop="10dp">
+                <RadioButton android:id="@+id/rbChangeYan" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="坏死性肠炎"/>
+            </RadioGroup>
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="感染疾病:" 
+                android:textSize="@dimen/LargeTextSize" android:layout_marginTop="15dp"/>
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+                android:gravity="center_vertical" android:layout_marginTop="10dp">
+                <RadioButton android:id="@+id/rbFeiYan" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="肺炎"/>
+                <RadioButton android:id="@+id/rbNaoMoYan" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="脑膜炎"/>
+                <RadioButton android:id="@+id/rbBaiXueZheng" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="败血症"/>
+            </RadioGroup>
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="系统疾病:" 
+                android:textSize="@dimen/LargeTextSize" android:layout_marginTop="15dp"/>
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+                android:gravity="center_vertical" android:layout_marginTop="10dp">
+                <RadioButton android:id="@+id/rbGaoXueTang" style="@style/complication_radio_btn_style" android:layout_width="wrap_content" android:layout_marginRight="20dp"
+                    android:text="高血糖"/>
+                <RadioButton android:id="@+id/rbDaiXie" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="代谢及电解质紊乱"/>
+            </RadioGroup>
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+                android:gravity="center_vertical" android:layout_marginTop="15dp">
+                <RadioButton android:id="@+id/rbNo" style="@style/complication_radio_btn_style" android:layout_width="0dp" android:layout_weight="1" 
+                    android:text="无"/>
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.keju.baby.Constants;
+import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseWebViewActivity;
 import com.keju.baby.activity.doctor.DoctorMainActivity;
 import com.keju.baby.util.SharedPrefUtil;
@@ -24,6 +25,7 @@ public class DoctorLoginActivity extends BaseWebViewActivity {
 	}
 
 	private void findView() {
+		btnLeft.setImageResource(R.drawable.btn_back_selector);
 		btnLeft.setVisibility(View.INVISIBLE);
 		btnRight.setVisibility(View.INVISIBLE);
 		tvTitle.setVisibility(View.VISIBLE);

@@ -35,13 +35,15 @@ public class BabyHomeActivity extends BaseWebViewActivity implements OnClickList
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		isMother = true;
 		findView();
 		fillData();
 	}
 
 	private void findView() {
 		btnLeft.setVisibility(View.INVISIBLE);
-		// btnLeft.setImageResource(R.drawable.btn_back_selector);
+		btnLeft.setImageResource(R.drawable.btn_back_selector);
+		btnLeft.setOnClickListener(this);
 		btnRight.setImageResource(R.drawable.btn_add_record_selector);
 		btnRight.setOnClickListener(this);
 		tvTitle.setVisibility(View.VISIBLE);
@@ -87,9 +89,15 @@ public class BabyHomeActivity extends BaseWebViewActivity implements OnClickList
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.btnLeft:
+			if(webView.canGoBack()){
+				webView.goBack();
+			}
+			break;
 		case R.id.btnRight:
 			Bundle b = new Bundle();
 			b.putInt(Constants.EXTRA_DATA, SharedPrefUtil.getUid(this));
+			b.putBoolean("isMother", true);
 			Intent intent = new Intent(this, NewAddBabyRecordActivity.class);
 			intent.putExtras(b);
 			startActivityForResult(intent, Constants.REQUEST_NEW_ADD_VISIT_CODE);

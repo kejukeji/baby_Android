@@ -21,6 +21,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,6 +51,7 @@ import com.keju.baby.bean.DoctorHospitalBean;
 import com.keju.baby.bean.DoctorProvinceBean;
 import com.keju.baby.bean.MyCollectBean;
 import com.keju.baby.helper.BusinessHelper;
+import com.keju.baby.util.AndroidUtil;
 import com.keju.baby.util.ImageUtil;
 import com.keju.baby.util.NetUtil;
 import com.keju.baby.util.SharedPrefUtil;
@@ -560,9 +562,8 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 					int status = result.getInt("code");
 					if (status == Constants.REQUEST_SUCCESS) {
 						showShortToast("资料修改成功");
-						finish();
 					} else {
-						showShortToast("资料设置失败");
+						showShortToast("资料修改失败");
 					}
 				} catch (JSONException e) {
 					showShortToast(R.string.json_exception);
@@ -888,7 +889,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 					int status = result.getInt("code");
 					if (status == Constants.REQUEST_SUCCESS) {
 						JSONObject obj = result.getJSONArray("doctor_list").getJSONObject(0);
-						etDoctorName.setText(obj.getString("doctor_name"));
+						etDoctorName.setText(obj.getString("real_name"));
 						tvDoctorAddress.setText(obj.getString("province"));
 						tvDoctorHospital.setText(obj.getString("hospital"));
 						tvDoctorDepartment.setText(obj.getString("department"));
@@ -930,5 +931,20 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			}
 		}
 
+	}
+	private long exitTime;
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				showShortToast(R.string.try_again_logout);
+				exitTime = System.currentTimeMillis();
+			} else {
+				AndroidUtil.exitApp(this);
+				finish();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

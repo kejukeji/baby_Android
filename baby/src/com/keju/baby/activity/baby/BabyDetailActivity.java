@@ -119,6 +119,7 @@ public class BabyDetailActivity extends BaseWebViewActivity implements OnClickLi
 		case R.id.btnRight:
 			Bundle b = new Bundle();
 			b.putInt(Constants.EXTRA_DATA, bean.getId());
+			b.putBoolean("isMother", false);
 			Intent intent = new Intent(this, NewAddBabyRecordActivity.class);
 			intent.putExtras(b);
 			startActivityForResult(intent, Constants.REQUEST_NEW_ADD_VISIT_CODE);

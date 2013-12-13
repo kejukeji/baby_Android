@@ -40,7 +40,7 @@ public class BabyBean implements Serializable{
 			this.avatarUrl = BusinessHelper.PIC_URL + obj.getString("picture_path");
 		}
 		if(obj.has("is_collect")){
-			this.isCollect = obj.getInt("is_collect") == 1 ? true : false;
+			this.isCollect = obj.getInt("is_collect") == 0 ? true : false;
 		}
 	}
 	/**

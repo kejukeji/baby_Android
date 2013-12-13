@@ -512,7 +512,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 							etHeight.setText(babyBean.getInt("born_height") + "");
 							etWeight.setText(babyBean.getInt("born_weight") + "");
 							etHeadCircumference.setText(babyBean.getInt("born_head") + "");
-							tvDeliveryWay.setText(babyBean.getString("childbirth"));
+							tvDeliveryWay.setText(babyBean.getString("childbirth_style"));
 							tvComplication.setText(babyBean.getString("complication"));
 							tvApgar.setText(babyBean.getInt("apgar_score") + "");
 							String photoUrl = BusinessHelper.PIC_URL + babyBean.getString("picture_path");

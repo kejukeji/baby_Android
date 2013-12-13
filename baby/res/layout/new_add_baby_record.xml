@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include layout="@layout/common_title_bar"/>
+	 <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_input"
+            android:orientation="vertical"
+            android:padding="10dp" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/add_visit_record_time" />
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input_arrow"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="kg" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="invisible"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/add_visit_record_weight" />
+
+                <EditText
+                    android:id="@+id/etWeight"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input"
+                    android:inputType="number"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="kg" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="visible"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/add_visit_record_height" />
+
+                <EditText
+                    android:id="@+id/etHeight"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input"
+                    android:inputType="number"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="cm" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="visible"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/add_visit_record_head" />
+
+                <EditText
+                    android:id="@+id/etHead"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input"
+                    android:inputType="number"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="cm" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="visible"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/add_visit_record_feed1" />
+
+                <EditText
+                    android:id="@+id/etFeed"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input"
+                    android:inputType="number"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="ml" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="visible"/>
+            </LinearLayout>
+            <View android:layout_width="fill_parent" android:layout_height="1dp" android:background="@drawable/gold_line" 
+                android:layout_marginTop="12dp" android:layout_marginLeft="8dp" android:layout_marginRight="8dp"/>
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/add_visit_record_milk"
+                    android:textColor="@color/grey" android:layout_marginTop="5dp" android:textSize="@dimen/BasicTextSize"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="fill_parent" android:orientation="horizontal" android:layout_weight="1"
+                    android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:gravity="center">
+                    <Button android:id="@+id/btnCheck" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+                        android:background="@drawable/btn_selector" android:text="查看营养数据" android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" />
+                    <Button android:id="@+id/btnNewAddMilk" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp"
+                        android:background="@drawable/btn_selector" android:text="新增配方奶" android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" />
+                </LinearLayout>
+            </LinearLayout>
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/choose_milk_yard" />
+
+                <TextView
+                    android:id="@+id/tvYard"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input_arrow"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="kg" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="invisible"/>
+            </LinearLayout>
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/choose_milk_brand" />
+
+                <TextView
+                    android:id="@+id/tvBrand"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input_arrow"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="kg" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="invisible"/>
+            </LinearLayout>
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/choose_milk_kind" />
+
+                <TextView
+                    android:id="@+id/tvKind"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input_arrow"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="kg" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="invisible"/>
+            </LinearLayout>
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/add_visit_record_feed2" />
+
+                <EditText
+                    android:id="@+id/etMilk"
+                    style="@style/creat_baby_text_style"
+                    android:background="@drawable/bg_input"
+                    android:inputType="number"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
+                    android:text="ml" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="visible"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/viewNutrition" android:layout_width="fill_parent" android:layout_height="wrap_content" 
+                android:orientation="vertical" android:visibility="gone" android:padding="5dp">
+                <View android:layout_width="fill_parent" android:layout_height="1dp" android:background="@drawable/gold_line" 
+                android:layout_marginTop="6dp" android:layout_marginLeft="8dp" android:layout_marginRight="8dp"/>
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="低出生体重儿院内专用配方奶粉营养数据:"
+                    android:textSize="13dp"
+                    android:layout_marginTop="8dp" />
+                <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical"
+                    android:background="@drawable/bg_setting" android:layout_marginTop="8dp">
+                    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+                        android:background="@color/gold">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" android:text="能量"
+                            android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" android:text="蛋白质"
+                            android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" android:text="碳水化合物"
+                            android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" android:text="脂肪"
+                            android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+                        android:background="@color/gold">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" android:text="kcal/100ml"
+                            android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" android:text="g/100ml"
+                            android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" android:text="g/100ml"
+                            android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" android:text="g/100ml"
+                            android:textColor="@color/white" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+                        android:layout_marginTop="10dp" android:layout_marginBottom="10dp">
+                        <TextView android:id="@+id/tvEnergy" android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" 
+                            android:textColor="@color/black" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:id="@+id/tvProtein" android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" 
+                            android:textColor="@color/black" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:id="@+id/tvCarbohydrate" android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" 
+                            android:textColor="@color/black" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                        <TextView android:id="@+id/tvFat" android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center" 
+                            android:textColor="@color/black" android:textSize="@dimen/BasicTextSize" android:layout_weight="1" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+    	</LinearLayout>
+    </ScrollView>
+</LinearLayout>

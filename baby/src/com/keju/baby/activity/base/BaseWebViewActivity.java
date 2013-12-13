@@ -24,6 +24,7 @@ public class BaseWebViewActivity extends BaseActivity {
 	protected TextView tvTitle;
 	protected WebView webView;
 	protected View viewWebTab;
+	protected boolean isMother = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,7 +67,7 @@ public class BaseWebViewActivity extends BaseActivity {
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
 				super.onPageStarted(view, url, favicon);
 				setWebTabVisible(url);
-				if(url.contains(Constants.URL_NEED)){
+				if(url.contains(Constants.URL_NEED) || url.contains(Constants.URL_GROW_LINE)){
 					BabyMainActivity.setTabVisible(false);
 					setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 				}else{
@@ -112,7 +113,11 @@ public class BaseWebViewActivity extends BaseActivity {
 		}
 		for (int i = 0; i < babyDetailUrls.length; i++) {
 			if(url.contains(babyDetailUrls[i])){
-				btnLeft.setVisibility(View.VISIBLE);
+				if(isMother){
+					btnLeft.setVisibility(View.INVISIBLE);
+				}else{
+					btnLeft.setVisibility(View.VISIBLE);
+				}
 				break;
 			}
 		}

@@ -35,8 +35,9 @@
         <activity  android:name=".activity.AuthorizeActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.SettingActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.ChangePasswordActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
-        <activity  android:name=".activity.NewAddBabyRecordActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden" android:windowSoftInputMode="stateHidden|adjustPan"></activity>
+        <activity  android:name=".activity.NewAddBabyRecordActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden" android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity  android:name=".activity.ChooseMilkActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.ComplicationActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         
         <!-- 登录相关界面 -->
         <activity  android:name=".activity.login.LoginActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>

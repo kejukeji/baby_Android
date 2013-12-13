@@ -8,10 +8,10 @@
         <ImageView android:id="@+id/ivAvatar" android:layout_width="60dp" android:layout_height="60dp" android:scaleType="centerCrop"/>
         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="horizontal"
             android:gravity="center">
-            <TextView android:id="@+id/tvName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/gold"
-                android:textSize="@dimen/LargeTextSize"/>
-            <TextView android:id="@+id/tvAge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/gold"
-                android:textSize="@dimen/LargeTextSize" android:layout_marginLeft="10dp"/>
+            <TextView android:id="@+id/tvName" android:layout_width="0dp" android:layout_height="wrap_content" android:textColor="@color/gold"
+                android:textSize="@dimen/LargeTextSize" android:layout_weight="2" android:singleLine="true" android:ellipsize="end" android:gravity="center_horizontal"/>
+            <TextView android:id="@+id/tvAge" android:layout_width="0dp" android:layout_height="wrap_content" android:textColor="@color/gold"
+                android:textSize="@dimen/LargeTextSize" android:layout_marginLeft="10dp" android:layout_weight="1" android:gravity="center_horizontal"/>
         </LinearLayout>
         <ImageView android:id="@+id/ivCollect" android:layout_width="wrap_content" android:layout_height="wrap_content" 
              android:layout_marginRight="5dp" android:padding="5dp"/>

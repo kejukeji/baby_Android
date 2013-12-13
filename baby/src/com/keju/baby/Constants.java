@@ -46,6 +46,8 @@ public class Constants {
 	 */
 	public static final int REQUEST_CREATE_BABY = 5;//创建婴儿账户
 	public static final int REQUEST_NEW_ADD_VISIT_CODE = 6;//新增随访记录
+	public static final int REQUEST_NEW_ADD_MILK = 7;//新增随访记录
+	public static final int REQUEST_COMPLICATION = 8;//合并症
 	/**
 	 * 分页数据
 	 */
@@ -60,7 +62,7 @@ public class Constants {
 	 */
 	public static final String URL_BASE_HTML = "http://42.121.108.142:7007/html/";
 	public static final String URL_DOCTOR_LOGIN = "login.html";//医生登录
-	public static final String URL_BABY_LOGIN = "login.html";//婴儿登录
+	public static final String URL_BABY_LOGIN = "mummy/login.html";//婴儿登录
 	public static final String URL_REGISTER = "register.html";//注册
 	public static final String URL_FITMENT_LIST = "raise_dir.html";//育儿指南列表
 	public static final String URL_FITMENT_DETAIL = "raise.html";//育儿指南详情

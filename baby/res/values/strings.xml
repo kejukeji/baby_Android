@@ -100,14 +100,20 @@
     <string name="search_clean">清除历史</string>
     <!-- “新增随访记录”界面 -->
     <string name="add_visit_record">新增随访记录</string>
-    <string name="add_visit_record_time">测量日期:</string>
-    <string name="add_visit_record_weight">体重:</string>
-    <string name="add_visit_record_height">身长:</string>
-    <string name="add_visit_record_head">头围:</string>
-    <string name="add_visit_record_feed1">母乳喂养量:</string>
-    <string name="add_visit_record_milk">配方奶种类:</string>
+    <string name="add_visit_record_time">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;测量日期:</string>
+    <string name="add_visit_record_weight">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;体重:</string>
+    <string name="add_visit_record_height">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;身长:</string>
+    <string name="add_visit_record_head">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;头围:</string>
+    <string name="add_visit_record_feed1">&#160;&#160;&#160;&#160;母乳喂养量:</string>
+    <string name="add_visit_record_milk">&#160;&#160;&#160;&#160;配方奶种类:</string>
     <string name="add_visit_record_feed2">配方奶喂养量:</string>
     
+    <!-- “配方奶”界面 -->  
+    <string name="choose_milk_yard">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;院内/外：</string>
+    <string name="choose_milk_brand">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;品牌：</string>
+    <string name="choose_milk_kind">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;种类：</string>
+    <string name="choose_milk_add_milk">新增配方奶</string>
+    <string name="choose_milk_check">查看营养数据</string>
     <!-- 单位 -->
     <string name="g">g</string>
     <string name="cm">cm</string>
@@ -124,17 +130,17 @@
     
     <!-- 婴儿“修改资料”界面 -->
     <string name="doctor_creat_phone">家长手机号:</string>
-    <string name="doctor_creat_name">婴儿名:</string>
-    <string name="doctor_creat_start_pw">初始密码:</string>
-    <string name="doctor_creat_end_pw">确认密码:</string>
-    <string name="doctor_creat_gender">性别:</string>
-    <string name="doctor_creat_parturition_time">预产期:</string>
-    <string name="doctor_creat_birthday">出生日期:</string>
-    <string name="doctor_creat_weight">出生体重:</string>
-    <string name="doctor_creat_height">出生身长:</string>
-    <string name="doctor_creat_head">出生头围:</string>
-    <string name="doctor_creat_way">分娩方式:</string>
-    <string name="doctor_creat_complication">合并症:</string>
+    <string name="doctor_creat_name">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;婴儿名:</string>
+    <string name="doctor_creat_start_pw">&#160;&#160;&#160;&#160;初始密码:</string>
+    <string name="doctor_creat_end_pw">&#160;&#160;&#160;&#160;确认密码:</string>
+    <string name="doctor_creat_gender">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;性别:</string>
+    <string name="doctor_creat_parturition_time">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;预产期:</string>
+    <string name="doctor_creat_birthday">&#160;&#160;&#160;&#160;出生日期:</string>
+    <string name="doctor_creat_weight">&#160;&#160;&#160;&#160;出生体重:</string>
+    <string name="doctor_creat_height">&#160;&#160;&#160;&#160;出生身长:</string>
+    <string name="doctor_creat_head">&#160;&#160;&#160;&#160;出生头围:</string>
+    <string name="doctor_creat_way">&#160;&#160;&#160;&#160;分娩方式:</string>
+    <string name="doctor_creat_complication">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;合并症:</string>
     <string name="doctor_creat_recover_days">恢复出生体重天数:</string>
     <string name="doctor_creat_apgar">Apgar评分:</string>
     <string name="doctor_creat_grow_measure">出长参考标准:</string>
@@ -142,12 +148,6 @@
     <string name="doctor_creat_choice2">九城</string>
     <string name="doctor_creat_choice3">上海</string>
     
-  <!-- “配方奶”界面 -->  
-    <string name="choose_milk_yard">院内/外：</string>
-    <string name="choose_milk_brand">品牌：</string>
-    <string name="choose_milk_kind">种类：</string>
-    <string name="choose_milk_add_milk">新增配方奶</string>
-    <string name="choose_milk_check">查看营养数据</string>
     
   <!-- 婴儿状态总结(随访记录“分析”界面) -->
     <string name="baby_status_gap">营养差距></string>

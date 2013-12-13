@@ -3,7 +3,7 @@
 
     
     <color name="blue">#ffccddff</color>
-    <color name="grey">#58616d</color>
+    
     <color name="darkgrey">#ff404040</color>
     <color name="toasterro">#9fd524</color>
     <color name="lightgrey">#ff888888</color>
@@ -15,4 +15,6 @@
 	<color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="gold">#9a8335</color>
+    <color name="grey">#8a8a8a</color>
+    
 </resources>
