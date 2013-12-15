@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import com.keju.baby.Constants;
 import com.keju.baby.SystemException;
+import com.keju.baby.bean.AcademicAbstractBean;
 import com.keju.baby.bean.BabyBean;
 import com.keju.baby.bean.ResponseBean;
 import com.keju.baby.bean.YardBean;
@@ -60,6 +61,40 @@ public class BusinessHelper {
 		try {
 			obj = httpClient.get(
 					BASE_URL + "baby/list",
+					new PostParameter[] { new PostParameter("page", pageIndex),
+							new PostParameter("doctor_id", doctor_id) }).asJSONObject();
+			int status = obj.getInt("code");
+			if (status == Constants.REQUEST_SUCCESS) {
+				response = new ResponseBean<BabyBean>(obj);
+				List<BabyBean> list = null;
+				if (!TextUtils.isEmpty(obj.getString("baby_list"))) {
+					list = BabyBean.constractList(obj.getJSONArray("baby_list"));
+				} else {
+					list = new ArrayList<BabyBean>();
+				}
+				response.setObjList(list);
+			} else {
+				response = new ResponseBean<BabyBean>(Constants.REQUEST_FAILD, obj.getString("message"));
+			}
+		} catch (SystemException e1) {
+			response = new ResponseBean<BabyBean>(Constants.REQUEST_FAILD, "服务器连接失败");
+		} catch (JSONException e) {
+			response = new ResponseBean<BabyBean>(Constants.REQUEST_FAILD, "json解析错误");
+		}
+		return response;
+	}
+	/**
+	 * 获取收藏的婴儿列表
+	 * @param pageIndex
+	 * @param doctor_id
+	 * @return
+	 */
+	public ResponseBean<BabyBean> getCollectBabyList(int pageIndex, int doctor_id) {
+		ResponseBean<BabyBean> response = null;
+		JSONObject obj;
+		try {
+			obj = httpClient.get(
+					BASE_URL + "baby/collect/list",
 					new PostParameter[] { new PostParameter("page", pageIndex),
 							new PostParameter("doctor_id", doctor_id) }).asJSONObject();
 			int status = obj.getInt("code");
@@ -364,5 +399,47 @@ public class BusinessHelper {
 			bean = new ResponseBean<YardBean>(Constants.REQUEST_FAILD, "json解析错误");
 		}
 		return bean;
+	}
+	/**
+	 * 获取学术文摘列表
+	 * @return
+	 */
+	public ResponseBean<AcademicAbstractBean> getAcademicAbstract(int pageIndex,int doctor_id){
+		ResponseBean<AcademicAbstractBean> bean ;
+		try {
+			JSONObject obj = httpClient.get(BASE_URL + "academic",new PostParameter[]{new PostParameter("doctor_id", doctor_id),
+					new PostParameter("page", pageIndex)}).asJSONObject();
+			int status = obj.getInt("code");
+			if (status == Constants.REQUEST_SUCCESS) {
+				bean = new ResponseBean<AcademicAbstractBean>(obj);
+				List<AcademicAbstractBean> list = null;
+				if (!TextUtils.isEmpty(obj.getString("academic_list"))) {
+					list = AcademicAbstractBean.constractList(obj.getJSONArray("academic_list"));
+				} else {
+					list = new ArrayList<AcademicAbstractBean>();
+				}
+				bean.setObjList(list);
+			} else {
+				bean = new ResponseBean<AcademicAbstractBean>(Constants.REQUEST_FAILD, obj.getString("message"));
+			}
+		} catch (SystemException e) {
+			bean = new ResponseBean<AcademicAbstractBean>(Constants.REQUEST_FAILD, "服务器连接失败");
+		} catch (JSONException e) {
+			bean = new ResponseBean<AcademicAbstractBean>(Constants.REQUEST_FAILD, "json解析错误");
+		}
+		return bean;
+	}
+	/**
+	 * 收藏或取消收藏 学术文摘接口
+	 * @param academic_id
+	 * @param doctorId
+	 * @return
+	 * @throws SystemException
+	 */
+	public JSONObject collectAcademic(int academic_id, int doctorId) throws SystemException {
+		return httpClient.get(
+				BASE_URL + "doctor/collect",
+				new PostParameter[] { new PostParameter("type", "abstract"), new PostParameter("abstract_id", academic_id),
+						new PostParameter("doctor_id", doctorId) }).asJSONObject();
 	}
 }

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -27,10 +28,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gold"
+            android:lineSpacingExtra="2dp"
             android:textSize="@dimen/BasicTextSize" />
 
         <Button
-            android:id="@+id/tvCollectCancel"
+            android:id="@+id/btnCollect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -38,7 +40,6 @@
             android:background="@drawable/btn_selector"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:text="@string/academic_abstract_collect"
             android:textColor="@color/white"
             android:layout_marginTop="5dp"
             android:textSize="@dimen/LargeTextSize" />

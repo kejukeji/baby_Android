@@ -43,7 +43,9 @@ import com.keju.baby.AsyncImageLoader.ImageCallback;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
+import com.keju.baby.activity.ComplicationActivity;
 import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.activity.doctor.DoctorCreatBabyAccountActivity;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
 import com.keju.baby.util.DateUtil;
@@ -156,6 +158,9 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 			case Constants.CAMERA_WITH_DATA:// 拍照
 				doCropPhoto(mCurrentPhotoFile);
 				break;
+			case Constants.REQUEST_COMPLICATION:
+				tvComplication.setText(data.getStringExtra(Constants.EXTRA_DATA));
+				break;
 			}
 		}
 	}
@@ -236,7 +241,6 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -276,6 +280,11 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 			showDialog(list);
 			break;
 		case R.id.tvComplication:
+			Bundle b= new Bundle();
+			b.putString(Constants.EXTRA_DATA, tvComplication.getText().toString());
+			Intent intent = new Intent(this, ComplicationActivity.class);
+			intent.putExtras(b);
+			startActivityForResult(intent, Constants.REQUEST_COMPLICATION);
 			break;
 		case R.id.ivAvatar:
 			LayoutInflater inflater = getLayoutInflater();

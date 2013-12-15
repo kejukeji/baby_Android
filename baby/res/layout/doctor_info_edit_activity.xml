@@ -103,32 +103,6 @@
                     <TextView
                         style="@style/info_label_style"
                         android:gravity="right"
-                        android:text="医生ID：" />
-
-                    <TextView
-                        android:id="@+id/tvId"
-                        style="@style/info_text_style"/>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_grey_right_arrow"
-                        android:visibility="invisible" />
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@drawable/home_line_bit" />
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="15dp" >
-
-                    <TextView
-                        style="@style/info_label_style"
-                        android:gravity="right"
                         android:text="医生名：" />
 
                     <EditText

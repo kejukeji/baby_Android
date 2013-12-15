@@ -53,6 +53,7 @@
         <activity  android:name=".activity.doctor.SearchActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.doctor.SearchResultActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.doctor.AcademicAbstractsActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.AbstractDetailActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.doctor.MeetingNotifyAcitivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         
         <activity  android:name=".activity.DoctorChangePassword" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>

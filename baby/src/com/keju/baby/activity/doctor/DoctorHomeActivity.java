@@ -53,16 +53,23 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	private ListView listView; //
 	private List<BabyBean> list; // adapter数据源
 	private List<BabyBean> allList;//所有的list
+	private boolean isAllLoad = false;// 是否正在加载数据
+	private boolean isAllLoadMore = false;
+	private boolean isAllComplete = false;// 是否加载完了；
+
+	private int allPageIndex = 1;
 	private List<BabyBean> collectList;//收藏的list
 	private HomeAdapter adapter;
 	private View vFooter;
 	private ProgressBar pbFooter;
 	private TextView tvFooterMore;
-	private boolean isLoad = false;// 是否正在加载数据
-	private boolean isLoadMore = false;
-	private boolean isComplete = false;// 是否加载完了；
-
-	private int pageIndex = 1;
+	
+	private boolean isCollectLoad = false;// 是否正在加载数据
+	private boolean isCollectLoadMore = false;
+	private boolean isCollectComplete = false;// 是否加载完了；
+	private int collectPageIndex = 1;
+	
+	
 	private long exitTime;
 	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
@@ -93,11 +100,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		listView = (ListView) findViewById(R.id.listView);
 		
 		doctorHomeRadioGroup = (RadioGroup) findViewById(R.id.dochome_radio_group);
-		if (NetUtil.checkNet(this)) {
-			new GetBabyListTask().execute();
-		} else {
-			showShortToast(R.string.NoSignalException);
-		}
+		
 	}
 	
 	/**
@@ -115,6 +118,13 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		listView.setOnScrollListener(LoadListener);
 		listView.setOnItemClickListener(itemListener);
 		doctorHomeRadioGroup.setOnCheckedChangeListener(this);
+		
+		if (NetUtil.checkNet(this)) {
+			new GetBabyListTask().execute();
+			new GetCollectBabyListTask().execute();
+		} else {
+			showShortToast(R.string.NoSignalException);
+		}
 	}
 	/**
 	 * 刷新数据
@@ -122,7 +132,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	private void refreshData() {
 		if (NetUtil.checkNet(this)) {
 			isRefresh = true;
-			pageIndex = 1;
+			allPageIndex = 1;
 			new GetBabyListTask().execute();
 		} else {
 			showShortToast(R.string.NoSignalException);
@@ -149,19 +159,27 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		@Override
 		public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 			if (firstVisibleItem + visibleItemCount == totalItemCount) {
-				isLoadMore = true;
+				isAllLoadMore = true;
+				isCollectLoadMore = true;
 			} else {
-				isLoadMore = false;
+				isAllLoadMore = false;
+				isCollectLoadMore = false;
 			}
 		}
 
 		@Override
 		public void onScrollStateChanged(AbsListView view, int scrollState) {
 			// 滚动到最后，默认加载下一页
-			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE && isLoadMore) {
+			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE && isAllLoadMore) {
 				if (NetUtil.checkNet(context)) {
-					if (!isLoad && !isComplete) {
-						new GetBabyListTask().execute();
+					if(doctorHomeRadioGroup.getCheckedRadioButtonId() == R.id.dochome_allbaby){
+						if (!isAllLoad && !isAllComplete) {
+							new GetBabyListTask().execute();
+						}
+					}else{
+						if (!isCollectLoad && !isCollectComplete) {
+							new GetCollectBabyListTask().execute();
+						}
 					}
 				} else {
 					showShortToast(R.string.NoSignalException);
@@ -200,14 +218,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			adapter.notifyDataSetChanged();
 			break;
 		case R.id.dochome_mycollect:
-			collectList.clear();
 			list.clear();
-			for (int i = 0; i < allList.size(); i++) {
-				BabyBean bean = allList.get(i);
-				if(bean.isCollect()){
-					collectList.add(bean);
-				}
-			}
 			list.addAll(collectList);
 			adapter.notifyDataSetChanged();
 			break;
@@ -317,14 +328,18 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			refreshData();
 		}
 	}
-
+	/**
+	 * 获取婴儿列表
+	 * @author Zhoujun
+	 *
+	 */
 	private class GetBabyListTask extends AsyncTask<Void, Void, ResponseBean<BabyBean>> {
 		
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			if(isLoadMore){
-				isLoad = true;
+			if(isAllLoadMore){
+				isAllLoad = true;
 				pbFooter.setVisibility(View.VISIBLE);
 				tvFooterMore.setText(R.string.loading);
 			}
@@ -336,7 +351,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		@Override
 		protected ResponseBean<BabyBean> doInBackground(Void... params) {
 			int doctor_id = SharedPrefUtil.getUid(context);
-			return new BusinessHelper().getBabyList(pageIndex, doctor_id);
+			return new BusinessHelper().getBabyList(allPageIndex, doctor_id);
 		}
 
 		@Override
@@ -353,25 +368,25 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 				}
 				if (tempList.size() > 0) {
 					allList.addAll(tempList);
-					pageIndex++;
+					allPageIndex++;
 				} else {
 					isLastPage = true;
 				}
 				if (isLastPage) {
 					pbFooter.setVisibility(View.GONE);
 					tvFooterMore.setText(R.string.load_all);
-					isComplete = true;
+					isAllComplete = true;
 				} else {
 					if (tempList.size() > 0 && tempList.size() < Constants.PAGE_SIZE) {
 						pbFooter.setVisibility(View.GONE);
 						tvFooterMore.setText("");
-						isComplete = true;
+						isAllComplete = true;
 					} else {
 						pbFooter.setVisibility(View.GONE);
 						tvFooterMore.setText("上拉查看更多");
 					}
 				}
-				if (pageIndex == 1 && tempList.size() == 0) {
+				if (allPageIndex == 1 && tempList.size() == 0) {
 					tvFooterMore.setText("");
 				}
 
@@ -379,13 +394,89 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 				tvFooterMore.setText("");
 				showShortToast(result.getError());
 			}
+			list.clear();
 			list.addAll(allList);
 			adapter.notifyDataSetChanged();
-			isLoad = false;
+			isAllLoad = false;
 			isRefresh = false;
 		}
 
 	}
+	/**
+	 * 获取收藏的婴儿列表
+	 * @author Zhoujun
+	 *
+	 */
+	private class GetCollectBabyListTask extends AsyncTask<Void, Void, ResponseBean<BabyBean>> {
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			if(isCollectLoadMore){
+				isCollectLoad = true;
+				pbFooter.setVisibility(View.VISIBLE);
+				tvFooterMore.setText(R.string.loading);
+			}
+			if(isRefresh){
+				showPd(R.string.loading);
+			}
+		}
+		
+		@Override
+		protected ResponseBean<BabyBean> doInBackground(Void... params) {
+			int doctor_id = SharedPrefUtil.getUid(context);
+			return new BusinessHelper().getCollectBabyList(collectPageIndex, doctor_id);
+		}
+		
+		@Override
+		protected void onPostExecute(ResponseBean<BabyBean> result) {
+			super.onPostExecute(result);
+			pbFooter.setVisibility(View.GONE);
+			dismissPd();
+			if (result.getStatus() == Constants.REQUEST_SUCCESS) {
+				List<BabyBean> tempList = result.getObjList();
+				boolean isLastPage = false;
+				if (tempList.size() > 0) {
+					collectList.addAll(tempList);
+					collectPageIndex++;
+				} else {
+					isLastPage = true;
+				}
+				if (isLastPage) {
+					pbFooter.setVisibility(View.GONE);
+					tvFooterMore.setText(R.string.load_all);
+					isCollectComplete = true;
+				} else {
+					if (tempList.size() > 0 && tempList.size() < Constants.PAGE_SIZE) {
+						pbFooter.setVisibility(View.GONE);
+						tvFooterMore.setText("");
+						isCollectComplete = true;
+					} else {
+						pbFooter.setVisibility(View.GONE);
+						tvFooterMore.setText("上拉查看更多");
+					}
+				}
+				if (collectPageIndex == 1 && tempList.size() == 0) {
+					tvFooterMore.setText("");
+				}
+				
+			} else {
+				tvFooterMore.setText("");
+				showShortToast(result.getError());
+			}
+			list.clear();
+			list.addAll(collectList);
+			adapter.notifyDataSetChanged();
+			isCollectLoad = false;
+			isRefresh = false;
+		}
+		
+	}
+	/**
+	 * 收藏取消收藏
+	 * @author Zhoujun
+	 *
+	 */
 	private class CollectTask extends AsyncTask<Void, Void, JSONObject>{
 		private BabyBean bean;
 		

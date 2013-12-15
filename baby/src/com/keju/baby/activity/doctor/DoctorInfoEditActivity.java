@@ -27,13 +27,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
@@ -45,11 +49,12 @@ import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
 import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.bean.AcademicAbstractBean;
 import com.keju.baby.bean.DoctorBelongDepartmentBean;
 import com.keju.baby.bean.DoctorDepartmentBean;
 import com.keju.baby.bean.DoctorHospitalBean;
 import com.keju.baby.bean.DoctorProvinceBean;
-import com.keju.baby.bean.MyCollectBean;
+import com.keju.baby.bean.ResponseBean;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
 import com.keju.baby.util.ImageUtil;
@@ -71,7 +76,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 
 	private ImageView ivAvatar;
 	private EditText etDoctorName, etDoctorEmil, etDoctorNumber;
-	private TextView tvId, tvDoctorAddress, tvDoctorHospital, tvDoctorDepartment, tvJobTitle;
+	private TextView tvName, tvDoctorAddress, tvDoctorHospital, tvDoctorDepartment, tvJobTitle;
 	private LinearLayout viewDoctorAddress, viewDoctorHospital, viewDoctorDepartment, viewJobTitle;
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
 	private File avatarFile;// 头像文件
@@ -92,11 +97,18 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 
 	private ListView listView;
 	private CollectionAdapter collectionAdapter;
-	private List<MyCollectBean> list;
+	private List<AcademicAbstractBean> list;
 	private int proviceId;
 	private int hospitalId;
 	private int departmentId;
 	private int positionId;
+	private View vFooter;
+	private ProgressBar pbFooter;
+	private TextView tvFooterMore;
+	private boolean isLoad = false;// 是否正在加载数据
+	private boolean isLoadMore = false;
+	private boolean isComplete = false;// 是否加载完了；
+	private int pageIndex = 1;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -117,7 +129,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		radio_group = (RadioGroup) findViewById(R.id.radio_group);
 		radio_group.setOnCheckedChangeListener(this);
 		viewInfo = findViewById(R.id.viewInfo);
-		tvId = (TextView) findViewById(R.id.tvId);
+		tvName = (TextView) findViewById(R.id.tvName);
 		ivAvatar = (ImageView) this.findViewById(R.id.ivAvatar);
 		ivAvatar.setOnClickListener(this);
 		etDoctorName = (EditText) this.findViewById(R.id.etDoctorName);
@@ -136,6 +148,11 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		viewDoctorDepartment.setOnClickListener(this);
 		viewJobTitle = (LinearLayout) this.findViewById(R.id.viewJobTitle);
 		viewJobTitle.setOnClickListener(this);
+
+		// 加载更多footer
+		vFooter = getLayoutInflater().inflate(R.layout.footer, null);
+		pbFooter = (ProgressBar) vFooter.findViewById(R.id.progressBar);
+		tvFooterMore = (TextView) vFooter.findViewById(R.id.tvMore);
 		listView = (ListView) findViewById(R.id.listView);
 	}
 
@@ -148,27 +165,72 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		btnRight.setImageResource(R.drawable.btn_commit_selector);
 		tvTitle.setText("个人中心");
 
-		list = new ArrayList<MyCollectBean>();
+		list = new ArrayList<AcademicAbstractBean>();
 		collectionAdapter = new CollectionAdapter();
-
+		
+		listView.addFooterView(vFooter);
+		listView.setOnScrollListener(LoadListener);
+		listView.setAdapter(collectionAdapter);
+		listView.setOnItemClickListener(clicklistener);
 		listView.setAdapter(collectionAdapter);
 		if (NetUtil.checkNet(this)) {
 			new PostDoctorInforTask().execute();
 			new GetDoctorTask().execute();
+			new GetDataTask().execute();
 		} else {
 			showShortToast(R.string.NoSignalException);
 		}
 
 	}
+	OnItemClickListener clicklistener = new OnItemClickListener() {
 
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			AcademicAbstractBean bean = list.get(position);
+			Bundle b = new Bundle();
+			b.putSerializable(Constants.EXTRA_DATA, bean);
+			openActivity(AbstractDetailActivity.class, b);
+		}
+	};
+	/**
+	 * 滚动监听器
+	 */
+	OnScrollListener LoadListener = new OnScrollListener() {
+		@Override
+		public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			if (firstVisibleItem + visibleItemCount == totalItemCount) {
+				isLoadMore = true;
+			} else {
+				isLoadMore = false;
+			}
+		}
+
+		@Override
+		public void onScrollStateChanged(AbsListView view, int scrollState) {
+			// 滚动到最后，默认加载下一页
+			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE && isLoadMore) {
+				if (NetUtil.checkNet(context)) {
+					if (!isLoad && !isComplete) {
+						new GetDataTask().execute();
+					}
+				} else {
+					showShortToast(R.string.NoSignalException);
+				}
+			} else {
+
+			}
+		}
+	};
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.rb_info:
+			btnRight.setVisibility(View.VISIBLE);
 			viewInfo.setVisibility(View.VISIBLE);
 			listView.setVisibility(View.GONE);
 			break;
 		case R.id.rb_collect:
+			btnRight.setVisibility(View.INVISIBLE);
 			viewInfo.setVisibility(View.GONE);
 			listView.setVisibility(View.VISIBLE);
 			break;
@@ -836,25 +898,164 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder viewHolder = null;
+			final AcademicAbstractBean bean = list.get(position);
 			if (convertView == null) {
 				viewHolder = new ViewHolder();
-				convertView = getLayoutInflater().inflate(R.layout.doctor_my_collect_listitem, null);
-				viewHolder.title = (TextView) convertView.findViewById(R.id.my_collect_title);
-				viewHolder.content = (TextView) convertView.findViewById(R.id.my_collect_content);
+				convertView = getLayoutInflater().inflate(R.layout.academic_abstract_item, null);
+				viewHolder.title = (TextView) convertView.findViewById(R.id.academic_title);
+				viewHolder.content = (TextView) convertView.findViewById(R.id.academic_content);
+				viewHolder.btnCollect = (Button) convertView.findViewById(R.id.btnCollect);
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			viewHolder.title.setText(list.get(position).getTitle());
-			viewHolder.content.setText(list.get(position).getContent());
+			viewHolder.title.setText(bean.getTitle());
+			viewHolder.content.setText(bean.getContent());
+			String content = bean.getContent();
+			if(content.length() > 120){
+				content = content.substring(0, 120) + "...";
+			}
+			viewHolder.content.setText(bean.getContent());
+			if(bean.isCollect()){
+				viewHolder.btnCollect.setText(R.string.doctor_my_collect_cancel);
+			}else{
+				viewHolder.btnCollect.setText(R.string.academic_abstract_collect);
+			}
+			viewHolder.btnCollect.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if(NetUtil.checkNet(DoctorInfoEditActivity.this)){
+						new CollectTask(bean).execute();
+					}else{
+						showShortToast(R.string.NoSignalException);
+					}
+				}
+			});
 			return convertView;
 		}
 
 		class ViewHolder {
 			public TextView title;
 			public TextView content;
+			public Button btnCollect;
 		}
 
+	}
+	/**
+	 * 收藏取消收藏接口
+	 * @author Zhoujun
+	 *
+	 */
+	private class CollectTask extends AsyncTask<Void, Void, JSONObject>{
+		private AcademicAbstractBean bean;
+		
+		public CollectTask(AcademicAbstractBean bean) {
+			super();
+			this.bean = bean;
+		}
+
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+			int doctorId = SharedPrefUtil.getUid(DoctorInfoEditActivity.this);
+			try {
+				return new BusinessHelper().collectAbstract(bean.getId(), doctorId);
+			} catch (SystemException e) {
+				return null;
+			}
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			if(result != null){
+				try {
+					int status = result.getInt("code");
+					if(status == Constants.REQUEST_SUCCESS){
+						boolean isCollect = bean.isCollect();
+						bean.setCollect(!isCollect);
+						collectionAdapter.notifyDataSetChanged();
+						if(isCollect){
+							showShortToast("取消收藏成功");
+						}else{
+							showShortToast("收藏成功");
+						}
+					}else{
+						showShortToast(result.getString("message"));
+					}
+				} catch (JSONException e) {
+					showShortToast(R.string.json_exception);
+				}
+			}else{
+				showShortToast(R.string.connect_server_exception);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @author Zhoujun
+	 * 
+	 */
+	private class GetDataTask extends AsyncTask<Void, Void, ResponseBean<AcademicAbstractBean>> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			if (isLoadMore) {
+				isLoad = true;
+				pbFooter.setVisibility(View.VISIBLE);
+				tvFooterMore.setText(R.string.loading);
+			} else {
+				showPd(R.string.loading);
+			}
+
+		}
+
+		@Override
+		protected ResponseBean<AcademicAbstractBean> doInBackground(Void... params) {
+			int doctor_id = SharedPrefUtil.getUid(context);
+			return new BusinessHelper().getAcademicAbstract(pageIndex, doctor_id);
+		}
+
+		@Override
+		protected void onPostExecute(ResponseBean<AcademicAbstractBean> result) {
+			super.onPostExecute(result);
+			pbFooter.setVisibility(View.GONE);
+			dismissPd();
+			if (result.getStatus() == Constants.REQUEST_SUCCESS) {
+				List<AcademicAbstractBean> tempList = result.getObjList();
+				boolean isLastPage = false;
+				if (tempList.size() > 0) {
+					list.addAll(tempList);
+					pageIndex++;
+				} else {
+					isLastPage = true;
+				}
+				if (isLastPage) {
+					pbFooter.setVisibility(View.GONE);
+					tvFooterMore.setText(R.string.load_all);
+					isComplete = true;
+				} else {
+					if (tempList.size() > 0 && tempList.size() < Constants.PAGE_SIZE) {
+						pbFooter.setVisibility(View.GONE);
+						tvFooterMore.setText("");
+						isComplete = true;
+					} else {
+						pbFooter.setVisibility(View.GONE);
+						tvFooterMore.setText("上拉查看更多");
+					}
+				}
+				if (pageIndex == 1 && tempList.size() == 0) {
+					tvFooterMore.setText("");
+				}
+
+			} else {
+				tvFooterMore.setText("");
+				showShortToast(result.getError());
+			}
+			collectionAdapter.notifyDataSetChanged();
+			isLoad = false;
+		}
 	}
 
 	/**
@@ -896,7 +1097,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 						tvJobTitle.setText(obj.getString("positions"));
 						etDoctorEmil.setText(obj.getString("email"));
 						etDoctorNumber.setText(obj.getString("tel"));
-						tvId.setText(obj.getInt("id") + "");
+						tvName.setText(obj.getString("doctor_name"));
 
 						String avatarUrl = BusinessHelper.PIC_URL + obj.getString("picture_path");
 						ivAvatar.setTag(avatarUrl);
@@ -906,7 +1107,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 									@Override
 									public void imageLoaded(Drawable imageDrawable, String imageUrl) {
 										ImageView image = (ImageView) ivAvatar.findViewWithTag(imageUrl);
-										if(image != null){
+										if (image != null) {
 											if (imageDrawable != null) {
 												ivAvatar.setImageDrawable(imageDrawable);
 											} else {
@@ -932,7 +1133,9 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		}
 
 	}
+
 	private long exitTime;
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
