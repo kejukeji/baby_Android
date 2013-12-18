@@ -112,7 +112,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_grey_right_arrow" />
+                        android:background="@drawable/ic_grey_right_arrow"
+                        android:visibility="invisible" />
                 </LinearLayout>
 
                 <View
@@ -251,7 +252,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_grey_right_arrow" />
+                        android:background="@drawable/ic_grey_right_arrow"
+                        android:visibility="invisible" />
                 </LinearLayout>
 
                 <View
@@ -278,7 +280,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_grey_right_arrow" />
+                        android:background="@drawable/ic_grey_right_arrow" 
+                        android:visibility="invisible"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

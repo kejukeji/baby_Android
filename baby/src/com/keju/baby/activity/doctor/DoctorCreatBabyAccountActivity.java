@@ -383,7 +383,8 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 					int status = result.getInt("code");
 					if(status == Constants.REQUEST_SUCCESS){
 						showShortToast("创建婴儿账户成功");
-						setResult(RESULT_OK);
+						Intent intent = new Intent(Constants.REQUEST_CREATE_BABY + "");
+						sendBroadcast(intent);
 						finish();
 					}else{
 						showShortToast(result.getString("message"));

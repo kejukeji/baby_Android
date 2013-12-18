@@ -6,6 +6,9 @@ import android.view.View;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseWebViewActivity;
+import com.keju.baby.activity.login.DoctorLoginActivity;
+import com.keju.baby.activity.login.LoginActivity;
+import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 修改密码界面(通过参数判断是修改医生的密码还是婴儿的密码)
@@ -37,6 +40,7 @@ public class ChangePasswordActivity extends BaseWebViewActivity {
 		webView.addJavascriptInterface(new Object() {
 			public void webviewPassword(int code) {
 				if(code == 200){
+					openActivity(LoginActivity.class);
 					finish();
 				}
 			}

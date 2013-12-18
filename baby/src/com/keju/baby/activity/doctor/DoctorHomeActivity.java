@@ -6,7 +6,10 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,18 +54,23 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		OnClickListener {
 	private RadioGroup doctorHomeRadioGroup; // 主页面radiogroup
 	private ListView listView; //
-	private List<BabyBean> list; // adapter数据源
 	private List<BabyBean> allList;//所有的list
+	private View vFooterAll;
+	private ProgressBar pbFooterAll;
+	private TextView tvFooterMoreAll;
 	private boolean isAllLoad = false;// 是否正在加载数据
 	private boolean isAllLoadMore = false;
 	private boolean isAllComplete = false;// 是否加载完了；
 
 	private int allPageIndex = 1;
+	private ListView listViewCollect; //收藏的婴儿列表
 	private List<BabyBean> collectList;//收藏的list
+	private View vFooterCollect;
+	private ProgressBar pbFooterCollect;
+	private TextView tvFooterMoreCollect;
+	
+	private List<BabyBean> list; // adapter数据源
 	private HomeAdapter adapter;
-	private View vFooter;
-	private ProgressBar pbFooter;
-	private TextView tvFooterMore;
 	
 	private boolean isCollectLoad = false;// 是否正在加载数据
 	private boolean isCollectLoadMore = false;
@@ -74,6 +82,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 	private boolean isRefresh = false;
+	private RefreshReceiver receiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +90,25 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		setContentView(R.layout.doctor_home);
 		findView();
 		fillData();
+		IntentFilter filter = new IntentFilter(Constants.REQUEST_CREATE_BABY + "");
+		receiver = new RefreshReceiver();
+		this.registerReceiver(receiver, filter);
 	}
+	private class RefreshReceiver extends BroadcastReceiver{
 
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if(intent.getAction().equals(Constants.REQUEST_CREATE_BABY + "")){
+				refreshAllBabyData();
+			}
+		}
+		
+	}
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(receiver);
+	}
 	private void findView() {
 
 		btnLeft = (ImageView) findViewById(R.id.btnLeft);
@@ -94,10 +120,15 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		btnLeft.setOnClickListener(this);
 
 		// 加载更多footer
-		vFooter = getLayoutInflater().inflate(R.layout.footer, null);
-		pbFooter = (ProgressBar) vFooter.findViewById(R.id.progressBar);
-		tvFooterMore = (TextView) vFooter.findViewById(R.id.tvMore);
+		vFooterAll = getLayoutInflater().inflate(R.layout.footer, null);
+		pbFooterAll = (ProgressBar) vFooterAll.findViewById(R.id.progressBar);
+		tvFooterMoreAll = (TextView) vFooterAll.findViewById(R.id.tvMore);
+		// 加载收藏更多footer
+		vFooterCollect = getLayoutInflater().inflate(R.layout.footer, null);
+		pbFooterCollect = (ProgressBar) vFooterCollect.findViewById(R.id.progressBar);
+		tvFooterMoreCollect = (TextView) vFooterCollect.findViewById(R.id.tvMore);
 		listView = (ListView) findViewById(R.id.listView);
+		listViewCollect = (ListView) findViewById(R.id.listViewCollect);
 		
 		doctorHomeRadioGroup = (RadioGroup) findViewById(R.id.dochome_radio_group);
 		
@@ -113,15 +144,20 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		list = new ArrayList<BabyBean>();
 		allList = new ArrayList<BabyBean>();
 		collectList = new ArrayList<BabyBean>();
-		listView.addFooterView(vFooter);
+		listView.addFooterView(vFooterAll);
 		listView.setAdapter(adapter);
 		listView.setOnScrollListener(LoadListener);
 		listView.setOnItemClickListener(itemListener);
+		
+		listViewCollect.addFooterView(vFooterCollect);
+		listViewCollect.setAdapter(adapter);
+		listViewCollect.setOnScrollListener(LoadListener);
+		listViewCollect.setOnItemClickListener(itemListener);
+		
 		doctorHomeRadioGroup.setOnCheckedChangeListener(this);
 		
 		if (NetUtil.checkNet(this)) {
 			new GetBabyListTask().execute();
-			new GetCollectBabyListTask().execute();
 		} else {
 			showShortToast(R.string.NoSignalException);
 		}
@@ -129,11 +165,23 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	/**
 	 * 刷新数据
 	 */
-	private void refreshData() {
+	private void refreshAllBabyData() {
 		if (NetUtil.checkNet(this)) {
 			isRefresh = true;
 			allPageIndex = 1;
 			new GetBabyListTask().execute();
+		} else {
+			showShortToast(R.string.NoSignalException);
+		}
+	}
+	/**
+	 * 刷新数据收藏婴儿数据
+	 */
+	private void refreshCollectBabyData() {
+		if (NetUtil.checkNet(this)) {
+			isRefresh = true;
+			collectPageIndex = 1;
+			new GetCollectBabyListTask().execute();
 		} else {
 			showShortToast(R.string.NoSignalException);
 		}
@@ -213,14 +261,20 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.dochome_allbaby:
+			isAllComplete = false;
 			list.clear();
-			list.addAll(allList);
-			adapter.notifyDataSetChanged();
+			allList.clear();
+			refreshAllBabyData();
+			listView.setVisibility(View.VISIBLE);
+			listViewCollect.setVisibility(View.GONE);
 			break;
 		case R.id.dochome_mycollect:
+			isCollectComplete = false;
 			list.clear();
-			list.addAll(collectList);
-			adapter.notifyDataSetChanged();
+			collectList.clear();
+			refreshCollectBabyData();
+			listView.setVisibility(View.GONE);
+			listViewCollect.setVisibility(View.VISIBLE);
 			break;
 		}
 	}
@@ -313,21 +367,22 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			openActivity(SearchActivity.class);
 			break;
 		case R.id.btnLeft:
-			Intent intent = new Intent(this,DoctorCreatBabyAccountActivity.class);
-			startActivityForResult(intent, Constants.REQUEST_CREATE_BABY);
+//			Intent intent = new Intent(this,DoctorCreatBabyAccountActivity.class);
+//			startActivityForResult(intent, Constants.REQUEST_CREATE_BABY);
+			openActivity(DoctorCreatBabyAccountActivity.class);
 			break;
 		default:
 			break;
 		}
 
 	}
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if(resultCode == RESULT_OK && requestCode == Constants.REQUEST_CREATE_BABY ){
-			refreshData();
-		}
-	}
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+//		if(resultCode == RESULT_OK && requestCode == Constants.REQUEST_CREATE_BABY ){
+//			refreshAllBabyData();
+//		}
+//	}
 	/**
 	 * 获取婴儿列表
 	 * @author Zhoujun
@@ -340,8 +395,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			super.onPreExecute();
 			if(isAllLoadMore){
 				isAllLoad = true;
-				pbFooter.setVisibility(View.VISIBLE);
-				tvFooterMore.setText(R.string.loading);
+				pbFooterAll.setVisibility(View.VISIBLE);
+				tvFooterMoreAll.setText(R.string.loading);
 			}
 			if(isRefresh){
 				showPd(R.string.loading);
@@ -357,7 +412,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		@Override
 		protected void onPostExecute(ResponseBean<BabyBean> result) {
 			super.onPostExecute(result);
-			pbFooter.setVisibility(View.GONE);
+			pbFooterAll.setVisibility(View.GONE);
 			dismissPd();
 			if (result.getStatus() == Constants.REQUEST_SUCCESS) {
 				List<BabyBean> tempList = result.getObjList();
@@ -373,25 +428,25 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 					isLastPage = true;
 				}
 				if (isLastPage) {
-					pbFooter.setVisibility(View.GONE);
-					tvFooterMore.setText(R.string.load_all);
+					pbFooterAll.setVisibility(View.GONE);
+					tvFooterMoreAll.setText(R.string.load_all);
 					isAllComplete = true;
 				} else {
 					if (tempList.size() > 0 && tempList.size() < Constants.PAGE_SIZE) {
-						pbFooter.setVisibility(View.GONE);
-						tvFooterMore.setText("");
+						pbFooterAll.setVisibility(View.GONE);
+						tvFooterMoreAll.setText("");
 						isAllComplete = true;
 					} else {
-						pbFooter.setVisibility(View.GONE);
-						tvFooterMore.setText("上拉查看更多");
+						pbFooterAll.setVisibility(View.GONE);
+						tvFooterMoreAll.setText("上拉查看更多");
 					}
 				}
 				if (allPageIndex == 1 && tempList.size() == 0) {
-					tvFooterMore.setText("");
+					tvFooterMoreAll.setText("");
 				}
 
 			} else {
-				tvFooterMore.setText("");
+				tvFooterMoreAll.setText("");
 				showShortToast(result.getError());
 			}
 			list.clear();
@@ -414,8 +469,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 			super.onPreExecute();
 			if(isCollectLoadMore){
 				isCollectLoad = true;
-				pbFooter.setVisibility(View.VISIBLE);
-				tvFooterMore.setText(R.string.loading);
+				pbFooterCollect.setVisibility(View.VISIBLE);
+				tvFooterMoreCollect.setText(R.string.loading);
 			}
 			if(isRefresh){
 				showPd(R.string.loading);
@@ -431,7 +486,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 		@Override
 		protected void onPostExecute(ResponseBean<BabyBean> result) {
 			super.onPostExecute(result);
-			pbFooter.setVisibility(View.GONE);
+			pbFooterCollect.setVisibility(View.GONE);
 			dismissPd();
 			if (result.getStatus() == Constants.REQUEST_SUCCESS) {
 				List<BabyBean> tempList = result.getObjList();
@@ -443,25 +498,25 @@ public class DoctorHomeActivity extends BaseActivity implements OnCheckedChangeL
 					isLastPage = true;
 				}
 				if (isLastPage) {
-					pbFooter.setVisibility(View.GONE);
-					tvFooterMore.setText(R.string.load_all);
+					pbFooterCollect.setVisibility(View.GONE);
+					tvFooterMoreCollect.setText(R.string.load_all);
 					isCollectComplete = true;
 				} else {
 					if (tempList.size() > 0 && tempList.size() < Constants.PAGE_SIZE) {
-						pbFooter.setVisibility(View.GONE);
-						tvFooterMore.setText("");
+						pbFooterCollect.setVisibility(View.GONE);
+						tvFooterMoreCollect.setText("");
 						isCollectComplete = true;
 					} else {
-						pbFooter.setVisibility(View.GONE);
-						tvFooterMore.setText("上拉查看更多");
+						pbFooterCollect.setVisibility(View.GONE);
+						tvFooterMoreCollect.setText("上拉查看更多");
 					}
 				}
 				if (collectPageIndex == 1 && tempList.size() == 0) {
-					tvFooterMore.setText("");
+					tvFooterMoreCollect.setText("");
 				}
 				
 			} else {
-				tvFooterMore.setText("");
+				tvFooterMoreCollect.setText("");
 				showShortToast(result.getError());
 			}
 			list.clear();

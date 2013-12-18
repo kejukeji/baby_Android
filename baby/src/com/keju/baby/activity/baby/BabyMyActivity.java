@@ -45,7 +45,6 @@ import com.keju.baby.R;
 import com.keju.baby.SystemException;
 import com.keju.baby.activity.ComplicationActivity;
 import com.keju.baby.activity.base.BaseActivity;
-import com.keju.baby.activity.doctor.DoctorCreatBabyAccountActivity;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.AndroidUtil;
 import com.keju.baby.util.DateUtil;
@@ -65,14 +64,13 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 
-	private ImageView ivAvatar;
 	private TextView tvId, tvGendar, tvPreproductions, tvDeliveryWay, tvComplication, tvApgar;
 	private EditText etRealName, etHeight, etWeight, etHeadCircumference;
 
+	private ImageView ivAvatar;
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
 	private File avatarFile;// 头像文件
 	private File PHOTO_DIR;// 照相机拍照得到的图片的存储位置
-	static final int DATE_DIALOG_ID = 1;
 	private Bitmap cameraBitmap;// 头像bitmap
 
 	private String dialogType;
@@ -139,7 +137,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 							.getUid(this))));
 					out = new FileOutputStream(avatarFile, false);
 
-					if (cameraBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)) {
+					if (cameraBitmap.compress(Bitmap.CompressFormat.PNG, 80, out)) {
 						out.flush();
 						out.close();
 					}

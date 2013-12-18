@@ -177,7 +177,7 @@
                     android:id="@+id/etWeight"
                     style="@style/creat_baby_text_style"
                     android:background="@drawable/bg_input"
-                    android:inputType="number"/>
+                    android:inputType="numberDecimal"/>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
                     android:text="kg" android:textColor="@color/grey" android:layout_marginLeft="5dp"/>
             </LinearLayout>
@@ -196,7 +196,7 @@
                     android:id="@+id/etHeight"
                     style="@style/creat_baby_text_style"
                     android:background="@drawable/bg_input"
-                    android:inputType="number"/>
+                    android:inputType="numberDecimal"/>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
                     android:text="cm" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="visible"/>
             </LinearLayout>
@@ -215,7 +215,7 @@
                     android:id="@+id/etHead"
                     style="@style/creat_baby_text_style"
                     android:background="@drawable/bg_input"
-                    android:inputType="number"/>
+                    android:inputType="numberDecimal"/>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
                     android:text="cm" android:textColor="@color/grey" android:layout_marginLeft="5dp" android:visibility="visible"/>
             </LinearLayout>

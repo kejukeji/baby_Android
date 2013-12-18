@@ -430,6 +430,37 @@ public class BusinessHelper {
 		return bean;
 	}
 	/**
+	 * 获取收藏的学术文摘
+	 * @param pageIndex
+	 * @param doctor_id
+	 * @return
+	 */
+	public ResponseBean<AcademicAbstractBean> getCollectAcademicAbstract(int pageIndex,int doctor_id){
+		ResponseBean<AcademicAbstractBean> bean ;
+		try {
+			JSONObject obj = httpClient.get(BASE_URL + "doctor/collect/academic",new PostParameter[]{new PostParameter("doctor_id", doctor_id),
+					new PostParameter("page", pageIndex)}).asJSONObject();
+			int status = obj.getInt("code");
+			if (status == Constants.REQUEST_SUCCESS) {
+				bean = new ResponseBean<AcademicAbstractBean>(obj);
+				List<AcademicAbstractBean> list = null;
+				if (!TextUtils.isEmpty(obj.getString("academic"))) {
+					list = AcademicAbstractBean.constractList(obj.getJSONArray("academic"));
+				} else {
+					list = new ArrayList<AcademicAbstractBean>();
+				}
+				bean.setObjList(list);
+			} else {
+				bean = new ResponseBean<AcademicAbstractBean>(Constants.REQUEST_FAILD, obj.getString("message"));
+			}
+		} catch (SystemException e) {
+			bean = new ResponseBean<AcademicAbstractBean>(Constants.REQUEST_FAILD, "服务器连接失败");
+		} catch (JSONException e) {
+			bean = new ResponseBean<AcademicAbstractBean>(Constants.REQUEST_FAILD, "json解析错误");
+		}
+		return bean;
+	}
+	/**
 	 * 收藏或取消收藏 学术文摘接口
 	 * @param academic_id
 	 * @param doctorId

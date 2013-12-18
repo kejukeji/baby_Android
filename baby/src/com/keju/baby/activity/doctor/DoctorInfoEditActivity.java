@@ -41,7 +41,6 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.keju.baby.AsyncImageLoader;
 import com.keju.baby.AsyncImageLoader.ImageCallback;
@@ -74,15 +73,16 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 
-	private ImageView ivAvatar;
 	private EditText etDoctorName, etDoctorEmil, etDoctorNumber;
 	private TextView tvName, tvDoctorAddress, tvDoctorHospital, tvDoctorDepartment, tvJobTitle;
 	private LinearLayout viewDoctorAddress, viewDoctorHospital, viewDoctorDepartment, viewJobTitle;
+	
+	private ImageView ivAvatar;
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
 	private File avatarFile;// 头像文件
 	private File PHOTO_DIR;// 照相机拍照得到的图片的存储位置
-	static final int DATE_DIALOG_ID = 1;
 	private Bitmap cameraBitmap;// 头像bitmap
+	
 	private RadioGroup radio_group;
 	private View viewInfo;
 	private List<DoctorDepartmentBean> departmentList = new ArrayList<DoctorDepartmentBean>();// 科室list
@@ -155,7 +155,53 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		tvFooterMore = (TextView) vFooter.findViewById(R.id.tvMore);
 		listView = (ListView) findViewById(R.id.listView);
 	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+			case Constants.PHOTO_PICKED_WITH_DATA:// 相册
+				cameraBitmap = data.getParcelableExtra("data");
+				if (cameraBitmap == null) {
+					Uri dataUri = data.getData();
+					Intent intent = getCropImageIntent(dataUri);
+					startActivityForResult(intent, Constants.PHOTO_PICKED_WITH_DATA);
+				}
 
+				try {
+					// 保存缩略图
+					FileOutputStream out = null;
+					File file = new File(PHOTO_DIR, ImageUtil.createAvatarFileName(String.valueOf(SharedPrefUtil
+							.getUid(this))));
+					if (file != null && file.exists()) {
+						file.delete();
+					}
+					avatarFile = new File(PHOTO_DIR, ImageUtil.createAvatarFileName(String.valueOf(SharedPrefUtil
+							.getUid(this))));
+					out = new FileOutputStream(avatarFile, false);
+
+					if (cameraBitmap.compress(Bitmap.CompressFormat.PNG, 80, out)) {
+						out.flush();
+						out.close();
+					}
+					if (avatarFile != null) {
+//						ivAvatar.setImageBitmap(cameraBitmap);
+						ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmapWithPic(cameraBitmap, 0.5f));
+					} else {
+//						ivAvatar.setImageResource(R.drawable.doctor_default);
+						ivAvatar.setImageResource(R.drawable.doctor_default);
+					}
+					if (mCurrentPhotoFile != null && mCurrentPhotoFile.exists())
+						mCurrentPhotoFile.delete();
+				} catch (Exception e) {
+
+				}
+				break;
+			case Constants.CAMERA_WITH_DATA:// 拍照
+				doCropPhoto(mCurrentPhotoFile);
+				break;
+			}
+		}
+	}
 	/**
 	 * 数据填充
 	 */
@@ -176,7 +222,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		if (NetUtil.checkNet(this)) {
 			new PostDoctorInforTask().execute();
 			new GetDoctorTask().execute();
-			new GetDataTask().execute();
+			new GetCollectDataTask().execute();
 		} else {
 			showShortToast(R.string.NoSignalException);
 		}
@@ -211,7 +257,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE && isLoadMore) {
 				if (NetUtil.checkNet(context)) {
 					if (!isLoad && !isComplete) {
-						new GetDataTask().execute();
+						new GetCollectDataTask().execute();
 					}
 				} else {
 					showShortToast(R.string.NoSignalException);
@@ -238,53 +284,6 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			break;
 		}
 
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			switch (requestCode) {
-			case Constants.PHOTO_PICKED_WITH_DATA:// 相册
-				cameraBitmap = data.getParcelableExtra("data");
-				if (cameraBitmap == null) {
-					Uri dataUri = data.getData();
-					Intent intent = getCropImageIntent(dataUri);
-					startActivityForResult(intent, Constants.PHOTO_PICKED_WITH_DATA);
-				}
-
-				try {
-					// 保存缩略图
-					FileOutputStream out = null;
-					File file = new File(PHOTO_DIR, ImageUtil.createAvatarFileName(String.valueOf(SharedPrefUtil
-							.getUid(this))));
-					if (file != null && file.exists()) {
-						file.delete();
-					}
-					avatarFile = new File(PHOTO_DIR, ImageUtil.createAvatarFileName(String.valueOf(SharedPrefUtil
-							.getUid(this))));
-					out = new FileOutputStream(avatarFile, false);
-
-					if (cameraBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)) {
-						out.flush();
-						out.close();
-					}
-					if (avatarFile != null) {
-						ivAvatar.setImageBitmap(cameraBitmap);
-					} else {
-						ivAvatar.setImageResource(R.drawable.doctor_default);
-					}
-					if (mCurrentPhotoFile != null && mCurrentPhotoFile.exists())
-						mCurrentPhotoFile.delete();
-				} catch (Exception e) {
-					showShortToast(e.getMessage());
-					MobclickAgent.reportError(DoctorInfoEditActivity.this, StringUtil.getExceptionInfo(e));
-				}
-				break;
-			case Constants.CAMERA_WITH_DATA:// 拍照
-				doCropPhoto(mCurrentPhotoFile);
-				break;
-			}
-		}
 	}
 
 	private Dialog dialogProvince;
@@ -499,34 +498,6 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		}
 	};
 
-	private void createPhotoDir() {
-		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-			PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/" + Constants.APP_DIR_NAME + "/");
-			if (!PHOTO_DIR.exists()) {
-				// 创建照片的存储目录
-				PHOTO_DIR.mkdirs();
-			}
-		} else {
-			showShortToast("请检查SD卡是否正常");
-		}
-	}
-
-	public void StartCamera() {
-		try {
-			mCurrentPhotoFile = new File(PHOTO_DIR, ImageUtil.getPhotoFileName());// 给新照的照片文件命名
-			final Intent intent = getTakePickIntent(mCurrentPhotoFile);
-			startActivityForResult(intent, Constants.CAMERA_WITH_DATA);
-		} catch (ActivityNotFoundException e) {
-			Toast.makeText(this, "拍照出错", Toast.LENGTH_LONG).show();
-		}
-	}
-
-	public static Intent getTakePickIntent(File f) {
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-		return intent;
-	}
-
 	/**
 	 * 拍照获取图片
 	 * 
@@ -550,10 +521,10 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		try {
 			// 启动gallery去剪辑这个照片
 			final Intent intent = getCropImageIntent(Uri.fromFile(f));
-			startActivityForResult(intent, Constants.PHOTO_PICKED_WITH_DATA);
+			getParent().startActivityForResult(intent, Constants.PHOTO_PICKED_WITH_DATA);
 
 		} catch (Exception e) {
-			MobclickAgent.reportError(DoctorInfoEditActivity.this, StringUtil.getExceptionInfo(e));
+			MobclickAgent.reportError(this, StringUtil.getExceptionInfo(e));
 			showShortToast("照片裁剪出错");
 		}
 	}
@@ -572,7 +543,23 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		intent.putExtra("return-data", true);
 		return intent;
 	}
+	private void createPhotoDir() {
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/" + Constants.APP_DIR_NAME + "/");
+			if (!PHOTO_DIR.exists()) {
+				// 创建照片的存储目录
+				PHOTO_DIR.mkdirs();
+			}
+		} else {
+			showShortToast("请检查SD卡是否正常");
+		}
+	}
 
+	public static Intent getTakePickIntent(File f) {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+		return intent;
+	}
 	/***
 	 * 医生个人资料修改
 	 */
@@ -974,12 +961,14 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 					if(status == Constants.REQUEST_SUCCESS){
 						boolean isCollect = bean.isCollect();
 						bean.setCollect(!isCollect);
-						collectionAdapter.notifyDataSetChanged();
+						
 						if(isCollect){
 							showShortToast("取消收藏成功");
+							list.remove(bean);
 						}else{
 							showShortToast("收藏成功");
 						}
+						collectionAdapter.notifyDataSetChanged();
 					}else{
 						showShortToast(result.getString("message"));
 					}
@@ -997,7 +986,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	 * @author Zhoujun
 	 * 
 	 */
-	private class GetDataTask extends AsyncTask<Void, Void, ResponseBean<AcademicAbstractBean>> {
+	private class GetCollectDataTask extends AsyncTask<Void, Void, ResponseBean<AcademicAbstractBean>> {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -1014,7 +1003,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		@Override
 		protected ResponseBean<AcademicAbstractBean> doInBackground(Void... params) {
 			int doctor_id = SharedPrefUtil.getUid(context);
-			return new BusinessHelper().getAcademicAbstract(pageIndex, doctor_id);
+			return new BusinessHelper().getCollectAcademicAbstract(pageIndex, doctor_id);
 		}
 
 		@Override
