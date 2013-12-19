@@ -57,7 +57,6 @@ public class SearchResultActivity extends BaseActivity implements OnClickListene
 	private void findView() {
 
 		btnLeft = (ImageView) findViewById(R.id.btnLeft);
-		btnLeft.setBackgroundResource(android.R.drawable.btn_default);
 		btnLeft.setImageResource(R.drawable.btn_back_selector);
 		btnRight = (ImageView) findViewById(R.id.btnRight);
 		btnRight.setVisibility(View.INVISIBLE);

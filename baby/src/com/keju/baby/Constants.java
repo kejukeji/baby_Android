@@ -69,6 +69,7 @@ public class Constants {
 	
 	public static final String URL_VISIT_RECORD = "visit_record.html/";//随访记录
 	public static final String URL_GROW_LINE = "grow_line.html/";//生长曲线
+	public static final String URL_GROW_LINE_NINE = "grow_line_nine.html/";//九城生长曲线
 	public static final String URL_GROW_RATE = "grow_rate.html/";//生长速率
 	public static final String URL_BABY_DETAIL = "baby_detail.html/";//婴儿详细资料
 	public static final String URL_NEED = "grow_bar.html/";//营养摄入需求

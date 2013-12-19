@@ -184,10 +184,8 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 						out.close();
 					}
 					if (avatarFile != null) {
-//						ivAvatar.setImageBitmap(cameraBitmap);
-						ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmapWithPic(cameraBitmap, 0.5f));
+						ivAvatar.setImageBitmap(cameraBitmap);
 					} else {
-//						ivAvatar.setImageResource(R.drawable.doctor_default);
 						ivAvatar.setImageResource(R.drawable.doctor_default);
 					}
 					if (mCurrentPhotoFile != null && mCurrentPhotoFile.exists())

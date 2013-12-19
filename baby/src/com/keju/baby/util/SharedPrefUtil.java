@@ -270,4 +270,24 @@ public class SharedPrefUtil {
 		e.remove(UID).remove(USER_TYPE).remove(IS_LOGIN).remove(NAME);
 		e.commit();
 	}
+	/**
+	 * 获取用户名
+	 * @param context
+	 * @return
+	 */
+	public static String getSearchHistory(Context context){
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		return sp.getString(SEARCH_HISTORY, "");
+	}
+	/**
+	 * 保存用户的名字
+	 * @param context
+	 * @param uid
+	 */
+	public static void setSearchHistory(Context context, String history){
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		Editor e = sp.edit();
+		e.putString(SEARCH_HISTORY, history);
+		e.commit();
+	}
 }

@@ -50,7 +50,7 @@
         <activity  android:name=".activity.doctor.DoctorMyActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.doctor.DoctorInfoEditActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.doctor.DoctorCreatBabyAccountActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden" android:windowSoftInputMode="stateHidden|adjustResize"></activity>
-        <activity  android:name=".activity.doctor.SearchActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity  android:name=".activity.doctor.SearchActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden" android:windowSoftInputMode="stateHidden|adjustUnspecified"></activity>
         <activity  android:name=".activity.doctor.SearchResultActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.doctor.AcademicAbstractsActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>
         <activity  android:name=".activity.doctor.AbstractDetailActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden"></activity>

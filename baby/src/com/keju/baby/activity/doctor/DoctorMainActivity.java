@@ -1,6 +1,5 @@
 package com.keju.baby.activity.doctor;
 
-import android.app.LocalActivityManager;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,10 +35,6 @@ public class DoctorMainActivity extends TabActivity implements OnCheckedChangeLi
 		findView();
 		fillData();
 		((CommonApplication) getApplication()).addActivity(this);
-
-		LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);  
-        mLocalActivityManager.dispatchCreate(savedInstanceState);  
-        mth.setup(mLocalActivityManager); 
 	}
 	
 	/**

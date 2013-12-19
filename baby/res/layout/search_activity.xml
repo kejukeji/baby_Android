@@ -6,166 +6,178 @@
     android:orientation="vertical" >
 
     <include layout="@layout/common_title_bar" />
-	<ScrollView 
-	    android:layout_width="fill_parent" android:layout_height="0dp" android:scrollbars="vertical" android:layout_weight="1">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_key"
-                android:textColor="@color/gold"
-                android:textSize="@dimen/BasicTextSize" />
-
-            <EditText
-                android:id="@+id/etKeyword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="8dp"
-                android:singleLine="true"
-                android:inputType="text"
-                android:background="@drawable/bg_input"
-                android:padding="5dp"
-                android:textSize="@dimen/BasicTextSize" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_time"
-                android:textColor="@color/gold"
-                android:textSize="@dimen/BasicTextSize" />
-			    <TextView
-                android:id="@+id/tvTimeStart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="8dp"
-                android:padding="5dp"
-                android:background="@drawable/bg_input_arrow"
-                android:singleLine="true"
-                android:textSize="@dimen/BasicTextSize" />
-        </LinearLayout>
-		<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_time"
-                android:visibility="invisible"
-                android:textSize="@dimen/BasicTextSize" />
-
-			<TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:background="@null"
-                android:gravity="center"
-                android:text="@string/search_to"
-                android:textColor="@color/gold"
-                android:textSize="@dimen/BasicTextSize" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_time"
-                android:textColor="@color/gold"
-                android:visibility="invisible"
-                android:textSize="@dimen/BasicTextSize" />
-
-			<TextView
-                android:id="@+id/tvTimeStart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bg_input_arrow"
-                android:singleLine="true"
-                android:layout_marginLeft="8dp"
-                android:padding="5dp"
-                android:textSize="@dimen/BasicTextSize" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/LargeTextSize"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:background="@drawable/btn_selector"
-            android:text="@string/search_button" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/search_line_repeat" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="@dimen/BasicTextSize"
-            android:textColor="@color/gold"
-            android:text="@string/search_history" />
-
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            />
-
-    </LinearLayout>
-    </ScrollView>
-	<Button
-            android:id="@+id/btnClear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_marginBottom="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/btn_selector"
-            android:visibility="invisible"
-            android:textSize="@dimen/LargeTextSize"
-            android:text="@string/search_clean" />
+            android:layout_marginTop="15dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_key"
+                    android:textColor="@color/gold"
+                    android:textSize="@dimen/BasicTextSize" />
+
+                <EditText
+                    android:id="@+id/etKeyword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/BasicTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_time"
+                    android:textColor="@color/gold"
+                    android:textSize="@dimen/BasicTextSize" />
+
+                <TextView
+                    android:id="@+id/tvTimeStart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_arrow"
+                    android:padding="5dp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/BasicTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_time"
+                    android:textSize="@dimen/BasicTextSize"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/search_to"
+                    android:textColor="@color/gold"
+                    android:textSize="@dimen/BasicTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_time"
+                    android:textColor="@color/gold"
+                    android:textSize="@dimen/BasicTextSize"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tvTimeStart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_arrow"
+                    android:padding="5dp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/BasicTextSize" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btn_selector"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="@string/search_button"
+                android:textColor="@color/white"
+                android:textSize="@dimen/LargeTextSize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/search_line_repeat" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/search_history"
+                android:textColor="@color/gold"
+                android:textSize="@dimen/BasicTextSize" />
+
+            <com.keju.baby.view.GridViewInScrollView
+                android:id="@+id/gvSearchHistory"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="3"
+                android:scrollbars="none" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_selector"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/search_clean"
+        android:textColor="@color/white"
+        android:textSize="@dimen/LargeTextSize"
+        android:visibility="invisible" />
+
 </LinearLayout>

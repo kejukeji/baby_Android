@@ -67,7 +67,7 @@ public class BaseWebViewActivity extends BaseActivity {
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
 				super.onPageStarted(view, url, favicon);
 				setWebTabVisible(url);
-				if(url.contains(Constants.URL_NEED) || url.contains(Constants.URL_GROW_LINE)){
+				if(url.contains(Constants.URL_NEED) || url.contains(Constants.URL_GROW_LINE) || url.contains(Constants.URL_GROW_LINE_NINE)){
 					BabyMainActivity.setTabVisible(false);
 					setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 				}else{
