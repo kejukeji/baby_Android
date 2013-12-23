@@ -20,11 +20,13 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.keju.baby.Constants;
@@ -44,16 +46,18 @@ import com.keju.baby.util.StringUtil;
  * @version 创建时间：2013-10-25 下午2:57:49
  */
 
-public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnClickListener{
+public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnClickListener, OnCheckedChangeListener{
 	private ImageView btnLeft,btnRight;
 	private TextView tvTitle;
 	
 	private EditText etPhone,etName,etPassword,etPasswordConfirm,etWeight,etHeight,etHead;
 	private TextView tvGender,tvPreProduction,tvBirthday,tvWay,tvComplication;
+	private RadioGroup rgStandard;
 	
 	private List<String> list = new ArrayList<String>();
 	private String dateType;
 	private String complicationStr;
+	private String standardStr = "WHO";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,8 +90,20 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 		etHead = (EditText) findViewById(R.id.etHead);
 		tvWay = (TextView) findViewById(R.id.tvWay);
 		tvComplication = (TextView) findViewById(R.id.tvComplication);
+		rgStandard = (RadioGroup) findViewById(R.id.rgStandard);
+		rgStandard.setOnCheckedChangeListener(this);
 	}
-
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+		switch (checkedId) {
+		case R.id.rbWHO:
+			standardStr = "WHO";
+			break;
+		case R.id.rbJiuCheng:
+			standardStr = "九城";
+			break;
+		}
+	}
 	private void fillData() {
 		tvGender.setOnClickListener(this);
 		tvPreProduction.setOnClickListener(this);
@@ -369,7 +385,7 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 		@Override
 		protected JSONObject doInBackground(Void... params) {
 			try {
-				return new BusinessHelper().creatBabyAccount(baby_name, baby_pass, patriarch_tel, gender, due_date, born_birthday, born_weight, born_height, born_head, childbirth_style, complication_id);
+				return new BusinessHelper().creatBabyAccount(baby_name, baby_pass, patriarch_tel, gender, due_date, born_birthday, born_weight, born_height, born_head, childbirth_style, complication_id,standardStr);
 			} catch (SystemException e) {
 				return null;
 			}

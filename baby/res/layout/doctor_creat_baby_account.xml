@@ -257,7 +257,41 @@
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/BasicTextSize"
                     android:text="kg" android:textColor="@color/black" android:layout_marginLeft="5dp" android:visibility="invisible"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+                <TextView
+                    style="@style/creat_baby_label_style"
+                    android:text="@string/doctor_creat_grow_measure" />
+			<RadioGroup android:layout_width="0dp" android:layout_height="fill_parent" android:orientation="horizontal"
+			    android:gravity="center_vertical"  android:id="@+id/rgStandard" android:layout_weight="1">
+			    <RadioButton
+            android:id="@+id/rbWHO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:button="@drawable/round_check_selector"
+            android:checked="true"
+            android:gravity="center"
+            android:text="WHO"
+            android:textSize="@dimen/BasicTextSize"
+            android:textColor="@color/grey" />
 
+        <RadioButton
+            android:id="@+id/rbJiuCheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/round_check_selector"
+            android:gravity="center"
+            android:text="九城"
+            android:textSize="@dimen/BasicTextSize"
+            android:textColor="@color/grey" />
+			</RadioGroup>
+			</LinearLayout>
         </LinearLayout>
     </ScrollView>
 

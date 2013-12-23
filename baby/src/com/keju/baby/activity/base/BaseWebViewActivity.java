@@ -3,7 +3,13 @@ package com.keju.baby.activity.base;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -19,12 +25,21 @@ import com.keju.baby.activity.baby.BabyMainActivity;
  * @author Zhoujun
  * @version 创建时间：2013-11-21 下午2:42:53
  */
-public class BaseWebViewActivity extends BaseActivity {
+public class BaseWebViewActivity extends BaseActivity implements OnTouchListener{
 	protected ImageView btnLeft, btnRight;
 	protected TextView tvTitle;
 	protected WebView webView;
 	protected View viewWebTab;
 	protected boolean isMother = false;
+
+	private View viewParent;
+	private View titleBar;
+	private Animation topUpAnim;
+	private Animation topDownAnim;
+	private Handler handler;
+	private Runnable runnable;
+	private boolean isProcess = false;
+	private String url;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,9 +52,16 @@ public class BaseWebViewActivity extends BaseActivity {
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 		viewWebTab = findViewById(R.id.viewWebTab);
 		
+		viewParent = findViewById(R.id.viewParent);
+		viewParent.setOnTouchListener(this);
+		titleBar = findViewById(R.id.viewTop);
+		topUpAnim = AnimationUtils.loadAnimation(this, R.anim.topbar_up);
+		topDownAnim = AnimationUtils.loadAnimation(this, R.anim.topbar_down);
+		
 		webView = (WebView) findViewById(R.id.webview);
+		webView.setOnTouchListener(this);
 		WebSettings webSettings = webView.getSettings();
-		webSettings.setBuiltInZoomControls(true);
+		webSettings.setBuiltInZoomControls(false);
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setSavePassword(false);
 		webSettings.setSaveFormData(false);
@@ -50,6 +72,7 @@ public class BaseWebViewActivity extends BaseActivity {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				view.loadUrl(url);
+				BaseWebViewActivity.this.url = url;
 				return true;
 			}
 
@@ -66,6 +89,7 @@ public class BaseWebViewActivity extends BaseActivity {
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
 				super.onPageStarted(view, url, favicon);
+				BaseWebViewActivity.this.url = url;
 				setWebTabVisible(url);
 				if(url.contains(Constants.URL_NEED) || url.contains(Constants.URL_GROW_LINE) || url.contains(Constants.URL_GROW_LINE_NINE)){
 					BabyMainActivity.setTabVisible(false);
@@ -74,10 +98,18 @@ public class BaseWebViewActivity extends BaseActivity {
 					BabyMainActivity.setTabVisible(true);
 					setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 				}
+				if(url.contains(Constants.URL_GROW_LINE) || url.contains(Constants.URL_GROW_LINE_NINE)){
+					toggleAnim();
+				}else{
+					if (handler != null) {
+						handler.removeCallbacks(runnable);
+					}
+				}
 			}
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
+				BaseWebViewActivity.this.url = url;
 //				if(changeTitle(url)){
 //					tvTitle.setText(view.getTitle());
 //				}
@@ -175,5 +207,57 @@ public class BaseWebViewActivity extends BaseActivity {
 		super.onDestroy();
 		webView.clearCache(true);
 		webView.clearHistory();
+	}
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		switch (v.getId()) {
+		case R.id.webview:
+			if (!isProcess &&(url.contains(Constants.URL_GROW_LINE) || url.contains(Constants.URL_GROW_LINE_NINE))) {
+				titleDown();
+			}
+			break;
+		case R.id.viewParent:
+			if (!isProcess &&(url.contains(Constants.URL_GROW_LINE) || url.contains(Constants.URL_GROW_LINE_NINE))) {
+				titleDown();
+			}
+			break;
+		default:
+			break;
+		}
+		return false;
+	}
+	/**
+	 * 动画
+	 */
+	private void toggleAnim() {
+		handler = new Handler();
+		runnable = new Runnable() {
+			@Override
+			public void run() {
+				titleBar.startAnimation(topUpAnim);
+				titleBar.setVisibility(View.GONE);
+			}
+		};
+		handler.postDelayed(runnable, 2000);
+	}
+	/**
+	 * 点击titleBar出现
+	 */
+
+	public void titleDown() {
+		isProcess = true;
+		titleBar.startAnimation(topDownAnim);
+		titleBar.setVisibility(View.VISIBLE);
+		handler = new Handler();
+		runnable = new Runnable() {
+			@Override
+			public void run() {
+				titleBar.startAnimation(topUpAnim);
+				titleBar.setVisibility(View.GONE);
+				isProcess = false;
+			}
+		};
+		handler.postDelayed(runnable, 2000);
+
 	}
 }

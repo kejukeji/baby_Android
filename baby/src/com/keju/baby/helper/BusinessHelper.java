@@ -350,7 +350,7 @@ public class BusinessHelper {
 	 */
 	public JSONObject creatBabyAccount(String baby_name, String baby_pass, String patriarch_tel, String gender,
 			String due_date, String born_birthday, String born_weight, String born_height, String born_head,
-			String childbirth_style, String complication_id) throws SystemException {
+			String childbirth_style, String complication_id,String growth_standard) throws SystemException {
 		return httpClient.post(
 				BASE_URL + "html/create/baby",
 				new PostParameter[] { new PostParameter("baby_name", baby_name),
@@ -360,7 +360,7 @@ public class BusinessHelper {
 						new PostParameter("born_weight", born_weight), new PostParameter("born_height", born_height),
 						new PostParameter("born_head", born_head),
 						new PostParameter("childbirth_style", childbirth_style),
-						new PostParameter("complication_id", complication_id) }).asJSONObject();
+						new PostParameter("complication_id", complication_id),new PostParameter("growth_standard", growth_standard) }).asJSONObject();
 	}
 	/**
 	 * 添加随访记录
