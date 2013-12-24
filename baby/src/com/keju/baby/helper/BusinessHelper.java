@@ -377,10 +377,11 @@ public class BusinessHelper {
 	 * @throws SystemException 
 	 */
 	public JSONObject addVisit(int id,String due_date, String weight, String height, String head, String breastfeeding,
-			String location, String brand, String kind, String nutrition) throws SystemException {
+			String location, String brand, String kind, String nutrition,String add_type) throws SystemException {
 		return httpClient.post(BASE_URL + "html/add/visit", new PostParameter[] {new PostParameter("baby_id", id),new PostParameter("measure_date", due_date),
 				new PostParameter("weight", weight),new PostParameter("height", height),new PostParameter("head", head),new PostParameter("breastfeeding", breastfeeding),
-				new PostParameter("location", location),new PostParameter("brand", brand),new PostParameter("kind", kind),new PostParameter("nutrition", nutrition)}).asJSONObject();
+				new PostParameter("location", location),new PostParameter("brand", brand),new PostParameter("kind", kind),
+				new PostParameter("nutrition", nutrition),new PostParameter("add_type", add_type)}).asJSONObject();
 	}
 	/**
 	 * 获取奶粉数据；

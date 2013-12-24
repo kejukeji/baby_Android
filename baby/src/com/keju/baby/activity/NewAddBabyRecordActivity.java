@@ -39,6 +39,7 @@ import com.keju.baby.bean.YardBean;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.DateUtil;
 import com.keju.baby.util.NetUtil;
+import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 新增宝宝记录(妈妈新增的时候，不可以新增配方奶，传boolean判断)
@@ -421,9 +422,15 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 
 		@Override
 		protected JSONObject doInBackground(Void... params) {
+			String add_type;
+			if(SharedPrefUtil.getUserType(NewAddBabyRecordActivity.this) == Constants.USER_DOCTOR){
+				add_type = "doctor";
+			}else{
+				add_type = "baby";
+			}
 			try {
 				return new BusinessHelper().addVisit(id, due_date, weight, height, head, breastfeeding, location,
-						brand, kind, nutrition);
+						brand, kind, nutrition,add_type);
 			} catch (SystemException e) {
 				return null;
 			}

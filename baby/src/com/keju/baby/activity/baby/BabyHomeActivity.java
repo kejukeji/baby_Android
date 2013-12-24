@@ -90,7 +90,7 @@ public class BabyHomeActivity extends BaseWebViewActivity implements OnClickList
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnLeft:
-			if(webView.canGoBack()){
+			if (webView.canGoBack()) {
 				webView.goBack();
 			}
 			break;
@@ -115,7 +115,7 @@ public class BabyHomeActivity extends BaseWebViewActivity implements OnClickList
 			}
 			setPositionUnCheck(1);
 			viewTab.fullScroll(View.FOCUS_LEFT);
-			loadUrl(Constants.URL_GROW_LINE + SharedPrefUtil.getUid(this));
+			loadUrl(Constants.URL_GROW_LINE + SharedPrefUtil.getUid(this) + "?select_type=baby");
 			break;
 		case R.id.tvGrowRate:
 			if (isClick.get(2)) {
@@ -187,6 +187,12 @@ public class BabyHomeActivity extends BaseWebViewActivity implements OnClickList
 					webView.goBack();
 					return true;
 				}
+			} else if ((webView.getUrl().contains(Constants.URL_GROW_LINE)
+					|| webView.getUrl().contains(Constants.URL_GROW_LINE) || webView.getUrl().contains(
+					Constants.URL_GROW_LINE_FEN_TONG))
+					&& titleBar.getVisibility() == View.GONE) {
+				titleDown();
+				return true;
 			} else {
 				if ((System.currentTimeMillis() - exitTime) > 2000) {
 					showShortToast(R.string.try_again_logout);
