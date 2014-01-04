@@ -27,9 +27,9 @@ public class BusinessHelper {
 	/**
 	 * 网络访问路径
 	 */
-	private static final String BASE_URL = "http://42.121.108.142:7007/restful/";
+	private static final String BASE_URL = "http://baby.kejukeji.com/restful/";
 //	private static final String BASE_URL = "http://192.168.1.125:7007/restful/";//向进服务器地址
-	public static final String PIC_URL = "http://42.121.108.142:7007";// 头像地址
+	public static final String PIC_URL = "http://baby.kejukeji.com";// 头像地址
 	HttpClient httpClient = new HttpClient();
 
 	/**
