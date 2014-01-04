@@ -161,6 +161,7 @@
                             android:id="@+id/etHeight"
                             android:inputType="numberDecimal"
                             style="@style/info_text_style"
+                            android:selectAllOnFocus="true"
                             android:gravity="right"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp"
                             android:textSize="@dimen/BasicTextSize" android:textColor="@color/gold" android:text="cm"/>
@@ -192,7 +193,8 @@
                         <EditText
                             android:id="@+id/etWeight"
                             android:inputType="numberDecimal"
-                            style="@style/info_text_style" 
+                            style="@style/info_text_style"
+                            android:selectAllOnFocus="true" 
                             android:gravity="right"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp"
                             android:textSize="@dimen/BasicTextSize" android:textColor="@color/gold" android:text="kg"/>
@@ -224,6 +226,7 @@
                             android:id="@+id/etHeadCircumference"
                             android:inputType="numberDecimal"
                             style="@style/info_text_style"
+                            android:selectAllOnFocus="true"
                             android:gravity="right" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp"
                             android:textSize="@dimen/BasicTextSize" android:textColor="@color/gold" android:text="cm"/>

@@ -373,6 +373,7 @@ public class BusinessHelper {
 	 * @param brand
 	 * @param kind
 	 * @param nutrition
+	 * @param add_type
 	 * @return
 	 * @throws SystemException 
 	 */

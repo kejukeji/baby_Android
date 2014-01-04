@@ -38,9 +38,9 @@ public class BabyLoginActivity extends BaseWebViewActivity {
 				}
 				SharedPrefUtil.setUid(BabyLoginActivity.this, uid);
 				SharedPrefUtil.setName(BabyLoginActivity.this, name);
+				SharedPrefUtil.setUserType(BabyLoginActivity.this,Constants.USER_MOTHER);
 				if(isRemember == 1){
 					SharedPrefUtil.setIsLogin(BabyLoginActivity.this);
-					SharedPrefUtil.setUserType(BabyLoginActivity.this,Constants.USER_MOTHER);
 				}
 				openActivity(BabyMainActivity.class);
 				finish();

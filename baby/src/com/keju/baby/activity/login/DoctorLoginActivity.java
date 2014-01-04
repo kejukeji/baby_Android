@@ -26,6 +26,15 @@ public class DoctorLoginActivity extends BaseWebViewActivity {
 
 	private void findView() {
 		btnLeft.setImageResource(R.drawable.btn_back_selector);
+		btnLeft.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(webView.canGoBack()){
+					webView.goBack();
+				}
+			}
+		});
 		btnLeft.setVisibility(View.INVISIBLE);
 		btnRight.setVisibility(View.INVISIBLE);
 		tvTitle.setVisibility(View.VISIBLE);
@@ -41,9 +50,9 @@ public class DoctorLoginActivity extends BaseWebViewActivity {
 				}
 				SharedPrefUtil.setUid(DoctorLoginActivity.this, uid);
 				SharedPrefUtil.setName(DoctorLoginActivity.this, name);
+				SharedPrefUtil.setUserType(DoctorLoginActivity.this,Constants.USER_DOCTOR);
 				if(isRemember == 1){
 					SharedPrefUtil.setIsLogin(DoctorLoginActivity.this);
-					SharedPrefUtil.setUserType(DoctorLoginActivity.this,Constants.USER_DOCTOR);
 				}
 				openActivity(DoctorMainActivity.class);
 				finish();
