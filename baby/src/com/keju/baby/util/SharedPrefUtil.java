@@ -267,7 +267,7 @@ public class SharedPrefUtil {
 	public static void clearUserinfo(Context context){
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 		Editor e = sp.edit();
-		e.remove(UID).remove(USER_TYPE).remove(IS_LOGIN).remove(NAME);
+		e.remove(UID).remove(USER_TYPE).remove(IS_LOGIN).remove(NAME).remove(SEARCH_HISTORY);
 		e.commit();
 	}
 	/**

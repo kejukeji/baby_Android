@@ -1,8 +1,10 @@
 package com.keju.baby.activity.doctor;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Display;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.util.DateUtil;
 import com.keju.baby.util.NetUtil;
 import com.keju.baby.util.SharedPrefUtil;
 import com.keju.baby.view.GridViewInScrollView;
@@ -32,12 +36,14 @@ import com.keju.baby.view.GridViewInScrollView;
 public class SearchActivity extends BaseActivity implements OnClickListener {
 	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
+	private TextView tvTimeStart, tvTimeEnd;
 	private Button btnSearch, btnClear;
 	private EditText etKeyword;
 	private GridViewInScrollView gvHistory;
 	private Adapter adapter;
 	private List<String> list;
 	
+	private String dateType;
 	private int screenWidth;
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,10 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 		btnClear.setOnClickListener(this);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 		etKeyword = (EditText) findViewById(R.id.etKeyword);
+		tvTimeStart = (TextView) findViewById(R.id.tvTimeStart);
+		tvTimeStart.setOnClickListener(this);
+		tvTimeEnd = (TextView) findViewById(R.id.tvTimeEnd);
+		tvTimeEnd.setOnClickListener(this);
 		
 		gvHistory = (GridViewInScrollView) findViewById(R.id.gvSearchHistory);
 	}
@@ -110,13 +120,25 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 			openActivity(SearchResultActivity.class, b);
 			break;
 		case R.id.btnClear:
+			SharedPrefUtil.setSearchHistory(this, "");
+			fillSearchHistory();
+			break;
+		case R.id.tvTimeStart:
+			dateType = "start";
+			showDateDialog();
+			break;
+		case R.id.tvTimeEnd:
+			dateType = "end";
+			showDateDialog();
 			break;
 		default:
 			break;
 		}
 
 	}
-
+	/**
+	 * 保存搜索历史
+	 */
 	private void saveHistory() {
 		String text = etKeyword.getText().toString();
 		String save_Str = SharedPrefUtil.getSearchHistory(this);
@@ -129,6 +151,33 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 		StringBuilder sb = new StringBuilder(save_Str);
 		sb.append(text + ",");
 		SharedPrefUtil.setSearchHistory(this, sb.toString());
+	}
+	private Calendar cal = Calendar.getInstance();
+	/**
+	 * 显示日期选项dialog；
+	 */
+	private void showDateDialog() {
+		new DatePickerDialog(this, listener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+				cal.get(Calendar.DAY_OF_MONTH)).show();
+	}
+
+	private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+			cal.set(Calendar.YEAR, year);
+			cal.set(Calendar.MONTH, monthOfYear);
+			cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+			updateDate();
+		}
+	};
+
+	private void updateDate() {
+		if(dateType.equals("start")){
+			tvTimeStart.setText(DateUtil.dateToString("yyyy-MM-dd", cal.getTime()));
+		}else if(dateType.equals("end")){
+			tvTimeEnd.setText(DateUtil.dateToString("yyyy-MM-dd", cal.getTime()));
+		}
 	}
 	/**
 	 * 适配器

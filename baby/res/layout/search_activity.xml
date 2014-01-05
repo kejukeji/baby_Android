@@ -116,7 +116,7 @@
                     android:visibility="invisible" />
 
                 <TextView
-                    android:id="@+id/tvTimeStart"
+                    android:id="@+id/tvTimeEnd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
