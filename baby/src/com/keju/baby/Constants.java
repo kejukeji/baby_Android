@@ -60,7 +60,7 @@ public class Constants {
 	/**
 	 * html url
 	 */
-	public static final String URL_BASE_HTML = "http://42.121.108.142:7007/html/";
+	public static final String URL_BASE_HTML = "http://baby.kejukeji.com/html/";
 	public static final String URL_DOCTOR_LOGIN = "login.html";//医生登录
 	public static final String URL_BABY_LOGIN = "mummy/login.html";//婴儿登录
 	public static final String URL_REGISTER = "register.html";//注册

@@ -39,6 +39,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
@@ -76,13 +77,13 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 	private EditText etDoctorName, etDoctorEmil, etDoctorNumber;
 	private TextView tvName, tvDoctorAddress, tvDoctorHospital, tvDoctorDepartment, tvJobTitle;
 	private LinearLayout viewDoctorAddress, viewDoctorHospital, viewDoctorDepartment, viewJobTitle;
-	
+
 	private ImageView ivAvatar;
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
 	private File avatarFile;// 头像文件
 	private File PHOTO_DIR;// 照相机拍照得到的图片的存储位置
 	private Bitmap cameraBitmap;// 头像bitmap
-	
+
 	private RadioGroup radio_group;
 	private View viewInfo;
 	private List<DoctorDepartmentBean> departmentList = new ArrayList<DoctorDepartmentBean>();// 科室list
@@ -155,6 +156,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		tvFooterMore = (TextView) vFooter.findViewById(R.id.tvMore);
 		listView = (ListView) findViewById(R.id.listView);
 	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
@@ -200,6 +202,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			}
 		}
 	}
+
 	/**
 	 * 数据填充
 	 */
@@ -211,7 +214,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 
 		list = new ArrayList<AcademicAbstractBean>();
 		collectionAdapter = new CollectionAdapter();
-		
+
 		listView.addFooterView(vFooter);
 		listView.setOnScrollListener(LoadListener);
 		listView.setAdapter(collectionAdapter);
@@ -226,6 +229,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		}
 
 	}
+
 	OnItemClickListener clicklistener = new OnItemClickListener() {
 
 		@Override
@@ -265,6 +269,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			}
 		}
 	};
+
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
@@ -420,15 +425,94 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			String doctorName = etDoctorName.getText().toString().trim();
 			String doctorEmil = etDoctorEmil.getText().toString().trim();
 			String doctorNumber = etDoctorNumber.getText().toString().trim();
-			if (NetUtil.checkNet(this)) {
-				new PostDoctorInfor(doctorName, doctorEmil, doctorNumber).execute();
+			if (StringUtil.isBlank(doctorName) || StringUtil.isBlank(doctorEmil) || StringUtil.isBlank(doctorNumber)) {
+				showShortToast("请输入完整的信息");
+				return;
 			} else {
-				showShortToast(R.string.NoSignalException);
+				if (NetUtil.checkNet(this)) {
+					new PostDoctorInfor(doctorName, doctorEmil, doctorNumber).execute();
+				} else {
+					showShortToast(R.string.NoSignalException);
+				}
 			}
 			break;
 		default:
 			break;
 		}
+	}
+
+	private void createPhotoDir() {
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/" + Constants.APP_DIR_NAME + "/");
+			if (!PHOTO_DIR.exists()) {
+				// 创建照片的存储目录
+				PHOTO_DIR.mkdirs();
+			}
+		} else {
+			showShortToast("请检查SD卡是否正常");
+		}
+	}
+
+	public void StartCamera() {
+		try {
+			mCurrentPhotoFile = new File(PHOTO_DIR, ImageUtil.getPhotoFileName());// 给新照的照片文件命名
+			final Intent intent = getTakePickIntent(mCurrentPhotoFile);
+			startActivityForResult(intent, Constants.CAMERA_WITH_DATA);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(this, "拍照出错", Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public static Intent getTakePickIntent(File f) {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+		return intent;
+	}
+
+	/**
+	 * 拍照获取图片
+	 * 
+	 */
+	protected void doTakePhoto() {
+		try {
+			mCurrentPhotoFile = new File(PHOTO_DIR, ImageUtil.getPhotoFileName());// 给新照的照片文件命名
+			final Intent intent = getTakePickIntent(mCurrentPhotoFile);
+			startActivityForResult(intent, Constants.CAMERA_WITH_DATA);
+		} catch (ActivityNotFoundException e) {
+			showShortToast("拍照出错");
+		}
+	}
+
+	/**
+	 * 调用图片剪辑程序去剪裁图片
+	 * 
+	 * @param f
+	 */
+	protected void doCropPhoto(File f) {
+		try {
+			// 启动gallery去剪辑这个照片
+			final Intent intent = getCropImageIntent(Uri.fromFile(f));
+			startActivityForResult(intent, Constants.PHOTO_PICKED_WITH_DATA);
+
+		} catch (Exception e) {
+			MobclickAgent.reportError(DoctorInfoEditActivity.this, StringUtil.getExceptionInfo(e));
+			showShortToast("照片裁剪出错");
+		}
+	}
+
+	/**
+	 * 调用图片剪辑程序
+	 */
+	public static Intent getCropImageIntent(Uri photoUri) {
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(photoUri, "image/*");
+		intent.putExtra("crop", "true");
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		intent.putExtra("outputX", 200);
+		intent.putExtra("outputY", 200);
+		intent.putExtra("return-data", true);
+		return intent;
 	}
 
 	/**
@@ -496,68 +580,7 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		}
 	};
 
-	/**
-	 * 拍照获取图片
-	 * 
-	 */
-	protected void doTakePhoto() {
-		try {
-			mCurrentPhotoFile = new File(PHOTO_DIR, ImageUtil.getPhotoFileName());// 给新照的照片文件命名
-			final Intent intent = getTakePickIntent(mCurrentPhotoFile);
-			startActivityForResult(intent, Constants.CAMERA_WITH_DATA);
-		} catch (ActivityNotFoundException e) {
-			showShortToast("拍照出错");
-		}
-	}
-
-	/**
-	 * 调用图片剪辑程序去剪裁图片
-	 * 
-	 * @param f
-	 */
-	protected void doCropPhoto(File f) {
-		try {
-			// 启动gallery去剪辑这个照片
-			final Intent intent = getCropImageIntent(Uri.fromFile(f));
-			getParent().startActivityForResult(intent, Constants.PHOTO_PICKED_WITH_DATA);
-
-		} catch (Exception e) {
-			MobclickAgent.reportError(this, StringUtil.getExceptionInfo(e));
-			showShortToast("照片裁剪出错");
-		}
-	}
-
-	/**
-	 * 调用图片剪辑程序
-	 */
-	public static Intent getCropImageIntent(Uri photoUri) {
-		Intent intent = new Intent("com.android.camera.action.CROP");
-		intent.setDataAndType(photoUri, "image/*");
-		intent.putExtra("crop", "true");
-		intent.putExtra("aspectX", 1);
-		intent.putExtra("aspectY", 1);
-		intent.putExtra("outputX", 200);
-		intent.putExtra("outputY", 200);
-		intent.putExtra("return-data", true);
-		return intent;
-	}
-	private void createPhotoDir() {
-		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-			PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/" + Constants.APP_DIR_NAME + "/");
-			if (!PHOTO_DIR.exists()) {
-				// 创建照片的存储目录
-				PHOTO_DIR.mkdirs();
-			}
-		} else {
-			showShortToast("请检查SD卡是否正常");
-		}
-	}
-
-	public static Intent getTakePickIntent(File f) {
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-		return intent;
-	}
+	
 	/***
 	 * 医生个人资料修改
 	 */
@@ -897,22 +920,22 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			viewHolder.title.setText(bean.getTitle());
 			viewHolder.content.setText(bean.getContent());
 			String content = bean.getContent();
-			if(content.length() > 120){
+			if (content.length() > 120) {
 				content = content.substring(0, 120) + "...";
 			}
 			viewHolder.content.setText(bean.getContent());
-			if(bean.isCollect()){
+			if (bean.isCollect()) {
 				viewHolder.btnCollect.setText(R.string.doctor_my_collect_cancel);
-			}else{
+			} else {
 				viewHolder.btnCollect.setText(R.string.academic_abstract_collect);
 			}
 			viewHolder.btnCollect.setOnClickListener(new View.OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
-					if(NetUtil.checkNet(DoctorInfoEditActivity.this)){
+					if (NetUtil.checkNet(DoctorInfoEditActivity.this)) {
 						new CollectTask(bean).execute();
-					}else{
+					} else {
 						showShortToast(R.string.NoSignalException);
 					}
 				}
@@ -927,14 +950,16 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		}
 
 	}
+
 	/**
 	 * 收藏取消收藏接口
+	 * 
 	 * @author Zhoujun
-	 *
+	 * 
 	 */
-	private class CollectTask extends AsyncTask<Void, Void, JSONObject>{
+	private class CollectTask extends AsyncTask<Void, Void, JSONObject> {
 		private AcademicAbstractBean bean;
-		
+
 		public CollectTask(AcademicAbstractBean bean) {
 			super();
 			this.bean = bean;
@@ -953,27 +978,27 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			if(result != null){
+			if (result != null) {
 				try {
 					int status = result.getInt("code");
-					if(status == Constants.REQUEST_SUCCESS){
+					if (status == Constants.REQUEST_SUCCESS) {
 						boolean isCollect = bean.isCollect();
 						bean.setCollect(!isCollect);
-						
-						if(isCollect){
+
+						if (isCollect) {
 							showShortToast("取消收藏成功");
 							list.remove(bean);
-						}else{
+						} else {
 							showShortToast("收藏成功");
 						}
 						collectionAdapter.notifyDataSetChanged();
-					}else{
+					} else {
 						showShortToast(result.getString("message"));
 					}
 				} catch (JSONException e) {
 					showShortToast(R.string.json_exception);
 				}
-			}else{
+			} else {
 				showShortToast(R.string.connect_server_exception);
 			}
 		}

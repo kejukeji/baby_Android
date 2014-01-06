@@ -37,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.keju.baby.AsyncImageLoader;
 import com.keju.baby.AsyncImageLoader.ImageCallback;
@@ -150,7 +151,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 					if (mCurrentPhotoFile != null && mCurrentPhotoFile.exists())
 						mCurrentPhotoFile.delete();
 				} catch (Exception e) {
-
+					//MobclickAgent.reportError(BabyMyActivity.this, StringUtil.getExceptionInfo(e));
 				}
 				break;
 			case Constants.CAMERA_WITH_DATA:// 拍照
@@ -183,49 +184,6 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	/**
-	 * 调用图片剪辑程序去剪裁图片
-	 * 
-	 * @param f
-	 */
-	protected void doCropPhoto(File f) {
-		try {
-			// 启动gallery去剪辑这个照片
-			final Intent intent = getCropImageIntent(Uri.fromFile(f));
-			getParent().startActivityForResult(intent, Constants.PHOTO_PICKED_WITH_DATA);
-
-		} catch (Exception e) {
-			MobclickAgent.reportError(this, StringUtil.getExceptionInfo(e));
-			showShortToast("照片裁剪出错");
-		}
-	}
-
-	/**
-	 * 调用图片剪辑程序
-	 */
-	public static Intent getCropImageIntent(Uri photoUri) {
-		Intent intent = new Intent("com.android.camera.action.CROP");
-		intent.setDataAndType(photoUri, "image/*");
-		intent.putExtra("crop", "true");
-		intent.putExtra("aspectX", 1);
-		intent.putExtra("aspectY", 1);
-		intent.putExtra("outputX", 200);
-		intent.putExtra("outputY", 200);
-		intent.putExtra("return-data", true);
-		return intent;
-	}
-
-	private void createPhotoDir() {
-		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-			PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/" + Constants.APP_DIR_NAME + "/");
-			if (!PHOTO_DIR.exists()) {
-				// 创建照片的存储目录
-				PHOTO_DIR.mkdirs();
-			}
-		} else {
-			showShortToast("请检查SD卡是否正常");
-		}
-	}
 
 	private long exitTime;
 
@@ -345,6 +303,83 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
+	
+	
+
+	private void createPhotoDir() {
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/" + Constants.APP_DIR_NAME + "/");
+			if (!PHOTO_DIR.exists()) {
+				// 创建照片的存储目录
+				PHOTO_DIR.mkdirs();
+			}
+		} else {
+			showShortToast("请检查SD卡是否正常");
+		}
+	}
+
+	public void StartCamera() {
+		try {
+			mCurrentPhotoFile = new File(PHOTO_DIR, ImageUtil.getPhotoFileName());// 给新照的照片文件命名
+			final Intent intent = getTakePickIntent(mCurrentPhotoFile);
+			startActivityForResult(intent, Constants.CAMERA_WITH_DATA);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(this, "拍照出错", Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public static Intent getTakePickIntent(File f) {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+		return intent;
+	}
+
+	/**
+	 * 拍照获取图片
+	 * 
+	 */
+	protected void doTakePhoto() {
+		try {
+			mCurrentPhotoFile = new File(PHOTO_DIR, ImageUtil.getPhotoFileName());// 给新照的照片文件命名
+			final Intent intent = getTakePickIntent(mCurrentPhotoFile);
+			startActivityForResult(intent, Constants.CAMERA_WITH_DATA);
+		} catch (ActivityNotFoundException e) {
+			showShortToast("拍照出错");
+		}
+	}
+
+	/**
+	 * 调用图片剪辑程序去剪裁图片
+	 * 
+	 * @param f
+	 */
+	protected void doCropPhoto(File f) {
+		try {
+			// 启动gallery去剪辑这个照片
+			final Intent intent = getCropImageIntent(Uri.fromFile(f));
+			startActivityForResult(intent, Constants.PHOTO_PICKED_WITH_DATA);
+
+		} catch (Exception e) {
+			MobclickAgent.reportError(BabyMyActivity.this, StringUtil.getExceptionInfo(e));
+			showShortToast("照片裁剪出错");
+		}
+	}
+
+	/**
+	 * 调用图片剪辑程序
+	 */
+	public static Intent getCropImageIntent(Uri photoUri) {
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(photoUri, "image/*");
+		intent.putExtra("crop", "true");
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		intent.putExtra("outputX", 200);
+		intent.putExtra("outputY", 200);
+		intent.putExtra("return-data", true);
+		return intent;
+	}
+
 
 	Calendar cal = Calendar.getInstance();
 
@@ -462,26 +497,6 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 			private TextView tvName;
 		}
 
-	}
-
-	public static Intent getTakePickIntent(File f) {
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-		return intent;
-	}
-
-	/**
-	 * 拍照获取图片
-	 * 
-	 */
-	protected void doTakePhoto() {
-		try {
-			mCurrentPhotoFile = new File(PHOTO_DIR, ImageUtil.getPhotoFileName());// 给新照的照片文件命名
-			final Intent intent = getTakePickIntent(mCurrentPhotoFile);
-			startActivityForResult(intent, Constants.CAMERA_WITH_DATA);
-		} catch (ActivityNotFoundException e) {
-			showShortToast("拍照出错");
-		}
 	}
 
 	/***

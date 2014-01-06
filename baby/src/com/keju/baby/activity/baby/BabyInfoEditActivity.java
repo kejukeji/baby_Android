@@ -65,27 +65,27 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 	static final int DATE_DIALOG_ID = 1;
 	private Bitmap cameraBitmap;// 头像bitmap
 	private long userId;
-	
-	private String babyName,babySex,babyPreproductions,babyDeliveryW,babyComplication,babyPhone;
-    private int babyHeight,babyWeight,babyHeadCircumference,babyApgar;
-    private  String photoUrl; //婴儿图片的url
+
+	private String babyName, babySex, babyPreproductions, babyDeliveryW, babyComplication, babyPhone;
+	private int babyHeight, babyWeight, babyHeadCircumference, babyApgar;
+	private String photoUrl; // 婴儿图片的url
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.baby_info_edit_activity);
-       if(getIntent()!=null){
-    	   babyName = getIntent().getExtras().getString("BYNAME");
-    	   babySex = getIntent().getExtras().getString("BYSEX");
-    	   babyPreproductions = getIntent().getExtras().getString("BYPER");
-    	   babyDeliveryW = getIntent().getExtras().getString("BYDWAY");
-    	   babyHeight = getIntent().getExtras().getInt("BYHEI");
-    	   babyWeight = getIntent().getExtras().getInt("BYWEI");
-    	   babyHeadCircumference = getIntent().getExtras().getInt("BYHCIR");
-    	   babyApgar = getIntent().getExtras().getInt("BYAPGER");
-    	   babyPhone = getIntent().getExtras().getString("BYPHONE");
-    	   photoUrl = getIntent().getExtras().getString("ByURL");
-    	   babyComplication = getIntent().getExtras().getString("BYCOM");
-       }
+		if (getIntent() != null) {
+			babyName = getIntent().getExtras().getString("BYNAME");
+			babySex = getIntent().getExtras().getString("BYSEX");
+			babyPreproductions = getIntent().getExtras().getString("BYPER");
+			babyDeliveryW = getIntent().getExtras().getString("BYDWAY");
+			babyHeight = getIntent().getExtras().getInt("BYHEI");
+			babyWeight = getIntent().getExtras().getInt("BYWEI");
+			babyHeadCircumference = getIntent().getExtras().getInt("BYHCIR");
+			babyApgar = getIntent().getExtras().getInt("BYAPGER");
+			babyPhone = getIntent().getExtras().getString("BYPHONE");
+			photoUrl = getIntent().getExtras().getString("ByURL");
+			babyComplication = getIntent().getExtras().getString("BYCOM");
+		}
 		findView();
 		fillData();
 		createPhotoDir();
@@ -113,39 +113,40 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 		etChildbirthWay = (EditText) findViewById(R.id.etChildbirthWay);
 		etComplication = (EditText) findViewById(R.id.etComplication);
 		etGrade = (EditText) findViewById(R.id.etGrade);
-		
+
 		etBabyName.setText(babyName);
 		etParentNumber.setText(babyPhone);
 		etBabySix.setText(babySex);
 		etBabyProduction.setText(babyPreproductions);
-		etBabyWeight.setText(babyWeight+"kg");
-		etBabyHeight.setText(babyHeight+"cm");
-		etBabyHeadCircumference.setText(babyHeadCircumference+"cm");
+		etBabyWeight.setText(babyWeight + "kg");
+		etBabyHeight.setText(babyHeight + "cm");
+		etBabyHeadCircumference.setText(babyHeadCircumference + "cm");
 		etChildbirthWay.setText(babyDeliveryW);
-		etGrade.setText(babyApgar+"");
+		etGrade.setText(babyApgar + "");
 		etComplication.setText(babyComplication);
-		
+
 		ivUserPhone.setTag(photoUrl);
-			Drawable cacheDrawble = AsyncImageLoader.getInstance().loadDrawable(photoUrl,
-					new ImageCallback() {
-						@Override
-						public void imageLoaded(Drawable imageDrawable, String imageUrl) {
-							ImageView image = (ImageView) ivUserPhone.findViewWithTag(imageUrl);
-							if (image != null) {
-								if (imageDrawable != null) {
-									image.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(imageDrawable, 0.5f));
-								} else {
-									image.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(getResources().getDrawable(R.drawable.item_lion), 0.5f));
-								}
-							}
-						}
-					});
-			if (cacheDrawble != null) {
-				ivUserPhone.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(cacheDrawble, 0.5f));
-			} else {
-				ivUserPhone.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(getResources().getDrawable(R.drawable.item_lion), 0.5f));
+		Drawable cacheDrawble = AsyncImageLoader.getInstance().loadDrawable(photoUrl, new ImageCallback() {
+			@Override
+			public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+				ImageView image = (ImageView) ivUserPhone.findViewWithTag(imageUrl);
+				if (image != null) {
+					if (imageDrawable != null) {
+						image.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(imageDrawable, 0.5f));
+					} else {
+						image.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(
+								getResources().getDrawable(R.drawable.item_lion), 0.5f));
+					}
+				}
 			}
-		
+		});
+		if (cacheDrawble != null) {
+			ivUserPhone.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(cacheDrawble, 0.5f));
+		} else {
+			ivUserPhone.setImageBitmap(ImageUtil.getRoundCornerBitmapWithPic(
+					getResources().getDrawable(R.drawable.item_lion), 0.5f));
+		}
+
 	}
 
 	/**
@@ -185,7 +186,7 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 					}
 					if (avatarFile != null) {
 						ivUserPhone.setImageBitmap(cameraBitmap);
-					}else{
+					} else {
 						ivUserPhone.setBackgroundResource(R.drawable.item_lion);
 					}
 					if (mCurrentPhotoFile != null && mCurrentPhotoFile.exists())
@@ -218,11 +219,20 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 			String childbirthWay = etChildbirthWay.getText().toString().trim();
 			String complication = etComplication.getText().toString().trim();
 			String grade = etGrade.getText().toString().trim();
+			if(StringUtil.isBlank(babyName)||StringUtil.isBlank(parentNumber)||
+					StringUtil.isBlank(babySix)||StringUtil.isBlank(babyProduction)||
+					StringUtil.isBlank(babyWeight)||StringUtil.isBlank(babyHeight)||
+					StringUtil.isBlank(childbirthWay)||StringUtil.isBlank(grade)||
+					StringUtil.isBlank(babyHeadCircumference)||StringUtil.isBlank(complication)){
+				showShortToast("请输入完整的信息");
+				return;
+			}else{
 			if (NetUtil.checkNet(this)) {
 				new PostBabyInfor(babyName, parentNumber, babySix, babyProduction, babyWeight, babyHeight,
 						babyHeadCircumference, childbirthWay, complication, grade).execute();
 			} else {
 				showShortToast(R.string.NoSignalException);
+			}
 			}
 			break;
 		case R.id.viewUserPhone:
@@ -394,7 +404,7 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 			this.parentNumber = parentNumber;
 			this.babySex = babySex;
 			this.babyProduction = babyProduction;
-			if (babyWeight.equals("") ) {
+			if (babyWeight.equals("")) {
 				this.babyWeight = 0;
 			} else {
 				this.babyWeight = Integer.parseInt(babyWeight);
@@ -427,9 +437,9 @@ public class BabyInfoEditActivity extends BaseActivity implements OnClickListene
 		@Override
 		protected JSONObject doInBackground(Void... params) {
 			int uid = SharedPrefUtil.getUid(BabyInfoEditActivity.this);
-			String type ="update";
+			String type = "update";
 			try {
-				return new BusinessHelper().addBabyInfor(uid,type,babyName, parentNumber, babySex, babyProduction,
+				return new BusinessHelper().addBabyInfor(uid, type, babyName, parentNumber, babySex, babyProduction,
 						babyWeight, babyHeight, babyHeadCircumference, childbirthWay, complication, grade, avatarFile);
 			} catch (SystemException e) {
 				e.printStackTrace();
