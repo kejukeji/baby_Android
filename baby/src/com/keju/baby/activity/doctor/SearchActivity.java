@@ -117,6 +117,8 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 			saveHistory();
 			Bundle b = new Bundle();
 			b.putString(Constants.EXTRA_DATA, keyword);
+			b.putString("startTime", tvTimeStart.getText().toString());
+			b.putString("endTime", tvTimeEnd.getText().toString());
 			openActivity(SearchResultActivity.class, b);
 			break;
 		case R.id.btnClear:

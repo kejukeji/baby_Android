@@ -173,17 +173,12 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		btnRight.setBackgroundResource(R.drawable.btn_commit_selector);
 		btnRight.setOnClickListener(this);
 		tvTitle.setText("个人中心");
-	}
-	@Override
-	protected void onResume() {
-		super.onResume();
 		if (NetUtil.checkNet(this)) {
 			new GetBabyInfor().execute();
 		} else {
 			showShortToast(R.string.NoSignalException);
 		}
 	}
-
 
 	private long exitTime;
 

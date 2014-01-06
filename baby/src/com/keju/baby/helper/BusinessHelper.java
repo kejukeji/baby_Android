@@ -262,8 +262,15 @@ public class BusinessHelper {
 	 * @param keyword
 	 * @return
 	 */
-	public ResponseBean<BabyBean> searchBaby(String keyword) {
+	public ResponseBean<BabyBean> searchBaby(String keyword,String startTime,String endTime) {
 		ResponseBean<BabyBean> response = null;
+		List<PostParameter> p = new ArrayList<PostParameter>();
+		if(!TextUtils.isEmpty(startTime)){
+			p.add(new PostParameter("start_birthday_time", startTime));
+		}
+		if(!TextUtils.isEmpty(endTime)){
+			p.add(new PostParameter("end_birthday_time", endTime));
+		}
 		JSONObject obj;
 		try {
 			obj = httpClient.get(BASE_URL + "doctor/search",

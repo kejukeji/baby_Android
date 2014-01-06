@@ -118,7 +118,6 @@ public class BaseWebViewActivity extends BaseActivity {
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
 				super.onPageStarted(view, url, favicon);
 				BaseWebViewActivity.this.url = url;
-				setWebTabVisible(url);
 				if (url.contains(Constants.URL_NEED) || url.contains(Constants.URL_GROW_LINE)
 						|| url.contains(Constants.URL_GROW_LINE_NINE) || url.contains(Constants.URL_GROW_LINE_FEN_TONG)) {
 					BabyMainActivity.setTabVisible(false);

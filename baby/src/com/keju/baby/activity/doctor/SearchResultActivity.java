@@ -42,12 +42,15 @@ public class SearchResultActivity extends BaseActivity implements OnClickListene
 	private HomeAdapter adapter;
 
 	private String keyword;
+	private String startTime,endTime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getIntent() != null) {
 			keyword = getIntent().getExtras().getString(Constants.EXTRA_DATA);
+			startTime = getIntent().getExtras().getString("startTime");
+			endTime = getIntent().getExtras().getString("endTime");
 		}
 		setContentView(R.layout.search_result);
 		findView();
@@ -197,7 +200,7 @@ public class SearchResultActivity extends BaseActivity implements OnClickListene
 
 		@Override
 		protected ResponseBean<BabyBean> doInBackground(Void... params) {
-			return new BusinessHelper().searchBaby(keyword);
+			return new BusinessHelper().searchBaby(keyword,startTime,endTime);
 		}
 
 		@Override
@@ -208,6 +211,9 @@ public class SearchResultActivity extends BaseActivity implements OnClickListene
 				List<BabyBean> tempList = result.getObjList();
 				list.addAll(tempList);
 				adapter.notifyDataSetChanged();
+				if(tempList.size() == 0){
+					showShortToast("没有搜索到相应结果");
+				}
 			} else {
 				showShortToast(result.getError());
 			}

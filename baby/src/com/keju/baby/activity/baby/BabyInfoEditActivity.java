@@ -42,7 +42,7 @@ import com.keju.baby.util.StringUtil;
 import com.umeng.analytics.MobclickAgent;
 
 /**
- * 宝宝资料编辑
+ * 宝宝资料编辑(这个类不用了，现在修改是在BabyMyActivity里)
  * 
  * @author Zhoujun
  * @version 创建时间：2013-10-25 下午3:16:24

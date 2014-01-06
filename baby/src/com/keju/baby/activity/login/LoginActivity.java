@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.util.AndroidUtil;
+import com.keju.baby.util.NetUtil;
 
 /**
  * 登录切换界面
@@ -51,9 +52,17 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnDoctor:
+			if(!NetUtil.checkNet(this)){
+				showShortToast(R.string.NoSignalException);
+				return;
+			}
 			openActivity(DoctorLoginActivity.class);
 			break;
 		case R.id.btnBaby:
+			if(!NetUtil.checkNet(this)){
+				showShortToast(R.string.NoSignalException);
+				return;
+			}
 			openActivity(BabyLoginActivity.class);
 			break;
 
