@@ -151,7 +151,8 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 					if (mCurrentPhotoFile != null && mCurrentPhotoFile.exists())
 						mCurrentPhotoFile.delete();
 				} catch (Exception e) {
-					//MobclickAgent.reportError(BabyMyActivity.this, StringUtil.getExceptionInfo(e));
+					// MobclickAgent.reportError(BabyMyActivity.this,
+					// StringUtil.getExceptionInfo(e));
 				}
 				break;
 			case Constants.CAMERA_WITH_DATA:// 拍照
@@ -196,6 +197,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -210,11 +212,19 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 			String childbirthWay = tvDeliveryWay.getText().toString().trim();
 			String complication = tvComplication.getText().toString().trim();
 			String grade = tvApgar.getText().toString().trim();
-			if (NetUtil.checkNet(this)) {
-				new PostBabyInfor(babyName, parentNumber, babySix, babyProduction, babyWeight, babyHeight,
-						babyHeadCircumference, childbirthWay, complication, grade).execute();
+			if (StringUtil.isBlank(babyName) || StringUtil.isBlank(parentNumber) || StringUtil.isBlank(babySix)
+					|| StringUtil.isBlank(babyProduction) || StringUtil.isBlank(babyWeight)
+					|| StringUtil.isBlank(babyHeight) || StringUtil.isBlank(childbirthWay) || StringUtil.isBlank(grade)
+					|| StringUtil.isBlank(babyHeadCircumference) || StringUtil.isBlank(complication)) {
+				showShortToast("请输入完整的信息");
+				return;
 			} else {
-				showShortToast(R.string.NoSignalException);
+				if (NetUtil.checkNet(this)) {
+					new PostBabyInfor(babyName, parentNumber, babySix, babyProduction, babyWeight, babyHeight,
+							babyHeadCircumference, childbirthWay, complication, grade).execute();
+				} else {
+					showShortToast(R.string.NoSignalException);
+				}
 			}
 			break;
 		case R.id.tvGendar:
@@ -235,7 +245,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 			showDialog(list);
 			break;
 		case R.id.tvComplication:
-			Bundle b= new Bundle();
+			Bundle b = new Bundle();
 			b.putString(Constants.EXTRA_DATA, tvComplication.getText().toString());
 			Intent intent = new Intent(this, ComplicationActivity.class);
 			intent.putExtras(b);
@@ -298,8 +308,6 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
-	
-	
 
 	private void createPhotoDir() {
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -374,7 +382,6 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		intent.putExtra("return-data", true);
 		return intent;
 	}
-
 
 	Calendar cal = Calendar.getInstance();
 
