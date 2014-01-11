@@ -6,7 +6,8 @@ import android.view.View;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseWebViewActivity;
-import com.keju.baby.activity.login.LoginActivity;
+import com.keju.baby.activity.login.BabyLoginActivity;
+import com.keju.baby.activity.login.DoctorLoginActivity;
 import com.keju.baby.util.SharedPrefUtil;
 
 /**
@@ -39,7 +40,11 @@ public class ChangePasswordActivity extends BaseWebViewActivity {
 		webView.addJavascriptInterface(new Object() {
 			public void webviewPassword(int code) {
 				if(code == 200){
-					openActivity(LoginActivity.class);
+					if(SharedPrefUtil.getUserType(ChangePasswordActivity.this) == Constants.USER_DOCTOR){
+						openActivity(DoctorLoginActivity.class);
+					}else{
+						openActivity(BabyLoginActivity.class);
+					}
 					finish();
 				}
 			}

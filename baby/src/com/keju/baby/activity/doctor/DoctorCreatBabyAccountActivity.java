@@ -37,6 +37,7 @@ import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.DateUtil;
 import com.keju.baby.util.NetUtil;
+import com.keju.baby.util.SharedPrefUtil;
 import com.keju.baby.util.StringUtil;
 
 /**
@@ -296,10 +297,10 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 				tvGender.setText((String) adapter.getItem(arg2));
 			} else if (dialogType.equals("diliveryWay")) {
 				tvWay.setText((String) adapter.getItem(arg2));
-			} else if (dialogType.equals("complication")) {
+			}else if(dialogType.equals("complication")){
 				tvComplication.setText((String) adapter.getItem(arg2));
-				if (((String) adapter.getItem(arg2)).equals("有")) {
-					startActivityForResult(new Intent(DoctorCreatBabyAccountActivity.this, ComplicationActivity.class),
+				if(((String) adapter.getItem(arg2)).equals("有")){
+					startActivityForResult(new Intent(DoctorCreatBabyAccountActivity.this, ComplicationActivity.class), Constants.REQUEST_COMPLICATION);
 							Constants.REQUEST_COMPLICATION);
 				}
 			}
@@ -401,10 +402,9 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 
 		@Override
 		protected JSONObject doInBackground(Void... params) {
+			int doctor_id = SharedPrefUtil.getUid(DoctorCreatBabyAccountActivity.this);
 			try {
-				return new BusinessHelper().creatBabyAccount(baby_name, baby_pass, patriarch_tel, gender, due_date,
-						born_birthday, born_weight, born_height, born_head, childbirth_style, complication_id,
-						standardStr);
+				return new BusinessHelper().creatBabyAccount(doctor_id,baby_name, baby_pass, patriarch_tel, gender, due_date, born_birthday, born_weight, born_height, born_head, childbirth_style, complication_id,standardStr);
 			} catch (SystemException e) {
 				return null;
 			}

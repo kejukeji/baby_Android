@@ -133,6 +133,7 @@ public class BaseWebViewActivity extends BaseActivity {
 					if (handler != null) {
 						handler.removeCallbacks(runnable);
 					}
+					titleBar.setVisibility(View.VISIBLE);
 				}
 			}
 

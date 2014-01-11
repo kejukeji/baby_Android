@@ -57,6 +57,17 @@ public class DoctorLoginActivity extends BaseWebViewActivity {
 				openActivity(DoctorMainActivity.class);
 				finish();
 			}
+			public void webviewRegister(String code,int uid) {
+				if(!code.equals("200")){
+					showShortToast("注册失败");
+					return;
+				}
+				SharedPrefUtil.setUid(DoctorLoginActivity.this, uid);
+				SharedPrefUtil.setUserType(DoctorLoginActivity.this,Constants.USER_DOCTOR);
+				SharedPrefUtil.setIsLogin(DoctorLoginActivity.this);
+				openActivity(DoctorMainActivity.class);
+				finish();
+			}
 		}, "app");
 		
 	}

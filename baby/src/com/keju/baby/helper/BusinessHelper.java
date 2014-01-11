@@ -273,8 +273,7 @@ public class BusinessHelper {
 		}
 		JSONObject obj;
 		try {
-			obj = httpClient.get(BASE_URL + "doctor/search",
-					new PostParameter[] { new PostParameter("keyword", keyword) }).asJSONObject();
+			obj = httpClient.get(BASE_URL + "doctor/search",p.toArray(new PostParameter[p.size()])).asJSONObject();
 			int status = obj.getInt("code");
 			if (status == Constants.REQUEST_SUCCESS) {
 				response = new ResponseBean<BabyBean>(obj);
@@ -355,12 +354,12 @@ public class BusinessHelper {
 	 * @return
 	 * @throws SystemException
 	 */
-	public JSONObject creatBabyAccount(String baby_name, String baby_pass, String patriarch_tel, String gender,
+	public JSONObject creatBabyAccount(int doctor_id,String baby_name, String baby_pass, String patriarch_tel, String gender,
 			String due_date, String born_birthday, String born_weight, String born_height, String born_head,
 			String childbirth_style, String complication_id,String growth_standard) throws SystemException {
 		return httpClient.post(
 				BASE_URL + "html/create/baby",
-				new PostParameter[] { new PostParameter("baby_name", baby_name),
+				new PostParameter[] { new PostParameter("doctor_id", doctor_id),new PostParameter("baby_name", baby_name),
 						new PostParameter("baby_pass", baby_pass), new PostParameter("patriarch_tel", patriarch_tel),
 						new PostParameter("gender", gender), new PostParameter("due_date", due_date),
 						new PostParameter("born_birthday", born_birthday),
