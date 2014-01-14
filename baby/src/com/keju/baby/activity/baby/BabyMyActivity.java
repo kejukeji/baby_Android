@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -536,7 +537,8 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 							tvId.setText(babyBean.getString("patriarch_tel"));
 							etRealName.setText(babyBean.getString("baby_name"));
 							tvGendar.setText(babyBean.getString("gender"));
-							tvPreproductions.setText(babyBean.getString("due_date"));
+					     	Date data =DateUtil.stringToDate(null, babyBean.getString("due_date"));
+							tvPreproductions.setText(DateUtil.dateToString("yyyy-MM-dd", data));
 							etHeight.setText(babyBean.getInt("born_height") + "");
 							etWeight.setText(babyBean.getInt("born_weight") + "");
 							etHeadCircumference.setText(babyBean.getInt("born_head") + "");

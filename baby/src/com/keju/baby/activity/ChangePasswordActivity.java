@@ -6,7 +6,6 @@ import android.view.View;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseWebViewActivity;
-import com.keju.baby.activity.login.DoctorLoginActivity;
 import com.keju.baby.activity.login.LoginActivity;
 import com.keju.baby.util.SharedPrefUtil;
 

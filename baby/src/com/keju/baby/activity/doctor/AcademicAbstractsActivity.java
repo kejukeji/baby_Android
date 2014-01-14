@@ -334,4 +334,5 @@ public class AcademicAbstractsActivity extends BaseActivity {
 			}
 		}
 	}
+	
 }

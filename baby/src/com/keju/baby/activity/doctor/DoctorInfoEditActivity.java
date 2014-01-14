@@ -230,6 +230,19 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 
 	}
 
+	/**
+	 * 刷新学术收藏数据
+	 */
+	private void refreshCollect() {
+		if (NetUtil.checkNet(this)) {
+			// isRefresh = true;
+			pageIndex = 1;
+			new GetCollectDataTask().execute();
+		} else {
+			showShortToast(R.string.NoSignalException);
+		}
+	}
+
 	OnItemClickListener clicklistener = new OnItemClickListener() {
 
 		@Override
@@ -279,6 +292,8 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 			listView.setVisibility(View.GONE);
 			break;
 		case R.id.rb_collect:
+			list.clear();
+			refreshCollect();
 			btnRight.setVisibility(View.INVISIBLE);
 			viewInfo.setVisibility(View.GONE);
 			listView.setVisibility(View.VISIBLE);
@@ -580,7 +595,6 @@ public class DoctorInfoEditActivity extends BaseActivity implements OnClickListe
 		}
 	};
 
-	
 	/***
 	 * 医生个人资料修改
 	 */

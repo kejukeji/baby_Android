@@ -416,7 +416,8 @@ public class BusinessHelper {
 	public ResponseBean<AcademicAbstractBean> getAcademicAbstract(int pageIndex,int doctor_id){
 		ResponseBean<AcademicAbstractBean> bean ;
 		try {
-			JSONObject obj = httpClient.get(BASE_URL + "academic",new PostParameter[]{new PostParameter("doctor_id", doctor_id),
+			JSONObject obj = httpClient.get(BASE_URL + "academic",
+					new PostParameter[]{new PostParameter("doctor_id", doctor_id),
 					new PostParameter("page", pageIndex)}).asJSONObject();
 			int status = obj.getInt("code");
 			if (status == Constants.REQUEST_SUCCESS) {
