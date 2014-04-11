@@ -13,6 +13,7 @@ import com.keju.baby.R;
 import com.keju.baby.activity.baby.BabyMainActivity;
 import com.keju.baby.activity.doctor.DoctorMainActivity;
 import com.keju.baby.activity.login.LoginActivity;
+import com.keju.baby.util.NetUtil;
 import com.keju.baby.util.SharedPrefUtil;
 
 public class LogoActivity extends Activity {
@@ -35,13 +36,26 @@ public class LogoActivity extends Activity {
 		ivHeart.startAnimation(aa);
 		aa.setAnimationListener(new AnimationListener() {
 			public void onAnimationEnd(Animation arg0) {
-				if(SharedPrefUtil.isLogin(LogoActivity.this)){
-					if(SharedPrefUtil.getUserType(LogoActivity.this) == Constants.USER_DOCTOR){
-						startActivity(new Intent(LogoActivity.this, DoctorMainActivity.class));
+				if(SharedPrefUtil.getIsRemember(LogoActivity.this)== 1){
+					if(SharedPrefUtil.getIsRemember(LogoActivity.this)== 1){
+						if(SharedPrefUtil.getUserType(LogoActivity.this) == Constants.USER_DOCTOR){
+							startActivity(new Intent(LogoActivity.this, DoctorMainActivity.class));
+						}else{
+							startActivity(new Intent(LogoActivity.this, BabyMainActivity.class));
+						}	
 					}else{
-						startActivity(new Intent(LogoActivity.this, BabyMainActivity.class));
+						if(NetUtil.checkNet(LogoActivity.this)){
+							if(SharedPrefUtil.getUserType(LogoActivity.this) == Constants.USER_DOCTOR){
+								startActivity(new Intent(LogoActivity.this, DoctorMainActivity.class));
+							}else{
+								startActivity(new Intent(LogoActivity.this, BabyMainActivity.class));
+							}	
+						}else{
+							startActivity(new Intent(LogoActivity.this, LoginActivity.class));
+						}
 					}
-				}else{
+				}
+					else{
 					startActivity(new Intent(LogoActivity.this, LoginActivity.class));
 				}
 				finish();

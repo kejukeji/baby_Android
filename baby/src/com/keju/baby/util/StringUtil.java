@@ -6,6 +6,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * 字符串工具类
  * @author Zhoujun
@@ -178,5 +181,20 @@ public class StringUtil {
 	public static String getExceptionInfo(Exception e) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * 创建一个josn 对象
+	 * 
+	 * */
+	public static String createJsonString(String key,Object valve){
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put(key, valve);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jsonObject.toString();
+		
 	}
 }

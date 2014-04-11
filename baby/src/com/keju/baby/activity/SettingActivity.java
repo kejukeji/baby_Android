@@ -132,6 +132,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					SharedPrefUtil.clearUserinfo(SettingActivity.this);
+					SharedPrefUtil.setIsRemember(SettingActivity.this, 2);
 					openActivity(LoginActivity.class);
 					finish();
 				}

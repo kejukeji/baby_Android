@@ -12,6 +12,7 @@ import com.keju.baby.R;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.util.AndroidUtil;
 import com.keju.baby.util.NetUtil;
+import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 登录切换界面
@@ -52,18 +53,29 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnDoctor:
-			if(!NetUtil.checkNet(this)){
-				showShortToast(R.string.NoSignalException);
-				return;
-			}
-			openActivity(DoctorLoginActivity.class);
+				if(SharedPrefUtil.isDoctorFistLogin(LoginActivity.this)){
+					if(NetUtil.checkNet(this)){
+						openActivity(DoctorLoginActivity.class);
+						SharedPrefUtil.setDoctorFistLogined(LoginActivity.this);
+					}else{
+						showShortToast("第一次登陆医生端必须有网络才能登陆");
+					}
+				}else{
+					openActivity(DoctorLoginActivity.class);
+				}
 			break;
 		case R.id.btnBaby:
-			if(!NetUtil.checkNet(this)){
-				showShortToast(R.string.NoSignalException);
-				return;
+			if(SharedPrefUtil.isFistLogin(LoginActivity.this)){
+				if(NetUtil.checkNet(this)){
+					openActivity(BabyLoginActivity.class);
+					SharedPrefUtil.setFistLogined(LoginActivity.this);
+				}else{
+					showShortToast("第一次登陆婴儿必须有网络才能登陆");
+				}
+			}else{
+				openActivity(BabyLoginActivity.class);
 			}
-			openActivity(BabyLoginActivity.class);
+			;
 			break;
 
 		default:

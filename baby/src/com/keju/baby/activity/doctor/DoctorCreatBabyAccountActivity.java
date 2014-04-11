@@ -20,20 +20,24 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.keju.baby.CommonApplication;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
 import com.keju.baby.activity.ComplicationActivity;
 import com.keju.baby.activity.base.BaseActivity;
+import com.keju.baby.bean.AddBabyBean;
+import com.keju.baby.bean.BabyBean;
+import com.keju.baby.db.DataBaseAdapter;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.DateUtil;
 import com.keju.baby.util.NetUtil;
@@ -60,10 +64,14 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 	private String complicationStr;
 	private String standardStr = "WHO";
 
+	private DataBaseAdapter dba;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.doctor_creat_baby_account);
+		dba = ((CommonApplication) getApplicationContext()).getDbAdapter();
+
 		findView();
 		fillData();
 	}
@@ -195,10 +203,13 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 				complication = complicationStr;
 			}
 			if (!NetUtil.checkNet(this)) {
-				showShortToast(R.string.NoSignalException);
+				 showShortToast(R.string.NoSignalException);
+				commitSql(phone, name, password, passwordConfirm, gender, preproduction, birthday, weight, height,
+						head, way, complication);
+			} else {
+				new CreatBabyAccountTask(name, password, phone, gender, preproduction, birthday, weight, height, head,
+						way, complication).execute();
 			}
-			new CreatBabyAccountTask(name, password, phone, gender, preproduction, birthday, weight, height, head, way,
-					complication).execute();
 			break;
 		case R.id.tvGender:
 			dialogType = "gender";
@@ -232,6 +243,81 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * @param phone
+	 * @param name
+	 * @param password
+	 * @param passwordConfirm
+	 * @param gender
+	 * @param birthday
+	 * @param weight
+	 * @param height
+	 * @param head
+	 * @param way
+	 * @param complication
+	 */
+	private String patriarch_tel;// 父母号码
+	private String baby_name;// 婴儿名字
+	private String incepting_password;// 初始密码
+	private String again_password;// 确认密码
+	private String sex;// 性别
+	private String expected_data;// 预产期
+	private String born_data;// 出生日期
+	private String weight; // 出生体重
+	private String height;// 出生身高
+	private String head_size;// 出生体重
+	private String delivery_way;// 分娩方式
+	private String complication1;// 有无合并症
+
+	private void commitSql(String phone, String name, String password, String passwordConfirm, String gender,
+			String preproduction, String birthday, String weight, String height, String head, String way,
+			String complication) {
+		this.patriarch_tel = phone;
+		this.baby_name = name;
+		this.incepting_password = password;
+		this.again_password = passwordConfirm;
+		this.sex = gender;
+		this.expected_data = preproduction;
+		this.born_data = birthday;
+		this.weight = weight;
+		this.height = height;
+		this.head_size = head;
+		this.delivery_way = way;
+		this.complication1 = complication;
+
+		AddBabyBean addBabyBean = new AddBabyBean();
+		addBabyBean.setPatriarch_tel(patriarch_tel);
+		addBabyBean.setBaby_name(baby_name);
+		addBabyBean.setIncepting_password(incepting_password);
+		addBabyBean.setAgain_password(again_password);
+		addBabyBean.setSex(sex);
+		addBabyBean.setExpected_data(expected_data);
+		addBabyBean.setBorn_data(born_data);
+		addBabyBean.setWeight(weight);
+		addBabyBean.setHeight(height);
+		addBabyBean.setHead_size(head_size);
+		addBabyBean.setDelivery_way(delivery_way);
+		addBabyBean.setComplication(complication1);
+		addBabyBean.setStandardStr(standardStr);
+
+		 Boolean boolean1 =dba.inserAddBabyData(addBabyBean);
+		 if(boolean1==true){
+			 Intent intent = new Intent(Constants.REQUEST_CREATE_BABY + "");
+			 sendBroadcast(intent);
+			 showShortToast("本地新增婴儿成功");
+			 finish();
+		 }else{
+			 showShortToast("本地新增婴儿失败");
+		 }
+		
+		AddBabyBean addBabyBean1 = dba.getNewBabyData();
+		BabyBean babyBean = new BabyBean();
+		babyBean.setName(addBabyBean1.getBaby_name());
+		
+		dba.inserSingleBabyListData(babyBean);
+
 	}
 
 	Calendar cal = Calendar.getInstance();
@@ -297,10 +383,10 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 				tvGender.setText((String) adapter.getItem(arg2));
 			} else if (dialogType.equals("diliveryWay")) {
 				tvWay.setText((String) adapter.getItem(arg2));
-			}else if(dialogType.equals("complication")){
+			} else if (dialogType.equals("complication")) {
 				tvComplication.setText((String) adapter.getItem(arg2));
-				if(((String) adapter.getItem(arg2)).equals("有")){
-					startActivityForResult(new Intent(DoctorCreatBabyAccountActivity.this, ComplicationActivity.class), Constants.REQUEST_COMPLICATION);
+				if (((String) adapter.getItem(arg2)).equals("有")) {
+					startActivityForResult(new Intent(DoctorCreatBabyAccountActivity.this, ComplicationActivity.class),
 							Constants.REQUEST_COMPLICATION);
 				}
 			}
@@ -404,7 +490,9 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 		protected JSONObject doInBackground(Void... params) {
 			int doctor_id = SharedPrefUtil.getUid(DoctorCreatBabyAccountActivity.this);
 			try {
-				return new BusinessHelper().creatBabyAccount(doctor_id,baby_name, baby_pass, patriarch_tel, gender, due_date, born_birthday, born_weight, born_height, born_head, childbirth_style, complication_id,standardStr);
+				return new BusinessHelper().creatBabyAccount(doctor_id, baby_name, baby_pass, patriarch_tel, gender,
+						due_date, born_birthday, born_weight, born_height, born_head, childbirth_style,
+						complication_id, standardStr);
 			} catch (SystemException e) {
 				return null;
 			}
@@ -420,7 +508,7 @@ public class DoctorCreatBabyAccountActivity extends BaseActivity implements OnCl
 					if (status == Constants.REQUEST_SUCCESS) {
 						showShortToast("创建婴儿账户成功");
 						Intent intent = new Intent(Constants.REQUEST_CREATE_BABY + "");
-						sendBroadcast(intent);
+						sendBroadcast(intent); // 这是隐式的intent 
 						finish();
 					} else {
 						showShortToast(result.getString("message"));

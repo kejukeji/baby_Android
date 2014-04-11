@@ -28,9 +28,7 @@ public class DoctorRegisterActivity extends BaseWebViewActivity {
 			
 			@Override
 			public void onClick(View v) {
-				if(webView.canGoBack()){
-					webView.goBack();
-				}
+            finish();
 			}
 		});
 		btnLeft.setVisibility(View.VISIBLE);
@@ -40,7 +38,7 @@ public class DoctorRegisterActivity extends BaseWebViewActivity {
 	}
 
 	private void fillData() {
-		loadUrl(Constants.URL_DOCTOR_LOGIN);
+		loadUrl(Constants.URL_REGISTER);
 		webView.addJavascriptInterface(new Object() {
 			public void webviewRegister(String code,int uid) {
 				if(!code.equals("200")){

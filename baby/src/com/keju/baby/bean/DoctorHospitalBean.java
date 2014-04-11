@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.TextUtils;
+
 /**
  * 医生个人资料医院修改实体类
  * 
@@ -23,6 +25,7 @@ public class DoctorHospitalBean implements Serializable {
 	private int hospitalId;
 	private int hospitalProvinceId;
 	private String hospitalName;
+	private List<DoctorDepartmentBean> list;
 
 	public DoctorHospitalBean(JSONObject obj) throws JSONException {
 		if (obj.has("id")) {
@@ -33,6 +36,13 @@ public class DoctorHospitalBean implements Serializable {
 		}
 		if (obj.has("name")) {
 			this.hospitalName = obj.getString("name");
+		}
+		if(obj.has("sub_department")){
+			if(!TextUtils.isEmpty(obj.getString("sub_department"))){
+				this.list = DoctorDepartmentBean.constractList(obj.getJSONArray("sub_department"));
+			}else{
+				this.list = new ArrayList<DoctorDepartmentBean>();
+			}
 		}
 	}
 
@@ -75,5 +85,14 @@ public class DoctorHospitalBean implements Serializable {
 	public void setHospitalName(String hospitalName) {
 		this.hospitalName = hospitalName;
 	}
+
+	public List<DoctorDepartmentBean> getList() {
+		return list;
+	}
+
+	public void setList(List<DoctorDepartmentBean> list) {
+		this.list = list;
+	}
+	
 
 }

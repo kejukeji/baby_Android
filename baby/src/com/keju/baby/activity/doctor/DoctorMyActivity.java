@@ -127,10 +127,51 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 			new GetDoctorTask().execute();
 			new GetCollectDataTask().execute();
 		} else {
-			showShortToast(R.string.NoSignalException);
+			String doctorInforStr = SharedPrefUtil.getDoctorInfor(DoctorMyActivity.this);
+			JSONObject obj;
+			try {
+				obj = new JSONObject(doctorInforStr);
+				tvId.setText(obj.getInt("id") + "");
+				tvName.setText(obj.getString("doctor_name"));
+				doctorName = obj.getString("real_name");
+				tvRealName.setText(doctorName);
+				doctorAddress = obj.getString("province");
+				tvArea.setText(doctorAddress);
+				doctorHospital = obj.getString("hospital");
+				tvHospital.setText(doctorHospital);
+				doctorDepartment = obj.getString("department");
+				tvDepartment.setText(doctorDepartment);
+				doctorJop = obj.getString("positions");
+				tvJob.setText(doctorJop);
+				doctorEmail = obj.getString("email");
+				tvEmail.setText(doctorEmail);
+				doctorPhone = obj.getString("tel");
+				tvPhone.setText(doctorPhone);
+				avatarUrl = BusinessHelper.PIC_URL + obj.getString("picture_path");
+				Drawable cacheDrawable = AsyncImageLoader.getInstance().loadAsynLocalDrawable(avatarUrl,
+						new ImageCallback() {
+
+							@Override
+							public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+								if (imageDrawable != null) {
+									ivAvatar.setImageDrawable(imageDrawable);
+								} else {
+									ivAvatar.setImageResource(R.drawable.item_lion);
+								}
+							}
+						});
+				if (cacheDrawable != null) {
+					ivAvatar.setImageDrawable(cacheDrawable);
+				} else {
+					ivAvatar.setImageResource(R.drawable.item_lion);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+//			showShortToast(R.string.NoSignalException);
+		
 		}
 	}
-
 	/**
 	 * 刷新学术收藏数据
 	 */
@@ -460,8 +501,9 @@ public class DoctorMyActivity extends BaseActivity implements OnCheckedChangeLis
 					int status = result.getInt("code");
 					if (status == Constants.REQUEST_SUCCESS) {
 						JSONObject obj = result.getJSONArray("doctor_list").getJSONObject(0);
+						SharedPrefUtil.setDoctorInfor(DoctorMyActivity.this, obj.toString());
+						
 						tvId.setText(obj.getInt("id") + "");
-
 						tvName.setText(obj.getString("doctor_name"));
 						doctorName = obj.getString("real_name");
 						tvRealName.setText(doctorName);

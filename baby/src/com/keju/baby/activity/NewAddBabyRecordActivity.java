@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,16 +27,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
+import com.keju.baby.CommonApplication;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
 import com.keju.baby.SystemException;
 import com.keju.baby.activity.base.BaseActivity;
 import com.keju.baby.bean.BrandBean;
+import com.keju.baby.bean.FollowUpRecordBean;
 import com.keju.baby.bean.KindBean;
 import com.keju.baby.bean.ResponseBean;
 import com.keju.baby.bean.YardBean;
+import com.keju.baby.db.DataBaseAdapter;
 import com.keju.baby.helper.BusinessHelper;
 import com.keju.baby.util.DateUtil;
 import com.keju.baby.util.NetUtil;
@@ -67,9 +70,14 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 	private int brandId = 1;
 	private int kindId = 1;
 
+	private DataBaseAdapter dba;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		dba = ((CommonApplication) getApplicationContext()).getDbAdapter();
+
 		if (getIntent().getExtras() != null) {
 			id = getIntent().getExtras().getInt(Constants.EXTRA_DATA);
 			isMother = getIntent().getExtras().getBoolean("isMother");
@@ -113,6 +121,8 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 		tvProtein = (TextView) findViewById(R.id.tvProtein);
 		tvCarbohydrate = (TextView) findViewById(R.id.tvCarbohydrate);
 		tvFat = (TextView) findViewById(R.id.tvFat);
+		 
+
 	}
 
 	private void fillData() {
@@ -120,11 +130,52 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 		if (isMother) {
 			btnNewAddMilk.setVisibility(View.INVISIBLE);
 		}
+		if(!NetUtil.checkNet(NewAddBabyRecordActivity.this)){
+			btnNewAddMilk.setVisibility(View.GONE);
+		}
 		if (NetUtil.checkNet(this)) {
 			new GetMilkDataTask().execute();
 		} else {
-			showShortToast(R.string.NoSignalException);
+			loadCache();
 		}
+
+	}
+
+	/**
+	 * 无网络情况下从缓存取数据
+	 */
+	private void loadCache() {
+		String cacheMilkDataList = SharedPrefUtil.getMilkData(NewAddBabyRecordActivity.this);
+		if (cacheMilkDataList != null) {
+			try {
+				JSONObject obj = new JSONObject(cacheMilkDataList);
+				List<YardBean> milkDataList = YardBean.constractList(obj.getJSONArray("total"));
+				if (milkDataList.size() > 0) {
+					yardList.clear();
+					brandList.clear();
+					kindList.clear();
+				}
+				yardList.addAll(milkDataList);
+				if (yardList.size() > 0) {
+					tvYard.setText(yardList.get(0).getName());
+					brandList.addAll(yardList.get(0).getList());
+					if (brandList.size() > 0) {
+						tvBrand.setText(brandList.get(0).getName());
+						kindList.addAll(brandList.get(0).getList());
+						if (kindList.size() > 0) {
+							tvKind.setText(kindList.get(0).getName());
+							tvEnergy.setText(kindList.get(0).getEnergy());
+							tvProtein.setText(kindList.get(0).getProtein());
+							tvCarbohydrate.setText(kindList.get(0).getCarbohydrate());
+							tvFat.setText(kindList.get(0).getFat());
+						}
+					}
+				} 
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	@Override
@@ -196,8 +247,10 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 				new AddBabyRecordTask(time, weight, height, head, feed, yardId + "", brandId + "", kindId + "", milk)
 						.execute();
 			} else {
-				showShortToast(R.string.NoSignalException);
+				 commitSql(time, weight, height, head,feed,yardId + "",brandId + "",kindId + "",milk);
+				
 			}
+
 			break;
 		case R.id.tvTime:
 			showDateDialog();
@@ -244,6 +297,59 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * @param time
+	 * @param weight
+	 * @param height
+	 * @param head
+	 * @param feed
+	 * @param yard
+	 * @param brand
+	 * @param kind
+	 * @param milk
+	 */
+	private String time1;
+	private String weight1;
+	private String height1;
+	private String head1;
+	private String feed1;
+	private String yard1;
+	private String brand1;
+	private String kind1;
+	private String milk1;
+
+	private void commitSql(String time, String weight, String height, String head, String feed, String yard,
+			String brand, String kind, String milk) {
+		this.time1 = time;
+		this.weight1 = weight;
+		this.height1 = height;
+		this.head1 = head;
+		this.feed1 = feed;
+		this.yard1 = yard;
+		this.brand1 = brand;
+		this.kind1 = kind;
+		this.milk1 = milk;
+		FollowUpRecordBean bean = new FollowUpRecordBean();
+		
+        bean.setBabyId(id);
+		bean.setMeasure_data(time1);
+		bean.setWeight(weight1);
+		bean.setHeight(height1);
+		bean.setHead_size(head1);
+		bean.setBreast_feeding(feed1);
+		bean.setHospital_within(yard1);
+		bean.setBrand(brand1);
+		bean.setKind(kind1);
+		bean.setRecipe_milk(milk1);
+		if(dba.inserData(bean)){
+			showShortToast("本地增加随访记录成功");
+			finish();
+		}else{
+			showShortToast("本地增加随访记录");
+		}
+
 	}
 
 	Calendar cal = Calendar.getInstance();
@@ -423,14 +529,14 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 		@Override
 		protected JSONObject doInBackground(Void... params) {
 			String add_type;
-			if(SharedPrefUtil.getUserType(NewAddBabyRecordActivity.this) == Constants.USER_DOCTOR){
+			if (SharedPrefUtil.getUserType(NewAddBabyRecordActivity.this) == Constants.USER_DOCTOR) {
 				add_type = "doctor";
-			}else{
+			} else {
 				add_type = "baby";
 			}
 			try {
 				return new BusinessHelper().addVisit(id, due_date, weight, height, head, breastfeeding, location,
-						brand, kind, nutrition,add_type);
+						brand, kind, nutrition, add_type);
 			} catch (SystemException e) {
 				return null;
 			}
@@ -486,6 +592,7 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 			if (result.getStatus() == Constants.REQUEST_SUCCESS) {
 				List<YardBean> tempList = result.getObjList();
 				if (tempList.size() > 0) {
+					SharedPrefUtil.setMilkData(NewAddBabyRecordActivity.this, result.getJsonData());// 将奶粉的数据放入缓存
 					yardList.clear();
 					brandList.clear();
 					kindList.clear();
@@ -513,4 +620,5 @@ public class NewAddBabyRecordActivity extends BaseActivity implements OnClickLis
 		}
 
 	}
+
 }

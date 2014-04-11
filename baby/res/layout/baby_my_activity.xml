@@ -75,8 +75,8 @@
                             style="@style/info_label_style"
                             android:text="家长手机号:" />
 
-                        <TextView
-                            android:id="@+id/tvId"
+                        <EditText
+                            android:id="@+id/etId"
                             style="@style/info_text_style" />
                     </LinearLayout>
 
@@ -358,8 +358,8 @@
                             style="@style/info_label_style"
                             android:text="@string/baby_my_apgar" />
 
-                        <TextView
-                            android:id="@+id/tvApgar"
+                        <EditText
+                            android:id="@+id/etApgar"
                             style="@style/info_text_style" />
 
                         <ImageView

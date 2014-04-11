@@ -114,4 +114,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
     </style>
+    
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox"> 
+    <item name="android:textSize"> 14dp</item> 
+    <item name= "android:textColor">@color/darkgrey</item> 
+    <item name="android:button">@drawable/checkbox_style</item>  
+</style>  
 </resources>

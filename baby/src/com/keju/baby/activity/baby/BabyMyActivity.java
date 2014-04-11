@@ -66,8 +66,8 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 	private ImageView btnLeft, btnRight;
 	private TextView tvTitle;
 
-	private TextView tvId, tvGendar, tvPreproductions, tvDeliveryWay, tvComplication, tvApgar;
-	private EditText etRealName, etHeight, etWeight, etHeadCircumference;
+	private TextView  tvGendar, tvPreproductions, tvDeliveryWay, tvComplication;
+	private EditText etId,etRealName, etHeight, etWeight, etHeadCircumference, etApgar;
 
 	private ImageView ivAvatar;
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片，临时文件
@@ -92,7 +92,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		btnRight = (ImageView) findViewById(R.id.btnRight);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 
-		tvId = (TextView) this.findViewById(R.id.tvId);
+		etId = (EditText) this.findViewById(R.id.etId);
 		etRealName = (EditText) this.findViewById(R.id.etRealName);
 		tvGendar = (TextView) this.findViewById(R.id.tvGendar);
 		tvPreproductions = (TextView) this.findViewById(R.id.tvPreproductions);
@@ -101,7 +101,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		etHeadCircumference = (EditText) this.findViewById(R.id.etHeadCircumference);
 		tvDeliveryWay = (TextView) this.findViewById(R.id.tvDeliveryWay);
 		tvComplication = (TextView) this.findViewById(R.id.tvComplication);
-		tvApgar = (TextView) this.findViewById(R.id.tvApgar);
+		etApgar = (EditText) this.findViewById(R.id.etApgar);
 
 		ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
 		ivAvatar.setOnClickListener(this);
@@ -204,7 +204,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btnRight:
 			String babyName = etRealName.getText().toString().trim();
-			String parentNumber = tvId.getText().toString().trim();
+			String parentNumber = etId.getText().toString().trim();
 			String babySix = tvGendar.getText().toString().trim();
 			String babyProduction = tvPreproductions.getText().toString().trim();
 			String babyWeight = etWeight.getText().toString().trim();
@@ -212,7 +212,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 			String babyHeadCircumference = etHeadCircumference.getText().toString().trim();
 			String childbirthWay = tvDeliveryWay.getText().toString().trim();
 			String complication = tvComplication.getText().toString().trim();
-			String grade = tvApgar.getText().toString().trim();
+			String grade = etApgar.getText().toString().trim();
 			if (StringUtil.isBlank(babyName) || StringUtil.isBlank(parentNumber) || StringUtil.isBlank(babySix)
 					|| StringUtil.isBlank(babyProduction) || StringUtil.isBlank(babyWeight)
 					|| StringUtil.isBlank(babyHeight) || StringUtil.isBlank(childbirthWay) || StringUtil.isBlank(grade)
@@ -534,7 +534,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 						if (result.has("baby_list")) {
 							JSONArray babyList = result.getJSONArray("baby_list");
 							JSONObject babyBean = babyList.optJSONObject(0);
-							tvId.setText(babyBean.getString("patriarch_tel"));
+							etId.setText(babyBean.getString("patriarch_tel"));
 							etRealName.setText(babyBean.getString("baby_name"));
 							tvGendar.setText(babyBean.getString("gender"));
 					     	Date data =DateUtil.stringToDate(null, babyBean.getString("due_date"));
@@ -544,7 +544,7 @@ public class BabyMyActivity extends BaseActivity implements OnClickListener {
 							etHeadCircumference.setText(babyBean.getInt("born_head") + "");
 							tvDeliveryWay.setText(babyBean.getString("childbirth_style"));
 							tvComplication.setText(babyBean.getString("complication"));
-							tvApgar.setText(babyBean.getInt("apgar_score") + "");
+							etApgar.setText(babyBean.getInt("apgar_score") + "");
 							String photoUrl = BusinessHelper.PIC_URL + babyBean.getString("picture_path");
 							ivAvatar.setTag(photoUrl);
 							Drawable cacheDrawble = AsyncImageLoader.getInstance().loadDrawable(photoUrl,

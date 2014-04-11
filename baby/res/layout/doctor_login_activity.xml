@@ -2,100 +2,132 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/common_bg"
     android:orientation="vertical" >
 
-<TextView 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#758AA6"
-    android:text=""
-    android:gravity="center"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:textColor="#FFFFFF"/>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:orientation="vertical">
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal">
-		<TextView
-		    android:layout_width="0dp"
-		    android:layout_weight="1"
-		    android:layout_height="wrap_content"
-		    android:text=""/> 
-		<EditText 
-		    android:id="@+id/etDocterLogin_username"
-		    android:layout_width="0dp"
-		    android:layout_weight="4"
-		    android:layout_height="wrap_content"/>
-	</LinearLayout>
-		<LinearLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_marginTop="10dp"
-		    android:orientation="horizontal" >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#B6A368"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="登陆"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
-		    <TextView
-		        android:layout_width="0dp"
-		    	android:layout_weight="1"
-		        android:layout_height="wrap_content"
-		        android:text="" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
 
-		    <EditText
-		        android:id="@+id/etDocterLogin_password"
-		        android:layout_width="0dp"
-		    	android:layout_weight="4"
-		        android:inputType="textPassword"
-		        android:layout_height="wrap_content"/>
-		</LinearLayout>
-	</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
-<TextView
-    android:id="@+id/tvDocterLogin_rememberme"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:drawableLeft="@drawable/checkbox"
-    android:layout_marginTop="10dp"
-    android:padding="10dp"
-    android:text="" />
-<LinearLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_gravity="center"
-		    android:layout_marginTop="20dp"
-		    android:orientation="horizontal" >
-			<TextView
-			    android:layout_width="0dp"
-		    	android:layout_weight="2"
-			    android:layout_height="wrap_content"/>
-		    <Button
-		        android:id="@+id/btnDoctorLogin_register"
-		        android:layout_width="0dp"
-		    	android:layout_weight="4"
-		        android:layout_height="wrap_content"
-		        android:text="" />
-			<TextView
-		    android:layout_width="0dp"
-		    	android:layout_weight="1"
-		    android:layout_height="wrap_content"/>
-		    <Button
-		        android:id="@+id/btnDoctorLogin_login"
-		        android:layout_width="0dp"
-		    	android:layout_weight="4"
-		        android:layout_height="wrap_content"
-		        android:text="" />
-		    <TextView
-		    android:layout_width="0dp"
-		    android:layout_weight="2"
-		    android:layout_height="wrap_content"/>
-		</LinearLayout>   
-		   
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="用户名：" />
+
+            <EditText
+                android:id="@+id/etDocterLogin_username"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="4"
+                android:background="@drawable/bg_input" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="密码：" />
+
+            <EditText
+                android:id="@+id/etDocterLogin_password"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="4"
+                android:background="@drawable/bg_input"
+                android:inputType="textPassword" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/cbIsRememberPassWord"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="记住我" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="忘记密码"
+            android:textColor="#60CDE9" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <Button
+            android:id="@+id/btnDoctorLogin_register"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:layout_weight="4"
+            android:background="#B6A368"
+            android:text="注册"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnDoctorLogin_login"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:layout_weight="4"
+            android:background="#B6A368"
+            android:text="登陆"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+    </LinearLayout>
 
 </LinearLayout>

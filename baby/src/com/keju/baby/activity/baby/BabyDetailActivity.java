@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -16,11 +20,18 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.keju.baby.CommonApplication;
 import com.keju.baby.Constants;
 import com.keju.baby.R;
+import com.keju.baby.SystemException;
 import com.keju.baby.activity.NewAddBabyRecordActivity;
 import com.keju.baby.activity.base.BaseWebViewActivity;
 import com.keju.baby.bean.BabyBean;
+import com.keju.baby.bean.FollowUpRecordBean;
+import com.keju.baby.db.DataBaseAdapter;
+import com.keju.baby.helper.BusinessHelper;
+import com.keju.baby.util.NetUtil;
+import com.keju.baby.util.SharedPrefUtil;
 
 /**
  * 婴儿详情界面
@@ -38,9 +49,16 @@ public class BabyDetailActivity extends BaseWebViewActivity implements OnClickLi
 	private List<TextView> tvList = new ArrayList<TextView>();
 	private int lastPosition = 0;
 
+	/**
+	 * 数据库操作对象
+	 */
+	private DataBaseAdapter dba;
+	public static final String TABLE_NAME_FOLLOW_UP_RECORD = "follow_up_record";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		dba = ((CommonApplication) getApplicationContext()).getDbAdapter();
 		if (getIntent() != null) {
 			bean = (BabyBean) getIntent().getExtras().getSerializable(Constants.EXTRA_DATA);
 		}
@@ -80,9 +98,30 @@ public class BabyDetailActivity extends BaseWebViewActivity implements OnClickLi
 		tvList.add(tvGrowLine);
 		tvList.add(tvGrowRate);
 		tvList.add(tvInfo);
+
+		if (NetUtil.checkNet(BabyDetailActivity.this)) {
+			List<FollowUpRecordBean> followUpRecordList = new ArrayList<FollowUpRecordBean>();
+			if (dba.tabbleIsExist(TABLE_NAME_FOLLOW_UP_RECORD) == true) {
+				followUpRecordList = dba.findAllFollow();
+				for (FollowUpRecordBean bean : followUpRecordList) {
+					if(bean.getBabyId()== 0){
+					 showShortToast("无网络下新添加的婴儿，无对应的id无法添加随访记录");
+					}else{
+					new AddBabyRecordTask(bean.getBabyId(), bean.getMeasure_data(), bean.getWeight(), bean.getHeight(),
+							bean.getHead_size(), bean.getBreast_feeding(), bean.getHospital_within(), bean.getBrand(),
+							bean.getKind(), bean.getRecipe_milk()).execute();
+					}
+				}
+				if (dba.clearTableData(TABLE_NAME_FOLLOW_UP_RECORD)) {
+					// showShortToast("新增婴儿表已清空");
+				}
+			}
+
+		}
 	}
 
 	private void fillData() {
+
 		loadUrl(Constants.URL_VISIT_RECORD + bean.getId());
 		webView.addJavascriptInterface(new Object() {
 			public void webviewAddVisit(int code) {
@@ -141,7 +180,7 @@ public class BabyDetailActivity extends BaseWebViewActivity implements OnClickLi
 			}
 			setPositionUnCheck(1);
 			viewTab.fullScroll(View.FOCUS_LEFT);
-			loadUrl(Constants.URL_GROW_LINE + bean.getId() + "?select_type=doctor" );
+			loadUrl(Constants.URL_GROW_LINE + bean.getId() + "?select_type=doctor");
 			break;
 		case R.id.tvGrowRate:
 			if (isClick.get(2)) {
@@ -221,4 +260,83 @@ public class BabyDetailActivity extends BaseWebViewActivity implements OnClickLi
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+
+	/**
+	 * 
+	 * @author Zhoujun
+	 * 
+	 */
+	private class AddBabyRecordTask extends AsyncTask<Void, Void, JSONObject> {
+		private int id;
+		private String due_date;
+		private String weight;
+		private String height;
+		private String head;
+		private String breastfeeding;
+		private String location;
+		private String brand;
+		private String kind;
+		private String nutrition;
+
+		public AddBabyRecordTask(int babyId, String due_date, String weight, String height, String head,
+				String breastfeeding, String location, String brand, String kind, String nutrition) {
+			super();
+			this.id  = babyId;
+			this.due_date = due_date;
+			this.weight = weight;
+			this.height = height;
+			this.head = head;
+			this.breastfeeding = breastfeeding;
+			this.location = location;
+			this.brand = brand;
+			this.kind = kind;
+			this.nutrition = nutrition;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showPd("添加记录中...");
+		}
+
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+			String add_type;
+			if (SharedPrefUtil.getUserType(BabyDetailActivity.this) == Constants.USER_DOCTOR) {
+				add_type = "doctor";
+			} else {
+				add_type = "baby";
+			}
+			try {
+				return new BusinessHelper().addVisit(id, due_date, weight, height, head, breastfeeding, location,
+						brand, kind, nutrition, add_type);
+			} catch (SystemException e) {
+				return null;
+			}
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			dismissPd();
+			if (result != null) {
+				try {
+					int status = result.getInt("code");
+					if (status == Constants.REQUEST_SUCCESS) {
+						showShortToast("添加随访记录成功");
+						setResult(RESULT_OK);
+						fillData();
+					} else {
+						showShortToast(result.getString("message"));
+					}
+				} catch (JSONException e) {
+					showShortToast(R.string.json_exception);
+				}
+			} else {
+				showShortToast(R.string.connect_server_exception);
+			}
+		}
+
+	}
+
 }

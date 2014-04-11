@@ -52,6 +52,7 @@ public class Constants {
 	 * 分页数据
 	 */
 	public static final int PAGE_SIZE = 6;
+	public static final int PAGE_SIZE1 = 3;
 	/**
 	 * 登录用户类型；
 	 */

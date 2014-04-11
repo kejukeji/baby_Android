@@ -44,6 +44,11 @@ public class BabyBean implements Serializable{
 		}
 	}
 	/**
+	 * 
+	 */
+	public BabyBean() {
+	}
+	/**
 	 * 构建list
 	 * @param array
 	 * @return

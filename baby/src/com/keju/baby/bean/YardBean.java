@@ -36,6 +36,12 @@ public class YardBean{
 		}
 	}
 	/**
+	 * 
+	 */
+	public YardBean() {
+		super();
+	}
+	/**
 	 * 构建一个list
 	 * @param array
 	 * @return

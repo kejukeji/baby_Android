@@ -51,9 +51,11 @@ public class AcademicAbstractsActivity extends BaseActivity {
 	private ProgressBar pbFooter;
 	private TextView tvFooterMore;
 	private boolean isLoad = false;// 是否正在加载数据
-	private boolean isLoadMore = false;
+	private boolean isLoadMore = false;// 是否加载更多
 	private boolean isComplete = false;// 是否加载完了；
 	private int pageIndex = 1;
+	
+	private boolean isFilter = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,11 +91,11 @@ public class AcademicAbstractsActivity extends BaseActivity {
 		lvAcademic.setOnScrollListener(LoadListener);
 		lvAcademic.setAdapter(academicAdapter);
 		lvAcademic.setOnItemClickListener(clicklistener);
-		if(NetUtil.checkNet(this)){
-			new GetDataTask().execute();
-		}else{
-			showShortToast(R.string.NoSignalException);
-		}
+//		if(NetUtil.checkNet(this)){
+//			new GetDataTask().execute();
+//		}else{
+//			showShortToast(R.string.NoSignalException);
+//		}
 	}
 	OnItemClickListener clicklistener = new OnItemClickListener() {
 
@@ -180,6 +182,10 @@ public class AcademicAbstractsActivity extends BaseActivity {
 			super.onPostExecute(result);
 			pbFooter.setVisibility(View.GONE);
 			dismissPd();
+			if (isFilter) {
+				list.clear();
+				academicAdapter.notifyDataSetChanged();
+			}
 			if (result.getStatus() == Constants.REQUEST_SUCCESS) {
 				List<AcademicAbstractBean> tempList = result.getObjList();
 				boolean isLastPage = false;
@@ -194,7 +200,7 @@ public class AcademicAbstractsActivity extends BaseActivity {
 					tvFooterMore.setText(R.string.load_all);
 					isComplete = true;
 				} else {
-					if (tempList.size() > 0 && tempList.size() < Constants.PAGE_SIZE) {
+					if (tempList.size() > 0 && tempList.size() < Constants.PAGE_SIZE1) {
 						pbFooter.setVisibility(View.GONE);
 						tvFooterMore.setText("");
 						isComplete = true;
@@ -213,6 +219,7 @@ public class AcademicAbstractsActivity extends BaseActivity {
 			}
 			academicAdapter.notifyDataSetChanged();
 			isLoad = false;
+			isFilter = false;
 		}
 	}
 
@@ -333,6 +340,19 @@ public class AcademicAbstractsActivity extends BaseActivity {
 				showShortToast(R.string.connect_server_exception);
 			}
 		}
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(NetUtil.checkNet(this)){
+			isFilter = true;
+			isComplete = false;
+			pageIndex  = 1;
+			new GetDataTask().execute();
+		}else{
+			showShortToast(R.string.NoSignalException);
+		}
+		
 	}
 	
 }

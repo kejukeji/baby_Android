@@ -35,6 +35,13 @@ public class BrandBean {
 		}
 	}
 	/**
+	 * 
+	 */
+	public BrandBean() {
+		super();
+	}
+
+	/**
 	 * 构建一个list
 	 * @param array
 	 * @return

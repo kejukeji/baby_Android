@@ -13,6 +13,7 @@ import com.keju.baby.Constants;
 import com.keju.baby.SystemException;
 import com.keju.baby.bean.AcademicAbstractBean;
 import com.keju.baby.bean.BabyBean;
+import com.keju.baby.bean.DoctorProvinceBean;
 import com.keju.baby.bean.ResponseBean;
 import com.keju.baby.bean.YardBean;
 import com.keju.baby.internet.HttpClient;
@@ -30,8 +31,28 @@ public class BusinessHelper {
 	private static final String BASE_URL = "http://baby.kejukeji.com/restful/";
 //	private static final String BASE_URL = "http://192.168.1.125:7007/restful/";//向进服务器地址
 	public static final String PIC_URL = "http://baby.kejukeji.com";// 头像地址
+	
+	public static final String BASE_URL1 = "http://42.121.108.142:7007/restful/";
 	HttpClient httpClient = new HttpClient();
 
+	
+	/**
+	 * 婴儿登录接口
+	 * 
+	 * @param loginName
+	 * @param password
+	 * @param remember  是否记住密码
+	 * @param loginType  登录类型
+	 * @return
+	 * @throws SystemException
+	 */
+	public JSONObject login(String loginName,String loginPassword,String remember,String loginType) throws SystemException{
+		return httpClient.post(BASE_URL +"html/do/login",new PostParameter[] { 
+				new PostParameter("login_name"  ,loginName ),
+				new PostParameter("login_pass"  ,loginPassword ),
+				new PostParameter("remember"  ,remember ),
+				new PostParameter("login_type"  ,loginType )} ).asJSONObject();
+	}
 	/**
 	 * 注册
 	 * 
@@ -46,6 +67,20 @@ public class BusinessHelper {
 				new PostParameter[] { new PostParameter("loginName", loginName),
 						new PostParameter("password", password), new PostParameter("nickname", nickname) })
 				.asJSONObject();
+	}
+
+	/**
+	 * 获取婴儿列表
+	 * 
+	 * @param page
+	 * @param doctor_id
+	 * @return
+	 */
+	public JSONObject getBabyList1(int pageIndex, int doctor_id) throws SystemException {
+			return httpClient.get(
+					BASE_URL + "baby/list",
+					new PostParameter[] { new PostParameter("page", pageIndex),
+							new PostParameter("doctor_id", doctor_id) }).asJSONObject();
 	}
 
 	/**
@@ -73,6 +108,7 @@ public class BusinessHelper {
 					list = new ArrayList<BabyBean>();
 				}
 				response.setObjList(list);
+				response.setJsonData(obj.toString());
 			} else {
 				response = new ResponseBean<BabyBean>(Constants.REQUEST_FAILD, obj.getString("message"));
 			}
@@ -83,6 +119,9 @@ public class BusinessHelper {
 		}
 		return response;
 	}
+	
+	
+	
 	/**
 	 * 获取收藏的婴儿列表
 	 * @param pageIndex
@@ -107,6 +146,7 @@ public class BusinessHelper {
 					list = new ArrayList<BabyBean>();
 				}
 				response.setObjList(list);
+				response.setJsonData(obj.toString());
 			} else {
 				response = new ResponseBean<BabyBean>(Constants.REQUEST_FAILD, obj.getString("message"));
 			}
@@ -302,8 +342,24 @@ public class BusinessHelper {
 	 * @return
 	 * @throws SystemException
 	 */
-	public JSONObject getDoctorData() throws SystemException {
-		return httpClient.get(BASE_URL + "html/register/data").asJSONObject();
+//	public JSONObject getDoctorData() throws SystemException {
+//		return httpClient.get(BASE_URL + "html/register/data").asJSONObject();
+//	}
+//	
+	
+	public ResponseBean<DoctorProvinceBean > getDoctorData(){
+		ResponseBean<DoctorProvinceBean> bean ;
+		try {
+			JSONObject obj = httpClient.get(BASE_URL + "html/register/data").asJSONObject();
+			List<DoctorProvinceBean> list = DoctorProvinceBean.constractList(obj.getJSONArray("total"));
+			bean = new ResponseBean<DoctorProvinceBean>(obj);
+			bean.setObjList(list);
+		} catch (SystemException e) {
+			bean = new ResponseBean<DoctorProvinceBean>(Constants.REQUEST_FAILD, "服务器连接失败");
+		} catch (JSONException e) {
+			bean = new ResponseBean<DoctorProvinceBean>(Constants.REQUEST_FAILD, "json解析错误");
+		}
+		return bean;
 	}
 
 	/**
@@ -401,6 +457,7 @@ public class BusinessHelper {
 			List<YardBean> list = YardBean.constractList(obj.getJSONArray("total"));
 			bean = new ResponseBean<YardBean>(obj);
 			bean.setObjList(list);
+			bean.setJsonData(obj.toString());
 		} catch (SystemException e) {
 			bean = new ResponseBean<YardBean>(Constants.REQUEST_FAILD, "服务器连接失败");
 		} catch (JSONException e) {
