@@ -311,6 +311,7 @@ public class BusinessHelper {
 		if(!TextUtils.isEmpty(endTime)){
 			p.add(new PostParameter("end_birthday_time", endTime));
 		}
+		p.add(new PostParameter("keyword", keyword));
 		JSONObject obj;
 		try {
 			obj = httpClient.get(BASE_URL + "doctor/search",p.toArray(new PostParameter[p.size()])).asJSONObject();

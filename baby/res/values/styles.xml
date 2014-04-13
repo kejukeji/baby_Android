@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--1、消除应用启动闪黑屏 -->
+    <style name="Theme.splash" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
     <!-- 标题栏字体的style -->
     <style name="StyleBarTitle">
         <item name="android:layout_gravity">center_vertical</item>

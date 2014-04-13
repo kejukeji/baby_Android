@@ -36,7 +36,7 @@ public class ChangePasswordActivity extends BaseWebViewActivity {
 		});
 		btnRight.setVisibility(View.GONE);
 		tvTitle.setText("修改密码");
-		loadUrl(Constants.URL_CHANGE_PASSWORD);
+		loadUrl(Constants.URL_CHANGE_PASSWORD + "?user_id=" + SharedPrefUtil.getUid(this));
 		webView.addJavascriptInterface(new Object() {
 			public void webviewPassword(int code) {
 				if(code == 200){
