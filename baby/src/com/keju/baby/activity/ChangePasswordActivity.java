@@ -36,7 +36,11 @@ public class ChangePasswordActivity extends BaseWebViewActivity {
 		});
 		btnRight.setVisibility(View.GONE);
 		tvTitle.setText("修改密码");
-		loadUrl(Constants.URL_CHANGE_PASSWORD + "?user_id=" + SharedPrefUtil.getUid(this));
+		String type = "baby";
+		if(SharedPrefUtil.getUserType(ChangePasswordActivity.this) == Constants.USER_DOCTOR){
+			type = "doctor";
+		}
+		loadUrl(Constants.URL_CHANGE_PASSWORD + "?user_id=" + SharedPrefUtil.getUid(this) + "&type=" + type);
 		webView.addJavascriptInterface(new Object() {
 			public void webviewPassword(int code) {
 				if(code == 200){
